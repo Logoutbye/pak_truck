@@ -34,6 +34,19 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
               padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
               children: [
                 Image.asset('assets/images/welcome.png'),
+
+                Text(
+                  'Chose Language',
+                  // localization.welcome_title,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: context.mediaQueryHeight / 80),
+
+                Text(
+                  'We will show the content in your preferred language.',
+                  style: TextStyle(fontWeight: FontWeight.w400),
+                ),
+                SizedBox(height: context.mediaQueryHeight / 30),
                 // Language Dropdown
                 InlineDropdown<String>(
                   expandedHeight: context.mediaQueryHeight / 9,
@@ -68,7 +81,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
                       Provider.of<LocaleProvider>(context, listen: false)
                           .setLocale(locale);
 
-                      Navigator.pushNamed(context, RoutesName.home);
+                      Navigator.pushNamed(context, RoutesName.login);
                     }
                   },
                   color: selectedLanguage != null

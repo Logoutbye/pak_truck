@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:testt/src/configs/color/color.dart';
 
 import 'theme_text.dart';
-import 'themecolors.dart';
 
 
 
@@ -18,11 +17,14 @@ class Themedark {
     elevatedButtonTheme: elevatedButtonTheme,
   );
   static AppBarTheme appbarTheme = const AppBarTheme(
-      backgroundColor: AppColors.primaryColor,
-      titleTextStyle: TextStyle(color: Colors.white));
+      backgroundColor: AppColors.whiteColor,
+      titleTextStyle: TextStyle(color: AppColors.primaryColor));
+
+
+
   static ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: AppColors.whiteColor,
       padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),

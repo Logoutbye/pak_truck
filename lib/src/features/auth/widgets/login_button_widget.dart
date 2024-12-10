@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../view_model/login_view_model.dart';
+import '../login/view_model/login_view_model.dart';
 import 'package:provider/provider.dart';
 import '../../../configs/components/round_button.dart';
 import '../../../configs/routes/routes_name.dart';

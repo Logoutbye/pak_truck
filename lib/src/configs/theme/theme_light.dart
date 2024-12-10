@@ -7,15 +7,19 @@ class Themelight {
   Themelight._();
 
   static ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: const Color(0xFFfefefe),
+    scaffoldBackgroundColor: AppColors.whiteSccafold,
     appBarTheme: appbarTheme,
     textTheme: Themetext.textTheme,
     useMaterial3: true,
     elevatedButtonTheme: elevatedbuttontheme,
   );
   static AppBarTheme appbarTheme = const AppBarTheme(
-      backgroundColor: AppColors.primaryColor,
-      titleTextStyle: TextStyle(color: Colors.white));
+      backgroundColor: AppColors.whiteSccafold,
+      titleTextStyle: TextStyle(
+          color: AppColors.primaryColor,
+          fontSize: 16,
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.w500));
   static ElevatedButtonThemeData elevatedbuttontheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: AppColors.primaryColor,

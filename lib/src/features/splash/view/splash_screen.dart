@@ -32,16 +32,17 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(height: context.mediaQueryHeight / 4),
             Image.asset('assets/images/splash.png'),
             SizedBox(height: context.mediaQueryHeight / 35),
-
             Text(
               localization.welcome_title,
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
-
-            Text(
-              localization.welcome_message,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                localization.welcome_message,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16),
+              ),
             ),
             Spacer(),
             RoundButton(

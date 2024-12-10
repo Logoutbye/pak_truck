@@ -24,6 +24,7 @@ dependencies:
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
   flutter_svg: ^2.0.16
+  country_picker:
 
   # localization
   flutter_localizations:
