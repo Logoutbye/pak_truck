@@ -6,10 +6,11 @@ import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
+import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/features/auth/login/view_model/auth_view_model.dart';
-import 'package:testt/src/features/auth/widgets/on_boarding_appbar.dart';
+import 'package:testt/src/features/auth/view_model/auth_view_model.dart';
+import 'package:testt/src/configs/components/custom_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ResetPasswordVerifyOtpScreen extends StatefulWidget {
@@ -64,8 +65,7 @@ class _ResetPasswordVerifyOtpScreenState
       closeKeyboardWhenCompleted: true,
       onCompleted: (pin) async {
         await context.read<LoginViewModel>().verifyOtp(context, pin).then((_) {
-          Navigator.pop(context);
-          Navigator.pop(context);
+          Navigator.pushNamed(context, RoutesName.setNewPasswordScreen);
         }).onError((e, s) {
           Utils.flushBarErrorMessage(e.toString(), context);
         });
@@ -94,7 +94,7 @@ class _ResetPasswordVerifyOtpScreenState
     final localization = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: OnBoardingAppBar(
+      appBar: CustomAppBar(
         firstText: 'Verify your number',
         secondText: '',
       ),

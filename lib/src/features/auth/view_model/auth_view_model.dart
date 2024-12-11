@@ -3,8 +3,8 @@ import 'package:country_picker/country_picker.dart';
 import 'package:testt/src/configs/utils.dart';
 import 'package:testt/src/repository/auth_api/auth_repository.dart';
 
-import '../../../../configs/routes/slide_transition_page.dart';
-import '../view/verify_otp_screen.dart';
+import '../../../configs/routes/slide_transition_page.dart';
+import '../login/view/verify_otp_screen.dart';
 
 class LoginViewModel with ChangeNotifier {
   final AuthRepository authRepository;
@@ -58,7 +58,7 @@ class LoginViewModel with ChangeNotifier {
         print('::: $fullPhone');
         setLoginLoading(false);
       });
-      // await authRepository.continueWithPhoneNumberApi(fullPhone);
+      // var response = await authRepository.continueWithPhoneNumberApi(fullPhone);
       Navigator.push(context,
           SlideTransitionPage(page: VerifyOtpScreen(phoneNumber: fullPhone)));
     } catch (error) {
@@ -75,6 +75,8 @@ class LoginViewModel with ChangeNotifier {
         print('::: $fullPhone');
         setLoginLoading(false);
       });
+      // var response = await authRepository.continueWithPhoneNumberApi(fullPhone);
+
       Utils.snackBar('Otp resent successfully', context);
     } catch (error) {
       Utils.snackBar('Failed to  re-send OTP. Please try again.', context);
@@ -89,6 +91,8 @@ class LoginViewModel with ChangeNotifier {
       Future.delayed(Duration(seconds: 2), () {
         setLoginLoading(false);
       });
+      // var response = await authRepository.verifyOtpApi(pin);
+
       Utils.snackBar('Otp verified successfully', context);
     } catch (error) {
       Utils.snackBar('Failed to verify OTP. Please try again.', context);
@@ -103,6 +107,7 @@ class LoginViewModel with ChangeNotifier {
         setLoginLoading(false);
         Utils.snackBar('Login Successfully', context);
       });
+      // var response = await authRepository.signInWithEmailApi(data);
     } catch (error) {
       Utils.snackBar('Failed to Login. Please try again.', context);
       setLoginLoading(false);
@@ -116,6 +121,7 @@ class LoginViewModel with ChangeNotifier {
         setLoginLoading(false);
         Utils.snackBar('User Registrered Scuessfully', context);
       });
+      // var response = await authRepository.signUpWithEmailApi(data);
     } catch (error) {
       Utils.snackBar('Failed to send OTP. Please try again.', context);
       setLoginLoading(false);
@@ -123,6 +129,19 @@ class LoginViewModel with ChangeNotifier {
   }
 
   Future<void> forgotPassword(BuildContext context, dynamic data) async {
+    setLoginLoading(true);
+    try {
+      Future.delayed(Duration(seconds: 2), () {
+        setLoginLoading(false);
+        Utils.snackBar('Code Sent successfully on your email', context);
+      });
+    } catch (error) {
+      Utils.snackBar('Failed to send code. Please try again.', context);
+      setLoginLoading(false);
+    }
+  }
+
+  Future<void> resetPassword(BuildContext context, dynamic data) async {
     setLoginLoading(true);
     try {
       Future.delayed(Duration(seconds: 2), () {

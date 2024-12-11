@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testt/src/configs/color/color.dart';
 
-class OnBoardingAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
   final Widget? trailing;
   final String firstText;
@@ -9,7 +9,7 @@ class OnBoardingAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TextStyle? firstTextStyle;
   final TextStyle? secondTextStyle;
 
-  const OnBoardingAppBar({
+  const CustomAppBar({
     super.key,
     this.leading,
     this.trailing,
@@ -32,29 +32,34 @@ class OnBoardingAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: const Icon(Icons.arrow_back),
             ),
           ),
-      title: Center(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+      title: Text.rich(
+        TextSpan(
           children: [
-            Text(firstText,
-                style: firstTextStyle ??
-                    TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w500)),
-            Text(secondText,
-                style: secondTextStyle ??
-                    TextStyle(
-                        color: AppColors.primaryColor,
-                        fontSize: 16,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w500)),
+            TextSpan(
+              text: firstText,
+              style: firstTextStyle ??
+                  const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
+            TextSpan(
+              text: secondText,
+              style: secondTextStyle ??
+                  const TextStyle(
+                    color: AppColors.primaryColor,
+                    fontSize: 16,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
           ],
         ),
+        textAlign: TextAlign.center, // Center aligns the text
       ),
-      actions: trailing != null ? [trailing!] : null,
+      actions: trailing != null ? [trailing!] : [SizedBox(width: 48)], // Maintain symmetry
       centerTitle: true,
     );
   }

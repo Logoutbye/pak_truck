@@ -1,39 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
-import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 
-class AuthTextFormField extends StatefulWidget {
+class CustomTextFormField extends StatefulWidget {
   final String hintText;
   final TextEditingController controller;
+  final Color color;
+  final Color borderColor;
   final ValueChanged<Country?>? onCountrySelected;
   final ValueChanged<String>? onPhoneNumberChanged;
   final bool isPassword;
 
-  const AuthTextFormField({
+  const CustomTextFormField({
     super.key,
     required this.hintText,
     required this.controller,
     this.onCountrySelected,
+    this.color = Colors.transparent,
+    this.borderColor = Colors.black38,
     this.onPhoneNumberChanged,
     this.isPassword = false,
   });
 
   @override
-  _AuthTextFormFieldState createState() =>
-      _AuthTextFormFieldState();
+  _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
 }
 
-class _AuthTextFormFieldState
-    extends State<AuthTextFormField> {
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
   Country? selectedCountry;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: widget.color,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.black38),
+        border: Border.all(color: widget.borderColor),
       ),
       child: TextFormField(
         controller: widget.controller,

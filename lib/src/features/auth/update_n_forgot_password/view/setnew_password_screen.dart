@@ -7,6 +7,7 @@ import 'package:testt/main.dart';
 import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/utils.dart';
+import 'package:testt/src/features/auth/signup/view/signup_view_with_number.dart';
 import 'package:testt/src/features/auth/view_model/auth_view_model.dart';
 import 'package:testt/src/features/auth/update_n_forgot_password/view/reset_password_otp_screen.dart';
 import 'package:testt/src/configs/components/custom_appbar.dart';
@@ -14,20 +15,22 @@ import '../../../../configs/extensions.dart';
 import '../../../../configs/theme/theme_text.dart';
 import '../../../../configs/components/custom_text_filed.dart';
 
-class ForgetPasswordScreen extends StatefulWidget {
-  const ForgetPasswordScreen({super.key});
+class SetNewPasswordScreen extends StatefulWidget {
+  const SetNewPasswordScreen({super.key});
 
   @override
-  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
+  State<SetNewPasswordScreen> createState() => _SetNewPasswordScreenState();
 }
 
-class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
-  final TextEditingController _emailController = TextEditingController();
+class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
+  final TextEditingController _cnfirmPasswordController =
+      TextEditingController();
+  final TextEditingController _newPasswordController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
-    _emailController.dispose();
+    _cnfirmPasswordController.dispose();
   }
 
   @override
@@ -65,8 +68,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     ),
                     SizedBox(height: context.mediaQueryHeight / 20),
                     CustomTextFormField(
-                      hintText: 'Enter your email',
-                      controller: _emailController,
+                      hintText: 'Enter your password',
+                      controller: _newPasswordController,
+                    ),
+                    SizedBox(height: context.mediaQueryHeight / 20),
+                    CustomTextFormField(
+                      hintText: 'Confrim your password',
+                      controller: _cnfirmPasswordController,
                     ),
                   ],
                 ),
@@ -79,20 +87,26 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       loading: provider.loading ? true : false,
                       title: 'Send Code',
                       onPress: () {
-                        if (_emailController.text.isEmpty) {
+                        if (_newPasswordController.text.isEmpty) {
                           Utils.flushBarErrorMessage(
-                              'Please enter your email', context);
+                              'Please enter new password', context);
+                        } else if (_cnfirmPasswordController.text.isEmpty) {
+                          Utils.flushBarErrorMessage(
+                              'Please enter password again', context);
+                        } else if (_cnfirmPasswordController.text !=
+                            _newPasswordController.text) {
+                          Utils.flushBarErrorMessage(
+                              'Password do not match', context);
                         } else {
                           Map data = {
-                            'email': _emailController.text.trim(),
+                            'email': _cnfirmPasswordController.text.trim(),
+                            'password': _cnfirmPasswordController.text.trim(),
                           };
-                          provider.forgotPassword(context, data).then((value) {
+                          provider.resetPassword(context, data).then((value) {
                             Navigator.push(
                                 context,
                                 SlideTransitionPage(
-                                    page: ResetPasswordVerifyOtpScreen(
-                                  email: _emailController.text.trim(),
-                                )));
+                                    page: SignUpViewWithNumber()));
                           }).onError((error, stackTrace) {
                             Utils.flushBarErrorMessage(
                                 error.toString(), context);

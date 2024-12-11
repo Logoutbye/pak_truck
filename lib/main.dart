@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:testt/languages/I10n/l10n.dart';
+import 'package:testt/src/features/account_verification/view/verify_shop_screen.dart';
 import 'package:testt/src/features/splash/view_model/local_provider.dart';
 import 'src/repository/auth_api/auth_http_api_repository.dart';
 import 'src/repository/auth_api/auth_repository.dart';
 import 'src/configs/theme/state.dart';
-import 'src/features/auth/login/view_model/auth_view_model.dart';
+import 'src/features/auth/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'src/configs/routes/routes.dart';
@@ -49,8 +50,9 @@ class MyApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            initialRoute: RoutesName.splash,
-            onGenerateRoute: Routes.generateRoute,
+            // initialRoute: RoutesName.splash,
+            // onGenerateRoute: Routes.generateRoute,
+            home: VerifyShopScreen(),
           );
         },
       ),

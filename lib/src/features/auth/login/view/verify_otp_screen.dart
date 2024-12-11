@@ -6,10 +6,11 @@ import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
+import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/features/auth/login/view_model/auth_view_model.dart';
-import 'package:testt/src/features/auth/widgets/on_boarding_appbar.dart';
+import 'package:testt/src/features/auth/view_model/auth_view_model.dart';
+import 'package:testt/src/configs/components/custom_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VerifyOtpScreen extends StatefulWidget {
@@ -62,11 +63,10 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
       closeKeyboardWhenCompleted:
           true, // Close the keyboard when OTP is complete
       onCompleted: (pin) async {
-        await context
-            .read<LoginViewModel>()
-            .verifyOtp(context, pin)
-            .then((_) {})
-            .onError((e, s) {
+        await context.read<LoginViewModel>().verifyOtp(context, pin).then((_) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, RoutesName.chooseAccountScreen, (route) => false);
+        }).onError((e, s) {
           Utils.flushBarErrorMessage(e.toString(), context);
         });
       },
@@ -94,7 +94,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
     final localization = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: OnBoardingAppBar(
+      appBar: CustomAppBar(
         firstText: 'Verify your number',
         secondText: '',
       ),

@@ -7,9 +7,9 @@ import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/features/auth/login/view_model/auth_view_model.dart';
+import 'package:testt/src/features/auth/view_model/auth_view_model.dart';
 import 'package:testt/src/features/auth/widgets/country_picker_textfiled.dart';
-import 'package:testt/src/features/auth/widgets/on_boarding_appbar.dart';
+import 'package:testt/src/configs/components/custom_appbar.dart';
 import '../../../../configs/extensions.dart';
 import '../../../../configs/theme/theme_text.dart';
 import 'login_view_with_email.dart';
@@ -38,7 +38,7 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
       create: (_) => LoginViewModel(authRepository: getIt()),
       child: Consumer<LoginViewModel>(builder: (context, loginViewModel, _) {
         return Scaffold(
-          appBar: OnBoardingAppBar(
+          appBar: CustomAppBar(
             firstText: localization.signin_first,
             secondText: localization.signin_second,
           ),

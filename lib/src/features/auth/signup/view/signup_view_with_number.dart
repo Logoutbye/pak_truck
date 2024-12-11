@@ -10,10 +10,10 @@ import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/utils.dart';
 import 'package:testt/src/features/auth/login/view/verify_otp_screen.dart';
-import 'package:testt/src/features/auth/login/view_model/auth_view_model.dart';
+import 'package:testt/src/features/auth/view_model/auth_view_model.dart';
 import 'package:testt/src/features/auth/signup/view/signup_view_with_email.dart';
 import 'package:testt/src/features/auth/widgets/country_picker_textfiled.dart';
-import 'package:testt/src/features/auth/widgets/on_boarding_appbar.dart';
+import 'package:testt/src/configs/components/custom_appbar.dart';
 import '../../../../configs/extensions.dart';
 import '../../../../configs/theme/theme_text.dart';
 
@@ -41,7 +41,7 @@ class _SignUpViewWithNumberState extends State<SignUpViewWithNumber> {
       create: (_) => LoginViewModel(authRepository: getIt()),
       child: Consumer<LoginViewModel>(builder: (context, signupViewModel, _) {
         return Scaffold(
-          appBar: OnBoardingAppBar(
+          appBar: CustomAppBar(
             firstText: localization.create_an_account,
             secondText: localization.sign_up,
           ),

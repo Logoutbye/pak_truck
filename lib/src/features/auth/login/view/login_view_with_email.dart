@@ -8,11 +8,11 @@ import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/features/auth/login/view_model/auth_view_model.dart';
-import 'package:testt/src/features/auth/widgets/on_boarding_appbar.dart';
+import 'package:testt/src/features/auth/view_model/auth_view_model.dart';
+import 'package:testt/src/configs/components/custom_appbar.dart';
 import '../../../../configs/extensions.dart';
 import '../../../../configs/theme/theme_text.dart';
-import '../../widgets/text_filed.dart';
+import '../../../../configs/components/custom_text_filed.dart';
 
 class LoginViewWithEmail extends StatefulWidget {
   const LoginViewWithEmail({super.key});
@@ -40,7 +40,7 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
       create: (_) => LoginViewModel(authRepository: getIt()),
       child: Consumer<LoginViewModel>(builder: (context, loginViewModel, _) {
         return Scaffold(
-          appBar: OnBoardingAppBar(
+          appBar: CustomAppBar(
             firstText: '',
             secondText: 'Already have an account',
           ),
@@ -72,12 +72,12 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
                     //   controller: _nameController,
                     // ),
                     // SizedBox(height: context.mediaQueryHeight / 30),
-                    AuthTextFormField(
+                    CustomTextFormField(
                       hintText: 'Enter your email',
                       controller: _emailController,
                     ),
                     SizedBox(height: context.mediaQueryHeight / 30),
-                    AuthTextFormField(
+                    CustomTextFormField(
                       hintText: 'Enter your password',
                       controller: _passwordController,
                     ),
@@ -129,7 +129,7 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
                             'password': _passwordController.text.trim(),
                           };
                           provider.signinWithEmail(context, data).then((value) {
-                            // Navigator.pushNamed(context, RoutesName.home);
+                            Navigator.pushNamed(context, RoutesName.chooseAccountScreen);
                           }).onError((error, stackTrace) {
                             Utils.flushBarErrorMessage(
                                 error.toString(), context);
