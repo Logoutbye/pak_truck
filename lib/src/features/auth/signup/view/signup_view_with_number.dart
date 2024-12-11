@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -7,21 +9,22 @@ import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/utils.dart';
+import 'package:testt/src/features/auth/login/view/verify_otp_screen.dart';
 import 'package:testt/src/features/auth/login/view_model/auth_view_model.dart';
+import 'package:testt/src/features/auth/signup/view/signup_view_with_email.dart';
 import 'package:testt/src/features/auth/widgets/country_picker_textfiled.dart';
 import 'package:testt/src/features/auth/widgets/on_boarding_appbar.dart';
 import '../../../../configs/extensions.dart';
 import '../../../../configs/theme/theme_text.dart';
-import 'login_view_with_email.dart';
 
-class LoginViewWithNumber extends StatefulWidget {
-  const LoginViewWithNumber({super.key});
+class SignUpViewWithNumber extends StatefulWidget {
+  const SignUpViewWithNumber({super.key});
 
   @override
-  State<LoginViewWithNumber> createState() => _LoginViewWithNumberState();
+  State<SignUpViewWithNumber> createState() => _SignUpViewWithNumberState();
 }
 
-class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
+class _SignUpViewWithNumberState extends State<SignUpViewWithNumber> {
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -36,11 +39,11 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
 
     return ChangeNotifierProvider(
       create: (_) => LoginViewModel(authRepository: getIt()),
-      child: Consumer<LoginViewModel>(builder: (context, loginViewModel, _) {
+      child: Consumer<LoginViewModel>(builder: (context, signupViewModel, _) {
         return Scaffold(
           appBar: OnBoardingAppBar(
-            firstText: localization.signin_first,
-            secondText: localization.signin_second,
+            firstText: localization.create_an_account,
+            secondText: localization.sign_up,
           ),
           body: Padding(
             padding: const EdgeInsets.all(20),
@@ -65,33 +68,44 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
                   hintText: "Enter your phone number",
                   controller: _controller,
                   onCountrySelected: (country) {
-                    loginViewModel.setSelectedCountry(country!);
+                    signupViewModel.setSelectedCountry(country!);
                   },
                   onPhoneNumberChanged: (phone) {
-                    loginViewModel.setPhonenuber(phone);
+                    signupViewModel.setPhonenuber(phone);
                   },
                 ),
                 SizedBox(height: context.mediaQueryHeight / 30),
                 RoundButton(
-                  loading: loginViewModel.loading,
+                  loading: signupViewModel.loading,
                   title: localization.continue_mobile,
                   textStyle: Themetext.subheadline.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: loginViewModel.phoneNumber.isEmpty
+                      color: signupViewModel.phoneNumber.isEmpty
                           ? Colors.black
                           : Colors.white),
                   onPress: () async {
-                    if (loginViewModel.selectedCountry == null) {
+                    if (signupViewModel.selectedCountry == null) {
                       Utils.flushBarErrorMessage(
                           'Please select your country', context);
-                    } else if (loginViewModel.phoneNumber.isEmpty) {
+                    } else if (signupViewModel.phoneNumber.isEmpty) {
                       Utils.flushBarErrorMessage(
                           'Please enter your phone number', context);
                     } else {
-                      await loginViewModel.sendOtp(context);
+                      await signupViewModel.sendOtp(context);
+
+                      signupViewModel.sendOtp(context).then((value) {
+                        Navigator.push(
+                            context,
+                            SlideTransitionPage(
+                                page: VerifyOtpScreen(
+                                    phoneNumber:
+                                        signupViewModel.fullPhoneNumber)));
+                      }).onError((error, stackTrace) {
+                        Utils.flushBarErrorMessage(error.toString(), context);
+                      });
                     }
                   },
-                  color: loginViewModel.phoneNumber.isEmpty
+                  color: signupViewModel.phoneNumber.isEmpty
                       ? AppColors.greyColor
                       : AppColors.primaryColor,
                 ),
@@ -134,7 +148,7 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
                       .copyWith(fontWeight: FontWeight.w600),
                   onPress: () {
                     Navigator.push(context,
-                        SlideTransitionPage(page: LoginViewWithEmail()));
+                        SlideTransitionPage(page: SignUpViewWithEmail()));
                   },
                   color: AppColors.whiteColor,
                   borderColor: Colors.grey.shade300,
@@ -150,16 +164,16 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      localization.dont_have_account,
+                      localization.already_have_account,
                       style: Themetext.subheadline.copyWith(fontSize: 16),
                     ),
                     InkWell(
                       onTap: () {
                         Navigator.pushReplacementNamed(
-                            context, RoutesName.signupViewWithNumber);
+                            context, RoutesName.loginViewWithNumber);
                       },
                       child: Text(
-                        localization.signup_text,
+                        ' ${localization.signin}',
                         style: Themetext.blackBoldText.copyWith(
                             color: AppColors.primaryColor, fontSize: 16),
                       ),

@@ -1,9 +1,28 @@
 {
-    "hello": "Hello",
-      "welcome_title": "Welcome PakTruck",
+  "@@locale": "en",
+  "hello": "Hello",
+  "welcome_title": "Welcome PakTruck",
   "welcome_message": "With thousands of Trucks, we have just the right one for you",
   "next_button": "Next",
-    "select_language":"Select Language"
-
+  "select_language": "Select Language",
+  "signin_first": "Sign in ",
+  "signin_second": "to Continue",
+  "create_an_account": "Create an account ",
+  "sign_up": "Sign Up",
+  "safely_connect": "Safely Connect with Buyers & Sellers",
+  "connect_message": "You can connect with thousands of buyers & Sellers and quick search",
+  "phone_hint": "Phone Number",
+  "continue_mobile": "Continue with Mobile Number",
+  "or_text": "Or",
+  "continue_google": "Continue with Google",
+  "continue_email": "Continue with Email",
+  "dont_have_account": "Don't have an account?",
+  "signup_text": "Sign up",
+  "signin": "Sign In",
+  "already_have_account": "Already Have an account?",
+  "verifyNumber": "Verify your number",
+  "enterOtp": "Enter the OTP Code",
+  "otpIntro": "Please enter the six (6) digit code sent to ",
+  "otpOutro": " and continue that was sent to your Phone Number."
 
 }

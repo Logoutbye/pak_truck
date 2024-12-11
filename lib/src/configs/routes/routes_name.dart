@@ -1,12 +1,12 @@
-
-
 class RoutesName {
+// splash
+  static const String splash = 'splash_view';
+  static const String selectLanguageScreen = 'selectLanguageScreen';
 
-  static const String splash = 'splash_view' ;
+// signup
+  static const signupViewWithNumber = 'signup_view_with_number';
+  static const forgotPassword = 'forgot_password_screen';
 
-  static const String login = 'login_screen' ;
-  static const String selectLanguageScreen = 'selectLanguageScreen' ;
-  static const String home = 'home_screen' ;
-
-
+// signin
+  static const loginViewWithNumber = 'login_view_with_number';
 }

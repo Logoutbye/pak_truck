@@ -11,8 +11,8 @@ class SplashServices {
         //   const Duration(seconds: 2),
         //   () =>
 
-        Navigator.pushNamedAndRemoveUntil(
-            context, RoutesName.home, (route) => false);
+        // Navigator.pushNamedAndRemoveUntil(
+        //     context, RoutesName.home, (route) => false);
         // );
       } else {
         // Timer(
@@ -27,7 +27,7 @@ class SplashServices {
       Timer(
         const Duration(seconds: 2),
         () => Navigator.pushNamedAndRemoveUntil(
-            context, RoutesName.login, (route) => false),
+            context, RoutesName.loginViewWithNumber, (route) => false),
       );
     });
   }

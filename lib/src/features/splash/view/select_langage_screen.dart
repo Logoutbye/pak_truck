@@ -81,7 +81,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
                       Provider.of<LocaleProvider>(context, listen: false)
                           .setLocale(locale);
 
-                      Navigator.pushNamed(context, RoutesName.login);
+                      Navigator.pushNamed(context, RoutesName.loginViewWithNumber);
                     }
                   },
                   color: selectedLanguage != null

@@ -11,6 +11,7 @@ class RoundButton extends StatelessWidget {
   final double? height; // Nullable to calculate dynamically if not provided
   final double? width;
   final Color color;
+  final Color textColor;
   final Color borderColor;
   final double borderRadius;
   final TextStyle? textStyle;
@@ -24,6 +25,7 @@ class RoundButton extends StatelessWidget {
     this.height,
     this.icon,
     this.width,
+    this.textColor = AppColors.whiteColor,
     this.color = AppColors.primaryColor,
     this.borderColor = Colors.transparent,
     this.borderRadius = 10.0,
@@ -48,18 +50,21 @@ class RoundButton extends StatelessWidget {
               ? CircularProgressIndicator(color: loadingIndicatorColor)
               : Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment:icon != null?MainAxisAlignment.spaceAround: MainAxisAlignment.center ,
+                  mainAxisAlignment: icon != null
+                      ? MainAxisAlignment.spaceAround
+                      : MainAxisAlignment.center,
                   children: [
                     if (icon != null) ...[icon ?? SizedBox()],
                     Text(
                       title,
                       style: textStyle ??
-                          const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
+                          TextStyle(
+                            color: textColor,
+                            fontSize: 17,
                             fontWeight: FontWeight.w600,
                           ),
                     ),
+                    if (icon != null) ...[SizedBox()],
                   ],
                 ),
         ),

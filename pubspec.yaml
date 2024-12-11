@@ -25,6 +25,7 @@ dependencies:
   json_annotation: ^4.9.0
   flutter_svg: ^2.0.16
   country_picker:
+  pinput: ^5.0.0
 
   # localization
   flutter_localizations:

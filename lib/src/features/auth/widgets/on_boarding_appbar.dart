@@ -22,34 +22,37 @@ class OnBoardingAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: leading??  IconButton(
-          onPressed: () {
-           Navigator.pop(context);
-          },
-          icon: CircleAvatar(
-            backgroundColor: Colors.white,
-            child: const Icon(Icons.arrow_back),
+      leading: leading ??
+          IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: const Icon(Icons.arrow_back),
+            ),
           ),
+      title: Center(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(firstText,
+                style: firstTextStyle ??
+                    TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w500)),
+            Text(secondText,
+                style: secondTextStyle ??
+                    TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w500)),
+          ],
         ),
-      title: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(firstText,
-              style: firstTextStyle ??
-                  TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w500)),
-          Text(secondText,
-              style: secondTextStyle ??
-                  TextStyle(
-                      color: AppColors.primaryColor,
-                      fontSize: 16,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w500)),
-        ],
       ),
       actions: trailing != null ? [trailing!] : null,
       centerTitle: true,
