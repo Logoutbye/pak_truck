@@ -1,3 +1,5 @@
+import 'package:testt/src/features/dashborad/view/dashboard.dart';
+
 class RoutesName {
 // splash
   static const String splash = 'splash_view';
@@ -9,9 +11,9 @@ class RoutesName {
   static const setNewPasswordScreen = 'set_new_password_screen';
 
   static const chooseAccountScreen = 'chooseAccountScreen';
+  static const verifyShopScreen = 'verify_shop_screen';
 
 // signin
   static const loginViewWithNumber = 'login_view_with_number';
-  static const homeScreen = 'home_screen';
-  static const verifyShopScreen = 'verify_shop_screen';
+  static const dashboard = 'dashboard';
 }

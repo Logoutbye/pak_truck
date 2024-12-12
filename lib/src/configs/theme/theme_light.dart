@@ -7,12 +7,12 @@ class Themelight {
   Themelight._();
 
   static ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: AppColors.whiteSccafold,
-    appBarTheme: appbarTheme,
-    textTheme: Themetext.textTheme,
-    useMaterial3: true,
-    elevatedButtonTheme: elevatedbuttontheme,
-  );
+      scaffoldBackgroundColor: AppColors.whiteSccafold,
+      appBarTheme: appbarTheme,
+      textTheme: Themetext.textTheme,
+      useMaterial3: true,
+      elevatedButtonTheme: elevatedbuttontheme,
+      bottomSheetTheme: bottomSheetTheme);
   static AppBarTheme appbarTheme = const AppBarTheme(
       backgroundColor: AppColors.whiteSccafold,
       titleTextStyle: TextStyle(
@@ -29,5 +29,17 @@ class Themelight {
       ),
       minimumSize: const Size(327.0, 56.0),
     ),
+  );
+
+  // Add your Bottom Sheet Theme here
+  static BottomSheetThemeData bottomSheetTheme = const BottomSheetThemeData(
+    backgroundColor: AppColors.whiteSccafold, // Background color
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(12.0)),
+    ),
+    elevation: 8.0, // Shadow effect
+    modalElevation: 8.0,
+    
+    modalBackgroundColor: AppColors.whiteSccafold,
   );
 }

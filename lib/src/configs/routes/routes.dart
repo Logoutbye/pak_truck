@@ -4,7 +4,7 @@ import 'package:testt/src/features/account_verification/view/verify_shop_screen.
 import 'package:testt/src/features/auth/signup/view/signup_view_with_number.dart';
 import 'package:testt/src/features/auth/update_n_forgot_password/view/forgot_password_screen.dart';
 import 'package:testt/src/features/auth/update_n_forgot_password/view/setnew_password_screen.dart';
-import 'package:testt/src/features/home/home_screen.dart';
+import 'package:testt/src/features/dashborad/view/dashboard.dart';
 import 'package:testt/src/features/splash/view/select_langage_screen.dart';
 import '../../features/account_verification/view/choose_ccount_type_screen.dart';
 import 'routes_name.dart';
@@ -36,11 +36,11 @@ class Routes {
 
 // shop verifucation
       case RoutesName.verifyShopScreen:
-        return SlideTransitionPage(page: const VerifyShopScreen());
+        return SlideTransitionPage(page: VerifyShopScreen());
 
 //home
-      case RoutesName.homeScreen:
-        return SlideTransitionPage(page: const HomeScreen());
+      case RoutesName.dashboard:
+        return SlideTransitionPage(page: Dashboard());
 
       default:
         return MaterialPageRoute(builder: (_) {

@@ -113,7 +113,7 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                       : "Verify Your Shop",
                   onPress: () {
                     if (_accountType == "Individual") {
-                      Navigator.pushNamed(context, RoutesName.homeScreen);
+                      Navigator.pushNamed(context, RoutesName.dashboard);
                     } else {
                       Navigator.pushNamed(context, RoutesName.verifyShopScreen);
                     }

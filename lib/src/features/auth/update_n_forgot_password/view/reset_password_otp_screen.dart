@@ -82,7 +82,7 @@ class _ResetPasswordVerifyOtpScreenState
           color: Colors.black,
         ),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.teal[700]!, width: 2),
+          border: Border.all(color: AppColors.primaryColor, width: 2),
           borderRadius: BorderRadius.circular(8),
         ),
       ),
@@ -163,7 +163,7 @@ class _ResetPasswordVerifyOtpScreenState
               },
               child: const Text(
                 'Resend Code',
-                style: TextStyle(color: Colors.teal),
+                style: TextStyle(color: AppColors.primaryColor),
               ),
             ),
         ],

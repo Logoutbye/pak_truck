@@ -3,6 +3,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:testt/languages/I10n/l10n.dart';
 import 'package:testt/src/features/account_verification/view/verify_shop_screen.dart';
+import 'package:testt/src/features/account_verification/view_model/verify_shop_view_model.dart';
+import 'package:testt/src/features/dashborad/view/dashboard.dart';
+import 'package:testt/src/features/dashborad/view_model/navigation_provider.dart';
 import 'package:testt/src/features/splash/view_model/local_provider.dart';
 import 'src/repository/auth_api/auth_http_api_repository.dart';
 import 'src/repository/auth_api/auth_repository.dart';
@@ -34,6 +37,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (_) => LoginViewModel(authRepository: getIt())),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => VerifyShopViewModel()),
+        ChangeNotifierProvider(create: (_) => NavigationProvider()),
       ],
       child: Consumer2<ThemeProvider, LocaleProvider>(
         builder: (BuildContext context, themeProvider, localeProvider,
@@ -52,7 +57,7 @@ class MyApp extends StatelessWidget {
             ],
             // initialRoute: RoutesName.splash,
             // onGenerateRoute: Routes.generateRoute,
-            home: VerifyShopScreen(),
+            home: Dashboard(),
           );
         },
       ),

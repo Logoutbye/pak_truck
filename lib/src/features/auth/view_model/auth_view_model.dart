@@ -14,7 +14,7 @@ class LoginViewModel with ChangeNotifier {
   bool _loading = false;
   bool get loading => _loading;
 
-  void setLoginLoading(bool value) {
+  void setLoading(bool value) {
     _loading = value;
     notifyListeners();
   }
@@ -51,106 +51,106 @@ class LoginViewModel with ChangeNotifier {
       return;
     }
 
-    setLoginLoading(true);
+    setLoading(true);
     try {
       String fullPhone = fullPhoneNumber;
       Future.delayed(Duration(seconds: 2), () {
         print('::: $fullPhone');
-        setLoginLoading(false);
+        setLoading(false);
       });
       // var response = await authRepository.continueWithPhoneNumberApi(fullPhone);
       Navigator.push(context,
           SlideTransitionPage(page: VerifyOtpScreen(phoneNumber: fullPhone)));
     } catch (error) {
       Utils.snackBar('Failed to send OTP. Please try again.', context);
-      setLoginLoading(false);
+      setLoading(false);
     }
   }
 
   Future<void> reSendOtp(BuildContext context) async {
-    setLoginLoading(true);
+    setLoading(true);
     try {
       String fullPhone = fullPhoneNumber;
       Future.delayed(Duration(seconds: 2), () {
         print('::: $fullPhone');
-        setLoginLoading(false);
+        setLoading(false);
       });
       // var response = await authRepository.continueWithPhoneNumberApi(fullPhone);
 
       Utils.snackBar('Otp resent successfully', context);
     } catch (error) {
       Utils.snackBar('Failed to  re-send OTP. Please try again.', context);
-      setLoginLoading(false);
+      setLoading(false);
     }
   }
 
   Future<void> verifyOtp(BuildContext context, String pin) async {
-    setLoginLoading(true);
+    setLoading(true);
     try {
       print(';::: pin $pin');
       Future.delayed(Duration(seconds: 2), () {
-        setLoginLoading(false);
+        setLoading(false);
       });
       // var response = await authRepository.verifyOtpApi(pin);
 
       Utils.snackBar('Otp verified successfully', context);
     } catch (error) {
       Utils.snackBar('Failed to verify OTP. Please try again.', context);
-      setLoginLoading(false);
+      setLoading(false);
     }
   }
 
   Future<void> signinWithEmail(BuildContext context, dynamic data) async {
-    setLoginLoading(true);
+    setLoading(true);
     try {
       Future.delayed(Duration(seconds: 2), () {
-        setLoginLoading(false);
+        setLoading(false);
         Utils.snackBar('Login Successfully', context);
       });
       // var response = await authRepository.signInWithEmailApi(data);
     } catch (error) {
       Utils.snackBar('Failed to Login. Please try again.', context);
-      setLoginLoading(false);
+      setLoading(false);
     }
   }
 
   Future<void> signupWithEmail(BuildContext context, dynamic data) async {
-    setLoginLoading(true);
+    setLoading(true);
     try {
       Future.delayed(Duration(seconds: 2), () {
-        setLoginLoading(false);
+        setLoading(false);
         Utils.snackBar('User Registrered Scuessfully', context);
       });
       // var response = await authRepository.signUpWithEmailApi(data);
     } catch (error) {
       Utils.snackBar('Failed to send OTP. Please try again.', context);
-      setLoginLoading(false);
+      setLoading(false);
     }
   }
 
   Future<void> forgotPassword(BuildContext context, dynamic data) async {
-    setLoginLoading(true);
+    setLoading(true);
     try {
       Future.delayed(Duration(seconds: 2), () {
-        setLoginLoading(false);
+        setLoading(false);
         Utils.snackBar('Code Sent successfully on your email', context);
       });
     } catch (error) {
       Utils.snackBar('Failed to send code. Please try again.', context);
-      setLoginLoading(false);
+      setLoading(false);
     }
   }
 
   Future<void> resetPassword(BuildContext context, dynamic data) async {
-    setLoginLoading(true);
+    setLoading(true);
     try {
       Future.delayed(Duration(seconds: 2), () {
-        setLoginLoading(false);
+        setLoading(false);
         Utils.snackBar('Code Sent successfully on your email', context);
       });
     } catch (error) {
       Utils.snackBar('Failed to send code. Please try again.', context);
-      setLoginLoading(false);
+      setLoading(false);
     }
   }
 }

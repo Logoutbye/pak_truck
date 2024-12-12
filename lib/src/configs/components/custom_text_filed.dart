@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
+import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -32,6 +33,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: context.mediaQueryHeight / 18,
       decoration: BoxDecoration(
         color: widget.color,
         borderRadius: BorderRadius.circular(12),
@@ -42,16 +44,18 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         obscureText: widget.isPassword,
         style: Themetext.subheadline,
         decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(
+              vertical: 14, horizontal: 10), // Adjust padding for centering
+
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
           border: InputBorder.none,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+
           hintText: widget.hintText,
           hintStyle: const TextStyle(
             color: Colors.black,
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
+            fontWeight: FontWeight.w200,
+            fontSize: 15,
           ),
           filled: true,
           fillColor: Colors.transparent,
