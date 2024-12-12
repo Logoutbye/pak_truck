@@ -1,4 +1,3 @@
-import 'package:testt/src/features/dashborad/view/dashboard.dart';
 
 class RoutesName {
 // splash
@@ -16,4 +15,6 @@ class RoutesName {
 // signin
   static const loginViewWithNumber = 'login_view_with_number';
   static const dashboard = 'dashboard';
+  static const notificaiton = 'notification';
+  static const deleteaccount = 'deleteaccount';
 }

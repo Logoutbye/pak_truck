@@ -5,6 +5,8 @@ import 'package:testt/src/features/auth/signup/view/signup_view_with_number.dart
 import 'package:testt/src/features/auth/update_n_forgot_password/view/forgot_password_screen.dart';
 import 'package:testt/src/features/auth/update_n_forgot_password/view/setnew_password_screen.dart';
 import 'package:testt/src/features/dashborad/view/dashboard.dart';
+import 'package:testt/src/features/my_profile/view/delete_account_screen.dart';
+import 'package:testt/src/features/notifications/notifications_screen.dart';
 import 'package:testt/src/features/splash/view/select_langage_screen.dart';
 import '../../features/account_verification/view/choose_ccount_type_screen.dart';
 import 'routes_name.dart';
@@ -38,9 +40,15 @@ class Routes {
       case RoutesName.verifyShopScreen:
         return SlideTransitionPage(page: VerifyShopScreen());
 
+//prifle
+      case RoutesName.deleteaccount:
+        return SlideTransitionPage(page: DeleteAccountScreen());
+
 //home
       case RoutesName.dashboard:
         return SlideTransitionPage(page: Dashboard());
+      case RoutesName.notificaiton:
+        return SlideTransitionPage(page: NotificationScreen());
 
       default:
         return MaterialPageRoute(builder: (_) {

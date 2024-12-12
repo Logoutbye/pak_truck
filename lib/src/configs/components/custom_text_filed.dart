@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
+import 'package:testt/src/features/my_profile/widget/my_ads_widget.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final String hintText;
@@ -11,6 +12,8 @@ class CustomTextFormField extends StatefulWidget {
   final ValueChanged<Country?>? onCountrySelected;
   final ValueChanged<String>? onPhoneNumberChanged;
   final bool isPassword;
+  final int? minLines; // Minimum number of lines
+  final int? maxLines; // Maximum number of lines
 
   const CustomTextFormField({
     super.key,
@@ -21,6 +24,8 @@ class CustomTextFormField extends StatefulWidget {
     this.borderColor = Colors.black38,
     this.onPhoneNumberChanged,
     this.isPassword = false,
+    this.minLines = 1, // Allow customization of minimum lines
+    this.maxLines, // Allow customization of maximum lines
   });
 
   @override
@@ -33,7 +38,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.mediaQueryHeight / 18,
+      height: widget.minLines! >= 2
+          ? context.mediaQueryHeight / 8
+          : context.mediaQueryHeight / 18,
       decoration: BoxDecoration(
         color: widget.color,
         borderRadius: BorderRadius.circular(12),
@@ -43,14 +50,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         controller: widget.controller,
         obscureText: widget.isPassword,
         style: Themetext.subheadline,
+        minLines: widget.minLines ?? 1, // Default to 1 line
+        maxLines: widget.maxLines ?? 1, // Default to single-line input
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(
               vertical: 14, horizontal: 10), // Adjust padding for centering
-
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
           border: InputBorder.none,
-
           hintText: widget.hintText,
           hintStyle: const TextStyle(
             color: Colors.black,

@@ -16,7 +16,7 @@ class Themelight {
   static AppBarTheme appbarTheme = const AppBarTheme(
       backgroundColor: AppColors.whiteSccafold,
       titleTextStyle: TextStyle(
-          color: AppColors.primaryColor,
+          color: AppColors.blackColor,
           fontSize: 16,
           fontFamily: 'Roboto',
           fontWeight: FontWeight.w500));
@@ -39,7 +39,7 @@ class Themelight {
     ),
     elevation: 8.0, // Shadow effect
     modalElevation: 8.0,
-    
+
     modalBackgroundColor: AppColors.whiteSccafold,
   );
 }

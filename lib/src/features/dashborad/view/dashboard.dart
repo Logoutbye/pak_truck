@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/features/home/home_screen.dart';
-import 'package:testt/src/features/my_profile/profile_screen.dart';
+import 'package:testt/src/features/my_profile/view/profile_screen.dart';
 import 'package:testt/src/features/sell/sell_screen.dart';
 import 'package:testt/src/features/videos/videos_screen.dart';
 

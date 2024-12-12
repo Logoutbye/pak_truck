@@ -6,7 +6,9 @@ import 'package:testt/src/features/account_verification/view/verify_shop_screen.
 import 'package:testt/src/features/account_verification/view_model/verify_shop_view_model.dart';
 import 'package:testt/src/features/dashborad/view/dashboard.dart';
 import 'package:testt/src/features/dashborad/view_model/navigation_provider.dart';
+import 'package:testt/src/features/my_profile/view/profile_screen.dart';
 import 'package:testt/src/features/splash/view_model/local_provider.dart';
+import 'src/features/my_profile/view_model/profile_tabbar_provider.dart';
 import 'src/repository/auth_api/auth_http_api_repository.dart';
 import 'src/repository/auth_api/auth_repository.dart';
 import 'src/configs/theme/state.dart';
@@ -39,6 +41,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => VerifyShopViewModel()),
         ChangeNotifierProvider(create: (_) => NavigationProvider()),
+        ChangeNotifierProvider(create: (_) => ProfileTabBarProvider()),
       ],
       child: Consumer2<ThemeProvider, LocaleProvider>(
         builder: (BuildContext context, themeProvider, localeProvider,
@@ -55,9 +58,9 @@ class MyApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            // initialRoute: RoutesName.splash,
-            // onGenerateRoute: Routes.generateRoute,
-            home: Dashboard(),
+          initialRoute: RoutesName.splash,
+            onGenerateRoute: Routes.generateRoute,
+            // home: Dashboard(),
           );
         },
       ),
