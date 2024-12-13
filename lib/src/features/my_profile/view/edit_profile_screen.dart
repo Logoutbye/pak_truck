@@ -5,22 +5,21 @@ import 'package:testt/src/configs/components/custom_text_filed.dart';
 import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
-import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/features/account_verification/view_model/verify_shop_view_model.dart';
-import 'package:testt/src/features/account_verification/widgets/profile_image_picker_widget.dart';
+import 'package:testt/src/features/my_profile/view_model/edit_profile_view_model.dart';
+import 'package:testt/src/features/my_profile/widget/profile_image_picker_widget.dart';
 
-class VerifyShopScreen extends StatefulWidget {
-  const VerifyShopScreen({super.key});
+class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({super.key});
 
   @override
-  State<VerifyShopScreen> createState() => _VerifyShopScreenState();
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
-class _VerifyShopScreenState extends State<VerifyShopScreen> {
+class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<VerifyShopViewModel>(context);
+    final viewModel = Provider.of<EditProfileViewModel>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -28,52 +27,33 @@ class _VerifyShopScreenState extends State<VerifyShopScreen> {
         foregroundColor: AppColors.whiteColor,
         leading: IconButton(
             onPressed: () {
+              viewModel.clearAll();
               Navigator.pop(context);
             },
             icon: Icon(Icons.arrow_back)),
         title: Text(
-          'Verification Process',
+          'Edit Profile',
           style: TextStyle(color: AppColors.whiteColor),
         ),
       ),
       body: ListView(
         padding: EdgeInsets.all(12),
         children: [
-          Text(
-            "Verify your Shop Through Identy",
-            style: Themetext.headline.copyWith(color: AppColors.primaryColor),
-          ),
-          SizedBox(height: context.mediaQueryHeight / 40),
-          Text('Verify my identity using these Steps'),
-          SizedBox(height: context.mediaQueryHeight / 30),
+          buildProfileImagePicker(context, ''),
+          SizedBox(height: context.mediaQueryHeight / 70),
+          Divider(color: AppColors.dividerColor),
+          SizedBox(height: context.mediaQueryHeight / 70),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Shop Name',
+                'Full Name',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
               SizedBox(height: context.mediaQueryHeight / 70),
               CustomTextFormField(
-                hintText: 'Enter your shop name',
-                controller: viewModel.shopNameController,
-                color: AppColors.greyColor,
-                borderColor: Colors.black12,
-              )
-            ],
-          ),
-          SizedBox(height: context.mediaQueryHeight / 35),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Shop Address',
-                style: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              SizedBox(height: context.mediaQueryHeight / 70),
-              CustomTextFormField(
-                hintText: 'Enter your shop address',
-                controller: viewModel.shopAddressController,
+                hintText: 'Enter your name',
+                controller: viewModel.nameController,
                 color: AppColors.greyColor,
                 borderColor: Colors.black12,
               )
@@ -114,15 +94,40 @@ class _VerifyShopScreenState extends State<VerifyShopScreen> {
             ],
           ),
           SizedBox(height: context.mediaQueryHeight / 35),
-          Text(
-            "Identity Card Front & Back",
-            style: Themetext.headline.copyWith(color: AppColors.primaryColor),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Country',
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              SizedBox(height: context.mediaQueryHeight / 70),
+              CustomTextFormField(
+                hintText: 'Enter Your Country',
+                controller: viewModel.countryController,
+                color: AppColors.greyColor,
+                borderColor: Colors.black12,
+              )
+            ],
           ),
-          SizedBox(height: context.mediaQueryHeight / 70),
-          buildImagePicker(context, 'Upload Front Photo', true),
           SizedBox(height: context.mediaQueryHeight / 35),
-          buildImagePicker(context, 'Upload Back Photo', false),
-          SizedBox(height: context.mediaQueryHeight / 30),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'City',
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              SizedBox(height: context.mediaQueryHeight / 70),
+              CustomTextFormField(
+                hintText: 'Enter Your City',
+                controller: viewModel.cityController,
+                color: AppColors.greyColor,
+                borderColor: Colors.black12,
+              )
+            ],
+          ),
+          SizedBox(height: context.mediaQueryHeight / 35),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -137,7 +142,7 @@ class _VerifyShopScreenState extends State<VerifyShopScreen> {
                 title: 'Clear all',
                 onPress: viewModel.clearAll,
               ),
-              Consumer<VerifyShopViewModel>(
+              Consumer<EditProfileViewModel>(
                 builder: (BuildContext context, value, Widget? child) {
                   return RoundButton(
                       loading: value.loading,
@@ -148,7 +153,7 @@ class _VerifyShopScreenState extends State<VerifyShopScreen> {
                         fontWeight: FontWeight.w600,
                       ),
                       color: AppColors.primaryColor,
-                      title: 'Submit',
+                      title: 'Save Changes',
                       onPress: () {
                         if (viewModel.validateInputs(context)) {
                           value.submitData(context).then((_) {

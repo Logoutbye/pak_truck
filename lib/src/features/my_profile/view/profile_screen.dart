@@ -104,35 +104,40 @@ class _ProfileScreenState extends State<ProfileScreen>
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset('assets/svg/edit.svg'),
-                    Text(
-                      '  Edit Profile',
-                      style: Themetext.blackBoldText
-                          .copyWith(fontWeight: FontWeight.w600, fontSize: 13),
-                    ),
-                    // SizedBox(
-                    //   height: context.mediaQueryHeight / 21,
-                    //   child: VerticalDivider(
-                    //     color: Colors.grey,
-                    //     width: 20,
-                    //     thickness: 2,
-                    //     indent: 10,
-                    //     endIndent: 10,
-                    //   ),
-                    // ),
-                    // Text(
-                    //   'Get Verified ',
-                    //   style: Themetext.blackBoldText.copyWith(
-                    //       fontWeight: FontWeight.w600,
-                    //       fontSize: 13,
-                    //       color: AppColors.primaryColor),
-                    // ),
-                    // SvgPicture.asset('assets/svg/arrow-right.svg')
-                  ],
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, RoutesName.editProfile);
+                  },
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset('assets/svg/edit.svg'),
+                      Text(
+                        '  Edit Profile',
+                        style: Themetext.blackBoldText.copyWith(
+                            fontWeight: FontWeight.w600, fontSize: 13),
+                      ),
+                      // SizedBox(
+                      //   height: context.mediaQueryHeight / 21,
+                      //   child: VerticalDivider(
+                      //     color: Colors.grey,
+                      //     width: 20,
+                      //     thickness: 2,
+                      //     indent: 10,
+                      //     endIndent: 10,
+                      //   ),
+                      // ),
+                      // Text(
+                      //   'Get Verified ',
+                      //   style: Themetext.blackBoldText.copyWith(
+                      //       fontWeight: FontWeight.w600,
+                      //       fontSize: 13,
+                      //       color: AppColors.primaryColor),
+                      // ),
+                      // SvgPicture.asset('assets/svg/arrow-right.svg')
+                    ],
+                  ),
                 ),
                 InkWell(
                   onTap: () {

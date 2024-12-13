@@ -8,11 +8,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String secondText;
   final TextStyle? firstTextStyle;
   final TextStyle? secondTextStyle;
+  final bool hasDivider;
 
   const CustomAppBar({
     super.key,
     this.leading,
     this.trailing,
+    this.hasDivider = false,
     required this.firstText,
     required this.secondText,
     this.firstTextStyle,
@@ -59,8 +61,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         textAlign: TextAlign.center, // Center aligns the text
       ),
-      actions: trailing != null ? [trailing!] : [SizedBox(width: 48)], // Maintain symmetry
+      actions: trailing != null
+          ? [trailing!]
+          : [SizedBox(width: 48)], // Maintain symmetry
       centerTitle: true,
+      // bottom: hasDivider
+      //     ? PreferredSize(preferredSize: preferredSize, child: Divider())
+      //     : PreferredSize(
+      //         preferredSize: preferredSize, child: SizedBox.shrink()),
     );
   }
 

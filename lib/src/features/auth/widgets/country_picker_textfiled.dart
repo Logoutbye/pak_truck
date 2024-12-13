@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:testt/src/configs/color/color.dart';
+import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 
 class CountryPickerTextFormField extends StatefulWidget {
@@ -31,6 +32,7 @@ class _CountryPickerTextFormFieldState
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: context.mediaQueryHeight / 17,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.black38),
@@ -67,7 +69,7 @@ class _CountryPickerTextFormFieldState
                   ),
                   const SizedBox(width: 8),
                   Container(
-                    height: 20,
+                    height: context.mediaQueryHeight / 35,
                     width: 2,
                     decoration: BoxDecoration(
                       color: AppColors.primaryColor,

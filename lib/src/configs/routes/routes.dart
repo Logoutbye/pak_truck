@@ -6,6 +6,7 @@ import 'package:testt/src/features/auth/update_n_forgot_password/view/forgot_pas
 import 'package:testt/src/features/auth/update_n_forgot_password/view/setnew_password_screen.dart';
 import 'package:testt/src/features/dashborad/view/dashboard.dart';
 import 'package:testt/src/features/my_profile/view/delete_account_screen.dart';
+import 'package:testt/src/features/my_profile/view/edit_profile_screen.dart';
 import 'package:testt/src/features/notifications/notifications_screen.dart';
 import 'package:testt/src/features/splash/view/select_langage_screen.dart';
 import '../../features/account_verification/view/choose_ccount_type_screen.dart';
@@ -49,6 +50,8 @@ class Routes {
         return SlideTransitionPage(page: Dashboard());
       case RoutesName.notificaiton:
         return SlideTransitionPage(page: NotificationScreen());
+      case RoutesName.editProfile:
+        return SlideTransitionPage(page: EditProfileScreen());
 
       default:
         return MaterialPageRoute(builder: (_) {

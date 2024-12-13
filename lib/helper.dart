@@ -78,7 +78,7 @@ class VerifyShopScreen extends StatelessWidget {
             if (pickedFile != null) {
               final image = File(pickedFile.path);
               isFront
-                  ? viewModel.setFrontImage(image)
+                  ? viewModel.setProfileImage(image)
                   : viewModel.setBackImage(image);
             }
           },

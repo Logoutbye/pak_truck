@@ -11,7 +11,8 @@ import '../services/splash/splash_services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SelectLanguageScreen extends StatefulWidget {
-  const SelectLanguageScreen({super.key});
+  final bool fromProfileScreen;
+  const SelectLanguageScreen({super.key, this.fromProfileScreen = false});
 
   @override
   State<SelectLanguageScreen> createState() => _SelectLanguageScreenState();
@@ -80,8 +81,12 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
                       // Update LocaleProvider
                       Provider.of<LocaleProvider>(context, listen: false)
                           .setLocale(locale);
-
-                      Navigator.pushNamed(context, RoutesName.loginViewWithNumber);
+                      if (widget.fromProfileScreen) {
+                        Navigator.pop(context);
+                      } else {
+                        Navigator.pushNamed(
+                            context, RoutesName.loginViewWithNumber);
+                      }
                     }
                   },
                   color: selectedLanguage != null

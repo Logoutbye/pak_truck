@@ -167,6 +167,7 @@ class _SignUpViewWithNumberState extends State<SignUpViewWithNumber> {
                       localization.already_have_account,
                       style: Themetext.subheadline.copyWith(fontSize: 16),
                     ),
+                    SizedBox(width: context.mediaQueryWidth / 75),
                     InkWell(
                       onTap: () {
                         Navigator.pushReplacementNamed(

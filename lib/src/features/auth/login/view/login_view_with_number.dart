@@ -153,13 +153,14 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
                       localization.dont_have_account,
                       style: Themetext.subheadline.copyWith(fontSize: 16),
                     ),
+                    
                     InkWell(
                       onTap: () {
                         Navigator.pushReplacementNamed(
                             context, RoutesName.signupViewWithNumber);
                       },
                       child: Text(
-                        localization.signup_text,
+                        ' ${localization.signup_text}',
                         style: Themetext.blackBoldText.copyWith(
                             color: AppColors.primaryColor, fontSize: 16),
                       ),

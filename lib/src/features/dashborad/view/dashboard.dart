@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
+import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/features/home/home_screen.dart';
 import 'package:testt/src/features/my_profile/view/profile_screen.dart';
-import 'package:testt/src/features/sell/sell_screen.dart';
+import 'package:testt/src/features/sell/view/sell_screen.dart';
+import 'package:testt/src/features/splash/view/select_langage_screen.dart';
 import 'package:testt/src/features/videos/videos_screen.dart';
 
 import '../../chat/chat_screen.dart';
@@ -24,7 +27,8 @@ class Dashboard extends StatelessWidget {
       bottomNavigationBar: Consumer<NavigationProvider>(
         builder: (context, provider, child) {
           return BottomNavigationBar(
-            backgroundColor: AppColors.whiteSccafold,
+            backgroundColor: AppColors.whiteColor,
+            type: BottomNavigationBarType.fixed,
             currentIndex: provider.selectedIndex,
             showUnselectedLabels: true,
             onTap: (index) {
@@ -37,13 +41,17 @@ class Dashboard extends StatelessWidget {
             selectedLabelStyle:
                 TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             unselectedLabelStyle: TextStyle(fontSize: 12),
-            items: const <BottomNavigationBarItem>[
+            items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Icons.home_rounded),
+                icon: Icon(provider.selectedIndex == 0
+                    ? Icons.home_rounded
+                    : Icons.home_outlined),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.search),
+                icon: SvgPicture.asset(provider.selectedIndex == 1
+                    ? 'assets/svg/video_filled.svg'
+                    : 'assets/svg/video.svg'),
                 label: 'Videos',
               ),
               BottomNavigationBarItem(
@@ -51,11 +59,18 @@ class Dashboard extends StatelessWidget {
                 label: 'Sell',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.chat),
+                icon: SvgPicture.asset(
+                  provider.selectedIndex == 3
+                      ? 'assets/svg/chat_filled.svg'
+                      : 'assets/svg/chat.svg',
+                  height: context.mediaQueryHeight / 35,
+                ),
                 label: 'Chat',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle_outlined),
+                icon: Icon(provider.selectedIndex == 4
+                    ? Icons.account_circle
+                    : Icons.account_circle_outlined),
                 label: 'Profile',
               ),
             ],

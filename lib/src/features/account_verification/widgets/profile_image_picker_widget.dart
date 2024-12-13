@@ -36,7 +36,7 @@ Widget buildImagePicker(BuildContext context, String label, bool isFront) {
                   if (pickedFile != null) {
                     final image = File(pickedFile.path);
                     isFront
-                        ? viewModel.setFrontImage(image)
+                        ? viewModel.setProfileImage(image)
                         : viewModel.setBackImage(image);
                   }
                 },
@@ -53,7 +53,7 @@ Widget buildImagePicker(BuildContext context, String label, bool isFront) {
                   if (pickedFile != null) {
                     final image = File(pickedFile.path);
                     isFront
-                        ? viewModel.setFrontImage(image)
+                        ? viewModel.setProfileImage(image)
                         : viewModel.setBackImage(image);
                   }
                 },

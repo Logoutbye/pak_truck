@@ -1,3 +1,4 @@
+import 'package:testt/src/features/my_profile/view/edit_profile_screen.dart';
 
 class RoutesName {
 // splash
@@ -17,4 +18,5 @@ class RoutesName {
   static const dashboard = 'dashboard';
   static const notificaiton = 'notification';
   static const deleteaccount = 'deleteaccount';
+  static const editProfile = 'edit_profile';
 }

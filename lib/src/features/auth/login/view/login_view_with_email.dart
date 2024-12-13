@@ -129,7 +129,8 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
                             'password': _passwordController.text.trim(),
                           };
                           provider.signinWithEmail(context, data).then((value) {
-                            Navigator.pushNamed(context, RoutesName.chooseAccountScreen);
+                            Navigator.pushNamed(
+                                context, RoutesName.chooseAccountScreen);
                           }).onError((error, stackTrace) {
                             Utils.flushBarErrorMessage(
                                 error.toString(), context);
