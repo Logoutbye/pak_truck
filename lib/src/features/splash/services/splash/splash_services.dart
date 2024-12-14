@@ -20,7 +20,7 @@ class SplashServices {
         //   () =>
 
         Navigator.pushNamedAndRemoveUntil(
-            context, RoutesName.selectLanguageScreen, (route) => false);
+            context, RoutesName.dashboard, (route) => false);
         // );
       }
     }).onError((error, stackTrace) {

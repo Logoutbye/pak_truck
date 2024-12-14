@@ -3,12 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
+import 'package:testt/src/features/dashborad/widgets/what_do_you_want_to_sell_bottom_sheet.dart';
 import 'package:testt/src/features/home/home_screen.dart';
 import 'package:testt/src/features/my_profile/view/profile_screen.dart';
-import 'package:testt/src/features/sell/view/sell_screen.dart';
-import 'package:testt/src/features/splash/view/select_langage_screen.dart';
 import 'package:testt/src/features/videos/videos_screen.dart';
-
 import '../../chat/chat_screen.dart';
 import '../view_model/navigation_provider.dart';
 
@@ -20,7 +18,6 @@ class Dashboard extends StatelessWidget {
     return Scaffold(
       body: Consumer<NavigationProvider>(
         builder: (context, provider, child) {
-          // Change body based on the selected index
           return _getPage(provider.selectedIndex);
         },
       ),
@@ -32,7 +29,11 @@ class Dashboard extends StatelessWidget {
             currentIndex: provider.selectedIndex,
             showUnselectedLabels: true,
             onTap: (index) {
-              provider.updateIndex(index);
+              if (index == 2) {
+                whatDoYouWantToSellBottomSheet(context);
+              } else {
+                provider.updateIndex(index);
+              }
             },
             selectedItemColor: provider.selectedIndex == 2
                 ? Colors.red
@@ -55,9 +56,12 @@ class Dashboard extends StatelessWidget {
                 label: 'Videos',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.add_box_rounded),
-                label: 'Sell',
-              ),
+                  icon: Icon(
+                    Icons.add_box_rounded,
+                    color: AppColors.red,
+                  ),
+                  label: 'Sell',
+                  backgroundColor: AppColors.red),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   provider.selectedIndex == 3
@@ -87,7 +91,7 @@ class Dashboard extends StatelessWidget {
       case 1:
         return Center(child: VideosScreen());
       case 2:
-        return Center(child: SellScreen());
+        return Container();
       case 3:
         return Center(child: ChatScreen());
       case 4:
