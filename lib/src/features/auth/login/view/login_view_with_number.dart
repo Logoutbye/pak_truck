@@ -39,8 +39,9 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
       child: Consumer<LoginViewModel>(builder: (context, loginViewModel, _) {
         return Scaffold(
           appBar: CustomAppBar(
-            firstText: localization.signin_first,
-            secondText: localization.signin_second,
+            firstText: localization.signin_second,
+            secondText: localization.signin_first,
+            isSecondTextBeforeFirst: true,
           ),
           body: Padding(
             padding: const EdgeInsets.all(20),
@@ -139,34 +140,36 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
                   color: AppColors.whiteColor,
                   borderColor: Colors.grey.shade300,
                 ),
-                SizedBox(height: context.mediaQueryHeight / 10),
-                RoundButton(
-                  title: localization.next_button,
-                  onPress: () {},
+                // SizedBox(height: context.mediaQueryHeight / 10),
+                // RoundButton(
+                //   title: localization.next_button,
+                //   onPress: () {},
+                // ),
+                // SizedBox(height: context.mediaQueryHeight / 30),
+              ],
+            ),
+          ),
+          bottomSheet: Padding(
+            padding: const EdgeInsets.only(bottom: 38.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  localization.dont_have_account,
+                  style: Themetext.subheadline.copyWith(fontSize: 16),
                 ),
-                SizedBox(height: context.mediaQueryHeight / 30),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      localization.dont_have_account,
-                      style: Themetext.subheadline.copyWith(fontSize: 16),
-                    ),
-                    
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, RoutesName.signupViewWithNumber);
-                      },
-                      child: Text(
-                        ' ${localization.signup_text}',
-                        style: Themetext.blackBoldText.copyWith(
-                            color: AppColors.primaryColor, fontSize: 16),
-                      ),
-                    ),
-                  ],
-                )
+                InkWell(
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, RoutesName.signupViewWithNumber);
+                  },
+                  child: Text(
+                    ' ${localization.signup_text}',
+                    style: Themetext.blackBoldText
+                        .copyWith(color: AppColors.primaryColor, fontSize: 16),
+                  ),
+                ),
               ],
             ),
           ),

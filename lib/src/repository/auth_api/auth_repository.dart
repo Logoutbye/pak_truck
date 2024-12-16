@@ -1,13 +1,14 @@
+import 'package:testt/src/model/auth/send_email_otp.dart';
+
 import '../../model/user/user_model.dart';
 
 abstract class AuthRepository {
   Future<UserModel> continueWithPhoneNumberApi(dynamic data);
+  Future<SendEmailOtpResponse> sendEmailOtp(dynamic data);
   Future<UserModel> verifyOtpApi(dynamic data);
   Future<UserModel> signInWithEmailApi(dynamic data);
   Future<UserModel> signUpWithEmailApi(dynamic data);
-  
-  
-  
+
   Future<UserModel> continueWithGoogleApi(dynamic data);
   Future<UserModel> forgotPasswordApi(dynamic data);
   Future<UserModel> resetPasswordApi(dynamic data);

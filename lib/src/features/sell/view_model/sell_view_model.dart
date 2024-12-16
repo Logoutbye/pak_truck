@@ -4,15 +4,24 @@ import 'package:testt/src/configs/utils.dart';
 import 'package:video_player/video_player.dart';
 
 class SellViewModel extends ChangeNotifier {
+  String _choosePlan = '';
+  String get choosePlan => _choosePlan;
+
+  void setPlan(String plan) {
+    _choosePlan = plan;
+    notifyListeners();
+  }
+
 //------------------------ vdeo picking/playing/removing mechanism starts from here------------------------
 
   File? _video;
   VideoPlayerController? _videoController;
+
   bool _isPlaying = false;
+  bool get isPlaying => _isPlaying;
 
   File? get video => _video;
   VideoPlayerController? get videoController => _videoController;
-  bool get isPlaying => _isPlaying;
 
   void setVideo(File videoFile) {
     _video = videoFile;
@@ -125,6 +134,17 @@ class SellViewModel extends ChangeNotifier {
       setLoading(false);
     }
   }
+
+  String? _selectedTransmission;
+
+  String? get selectedTransmission => _selectedTransmission;
+
+  void selectTransmission(String transmission) {
+    _selectedTransmission = transmission;
+    notifyListeners();
+  }
+
+
 
   void clearAll() {
     shopNameController.clear();

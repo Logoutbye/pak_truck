@@ -9,14 +9,14 @@ import 'package:testt/src/features/sell/widget/sell_textform_field.dart';
 import 'package:testt/src/features/sell/widget/sell_image_picker.dart';
 import 'package:testt/src/features/sell/widget/sell_video_picker.dart';
 
-class SellScreen extends StatefulWidget {
-  const SellScreen({super.key});
+class SellSparePartsScreen extends StatefulWidget {
+  const SellSparePartsScreen({super.key});
 
   @override
-  State<SellScreen> createState() => _SellScreenState();
+  State<SellSparePartsScreen> createState() => _SellSparePartsScreenState();
 }
 
-class _SellScreenState extends State<SellScreen> {
+class _SellSparePartsScreenState extends State<SellSparePartsScreen> {
   TextEditingController locationController = TextEditingController();
   TextEditingController registeredInController = TextEditingController();
   TextEditingController yearController = TextEditingController();
@@ -33,7 +33,7 @@ class _SellScreenState extends State<SellScreen> {
         title: InkWell(
           onTap: () {},
           child: Text(
-            'Sell your Truck',
+            'Sell Spare Parts',
             style: TextStyle(color: AppColors.whiteColor),
           ),
         ),

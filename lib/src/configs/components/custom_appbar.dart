@@ -9,6 +9,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TextStyle? firstTextStyle;
   final TextStyle? secondTextStyle;
   final bool hasDivider;
+  final bool isSecondTextBeforeFirst; // Option to control text order
 
   const CustomAppBar({
     super.key,
@@ -19,6 +20,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.secondText,
     this.firstTextStyle,
     this.secondTextStyle,
+    this.isSecondTextBeforeFirst = false, // Default is first text comes first
   });
 
   @override
@@ -37,6 +39,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text.rich(
         TextSpan(
           children: [
+            if (isSecondTextBeforeFirst)
+              TextSpan(
+                text: secondText,
+                style: secondTextStyle ??
+                    const TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 16,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
             TextSpan(
               text: firstText,
               style: firstTextStyle ??
@@ -47,16 +60,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     fontWeight: FontWeight.w500,
                   ),
             ),
-            TextSpan(
-              text: secondText,
-              style: secondTextStyle ??
-                  const TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: 16,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w500,
-                  ),
-            ),
+            if (!isSecondTextBeforeFirst)
+              TextSpan(
+                text: secondText,
+                style: secondTextStyle ??
+                    const TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 16,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
           ],
         ),
         textAlign: TextAlign.center, // Center aligns the text
@@ -65,10 +79,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? [trailing!]
           : [SizedBox(width: 48)], // Maintain symmetry
       centerTitle: true,
-      // bottom: hasDivider
-      //     ? PreferredSize(preferredSize: preferredSize, child: Divider())
-      //     : PreferredSize(
-      //         preferredSize: preferredSize, child: SizedBox.shrink()),
     );
   }
 

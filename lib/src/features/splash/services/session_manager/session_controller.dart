@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../model/user/user_model.dart';
 import '../storage/local_storage.dart';
 
@@ -10,6 +11,8 @@ class SessionController {
 
   bool? isLogin;
   UserModel? user; // User can now be null initially
+  String? _token; // Cached token
+  String? get token => _token;
 
   factory SessionController() {
     return _session;
@@ -21,6 +24,16 @@ class SessionController {
     user = null;
   }
 
+  Future<String?> getUserToken() async {
+    if (_token != null) {
+      return _token; // Return cached token if already loaded
+    }
+
+    final SharedPreferences sp = await SharedPreferences.getInstance();
+    _token = sp.getString('token');
+    return _token;
+  }
+
   // Save the complete user data into shared preferences
   Future<void> saveUserInPreference(UserModel user) async {
     try {
@@ -30,6 +43,8 @@ class SessionController {
 
       // Save additional login state
       await sharedPreferenceClass.setValue('isLogin', 'true');
+
+      _token = user.token; // Cache the token locally
 
       // Update current session data
       this.user = user;

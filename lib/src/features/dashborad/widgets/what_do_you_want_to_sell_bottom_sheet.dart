@@ -1,9 +1,8 @@
-
-
 // Function to show bottom sheet for 'Sell' tab
 import 'package:flutter/material.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
+import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 
 void whatDoYouWantToSellBottomSheet(BuildContext context) {
@@ -48,7 +47,11 @@ void whatDoYouWantToSellBottomSheet(BuildContext context) {
                 children: [
                   // sell truck
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(
+                          context, RoutesName.chooseSellingPlan);
+                    },
                     child: Container(
                       padding: EdgeInsets.only(top: 12),
                       width: context.mediaQueryWidth / 3.5,
@@ -76,7 +79,11 @@ void whatDoYouWantToSellBottomSheet(BuildContext context) {
                   ),
                   // spare parts
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(
+                          context, RoutesName.sellSparePartsScreen);
+                    },
                     child: Container(
                       padding: EdgeInsets.only(top: 12),
                       width: context.mediaQueryWidth / 3.5,

@@ -1,4 +1,4 @@
-import 'package:testt/src/features/my_profile/view/edit_profile_screen.dart';
+import 'package:testt/src/features/sell/view/sell_spare_parts_screen.dart';
 
 class RoutesName {
 // splash
@@ -11,7 +11,9 @@ class RoutesName {
   static const setNewPasswordScreen = 'set_new_password_screen';
 
   static const chooseAccountScreen = 'chooseAccountScreen';
+
   static const verifyShopScreen = 'verify_shop_screen';
+  static const verifyIndividualScreen = 'verify_individual_screen';
 
 // signin
   static const loginViewWithNumber = 'login_view_with_number';
@@ -19,4 +21,8 @@ class RoutesName {
   static const notificaiton = 'notification';
   static const deleteaccount = 'deleteaccount';
   static const editProfile = 'edit_profile';
+
+  static const chooseSellingPlan = 'choose_plan';
+  static const sellSparePartsScreen = 'sellSparePartsScreen';
+  static const sellTruckScreen = 'sellTruckScreen';
 }

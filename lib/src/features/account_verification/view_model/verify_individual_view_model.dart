@@ -2,32 +2,40 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:testt/src/configs/utils.dart';
 
-class VerifyShopViewModel extends ChangeNotifier {
-  final TextEditingController shopNameController = TextEditingController();
-  final TextEditingController shopAddressController = TextEditingController();
+class VerifyIndividualViewModel extends ChangeNotifier {
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailAddressController = TextEditingController();
   final TextEditingController phoneNoController = TextEditingController();
   File? frontImage;
   File? backImage;
-  File? shopImage;
-  String? role;
-  String? type;
 
-  void setUserRoleAndType(String role, String type) {
-    type = type;
-    role = role;
+  String? role;
+
+  String _email = '';
+  String get email => _email;
+
+  void setEmail(String email) {
+    _email = email;
     notifyListeners();
   }
 
-  void clearAll() {
-    shopNameController.clear();
-    shopAddressController.clear();
-    emailAddressController.clear();
-    phoneNoController.clear();
-    frontImage = null;
-    backImage = null;
-    shopImage = null;
-    notifyListeners(); // Notify UI of state changes
+  String _otp = '';
+  String get otp => _otp;
+  void setOtp(String otp) {
+    _otp = otp;
+    notifyListeners();
+  }
+
+  String _phoneNo = '';
+  String get phoneNo => _phoneNo;
+  void setPhoneNo(String phoneNo) {
+    _phoneNo = phoneNo;
+    notifyListeners();
+  }
+
+  void setUserRole(String role) {
+    role = role;
+    notifyListeners();
   }
 
   void setFrontImage(File? image) {
@@ -40,20 +48,12 @@ class VerifyShopViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setShopImage(File? image) {
-    shopImage = image;
-    notifyListeners();
-  }
-
   bool validateInputs(BuildContext context) {
-    if (shopNameController.text.isEmpty) {
-      _showError(context, 'Shop Name is required');
+    if (nameController.text.isEmpty) {
+      _showError(context, 'Name is required');
       return false;
     }
-    if (shopAddressController.text.isEmpty) {
-      _showError(context, 'Shop Address is required');
-      return false;
-    }
+
     if (emailAddressController.text.isEmpty ||
         !emailAddressController.text.contains('@')) {
       _showError(context, 'Valid Email Address is required');
@@ -89,9 +89,11 @@ class VerifyShopViewModel extends ChangeNotifier {
   Future<void> submitData(BuildContext context) async {
     setLoading(true);
     try {
+      print('::: email is $email otp is $otp');
       var data = {
-        'shopNameController': shopNameController.text.trim(),
-        'shopAddressController': shopAddressController.text.trim(),
+        if (email.isNotEmpty) "email": email.toString(),
+        if (phoneNo.isNotEmpty) "phoneNo": phoneNo.toString(),
+        'nameController': nameController.text.trim(),
         'emailAddressController': emailAddressController.text.trim(),
         'phoneNoController': phoneNoController.text.trim(),
         'frontImage': frontImage,
@@ -99,13 +101,22 @@ class VerifyShopViewModel extends ChangeNotifier {
       };
       print('::: data is ${data}');
       Future.delayed(Duration(seconds: 2), () {
-        setLoading(false);
-        Utils.snackBar('Application submitted successfully', context);
+        // setLoading(false);
+        // Utils.snackBar('Application submitted successfully', context);
       });
       // var response = await authRepository.continueWithPhoneNumberApi(fullPhone);
     } catch (error) {
       Utils.snackBar('Failed to submitted. Please try again.', context);
       setLoading(false);
     }
+  }
+
+  void clearAll() {
+    nameController.clear();
+    emailAddressController.clear();
+    phoneNoController.clear();
+    frontImage = null;
+    backImage = null;
+    notifyListeners(); // Notify UI of state changes
   }
 }

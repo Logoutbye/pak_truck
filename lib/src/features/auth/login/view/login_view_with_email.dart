@@ -24,7 +24,6 @@ class LoginViewWithEmail extends StatefulWidget {
 class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  // final TextEditingController _nameController = TextEditingController();
 
   @override
   void dispose() {
@@ -152,10 +151,10 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
                     InkWell(
                       onTap: () {
                         Navigator.pushReplacementNamed(
-                            context, RoutesName.loginViewWithNumber);
+                            context, RoutesName.signupViewWithNumber);
                       },
                       child: Text(
-                        ' ${localization.signin}',
+                        ' ${localization.sign_up}',
                         style: Themetext.blackBoldText.copyWith(
                             color: AppColors.primaryColor, fontSize: 16),
                       ),

@@ -23,7 +23,7 @@ class SellTextFormField extends StatefulWidget {
     required this.hintText,
     required this.controller,
     this.onCountrySelected,
-    this.color = Colors.transparent,
+    this.color = Colors.white,
     this.borderColor = Colors.black38,
     this.onPhoneNumberChanged,
     this.isPassword = false,
@@ -60,12 +60,10 @@ class _SellTextFormFieldState extends State<SellTextFormField> {
           child: TextFormField(
             controller: widget.controller,
             obscureText: widget.isPassword,
-            style: Themetext.subheadline,
+            style: Themetext.subheadline.copyWith(fontWeight: FontWeight.w500),
             minLines: widget.minLines ?? 1, // Default to 1 line
             maxLines: widget.maxLines ?? 1, // Default to single-line input
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(
-                  vertical: 14, horizontal: 10), // Adjust padding for centering
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
               border: InputBorder.none,

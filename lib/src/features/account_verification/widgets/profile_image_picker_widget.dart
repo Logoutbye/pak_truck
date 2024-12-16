@@ -3,15 +3,25 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
-import 'package:testt/src/configs/theme/theme_text.dart';
 
-import '../view_model/verify_shop_view_model.dart';
+class ImagePickerWidget extends StatefulWidget {
+  final String label;
+  final Function(File?) onImagePicked;
 
-Widget buildImagePicker(BuildContext context, String label, bool isFront) {
-  final viewModel = Provider.of<VerifyShopViewModel>(context, listen: false);
+  const ImagePickerWidget({
+    Key? key,
+    required this.label,
+    required this.onImagePicked,
+  }) : super(key: key);
+
+  @override
+  _ImagePickerWidgetState createState() => _ImagePickerWidgetState();
+}
+
+class _ImagePickerWidgetState extends State<ImagePickerWidget> {
+  File? _pickedImage;
 
   Future<void> _showImageSourceActionSheet() async {
     showModalBottomSheet(
@@ -25,38 +35,22 @@ Widget buildImagePicker(BuildContext context, String label, bool isFront) {
           child: Wrap(
             children: [
               ListTile(
-                leading: Icon(Icons.camera_alt),
-                title: Text('Take a Photo'),
-                titleTextStyle: Themetext.blackBoldText,
-                onTap: () async {
-                  Navigator.pop(context); // Close the bottom sheet
-                  final picker = ImagePicker();
-                  final pickedFile =
-                      await picker.pickImage(source: ImageSource.camera);
-                  if (pickedFile != null) {
-                    final image = File(pickedFile.path);
-                    isFront
-                        ? viewModel.setProfileImage(image)
-                        : viewModel.setBackImage(image);
-                  }
-                },
+                title: Text('Upload Photos'),
+                titleTextStyle: TextStyle(
+                  color: AppColors.blackColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              ListTile(
-                leading: Icon(Icons.photo_library),
-                title: Text('Choose from Gallery'),
-                titleTextStyle: Themetext.blackBoldText,
-                onTap: () async {
-                  Navigator.pop(context); // Close the bottom sheet
-                  final picker = ImagePicker();
-                  final pickedFile =
-                      await picker.pickImage(source: ImageSource.gallery);
-                  if (pickedFile != null) {
-                    final image = File(pickedFile.path);
-                    isFront
-                        ? viewModel.setProfileImage(image)
-                        : viewModel.setBackImage(image);
-                  }
-                },
+              _buildOptionTile(
+                icon: Icons.camera_alt,
+                text: 'Take a Photo',
+                onTap: () => _pickImage(ImageSource.camera),
+              ),
+              _buildOptionTile(
+                icon: Icons.photo_library,
+                text: 'Choose from Gallery',
+                onTap: () => _pickImage(ImageSource.gallery),
               ),
             ],
           ),
@@ -65,59 +59,116 @@ Widget buildImagePicker(BuildContext context, String label, bool isFront) {
     );
   }
 
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(label),
-      SizedBox(height: context.mediaQueryHeight / 70),
-      GestureDetector(
-        onTap: _showImageSourceActionSheet,
-        child: Consumer<VerifyShopViewModel>(
-          builder: (_, vm, __) {
-            final image = isFront ? vm.frontImage : vm.backImage;
-            return DottedBorder(
-              dashPattern: const <double>[10, 5],
-              color: AppColors.primaryColor,
-              borderType: BorderType.RRect,
-              radius: Radius.circular(12),
-              padding: EdgeInsets.all(6),
-              child: SizedBox(
-                height: context.mediaQueryHeight / 6,
-                width: double.infinity,
-                child: image != null
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.file(
-                          image,
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
-                      )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.camera_alt,
-                              color: AppColors.primaryColor, size: 40),
-                          SizedBox(height: 8),
-                          Text(
-                            'Add Photo',
-                            style: TextStyle(
-                                color: AppColors.primaryColor, fontSize: 16),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'PDF, JPG, JPEG, PNG less than 10MB.',
-                            style:
-                                TextStyle(color: AppColors.grey, fontSize: 15),
-                          ),
-                        ],
-                      ),
-              ),
-            );
-          },
-        ),
+  ListTile _buildOptionTile({
+    required IconData icon,
+    required String text,
+    required VoidCallback onTap,
+  }) {
+    return ListTile(
+      leading: Icon(icon),
+      title: Text(text),
+      titleTextStyle: TextStyle(
+        color: AppColors.blackColor,
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
       ),
-    ],
-  );
+      onTap: () {
+        Navigator.pop(context); // Close the bottom sheet
+        onTap();
+      },
+    );
+  }
+
+  Future<void> _pickImage(ImageSource source) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: source);
+    if (pickedFile != null) {
+      setState(() {
+        _pickedImage = File(pickedFile.path);
+      });
+      widget.onImagePicked(_pickedImage);
+    }
+  }
+
+  void _removeImage() {
+    setState(() {
+      _pickedImage = null;
+    });
+    widget.onImagePicked(null);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(widget.label),
+        SizedBox(height: context.mediaQueryHeight / 70),
+        GestureDetector(
+          onTap: _showImageSourceActionSheet,
+          child: DottedBorder(
+            dashPattern: const <double>[10, 5],
+            color: AppColors.primaryColor,
+            borderType: BorderType.RRect,
+            radius: Radius.circular(12),
+            padding: EdgeInsets.all(6),
+            child: Stack(
+              children: [
+                SizedBox(
+                  height: context.mediaQueryHeight / 6,
+                  width: double.infinity,
+                  child: _pickedImage != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.file(
+                            _pickedImage!,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: double.infinity,
+                          ),
+                        )
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.camera_alt,
+                                color: AppColors.primaryColor, size: 40),
+                            SizedBox(height: 8),
+                            Text(
+                              'Add Photo',
+                              style: TextStyle(
+                                  color: AppColors.primaryColor, fontSize: 16),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              'PDF, JPG, JPEG, PNG less than 10MB.',
+                              style: TextStyle(
+                                  color: AppColors.grey, fontSize: 15),
+                            ),
+                          ],
+                        ),
+                ),
+                if (_pickedImage != null)
+                  Positioned(
+                    top: 4,
+                    right: 4,
+                    child: GestureDetector(
+                      onTap: _removeImage,
+                      child: CircleAvatar(
+                        radius: 16,
+                        backgroundColor: Colors.red,
+                        child: Icon(
+                          Icons.close,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }

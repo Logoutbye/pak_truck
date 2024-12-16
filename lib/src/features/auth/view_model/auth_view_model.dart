@@ -42,6 +42,29 @@ class LoginViewModel with ChangeNotifier {
     return '+${_selectedCountry!.phoneCode}$_phoneNumber';
   }
 
+
+
+
+  Future<void> sendEmailOtp(BuildContext context, dynamic data) async {
+ 
+    setLoading(true);
+    try {
+      String fullPhone = fullPhoneNumber;
+      Future.delayed(Duration(seconds: 2), () {
+        print('::: $fullPhone');
+        setLoading(false);
+      });
+      // var response = await authRepository.continueWithPhoneNumberApi(fullPhone);
+      Navigator.push(context,
+          SlideTransitionPage(page: VerifyOtpScreen(phoneNumber: fullPhone)));
+    } catch (error) {
+      Utils.snackBar('Failed to send OTP. Please try again.', context);
+      setLoading(false);
+    }
+  }
+
+
+
   Future<void> sendOtp(BuildContext context) async {
     if (_selectedCountry == null || _phoneNumber.isEmpty) {
       Utils.snackBar(

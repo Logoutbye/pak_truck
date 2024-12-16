@@ -196,17 +196,125 @@ List<String> carMakes = [
 ];
 
 List<String> carModels = [
-  "Honda Civic", "Honda City", "Honda BR-V", "Honda HR-V",
-  "Toyota Corolla", "Toyota Yaris", "Toyota Fortuner", "Toyota Hilux",
-  "Kia Sportage", "Kia Picanto", "Kia Sorento",
-  "Hyundai Elantra", "Hyundai Tucson", "Hyundai Sonata",
-  "Changan Alsvin", "Changan Karvaan",
-  "MG HS", "MG ZS",
-  "Proton X70", "Proton Saga",
-  "DFSK Glory 580", "DFSK Mini Truck",
-  "Audi A3", "Audi A4", "Audi Q5",
-  "BMW 3 Series", "BMW X5", "BMW 5 Series",
-  "Mercedes-Benz C-Class", "E-Class", "GLC",
-  "Land Rover Defender", "Range Rover", "Range Rover Sport",
-  "Nissan Altima", "Nissan Juke", "Nissan Leaf"
+  "Honda Civic",
+  "Honda City",
+  "Honda BR-V",
+  "Honda HR-V",
+  "Toyota Corolla",
+  "Toyota Yaris",
+  "Toyota Fortuner",
+  "Toyota Hilux",
+  "Kia Sportage",
+  "Kia Picanto",
+  "Kia Sorento",
+  "Hyundai Elantra",
+  "Hyundai Tucson",
+  "Hyundai Sonata",
+  "Changan Alsvin",
+  "Changan Karvaan",
+  "MG HS",
+  "MG ZS",
+  "Proton X70",
+  "Proton Saga",
+  "DFSK Glory 580",
+  "DFSK Mini Truck",
+  "Audi A3",
+  "Audi A4",
+  "Audi Q5",
+  "BMW 3 Series",
+  "BMW X5",
+  "BMW 5 Series",
+  "Mercedes-Benz C-Class",
+  "E-Class",
+  "GLC",
+  "Land Rover Defender",
+  "Range Rover",
+  "Range Rover Sport",
+  "Nissan Altima",
+  "Nissan Juke",
+  "Nissan Leaf"
+];
+
+var categoriesList = {
+  'Used Truck': [
+    'Cargo Landing Truck',
+    'Concrete Mixer Truck',
+    'Flat Bed Truck',
+    'Trailer Truck',
+    'Tanker Truck',
+    'Container Carrier Truck',
+    'Freezer Truck',
+    'Box Truck',
+    'Dump Truck'
+  ],
+  'Mini Truck': [
+    'Mazda Body Truck',
+    'Container Mini Truck',
+    'Oil Tanker Mini Truck',
+    'Poultry Truck',
+    'Mini Dumper Truck'
+  ],
+  'Earth Moving Machinery': [
+    'Excavator Operator',
+    'Loader Operator',
+    'Roller Machine',
+    'Grader Truck',
+    'Mini Crane Machine',
+    'Wheel Tractor',
+    'Road Cutter',
+    'Drilling Machine',
+    'Compactor Machine',
+    'Foklift Operator',
+    'Bulldozar',
+    'Screening machine',
+    'Crusher'
+  ],
+  'Agriculture Machine': [
+    'Tractor',
+    'Threshers',
+    'Harvesters',
+    'Seeders',
+    'Plows'
+  ],
+};
+
+final List<String> truckEngines = [
+  'Diesel Engine',
+  'Petrol Engine',
+  'CNG Engine',
+  'LPG Engine',
+  'Electric Engine',
+  'Hybrid Engine',
+  'Turbocharged Diesel Engine',
+  'Natural Gas Engine',
+  'Biofuel Engine',
+];
+
+final List<String> truckCapacities = [
+  '1 Ton',
+  '2 Ton',
+  '3 Ton',
+  '5 Ton',
+  '7 Ton',
+  '10 Ton',
+  '12 Ton',
+  '15 Ton',
+  '20 Ton',
+  '30 Ton',
+  '40 Ton',
+  '50 Ton',
+];
+
+
+final List<String> truckMileages = [
+  '5 km/l',
+  '6 km/l',
+  '7 km/l',
+  '8 km/l',
+  '9 km/l',
+  '10 km/l',
+  '12 km/l',
+  '15 km/l',
+  '18 km/l',
+  '20 km/l',
 ];

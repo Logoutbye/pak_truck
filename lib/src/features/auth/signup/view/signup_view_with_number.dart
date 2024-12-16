@@ -154,33 +154,36 @@ class _SignUpViewWithNumberState extends State<SignUpViewWithNumber> {
                   borderColor: Colors.grey.shade300,
                 ),
                 SizedBox(height: context.mediaQueryHeight / 10),
-                RoundButton(
-                  title: localization.next_button,
-                  onPress: () {},
+                // RoundButton(
+                //   title: localization.next_button,
+                //   onPress: () {},
+                // ),
+                // SizedBox(height: context.mediaQueryHeight / 30),
+              ],
+            ),
+          ),
+          bottomSheet: Padding(
+            padding: const EdgeInsets.only(bottom: 38.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  localization.already_have_account,
+                  style: Themetext.subheadline.copyWith(fontSize: 16),
                 ),
-                SizedBox(height: context.mediaQueryHeight / 30),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      localization.already_have_account,
-                      style: Themetext.subheadline.copyWith(fontSize: 16),
-                    ),
-                    SizedBox(width: context.mediaQueryWidth / 75),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, RoutesName.loginViewWithNumber);
-                      },
-                      child: Text(
-                        ' ${localization.signin}',
-                        style: Themetext.blackBoldText.copyWith(
-                            color: AppColors.primaryColor, fontSize: 16),
-                      ),
-                    ),
-                  ],
-                )
+                SizedBox(width: context.mediaQueryWidth / 75),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, RoutesName.loginViewWithNumber);
+                  },
+                  child: Text(
+                    ' ${localization.signin}',
+                    style: Themetext.blackBoldText
+                        .copyWith(color: AppColors.primaryColor, fontSize: 16),
+                  ),
+                ),
               ],
             ),
           ),

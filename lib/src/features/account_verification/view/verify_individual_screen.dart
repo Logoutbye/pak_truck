@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
@@ -8,20 +9,20 @@ import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/features/account_verification/view_model/verify_shop_view_model.dart';
+import 'package:testt/src/features/account_verification/view_model/verify_individual_view_model.dart';
 import 'package:testt/src/features/account_verification/widgets/profile_image_picker_widget.dart';
 
-class VerifyShopScreen extends StatefulWidget {
-  const VerifyShopScreen({super.key});
+class VerifyIndividualScreen extends StatefulWidget {
+  const VerifyIndividualScreen({super.key});
 
   @override
-  State<VerifyShopScreen> createState() => _VerifyShopScreenState();
+  State<VerifyIndividualScreen> createState() => _VerifyIndividualScreenState();
 }
 
-class _VerifyShopScreenState extends State<VerifyShopScreen> {
+class _VerifyIndividualScreenState extends State<VerifyIndividualScreen> {
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<VerifyShopViewModel>(context);
+    final viewModel = Provider.of<VerifyIndividualViewModel>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -41,40 +42,21 @@ class _VerifyShopScreenState extends State<VerifyShopScreen> {
         padding: EdgeInsets.all(12),
         children: [
           Text(
-            "Verify your Shop Through Identity",
+            "Verify your Identity",
             style: Themetext.headline.copyWith(color: AppColors.primaryColor),
           ),
-          SizedBox(height: context.mediaQueryHeight / 40),
-          Text('Verify my identity using these Steps'),
           SizedBox(height: context.mediaQueryHeight / 30),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Shop Name',
+                'Full Name',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
               SizedBox(height: context.mediaQueryHeight / 70),
               CustomTextFormField(
-                hintText: 'Enter your shop name',
-                controller: viewModel.shopNameController,
-                color: AppColors.greyColor,
-                borderColor: Colors.black12,
-              )
-            ],
-          ),
-          SizedBox(height: context.mediaQueryHeight / 35),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Shop Address',
-                style: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              SizedBox(height: context.mediaQueryHeight / 70),
-              CustomTextFormField(
-                hintText: 'Enter your shop address',
-                controller: viewModel.shopAddressController,
+                hintText: 'Enter your full name',
+                controller: viewModel.nameController,
                 color: AppColors.greyColor,
                 borderColor: Colors.black12,
               )
@@ -122,9 +104,11 @@ class _VerifyShopScreenState extends State<VerifyShopScreen> {
           SizedBox(height: context.mediaQueryHeight / 70),
           // buildImagePicker(context, 'Upload Front Photo', true, false),
           ImagePickerWidget(
-            label: "Upload Front Photo",
+            label: 'Upload Front Photo',
             onImagePicked: (File? image) {
               if (image != null) {
+                // Do something with the picked image
+                print("Image path: ${image.path}");
                 viewModel.setFrontImage(image);
               }
             },
@@ -135,17 +119,9 @@ class _VerifyShopScreenState extends State<VerifyShopScreen> {
             label: 'Upload Back Photo',
             onImagePicked: (File? image) {
               if (image != null) {
+                // Do something with the picked image
+                print("Image path: ${image.path}");
                 viewModel.setBackImage(image);
-              }
-            },
-          ),
-          SizedBox(height: context.mediaQueryHeight / 35),
-          // buildImagePicker(context, 'Upload Shop Photo', true, true),
-          ImagePickerWidget(
-            label: "Upload Shop Photo",
-            onImagePicked: (File? image) {
-              if (image != null) {
-                viewModel.setShopImage(image);
               }
             },
           ),
@@ -164,7 +140,7 @@ class _VerifyShopScreenState extends State<VerifyShopScreen> {
                 title: 'Clear all',
                 onPress: viewModel.clearAll,
               ),
-              Consumer<VerifyShopViewModel>(
+              Consumer<VerifyIndividualViewModel>(
                 builder: (BuildContext context, value, Widget? child) {
                   return RoundButton(
                       loading: value.loading,
@@ -179,6 +155,8 @@ class _VerifyShopScreenState extends State<VerifyShopScreen> {
                       onPress: () {
                         if (viewModel.validateInputs(context)) {
                           value.submitData(context).then((_) {
+                            Utils.snackBar('Application submitted successfully', context);
+
                             Navigator.pushNamedAndRemoveUntil(context,
                                 RoutesName.dashboard, (routes) => false);
                             viewModel.clearAll();
