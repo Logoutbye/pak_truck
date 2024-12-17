@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
+import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
+import 'package:testt/src/features/my_profile/view/ad_details_screen.dart';
 
 // Step 1: Define a Post model class
 class Post {
@@ -83,78 +85,84 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 4),
-      decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        border: Border.all(color: Colors.black12),
-        borderRadius: BorderRadius.circular(
-          12,
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Row(
-          children: [
-            // Post Image with rounded border
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.asset(
-                post.image,
-                width: context.mediaQueryWidth / 4,
-                height: context.mediaQueryHeight / 8,
-                fit: BoxFit.cover,
-              ),
-            ),
-            SizedBox(width: 16),
-            // Post Info: Title, Price, Stats
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Title
-                  Text(
-                    post.title,
-                    style: Themetext.headline
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: context.mediaQueryHeight / 45),
-                  // Price
-                  Text(
-                    post.price,
-                    style: Themetext.blackBoldText
-                        .copyWith(color: AppColors.primaryColor),
-                  ),
-                  SizedBox(height: context.mediaQueryHeight / 45),
-                  // Stats: Chat Count, Views Count, Calls Count
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      StatItem(label: 'Views', value: post.viewsCount),
-                      StatItem(label: 'Calls', value: post.callsCount),
+    return InkWell(
 
-                      StatItem(label: 'Chats', value: post.chatCount),
-                      // "See My Ad" Text Button
-                      Row(
-                        children: [
-                          Text(
-                            'See My Ad',
-                            style: Themetext.blackBoldText.copyWith(
-                                color: AppColors.primaryColor, fontSize: 12),
-                          ),
-                          SizedBox(width: 5),
-                          SvgPicture.asset(
-                            'assets/svg/arrow-right.svg',
-                            color: AppColors.primaryColor,
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+      onTap: () {
+        Navigator.push(context, SlideTransitionPage(page: MyAdDetailScreen()));
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 4),
+        decoration: BoxDecoration(
+          color: AppColors.whiteColor,
+          border: Border.all(color: Colors.black12),
+          borderRadius: BorderRadius.circular(
+            12,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Row(
+            children: [
+              // Post Image with rounded border
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  post.image,
+                  width: context.mediaQueryWidth / 4,
+                  height: context.mediaQueryHeight / 8,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-          ],
+              SizedBox(width: 16),
+              // Post Info: Title, Price, Stats
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Title
+                    Text(
+                      post.title,
+                      style: Themetext.headline
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: context.mediaQueryHeight / 45),
+                    // Price
+                    Text(
+                      post.price,
+                      style: Themetext.blackBoldText
+                          .copyWith(color: AppColors.primaryColor),
+                    ),
+                    SizedBox(height: context.mediaQueryHeight / 45),
+                    // Stats: Chat Count, Views Count, Calls Count
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        StatItem(label: 'Views', value: post.viewsCount),
+                        StatItem(label: 'Calls', value: post.callsCount),
+      
+                        StatItem(label: 'Chats', value: post.chatCount),
+                        // "See My Ad" Text Button
+                        Row(
+                          children: [
+                            Text(
+                              'See My Ad',
+                              style: Themetext.blackBoldText.copyWith(
+                                  color: AppColors.primaryColor, fontSize: 12),
+                            ),
+                            SizedBox(width: 5),
+                            SvgPicture.asset(
+                              'assets/svg/arrow-right.svg',
+                              color: AppColors.primaryColor,
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

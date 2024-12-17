@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
@@ -111,8 +112,10 @@ Widget buildSellVideoPicker(BuildContext context, String label) {
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.videocam,
-                              color: AppColors.primaryColor, size: 40),
+                          SvgPicture.asset(
+                            'assets/svg/video_filled.svg',
+                            height: context.mediaQueryHeight / 20,
+                          ),
                           SizedBox(height: 8),
                           Text(
                             'Add Video',

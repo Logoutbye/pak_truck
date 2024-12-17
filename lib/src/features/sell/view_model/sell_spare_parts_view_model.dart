@@ -9,13 +9,27 @@ class SellSparePartsViewModel extends ChangeNotifier {
   }
 
   // ------------------------pick images------------------------
-  File? truckImage;
-  void setTruckImage(File? image) {
-    truckImage = image;
+
+  final List<File> _images = [];
+  List<File> get images => _images;
+
+  void addImage(File image) {
+    _images.add(image);
+    notifyListeners();
+  }
+
+  void removeImage(int index) {
+    _images.removeAt(index);
+    notifyListeners();
+  }
+
+  void clearImages() {
+    _images.clear();
     notifyListeners();
   }
 
   // ---------------------Controllers for truck info
+  TextEditingController priceController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -46,6 +60,7 @@ class SellSparePartsViewModel extends ChangeNotifier {
   Map<String, String?> get fieldErrors => _fieldErrors;
 
   void _addErrorClearListeners() {
+    priceController.addListener(() => _clearFieldError('Price'));
     locationController.addListener(() => _clearFieldError('Location'));
     titleController.addListener(() => _clearFieldError('Title'));
 
@@ -65,10 +80,13 @@ class SellSparePartsViewModel extends ChangeNotifier {
   // Validation Logic
   bool validateSellTruckFields(BuildContext context) {
     _fieldErrors.clear();
-    if (truckImage == null) {
+    if (images.isEmpty) {
       Utils.flushBarErrorMessage('Please select image of your truck', context);
     }
 
+    if (priceController.text.isEmpty) {
+      _fieldErrors['Price'] = 'Price is required';
+    }
     if (locationController.text.isEmpty) {
       _fieldErrors['Location'] = 'Location is required';
     }
@@ -110,24 +128,23 @@ class SellSparePartsViewModel extends ChangeNotifier {
   Future<void> submitData(BuildContext context) async {
     setLoading(true);
     try {
-     if (validateSellTruckFields(context)) {
-      SparePartsModel spareParts = SparePartsModel(
-        images: [],
-        // images: uploadedImages.map((file) => file.path).toList(), // List of image paths
-        location: locationController.text.trim(),
-        title: titleController.text.trim(),
-        description: descriptionController.text.trim(),
-        sellerName: sellerNameController.text.trim(),
-        mobileNumber: sellerMobileController.text.trim(),
-        address: selllerAddressController.text.trim(),
-        comments: sellerCommentController.text.trim(),
-        allowWhatsappContact: allowWhatsappContact,
-      );
+      if (validateSellTruckFields(context)) {
+        SparePartsModel spareParts = SparePartsModel(
+          images: _images.map((image) => image.path).toList(),
+          location: locationController.text.trim(),
+          title: titleController.text.trim(),
+          description: descriptionController.text.trim(),
+          sellerName: sellerNameController.text.trim(),
+          mobileNumber: sellerMobileController.text.trim(),
+          address: selllerAddressController.text.trim(),
+          comments: sellerCommentController.text.trim(),
+          allowWhatsappContact: allowWhatsappContact,
+        );
 
-      print(spareParts.toString());
+        print(spareParts.toString());
 
-      // Further actions: Send to API, Save to Database, etc.
-    }
+        // Further actions: Send to API, Save to Database, etc.
+      }
       Future.delayed(Duration(seconds: 2), () {
         setLoading(false);
         Utils.snackBar('Application submitted successfully', context);
@@ -141,6 +158,7 @@ class SellSparePartsViewModel extends ChangeNotifier {
 
   @override
   void dispose() {
+    priceController.dispose();
     locationController.dispose();
     titleController.dispose();
     descriptionController.dispose();

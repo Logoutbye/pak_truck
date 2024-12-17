@@ -8,6 +8,7 @@ class SparePartsModel with _$SparePartsModel {
   const factory SparePartsModel({
    @Default([]) List<String>? images, // List of image file paths
    @Default('') String location, // Location
+   @Default('') String price, // Location
    @Default('') String title, // Title
    @Default('') String description, // Description
    @Default('') String sellerName, // Seller name

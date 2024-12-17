@@ -23,6 +23,7 @@ mixin _$SparePartsModel {
   List<String>? get images =>
       throw _privateConstructorUsedError; // List of image file paths
   String get location => throw _privateConstructorUsedError; // Location
+  String get price => throw _privateConstructorUsedError; // Location
   String get title => throw _privateConstructorUsedError; // Title
   String get description => throw _privateConstructorUsedError; // Description
   String get sellerName => throw _privateConstructorUsedError; // Seller name
@@ -52,6 +53,7 @@ abstract class $SparePartsModelCopyWith<$Res> {
   $Res call(
       {List<String>? images,
       String location,
+      String price,
       String title,
       String description,
       String sellerName,
@@ -78,6 +80,7 @@ class _$SparePartsModelCopyWithImpl<$Res, $Val extends SparePartsModel>
   $Res call({
     Object? images = freezed,
     Object? location = null,
+    Object? price = null,
     Object? title = null,
     Object? description = null,
     Object? sellerName = null,
@@ -94,6 +97,10 @@ class _$SparePartsModelCopyWithImpl<$Res, $Val extends SparePartsModel>
       location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -138,6 +145,7 @@ abstract class _$$SparePartsModelImplCopyWith<$Res>
   $Res call(
       {List<String>? images,
       String location,
+      String price,
       String title,
       String description,
       String sellerName,
@@ -162,6 +170,7 @@ class __$$SparePartsModelImplCopyWithImpl<$Res>
   $Res call({
     Object? images = freezed,
     Object? location = null,
+    Object? price = null,
     Object? title = null,
     Object? description = null,
     Object? sellerName = null,
@@ -178,6 +187,10 @@ class __$$SparePartsModelImplCopyWithImpl<$Res>
       location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -217,6 +230,7 @@ class _$SparePartsModelImpl implements _SparePartsModel {
   const _$SparePartsModelImpl(
       {final List<String>? images = const [],
       this.location = '',
+      this.price = '',
       this.title = '',
       this.description = '',
       this.sellerName = '',
@@ -244,6 +258,10 @@ class _$SparePartsModelImpl implements _SparePartsModel {
   @override
   @JsonKey()
   final String location;
+// Location
+  @override
+  @JsonKey()
+  final String price;
 // Location
   @override
   @JsonKey()
@@ -275,7 +293,7 @@ class _$SparePartsModelImpl implements _SparePartsModel {
 
   @override
   String toString() {
-    return 'SparePartsModel(images: $images, location: $location, title: $title, description: $description, sellerName: $sellerName, mobileNumber: $mobileNumber, address: $address, comments: $comments, allowWhatsappContact: $allowWhatsappContact)';
+    return 'SparePartsModel(images: $images, location: $location, price: $price, title: $title, description: $description, sellerName: $sellerName, mobileNumber: $mobileNumber, address: $address, comments: $comments, allowWhatsappContact: $allowWhatsappContact)';
   }
 
   @override
@@ -286,6 +304,7 @@ class _$SparePartsModelImpl implements _SparePartsModel {
             const DeepCollectionEquality().equals(other._images, _images) &&
             (identical(other.location, location) ||
                 other.location == location) &&
+            (identical(other.price, price) || other.price == price) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -306,6 +325,7 @@ class _$SparePartsModelImpl implements _SparePartsModel {
       runtimeType,
       const DeepCollectionEquality().hash(_images),
       location,
+      price,
       title,
       description,
       sellerName,
@@ -335,6 +355,7 @@ abstract class _SparePartsModel implements SparePartsModel {
   const factory _SparePartsModel(
       {final List<String>? images,
       final String location,
+      final String price,
       final String title,
       final String description,
       final String sellerName,
@@ -350,6 +371,8 @@ abstract class _SparePartsModel implements SparePartsModel {
   List<String>? get images; // List of image file paths
   @override
   String get location; // Location
+  @override
+  String get price; // Location
   @override
   String get title; // Title
   @override

@@ -95,6 +95,7 @@ List<String> pakistanProvinces = [
   'Azad Jammu & Kashmir (AJK)',
   'Gilgit-Baltistan (GB)',
   'Islamabad Capital Territory',
+  'Not Registered'
 ];
 
 List<String> vehicleRegistrationYears = [
@@ -316,6 +317,11 @@ final List<String> truckMileages = [
   '15 km/l',
   '18 km/l',
   '20 km/l',
+];
+
+final List<String> truckAssembly = [
+  'Imported',
+  'Local',
 ];
 
 // Features List

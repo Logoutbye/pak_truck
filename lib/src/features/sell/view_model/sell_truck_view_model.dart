@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:testt/src/configs/utils.dart';
+import 'package:testt/src/features/sell/model/sell_truck_model/sell_truck_model.dart';
 import 'package:video_player/video_player.dart';
 
 class SellTuckViewModel extends ChangeNotifier {
@@ -17,9 +18,22 @@ class SellTuckViewModel extends ChangeNotifier {
   }
 
   // ------------------------pick images------------------------
-  File? truckImage;
-  void setTruckImage(File? image) {
-    truckImage = image;
+
+  final List<File> _images = [];
+  List<File> get images => _images;
+
+  void addImage(File image) {
+    _images.add(image);
+    notifyListeners();
+  }
+
+  void removeImage(int index) {
+    _images.removeAt(index);
+    notifyListeners();
+  }
+
+  void clearImages() {
+    _images.clear();
     notifyListeners();
   }
 //------------------------ vdeo picking/playing/removing mechanism starts from here------------------------
@@ -72,6 +86,7 @@ class SellTuckViewModel extends ChangeNotifier {
   }
 
   // ---------------------Controllers for truck info
+  TextEditingController priceController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   TextEditingController cateogryController = TextEditingController();
   TextEditingController registeredInController = TextEditingController();
@@ -82,6 +97,7 @@ class SellTuckViewModel extends ChangeNotifier {
   TextEditingController engineTypeController = TextEditingController();
   TextEditingController engineCapacityController = TextEditingController();
   TextEditingController engineMillageController = TextEditingController();
+  TextEditingController truckAssemblyController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
   // ------------------- manual or automatic
@@ -137,6 +153,9 @@ class SellTuckViewModel extends ChangeNotifier {
   Map<String, String?> get fieldErrors => _fieldErrors;
 
   void _addErrorClearListeners() {
+    truckAssemblyController
+        .addListener(() => _clearFieldError('Truck Assembly'));
+    priceController.addListener(() => _clearFieldError('Price'));
     locationController.addListener(() => _clearFieldError('Location'));
     cateogryController.addListener(() => _clearFieldError('Category'));
     registeredInController.addListener(() => _clearFieldError('Registered In'));
@@ -165,7 +184,7 @@ class SellTuckViewModel extends ChangeNotifier {
   // Validation Logic
   bool validateSellTruckFields(BuildContext context) {
     _fieldErrors.clear();
-    if (truckImage == null) {
+    if (images.isEmpty) {
       Utils.flushBarErrorMessage('Please select image of your truck', context);
     }
     if (truckVideo == null) {
@@ -173,6 +192,12 @@ class SellTuckViewModel extends ChangeNotifier {
     }
     if (selectedTransmission == null) {
       Utils.flushBarErrorMessage('Please select Transmission type', context);
+    }
+    if (priceController.text.isEmpty) {
+      _fieldErrors['Price'] = 'Price is required';
+    }
+    if (truckAssemblyController.text.isEmpty) {
+      _fieldErrors['Truck Assembly'] = 'Truck Assembly is required';
     }
     if (locationController.text.isEmpty) {
       _fieldErrors['Location'] = 'Location is required';
@@ -238,21 +263,78 @@ class SellTuckViewModel extends ChangeNotifier {
   Future<void> submitData(BuildContext context) async {
     setLoading(true);
     try {
-      var data = {};
-      print('::: data is ${data}');
-      Future.delayed(Duration(seconds: 2), () {
-        setLoading(false);
-        Utils.snackBar('Application submitted successfully', context);
-      });
-      // var response = await authRepository.continueWithPhoneNumberApi(fullPhone);
+      // Prepare the SellTruckModel object
+      final truckData = SellTruckModel(
+        truckImages:
+            _images.map((image) => image.path).toList(), // List of image paths
+        truckVideo: truckVideo?.path ?? '', // Video file path
+        price: priceController.text.trim(),
+        location: locationController.text.trim(),
+        category: cateogryController.text.trim(),
+        registeredIn: registeredInController.text.trim(),
+        truckYear: yearController.text.trim(),
+        truckMake: truckMakeController.text.trim(),
+        truckModel: truckModelController.text.trim(),
+        color: colorController.text.trim(),
+        engineType: engineTypeController.text.trim(),
+        engineCapacity: engineCapacityController.text.trim(),
+        engineMileage: engineMillageController.text.trim(),
+        description: descriptionController.text.trim(),
+        transmissionType: selectedTransmission ?? '',
+        selectedFeatures: selectedFeatures,
+        sellerName: sellerNameController.text.trim(),
+        mobileNumber: sellerMobileController.text.trim(),
+        address: selllerAddressController.text.trim(),
+        comments: sellerCommentController.text.trim(),
+        allowWhatsappContact: allowWhatsappContact,
+      );
+
+      // Print the truckData for debugging (or send to an API)
+      print('Prepared Truck Data: ${truckData.toJson()}');
+
+      // Simulate API submission
+      await Future.delayed(const Duration(seconds: 2));
+      setLoading(false);
+
+      Utils.snackBar('Application submitted successfully', context);
+
+      // Navigate to a success screen or reset form (optional)
+      clearForm();
     } catch (error) {
-      Utils.snackBar('Failed to submitted. Please try again.', context);
+      Utils.flushBarErrorMessage(
+          'Failed to submit. Please try again.', context);
       setLoading(false);
     }
   }
 
+  void clearForm() {
+    images.clear;
+    removeVideo();
+    priceController.clear();
+    locationController.clear();
+    cateogryController.clear();
+    registeredInController.clear();
+    yearController.clear();
+    truckMakeController.clear();
+    truckModelController.clear();
+    colorController.clear();
+    engineTypeController.clear();
+    engineCapacityController.clear();
+    engineMillageController.clear();
+    descriptionController.clear();
+    sellerNameController.clear();
+    sellerMobileController.clear();
+    selllerAddressController.clear();
+    sellerCommentController.clear();
+    _selectedTransmission = null;
+    _selectedFeatures.clear();
+    _allowWhatsappContact = false;
+    notifyListeners();
+  }
+
   @override
   void dispose() {
+    priceController.dispose();
     locationController.dispose();
     cateogryController.dispose();
     registeredInController.dispose();

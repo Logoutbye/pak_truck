@@ -12,7 +12,6 @@ import 'package:testt/src/features/sell/widget/bottom_sheets.dart';
 import 'package:testt/src/features/sell/widget/sell_textform_field.dart';
 import 'package:testt/src/features/sell/widget/sell_image_picker.dart';
 
-
 class SellSparePartsScreen extends StatefulWidget {
   const SellSparePartsScreen({super.key});
 
@@ -39,12 +38,22 @@ class _SellSparePartsScreenState extends State<SellSparePartsScreen> {
       body: ListView(
         padding: EdgeInsets.all(12),
         children: [
-          buildSellImagePicker(context, 'Upload Photo'),
+          buildSellImagePicker(context, 'Upload Photo',
+              Provider.of<SellSparePartsViewModel>(context)),
 
           SizedBox(height: context.mediaQueryHeight / 20),
           Text('Spare parts information', style: Themetext.superHeadline),
 
           SizedBox(height: context.mediaQueryHeight / 30),
+
+          //  location
+          SellTextFormField(
+            errorText: viewModel.fieldErrors['Price'],
+            titleText: 'Price',
+            hintText: 'Enter Price in PKR',
+            controller: viewModel.priceController,
+            leading: Image.asset('assets/images/price.png'),
+          ),
 
           //  location
           SellTextFormField(

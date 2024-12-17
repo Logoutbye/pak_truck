@@ -4,8 +4,10 @@ import 'package:testt/src/configs/app_constants.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/extensions.dart';
+import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/configs/utils.dart';
+import 'package:testt/src/features/sell/view/ad_posted_screen.dart';
 import 'package:testt/src/features/sell/view_model/sell_truck_view_model.dart';
 import 'package:testt/src/features/sell/widget/allow_contact_on_whatsapp_widget.dart';
 import 'package:testt/src/features/sell/widget/bottom_sheets.dart';
@@ -42,7 +44,8 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
       body: ListView(
         padding: EdgeInsets.all(12),
         children: [
-          buildSellImagePicker(context, 'Upload Photo'),
+          buildSellImagePicker(
+              context, 'Upload Photo', Provider.of<SellTuckViewModel>(context)),
           SizedBox(height: context.mediaQueryHeight / 30),
           buildSellVideoPicker(context, 'Upload Video'),
           SizedBox(height: context.mediaQueryHeight / 100),
@@ -51,6 +54,13 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
           Text('Truck information', style: Themetext.superHeadline),
 
           SizedBox(height: context.mediaQueryHeight / 30),
+          SellTextFormField(
+            errorText: viewModel.fieldErrors['Price'],
+            titleText: 'Price',
+            hintText: 'Enter Price in PKR',
+            controller: viewModel.priceController,
+            leading: Image.asset('assets/images/price.png'),
+          ),
 
           //  location
           SellTextFormField(
@@ -125,7 +135,7 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
             titleText: 'Truck Year',
             hintText: 'Enter Truck Year',
             controller: viewModel.yearController,
-            leading: Image.asset('assets/images/truck.png'),
+            leading: Image.asset('assets/images/calender.png'),
             trailing: InkWell(
                 onTap: () {
                   showSelectionModal(
@@ -147,7 +157,7 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
             titleText: 'Truck Make',
             hintText: 'Enter Make',
             controller: viewModel.truckMakeController,
-            leading: Image.asset('assets/images/truck.png'),
+            leading: Image.asset('assets/images/make.png'),
             trailing: InkWell(
                 onTap: () {
                   showSelectionModal(
@@ -169,7 +179,7 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
             titleText: 'Truck Model',
             hintText: 'Enter Model',
             controller: viewModel.truckModelController,
-            leading: Image.asset('assets/images/truck.png'),
+            leading: Image.asset('assets/images/model.png'),
             trailing: InkWell(
                 onTap: () {
                   showSelectionModal(
@@ -191,7 +201,7 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
             titleText: 'Selected Color',
             hintText: 'Select a color',
             controller: viewModel.colorController,
-            leading: Icon(Icons.color_lens),
+            leading: Image.asset('assets/images/color.png'),
             trailing:
                 ColorPickerWidget(colorController: viewModel.colorController),
           ),
@@ -202,7 +212,7 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
               titleText: 'Engine Type',
               hintText: 'Select Engine Type',
               controller: viewModel.engineTypeController,
-              leading: Image.asset('assets/images/engine.png'),
+              leading: Image.asset('assets/images/engine_type.png'),
               trailing: InkWell(
                   onTap: () {
                     showSelectionModal(
@@ -244,7 +254,7 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
               titleText: 'Engine Mileage',
               hintText: 'Select Engine Mileage',
               controller: viewModel.engineMillageController,
-              leading: Image.asset('assets/images/engine.png'),
+              leading: Image.asset('assets/images/milleage.png'),
               trailing: InkWell(
                   onTap: () {
                     showSelectionModal(
@@ -254,6 +264,27 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
                       items: truckMileages,
                       onItemSelected: (selectedItem) {
                         viewModel.engineMillageController.text = selectedItem;
+                      },
+                    );
+                  },
+                  child: Image.asset('assets/images/more.png'))),
+
+          // Truck Assembly
+          SellTextFormField(
+              errorText: viewModel.fieldErrors['Truck Assembly'],
+              titleText: 'Truck Assembly',
+              hintText: 'Select Truck Assembly',
+              controller: viewModel.truckAssemblyController,
+              leading: Image.asset('assets/images/milleage.png'),
+              trailing: InkWell(
+                  onTap: () {
+                    showSelectionModal(
+                      context: context,
+                      title: 'Truck Assembly',
+                      hintText: 'Select Truck Assembly',
+                      items: truckAssembly,
+                      onItemSelected: (selectedItem) {
+                        viewModel.truckAssemblyController.text = selectedItem;
                       },
                     );
                   },
@@ -303,15 +334,30 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
           ),
           AllowWhatsappContactWidget(),
           SizedBox(height: context.mediaQueryHeight / 20),
-          RoundButton(
-              title: 'Submit & Continue',
-              onPress: () {
-                if (viewModel.validateSellTruckFields(context)) {
-                  Utils.snackBar('Form submitted successfully!', context);
-                }
-              }),
-                        SizedBox(height: context.mediaQueryHeight / 20),
-
+          Consumer<SellTuckViewModel>(
+            builder:
+                (BuildContext context, SellTuckViewModel value, Widget? child) {
+              return RoundButton(
+                  loading: value.loading,
+                  title: 'Submit & Continue',
+                  onPress: () {
+                    // if (viewModel.validateSellTruckFields(context)) {
+                    viewModel.submitData(context).then((_) {
+                      Utils.snackBar('Form submitted successfully!', context);
+                      Navigator.push(
+                          context,
+                          SlideTransitionPage(
+                              slideDirection: SlideDirection.top,
+                              page: PostedSuccessScreen()));
+                    }).onError((e, s) {
+                      Utils.flushBarErrorMessage(
+                          'Some thing went wrong please try again', context);
+                    });
+                    // }
+                  });
+            },
+          ),
+          SizedBox(height: context.mediaQueryHeight / 20),
         ],
       ),
     );

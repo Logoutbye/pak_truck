@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,13 +8,10 @@ import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/features/sell/view_model/sell_truck_view_model.dart';
 
-Widget buildSellImagePicker(BuildContext context, String label) {
-  final viewModel = Provider.of<SellTuckViewModel>(context, listen: false);
-
+Widget buildSellImagePicker(BuildContext context, String label, viewModel) {
   Future<void> showImageSourceActionSheet() async {
     showModalBottomSheet(
       context: context,
-      showDragHandle: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),
@@ -28,14 +24,12 @@ Widget buildSellImagePicker(BuildContext context, String label) {
                 title: Text('Take a Photo'),
                 titleTextStyle: Themetext.blackBoldText,
                 onTap: () async {
-                  Navigator.pop(context); // Close the bottom sheet
+                  Navigator.pop(context);
                   final picker = ImagePicker();
                   final pickedFile =
                       await picker.pickImage(source: ImageSource.camera);
                   if (pickedFile != null) {
-                    final image = File(pickedFile.path);
-
-                    viewModel.setTruckImage(image);
+                    viewModel.addImage(File(pickedFile.path));
                   }
                 },
               ),
@@ -44,13 +38,13 @@ Widget buildSellImagePicker(BuildContext context, String label) {
                 title: Text('Choose from Gallery'),
                 titleTextStyle: Themetext.blackBoldText,
                 onTap: () async {
-                  Navigator.pop(context); // Close the bottom sheet
+                  Navigator.pop(context);
                   final picker = ImagePicker();
-                  final pickedFile =
-                      await picker.pickImage(source: ImageSource.gallery);
-                  if (pickedFile != null) {
-                    final image = File(pickedFile.path);
-                    viewModel.setTruckImage(image);
+                  final pickedFiles = await picker.pickMultiImage();
+                  if (pickedFiles.isNotEmpty) {
+                    for (var file in pickedFiles) {
+                      viewModel.addImage(File(file.path));
+                    }
                   }
                 },
               ),
@@ -69,54 +63,101 @@ Widget buildSellImagePicker(BuildContext context, String label) {
         style: Themetext.headline.copyWith(fontSize: 16),
       ),
       SizedBox(height: context.mediaQueryHeight / 70),
-      GestureDetector(
-        onTap: showImageSourceActionSheet,
-        child: Consumer<SellTuckViewModel>(
-          builder: (_, vm, __) {
-            final image = vm.truckImage;
-            return DottedBorder(
-              dashPattern: const <double>[10, 5],
-              color: AppColors.primaryColor,
-              borderType: BorderType.RRect,
-              radius: Radius.circular(12),
-              padding: EdgeInsets.all(6),
-              child: SizedBox(
-                height: context.mediaQueryHeight / 6,
-                width: double.infinity,
-                child: image != null
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.file(
-                          image,
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
-                      )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.camera_alt,
-                              color: AppColors.primaryColor, size: 40),
-                          SizedBox(height: 8),
-                          Text(
-                            'Add Photo',
-                            style: TextStyle(
-                                color: AppColors.primaryColor, fontSize: 16),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'PDF, JPG, JPEG, PNG less than 10MB.',
-                            style:
-                                TextStyle(color: AppColors.grey, fontSize: 15),
-                          ),
-                        ],
-                      ),
+
+      // Conditionally show "Add Photo" section
+      if (viewModel.images.isEmpty)
+        GestureDetector(
+          onTap: showImageSourceActionSheet,
+          child: DottedBorder(
+            dashPattern: const <double>[10, 5],
+            color: AppColors.primaryColor,
+            borderType: BorderType.RRect,
+            radius: Radius.circular(12),
+            padding: EdgeInsets.all(6),
+            child: SizedBox(
+              height: context.mediaQueryHeight / 6,
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.camera_alt,
+                      color: AppColors.primaryColor, size: 40),
+                  SizedBox(height: 8),
+                  Text(
+                    'Add Photo',
+                    style:
+                        TextStyle(color: AppColors.primaryColor, fontSize: 16),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'PDF, JPG, JPEG, PNG less than 10MB.',
+                    style: TextStyle(color: AppColors.grey, fontSize: 15),
+                  ),
+                ],
               ),
-            );
-          },
+            ),
+          ),
         ),
-      ),
+
+      // Display Selected Images
+      SizedBox(height: 16),
+      if (viewModel.images.isNotEmpty)
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: List.generate(viewModel.images.length, (index) {
+            return Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.grey[300],
+                    image: DecorationImage(
+                      image: FileImage(viewModel.images[index]),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: -8,
+                  right: -8,
+                  child: GestureDetector(
+                    onTap: () => viewModel.removeImage(index),
+                    child: CircleAvatar(
+                      radius: 12,
+                      backgroundColor: Colors.red,
+                      child: Icon(Icons.close, color: Colors.white, size: 14),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }),
+        ),
+
+      // Add More Button
+      if (viewModel.images.isNotEmpty)
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            width: context.mediaQueryWidth / 1.1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('If you want you can add more'),
+                TextButton.icon(
+                  onPressed: showImageSourceActionSheet,
+                  icon: Icon(Icons.add_a_photo, color: AppColors.primaryColor),
+                  label: Text('Add more',
+                      style: TextStyle(color: AppColors.primaryColor)),
+                ),
+              ],
+            ),
+          ),
+        ),
     ],
   );
 }
