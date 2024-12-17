@@ -35,6 +35,12 @@ class Themetext {
     fontWeight: FontWeight.w600,
   );
 
+  static TextStyle superHeadline = const TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
+
   static TextStyle subheadline = const TextStyle(
     fontFamily: 'Roboto',
     fontSize: largeSize,

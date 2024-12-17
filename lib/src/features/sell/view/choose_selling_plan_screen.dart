@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
-import 'package:testt/src/features/sell/view_model/sell_view_model.dart';
+import 'package:testt/src/features/sell/view_model/sell_truck_view_model.dart';
 
 class ChooseSellingPlanScreen extends StatelessWidget {
   const ChooseSellingPlanScreen({super.key});
@@ -13,14 +13,9 @@ class ChooseSellingPlanScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+       foregroundColor: AppColors.whiteColor,
         title: const Text(
-          'Chosse a plan',
+          'Choose a plan',
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),
       ),
@@ -42,7 +37,7 @@ class ChooseSellingPlanScreen extends StatelessWidget {
               actionText: 'I can find the best offer',
               imagePath: 'assets/images/splash.png',
               onTap: () {
-                context.read<SellViewModel>().setPlan('Sell it myself');
+                context.read<SellTuckViewModel>().setPlan('Sell it myself');
                 Navigator.pushNamed(context, RoutesName.sellTruckScreen);
               },
             ),
@@ -55,7 +50,7 @@ class ChooseSellingPlanScreen extends StatelessWidget {
               actionText: 'I want experts to sell my Truck',
               imagePath: 'assets/images/splash.png',
               onTap: () {
-                context.read<SellViewModel>().setPlan('Sell it for me');
+                context.read<SellTuckViewModel>().setPlan('Sell it for me');
                 Navigator.pushNamed(context, RoutesName.sellTruckScreen);
               },
             ),

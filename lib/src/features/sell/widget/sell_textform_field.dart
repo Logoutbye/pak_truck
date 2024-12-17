@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
+import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 
-class SellTextFormField extends StatefulWidget {
+class SellTextFormField extends StatelessWidget {
   final String titleText;
   final String hintText;
   final TextEditingController controller;
@@ -16,6 +17,7 @@ class SellTextFormField extends StatefulWidget {
   final int? maxLines; // Maximum number of lines
   final Widget? leading; // Custom widget for leading
   final Widget? trailing; // Custom widget for trailing
+  final String? errorText; // Add error text
 
   const SellTextFormField({
     super.key,
@@ -31,71 +33,77 @@ class SellTextFormField extends StatefulWidget {
     this.maxLines, // Allow customization of maximum lines
     this.leading, // Custom leading widget (e.g., an icon or button)
     this.trailing, // Custom trailing widget (e.g., clear button or icon)
+    this.errorText,
   });
-
-  @override
-  _SellTextFormFieldState createState() => _SellTextFormFieldState();
-}
-
-class _SellTextFormFieldState extends State<SellTextFormField> {
-  Country? selectedCountry;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.titleText),
-        SizedBox(height: context.mediaQueryHeight / 75),
-        Container(
-          margin: EdgeInsets.only(bottom: 12),
-          height: widget.minLines! >= 2
-              ? context.mediaQueryHeight / 8
-              : context.mediaQueryHeight / 18,
-          decoration: BoxDecoration(
-            color: widget.color,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: widget.borderColor),
-          ),
-          child: TextFormField(
-            controller: widget.controller,
-            obscureText: widget.isPassword,
-            style: Themetext.subheadline.copyWith(fontWeight: FontWeight.w500),
-            minLines: widget.minLines ?? 1, // Default to 1 line
-            maxLines: widget.maxLines ?? 1, // Default to single-line input
-            decoration: InputDecoration(
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              border: InputBorder.none,
-              hintText: widget.hintText,
-              hintStyle: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w200,
-                fontSize: 15,
-              ),
-              filled: true,
-              fillColor: Colors.transparent,
-              // Add the leading and trailing widgets
-              prefixIcon: widget.leading != null
-                  ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: widget.leading, // Leading widget
-                    )
-                  : null,
-              suffixIcon: widget.trailing != null
-                  ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: widget.trailing, // Trailing widget
-                    )
-                  : null,
-            ),
-            onChanged: (value) {
-              if (widget.onPhoneNumberChanged != null) {
-                widget.onPhoneNumberChanged!(value);
-              }
-            },
-          ),
+        Text(
+          titleText,
+          style: const TextStyle(fontWeight: FontWeight.w500),
         ),
+        const SizedBox(height: 8),
+        TextFormField(
+          controller: controller,
+          obscureText: isPassword,
+          style: Themetext.subheadline.copyWith(fontWeight: FontWeight.w500),
+          minLines: minLines ?? 1,
+          maxLines: maxLines ?? 1,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(
+              vertical: 10, // Center vertically
+              horizontal: 12, // Padding for horizontal alignment
+            ),
+            filled: true,
+            fillColor: color,
+            hintText: hintText,
+            hintStyle: const TextStyle(
+              color: Colors.black45,
+              fontWeight: FontWeight.w400,
+              fontSize: 15,
+            ),
+            errorText: errorText,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: borderColor),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: borderColor),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide:
+                  const BorderSide(color: AppColors.checkboxColor, width: 1.5),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(color: Colors.red, width: 1.5),
+            ),
+            prefixIcon: leading != null
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: leading,
+                  )
+                : null,
+            suffixIcon: trailing != null
+                ? Container(
+                    height: context.mediaQueryHeight / 20,
+                    padding: const EdgeInsets.all(8.0),
+                    child: trailing,
+                  )
+                : null,
+          ),
+          onChanged: (value) {
+            if (onPhoneNumberChanged != null) {
+              onPhoneNumberChanged!(value);
+            }
+          },
+        ),
+        const SizedBox(height: 12),
       ],
     );
   }

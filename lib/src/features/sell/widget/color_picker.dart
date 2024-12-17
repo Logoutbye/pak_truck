@@ -5,7 +5,7 @@ class ColorPickerWidget extends StatefulWidget {
   final TextEditingController
       colorController; // Controller to update color in text field
 
-  ColorPickerWidget({required this.colorController});
+  const ColorPickerWidget({super.key, required this.colorController});
 
   @override
   _ColorPickerWidgetState createState() => _ColorPickerWidgetState();

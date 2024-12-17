@@ -1,4 +1,4 @@
-import 'package:testt/src/model/auth/send_email_otp.dart';
+import 'package:testt/src/features/auth/model/send_email_otp.dart';
 
 import '../../model/user/user_model.dart';
 

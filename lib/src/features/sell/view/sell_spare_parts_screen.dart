@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:testt/src/configs/app_constants.dart';
 import 'package:testt/src/configs/color/color.dart';
+import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
+import 'package:testt/src/configs/utils.dart';
+import 'package:testt/src/features/sell/view_model/sell_spare_parts_view_model.dart';
+import 'package:testt/src/features/sell/widget/allow_contact_on_whatsapp_widget.dart';
 import 'package:testt/src/features/sell/widget/bottom_sheets.dart';
-import 'package:testt/src/features/sell/widget/color_picker.dart';
 import 'package:testt/src/features/sell/widget/sell_textform_field.dart';
 import 'package:testt/src/features/sell/widget/sell_image_picker.dart';
-import 'package:testt/src/features/sell/widget/sell_video_picker.dart';
+
 
 class SellSparePartsScreen extends StatefulWidget {
   const SellSparePartsScreen({super.key});
@@ -17,15 +21,9 @@ class SellSparePartsScreen extends StatefulWidget {
 }
 
 class _SellSparePartsScreenState extends State<SellSparePartsScreen> {
-  TextEditingController locationController = TextEditingController();
-  TextEditingController registeredInController = TextEditingController();
-  TextEditingController yearController = TextEditingController();
-  TextEditingController modelController = TextEditingController();
-  TextEditingController makeController = TextEditingController();
-  TextEditingController colorController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
+    var viewModel = Provider.of<SellSparePartsViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
@@ -42,20 +40,18 @@ class _SellSparePartsScreenState extends State<SellSparePartsScreen> {
         padding: EdgeInsets.all(12),
         children: [
           buildSellImagePicker(context, 'Upload Photo'),
-          SizedBox(height: context.mediaQueryHeight / 30),
-          buildSellVideoPicker(context, 'Upload Video'),
-          SizedBox(height: context.mediaQueryHeight / 100),
-          Divider(),
-          SizedBox(height: context.mediaQueryHeight / 80),
-          Text('Truck information',
-              style: Themetext.headline.copyWith(fontSize: 18)),
+
+          SizedBox(height: context.mediaQueryHeight / 20),
+          Text('Spare parts information', style: Themetext.superHeadline),
+
           SizedBox(height: context.mediaQueryHeight / 30),
 
           //  location
           SellTextFormField(
+            errorText: viewModel.fieldErrors['Location'],
             titleText: 'Location',
             hintText: 'Enter Location',
-            controller: locationController,
+            controller: viewModel.locationController,
             leading: Image.asset('assets/images/location.png'),
             trailing: InkWell(
                 onTap: () {
@@ -65,101 +61,70 @@ class _SellSparePartsScreenState extends State<SellSparePartsScreen> {
                     hintText: 'Search by Location',
                     items: pakistanCities,
                     onItemSelected: (selectedItem) {
-                      locationController.text = selectedItem;
+                      viewModel.locationController.text = selectedItem;
                     },
                   );
                 },
                 child: Image.asset('assets/images/more.png')),
           ),
-          //Registered in
+          // title
           SellTextFormField(
-            titleText: 'Registered In',
-            hintText: 'Enter Registered In',
-            controller: registeredInController,
-            leading: Image.asset('assets/images/registered_in.png'),
-            trailing: InkWell(
-                onTap: () {
-                  showSelectionModal(
-                    context: context,
-                    title: "Registered In",
-                    hintText: 'Search by Registration Area',
-                    items: pakistanProvinces,
-                    onItemSelected: (selectedItem) {
-                      registeredInController.text = selectedItem;
-                    },
-                  );
-                },
-                child: Image.asset('assets/images/more.png')),
-          ),
-          //Truck year
-          SellTextFormField(
-            titleText: 'Truck Year',
-            hintText: 'Enter Truck Year',
-            controller: yearController,
-            leading: Image.asset('assets/images/truck.png'),
-            trailing: InkWell(
-                onTap: () {
-                  showSelectionModal(
-                    context: context,
-                    title: "Truck Year",
-                    hintText: 'Select By Year',
-                    items: vehicleRegistrationYears,
-                    onItemSelected: (selectedItem) {
-                      yearController.text = selectedItem;
-                    },
-                  );
-                },
-                child: Image.asset('assets/images/more.png')),
+            errorText: viewModel.fieldErrors['Title'],
+            titleText: ' Title',
+            hintText: 'Enter Title',
+            controller: viewModel.titleController,
           ),
 
-          //Truck make
+          // description
           SellTextFormField(
-            titleText: 'Truck Make',
-            hintText: 'Enter Make',
-            controller: makeController,
-            leading: Image.asset('assets/images/truck.png'),
-            trailing: InkWell(
-                onTap: () {
-                  showSelectionModal(
-                    context: context,
-                    title: "Truck Make",
-                    hintText: 'Select By Make',
-                    items: carMakes,
-                    onItemSelected: (selectedItem) {
-                      makeController.text = selectedItem;
-                    },
-                  );
-                },
-                child: Image.asset('assets/images/more.png')),
+            errorText: viewModel.fieldErrors['Description'],
+            maxLines: 2,
+            minLines: 2,
+            titleText: ' Description',
+            hintText: 'Enter Description',
+            controller: viewModel.descriptionController,
           ),
-          //Truck model
+
+          SizedBox(height: context.mediaQueryHeight / 30),
+
+          // contact form
+          Text('Contact Information', style: Themetext.superHeadline),
+          SizedBox(height: context.mediaQueryHeight / 35),
           SellTextFormField(
-            titleText: 'Truck Model',
-            hintText: 'Enter Model',
-            controller: modelController,
-            leading: Image.asset('assets/images/truck.png'),
-            trailing: InkWell(
-                onTap: () {
-                  showSelectionModal(
-                    context: context,
-                    title: "Truck Model",
-                    hintText: 'Select By Model',
-                    items: carModels,
-                    onItemSelected: (selectedItem) {
-                      modelController.text = selectedItem;
-                    },
-                  );
-                },
-                child: Image.asset('assets/images/more.png')),
+            errorText: viewModel.fieldErrors['Name'],
+            titleText: 'Your Name',
+            hintText: 'Enter your Name',
+            controller: viewModel.sellerNameController,
           ),
-          // Your form with SellTextFormField
           SellTextFormField(
-            titleText: 'Selected Color',
-            hintText: 'Select a color',
-            controller: colorController,
-            leading: Icon(Icons.color_lens),
-            trailing: ColorPickerWidget(colorController: colorController),
+            errorText: viewModel.fieldErrors['Mobile Number'],
+            titleText: 'Your Mobile Number',
+            hintText: 'Enter your Mobile Number',
+            controller: viewModel.sellerMobileController,
           ),
+          SellTextFormField(
+            errorText: viewModel.fieldErrors['Address'],
+            titleText: 'Your Address',
+            hintText: 'Enter your Address',
+            controller: viewModel.selllerAddressController,
+          ),
+          SellTextFormField(
+            maxLines: 2,
+            minLines: 2,
+            titleText: 'Your Comments',
+            hintText: 'Enter any other details',
+            controller: viewModel.sellerCommentController,
+          ),
+          AllowWhatsappContactWidget(),
+          SizedBox(height: context.mediaQueryHeight / 20),
+          RoundButton(
+              title: 'Submit & Continue',
+              onPress: () {
+                if (viewModel.validateSellTruckFields(context)) {
+                  Utils.snackBar('Form submitted successfully!', context);
+                }
+              }),
+          SizedBox(height: context.mediaQueryHeight / 20),
         ],
       ),
     );

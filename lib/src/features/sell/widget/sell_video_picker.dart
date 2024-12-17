@@ -6,11 +6,11 @@ import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
-import 'package:testt/src/features/sell/view_model/sell_view_model.dart';
+import 'package:testt/src/features/sell/view_model/sell_truck_view_model.dart';
 import 'package:video_player/video_player.dart';
 
 Widget buildSellVideoPicker(BuildContext context, String label) {
-  final viewModel = Provider.of<SellViewModel>(context, listen: false);
+  final viewModel = Provider.of<SellTuckViewModel>(context, listen: false);
 
   Future<void> showVideoSourceActionSheet() async {
     showModalBottomSheet(
@@ -70,9 +70,9 @@ Widget buildSellVideoPicker(BuildContext context, String label) {
       SizedBox(height: context.mediaQueryHeight / 70),
       GestureDetector(
         onTap: showVideoSourceActionSheet,
-        child: Consumer<SellViewModel>(
+        child: Consumer<SellTuckViewModel>(
           builder: (_, vm, __) {
-            final video = vm.video;
+            final video = vm.truckVideo;
             final videoController = vm.videoController;
             return DottedBorder(
               dashPattern: const <double>[10, 5],
@@ -132,7 +132,7 @@ Widget buildSellVideoPicker(BuildContext context, String label) {
           },
         ),
       ),
-      Consumer<SellViewModel>(
+      Consumer<SellTuckViewModel>(
         builder: (_, vm, __) {
           final videoController = vm.videoController;
           if (videoController != null && videoController.value.isInitialized) {

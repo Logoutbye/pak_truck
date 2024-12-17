@@ -180,7 +180,7 @@ Future<void> showDynamicCategoryModal({
                                             child,
                                             style: const TextStyle(
                                                 fontSize: 14,
-                                                color: Colors.green),
+                                                color: AppColors.checkboxColor),
                                           ),
                                           value: child,
                                           groupValue: selectedChild,

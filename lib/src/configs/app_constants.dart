@@ -305,7 +305,6 @@ final List<String> truckCapacities = [
   '50 Ton',
 ];
 
-
 final List<String> truckMileages = [
   '5 km/l',
   '6 km/l',
@@ -317,4 +316,20 @@ final List<String> truckMileages = [
   '15 km/l',
   '18 km/l',
   '20 km/l',
+];
+
+// Features List
+final List<String> truckFeatures = [
+  'ABS',
+  'Keyless Entry',
+  'Power Mirrors',
+  'Air Bags',
+  'Air Conditioning',
+  'Power Windows',
+  'Alloy Rims',
+  'AM/FM Radio',
+  'Power Locks',
+  'Power Steering',
+  'Immobilizer Key',
+  'CD Player',
 ];

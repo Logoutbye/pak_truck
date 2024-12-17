@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:testt/src/model/auth/send_email_otp.dart';
+import 'package:testt/src/features/auth/model/send_email_otp.dart';
 
 import '../../data/network/base_api_services.dart';
 import '../../data/network/network_api_services.dart';

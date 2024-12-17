@@ -7,7 +7,7 @@ class AppColors {
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color blackColor = Colors.black;
   static const Color whiteSccafold = Color(0xFFF5F5F5);
-  static const Color buttonColor = Colors.green;
+  static const Color checkboxColor = Colors.green;
   static const Color primaryColor = Color(0xFF016635);
   static Color primaryLight = Color(0xFFceded6);
   // static const Color primaryLight = Color.fromARGB(255, 226, 238, 231);
