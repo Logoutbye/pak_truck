@@ -23,8 +23,8 @@ class CustomTextFormField extends StatefulWidget {
     this.borderColor = Colors.black38,
     this.onPhoneNumberChanged,
     this.isPassword = false,
-    this.minLines = 1, // Allow customization of minimum lines
-    this.maxLines, // Allow customization of maximum lines
+    this.minLines = 1,
+    this.maxLines,
   });
 
   @override
@@ -37,9 +37,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.minLines! >= 2
-          ? context.mediaQueryHeight / 8
-          : context.mediaQueryHeight / 18,
+      // Remove fixed height to allow dynamic resizing
       decoration: BoxDecoration(
         color: widget.color,
         borderRadius: BorderRadius.circular(12),
@@ -49,11 +47,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         controller: widget.controller,
         obscureText: widget.isPassword,
         style: Themetext.subheadline,
-        minLines: widget.minLines ?? 1, // Default to 1 line
-        maxLines: widget.maxLines ?? 1, // Default to single-line input
+        minLines: widget.minLines, // Support multi-line input
+        maxLines: widget.maxLines ?? null, // Null allows dynamic expansion
         decoration: InputDecoration(
-          // contentPadding: const EdgeInsets.symmetric(
-          //     vertical: 14, horizontal: 10), // Adjust padding for centering
+          contentPadding: const EdgeInsets.symmetric(
+              vertical: 10, horizontal: 10), // Adjust padding for centering
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
           border: InputBorder.none,

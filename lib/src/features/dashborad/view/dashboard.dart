@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/features/dashborad/widgets/what_do_you_want_to_sell_bottom_sheet.dart';
-import 'package:testt/src/features/home/home_screen.dart';
+import 'package:testt/src/features/home/view/home_screen.dart';
 import 'package:testt/src/features/my_profile/view/profile_screen.dart';
 import 'package:testt/src/features/videos/videos_screen.dart';
 import '../../chat/chat_screen.dart';

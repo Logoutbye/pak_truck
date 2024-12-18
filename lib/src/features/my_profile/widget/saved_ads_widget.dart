@@ -5,6 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
+import 'package:testt/src/features/home/view/spare_part_details_screen.dart';
+import 'package:testt/src/features/sell/model/spare_parts/spare_parts_model.dart';
 
 // Step 1: Define a Post model class
 class Post {
@@ -75,6 +77,91 @@ class SavedAdsWidget extends StatelessWidget {
   }
 }
 
+final List<SparePartsModel> dummySparePartsList = [
+  SparePartsModel(
+    images: [
+      'assets/images/truck.png',
+      'assets/images/remove_me1.png',
+      'assets/images/description.png',
+    ],
+    location: 'Karachi, Sindh',
+    price: 'PKR 5,000',
+    title: 'Brake Pads for Toyota Corolla',
+    description: 'High-quality brake pads for Toyota Corolla 2015-2020 model.',
+    sellerName: 'Ali Autos',
+    mobileNumber: '0312-3456789',
+    address: 'Auto Parts Market, Karachi',
+    comments: 'Brand new and reliable parts, available for immediate delivery.',
+    allowWhatsappContact: true,
+  ),
+  SparePartsModel(
+    images: [
+      'assets/images/truck.png',
+      'assets/images/remove_me1.png',
+      'assets/images/description.png',
+    ],
+    location: 'Lahore, Punjab',
+    price: 'PKR 12,000',
+    title: 'Genuine Honda Civic Air Filter',
+    description:
+        'Original air filter for Honda Civic 2016-2022, improves engine performance.',
+    sellerName: 'Honda Spare Mart',
+    mobileNumber: '0301-9876543',
+    address: 'Johar Town, Lahore',
+    comments: 'Limited stock available. Best price guaranteed!',
+    allowWhatsappContact: true,
+  ),
+  SparePartsModel(
+    images: [
+      'assets/images/truck.png',
+      'assets/images/remove_me1.png',
+      'assets/images/description.png',
+    ],
+    location: 'Islamabad',
+    price: 'PKR 8,500',
+    title: 'LED Headlights for Suzuki Swift',
+    description:
+        'Energy-efficient LED headlights for Suzuki Swift 2018-2023 models.',
+    sellerName: 'Swift Auto Lights',
+    mobileNumber: '0345-1122334',
+    address: 'Blue Area, Islamabad',
+    comments: 'Free installation on purchase. Limited-time offer.',
+    allowWhatsappContact: false,
+  ),
+  SparePartsModel(
+    images: [
+      'assets/images/truck.png',
+      'assets/images/remove_me1.png',
+      'assets/images/description.png',
+    ],
+    location: 'Faisalabad',
+    price: 'PKR 2,500',
+    title: 'Engine Oil Filter for Suzuki Mehran',
+    description: 'Premium oil filter to enhance engine lifespan for Mehran.',
+    sellerName: 'Mehran Parts House',
+    mobileNumber: '0333-4455667',
+    address: 'D Ground Market, Faisalabad',
+    comments: 'Bulk purchase discount available.',
+    allowWhatsappContact: true,
+  ),
+  SparePartsModel(
+    images: [
+      'assets/images/truck.png',
+      'assets/images/remove_me1.png',
+      'assets/images/description.png',
+    ],
+    location: 'Peshawar',
+    price: 'PKR 7,000',
+    title: 'Car Battery - 12V for Suzuki Alto',
+    description: 'Maintenance-free 12V battery for Suzuki Alto 2020 model.',
+    sellerName: 'Auto Energy Batteries',
+    mobileNumber: '0314-2233445',
+    address: 'Khyber Bazaar, Peshawar',
+    comments: 'Free delivery within Peshawar city.',
+    allowWhatsappContact: false,
+  ),
+];
+
 // Reusable Post Card Widget
 class PostCard extends StatelessWidget {
   final Post post; // Accepting Post model
@@ -82,78 +169,89 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 4),
-      decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        border: Border.all(color: Colors.black12),
-        borderRadius: BorderRadius.circular(
-          12,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SpartPartDetailScreen(
+                sparePart: dummySparePartsList.first,
+              ),
+            ));
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 4),
+        decoration: BoxDecoration(
+          color: AppColors.whiteColor,
+          border: Border.all(color: Colors.black12),
+          borderRadius: BorderRadius.circular(
+            12,
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Row(
-          children: [
-            // Post Image with rounded border
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.asset(
-                post.image,
-                width: context.mediaQueryWidth / 4,
-                height: context.mediaQueryHeight / 8,
-                fit: BoxFit.cover,
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Row(
+            children: [
+              // Post Image with rounded border
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  post.image,
+                  width: context.mediaQueryWidth / 4,
+                  height: context.mediaQueryHeight / 8,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            SizedBox(width: 16),
-            // Post Info: Title, Price, Stats
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Title
-                  Text(
-                    post.title,
-                    style: Themetext.headline
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: context.mediaQueryHeight / 45),
-                  // Price
-                  Text(
-                    post.price,
-                    style: Themetext.blackBoldText
-                        .copyWith(color: AppColors.primaryColor),
-                  ),
-                  SizedBox(height: context.mediaQueryHeight / 45),
-                  // Stats: Chat Count, Views Count, Calls Count
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      StatItem(label: 'Views', value: post.viewsCount),
-                      StatItem(label: 'Calls', value: post.callsCount),
+              SizedBox(width: 16),
+              // Post Info: Title, Price, Stats
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Title
+                    Text(
+                      post.title,
+                      style: Themetext.headline
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: context.mediaQueryHeight / 45),
+                    // Price
+                    Text(
+                      post.price,
+                      style: Themetext.blackBoldText
+                          .copyWith(color: AppColors.primaryColor),
+                    ),
+                    SizedBox(height: context.mediaQueryHeight / 45),
+                    // Stats: Chat Count, Views Count, Calls Count
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        StatItem(label: 'Views', value: post.viewsCount),
+                        StatItem(label: 'Calls', value: post.callsCount),
 
-                      StatItem(label: 'Chats', value: post.chatCount),
-                      // "See My Ad" Text Button
-                      Row(
-                        children: [
-                          Text(
-                            'See My Ad',
-                            style: Themetext.blackBoldText.copyWith(
-                                color: AppColors.primaryColor, fontSize: 12),
-                          ),
-                          SizedBox(width: 5),
-                          SvgPicture.asset(
-                            'assets/svg/arrow-right.svg',
-                            color: AppColors.primaryColor,
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                        StatItem(label: 'Chats', value: post.chatCount),
+                        // "See My Ad" Text Button
+                        Row(
+                          children: [
+                            Text(
+                              'See My Ad',
+                              style: Themetext.blackBoldText.copyWith(
+                                  color: AppColors.primaryColor, fontSize: 12),
+                            ),
+                            SizedBox(width: 5),
+                            SvgPicture.asset(
+                              'assets/svg/arrow-right.svg',
+                              color: AppColors.primaryColor,
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
