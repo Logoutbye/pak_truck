@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/app_constants.dart';
 import 'package:testt/src/configs/color/color.dart';
@@ -135,7 +136,8 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
             titleText: 'Truck Year',
             hintText: 'Enter Truck Year',
             controller: viewModel.yearController,
-            leading: Image.asset('assets/images/calender.png'),
+            leading: SvgPicture.asset('assets/svg/calender.svg'),
+            // leading: Image.asset('assets/images/calender.png'),
             trailing: InkWell(
                 onTap: () {
                   showSelectionModal(

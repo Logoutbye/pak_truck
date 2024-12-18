@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
-import 'package:testt/src/configs/components/custom_alert_diloag_box.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
@@ -15,8 +14,6 @@ import 'package:testt/src/features/my_profile/widget/personalized_widget.dart';
 import 'package:testt/src/features/my_profile/widget/saved_ads_widget.dart';
 import 'package:testt/src/features/my_profile/widget/show_logout_dialog.dart';
 import 'package:testt/src/features/my_profile/widget/user_image_avatar_widget.dart';
-import 'package:testt/src/features/splash/services/session_manager/session_controller.dart';
-
 import '../widget/show_delete_dialog.dart';
 
 class ProfileScreen extends StatefulWidget {

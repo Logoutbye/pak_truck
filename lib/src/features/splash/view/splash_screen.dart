@@ -36,8 +36,9 @@ class _SplashScreenState extends State<SplashScreen> {
               localization.welcome_title,
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
+            SizedBox(height: context.mediaQueryHeight / 75),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: Text(
                 localization.welcome_message,
                 textAlign: TextAlign.center,

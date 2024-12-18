@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:testt/src/configs/color/color.dart';
+import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
+import 'package:testt/src/features/my_profile/widget/ad_image_card.dart';
+import 'package:testt/src/features/my_profile/widget/truck_features_widget.dart';
+import 'package:testt/src/features/sell/model/sell_truck_model/sell_truck_model.dart';
 
 class MyAdDetailScreen extends StatelessWidget {
-  const MyAdDetailScreen({super.key});
+  final SellTruckModel ad;
+
+  const MyAdDetailScreen({super.key, required this.ad});
 
   @override
   Widget build(BuildContext context) {
@@ -22,47 +29,71 @@ class MyAdDetailScreen extends StatelessWidget {
           children: [
             // Manage Ads Section
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
               child: Column(
                 children: [
+                  AdImageCard(images: ad.truckImages),
+
+                  SizedBox(height: context.mediaQueryHeight / 35),
+                  // Title & Price
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Manage this Ads', style: Themetext.headline),
-                      Icon(Icons.more_horiz, color: AppColors.blackColor),
+                      Container(
+                        constraints: BoxConstraints(
+                            maxWidth: context.mediaQueryWidth / 2),
+                        child: Text(
+                          ad.category,
+                          // 'Truck Swift DLX Automatic 1.3 2024',
+                          style: Themetext.headline.copyWith(fontSize: 16),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Ad View',
+                            style: Themetext.headline.copyWith(
+                                fontSize: 15, fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(width: context.mediaQueryWidth / 41),
+                          Text(
+                            1999299.viewCountFormatted,
+                            style: Themetext.headline.copyWith(
+                                color: AppColors.primaryColor,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(width: context.mediaQueryWidth / 41),
+                          SvgPicture.asset(
+                            'assets/svg/eye.svg',
+                            color: AppColors.primaryColor,
+                            height: context.mediaQueryHeight / 35,
+                          )
+                        ],
+                      )
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image.asset(
-                      'assets/images/truck.png', // Replace with your image path
-                      height: 180,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+                  SizedBox(height: context.mediaQueryHeight / 35),
+
+                  Row(
+                    children: [
+                      Text(
+                        // 'PKR, 22 Lack',
+                        ad.price.toString(),
+                        style: Themetext.superHeadline
+                            .copyWith(color: AppColors.primaryColor),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 10),
-                  // Title & Price
-                  Text(
-                    'Truck Swift DLX Automatic\n1.3 2024',
-                    style: Themetext.headline.copyWith(fontSize: 16),
-                  ),
-                  const SizedBox(height: 8),
-                  Text('PKR, 22 Lack',
-                      style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green)),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Lorem ipsum dolor sit amet consectetur. Sagittis facilisis augue posuere eu iaculis est.',
-                    style: Themetext.subheadline,
-                  ),
+                  SizedBox(height: context.mediaQueryHeight / 75),
+                  Text(ad.description
+                      // 'Lorem ipsum dolor sit amet consectetur. Sagittis facilisis augue posuere eu iaculis est.',
+                      ),
                 ],
               ),
             ),
-            Divider(color: Colors.grey[300]),
+            SizedBox(height: context.mediaQueryHeight / 35),
 
             // Truck Detail Section
             Padding(
@@ -70,131 +101,151 @@ class MyAdDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Truck Detail',
-                      style: Themetext.headline.copyWith(fontSize: 18)),
-                  const SizedBox(height: 8),
+                  Text('Truck Detail', style: Themetext.headline),
+                  SizedBox(height: context.mediaQueryHeight / 75),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _iconWithText(Icons.calendar_today, '2024'),
-                      _iconWithText(Icons.speed, '103,950 km'),
-                      _iconWithText(Icons.local_gas_station, 'Petrol'),
-                      _iconWithText(Icons.settings, 'Automatic'),
+                      _iconWithText('assets/svg/calender.svg', ad.truckYear),
+                      _iconWithText(
+                          'assets/svg/milleage.svg', ad.engineMileage),
+                      _iconWithText(
+                          'assets/svg/engine_type.svg', ad.engineType),
+                      _iconWithText('assets/svg/transmission_type.svg',
+                          ad.transmissionType),
                     ],
                   ),
                   const SizedBox(height: 16),
-                  _truckDetailItem('Registered in', 'Sindh'),
-                  _truckDetailItem('Brand', 'Hino Pakistan'),
-                  _truckDetailItem('Model', 'Hino Pakistan'),
-                  _truckDetailItem('Color Pilers', 'Green Orange'),
+                  _truckDetailItem('Registered in', ad.registeredIn),
+                  _truckDetailItem('Brand', ad.truckMake),
+                  _truckDetailItem('Model', ad.truckModel),
+                  _truckDetailItem('Color Pilers', ad.color),
                   _truckDetailItem('Body Type', 'N/A'),
-                  _truckDetailItem('Engine Capacity', '1000 (cc)'),
+                  _truckDetailItem('Engine Capacity', ad.engineCapacity),
                   _truckDetailItem('Last update', '11 Nov, 2024'),
                   _truckDetailItem('Ad Ref', '9236459'),
                   _truckDetailItem('Assembly', 'Imported'),
+                  Divider(color: Colors.grey[300]),
                 ],
               ),
             ),
-            Divider(color: Colors.grey[300]),
 
-            // Truck Features Section
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Truck Feature',
-                      style: Themetext.headline.copyWith(fontSize: 18)),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
-                    children: [
-                      _featureItem('ABS'),
-                      _featureItem('AM/FM Radio'),
-                      _featureItem('Air Bags'),
-                      _featureItem('Air Conditioning'),
-                      _featureItem('Alloy Rims'),
-                      _featureItem('CD Player'),
-                      _featureItem('Immobilizer Key'),
-                      _featureItem('Keyless Entry'),
-                      _featureItem('Power Locks'),
-                      _featureItem('Power Mirrors'),
-                      _featureItem('Power Steering'),
-                      _featureItem('Power Windows'),
-                    ],
-                  )
-                ],
-              ),
+            TruckFeaturesWidget(
+              // featureNames: [
+              //   "ABS",
+              //   "Air Bags",
+              //   "Alloy Rims",
+              //   "CD Player",
+              //   "Immobilizer Key",
+              //   "Keyless Entry",
+              //   "Power Locks",
+              //   "Power Mirrors",
+              //   "Power Steering",
+              //   "Power Windows",
+              //   'Air Conditioning',
+              //   "AM/FM Radio",
+              // ],
+              featureNames: ad.selectedFeatures,
             ),
-            const SizedBox(height: 10),
 
             // Bottom Actions
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _actionButton(Icons.edit, 'Edit'),
-                  _actionButton(Icons.check_circle_outline, 'Mark as Sold'),
-                  _actionButton(Icons.delete, 'Remove your ad'),
-                ],
-              ),
-            ),
+
             const SizedBox(height: 20),
           ],
         ),
       ),
+      bottomSheet: _bottomSheet(),
     );
   }
 
-  Widget _iconWithText(IconData icon, String text) {
+  Widget _iconWithText(String icon, String text) {
     return Column(
       children: [
-        Icon(icon, color: AppColors.primaryColor, size: 30),
+        SvgPicture.asset(
+          icon,
+        ),
         const SizedBox(height: 4),
         Text(text,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 12)),
       ],
     );
   }
 
   Widget _truckDetailItem(String title, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(title,
-              style: const TextStyle(
-                  fontWeight: FontWeight.w500, color: Colors.black54)),
-          Text(value,
-              style: const TextStyle(
-                  fontWeight: FontWeight.w600, color: Colors.black)),
-        ],
-      ),
-    );
-  }
-
-  Widget _featureItem(String feature) {
-    return Chip(
-      avatar: Icon(Icons.check_circle, color: AppColors.primaryColor, size: 20),
-      label: Text(feature,
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
-      backgroundColor: Colors.grey[200],
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-    );
-  }
-
-  Widget _actionButton(IconData icon, String label) {
     return Column(
       children: [
-        Icon(icon, color: AppColors.primaryColor, size: 28),
-        const SizedBox(height: 4),
-        Text(label,
-            style: const TextStyle(
-                fontWeight: FontWeight.w500, color: AppColors.primaryColor)),
+        Divider(
+          color: Colors.grey[300],
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(title,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w500, color: Colors.black54)),
+              Text(value,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600, color: Colors.black54)),
+            ],
+          ),
+        ),
       ],
+    );
+  }
+
+  Widget _bottomSheet() {
+    return Container(
+      padding:
+          const EdgeInsets.only(left: 12.0, right: 12, bottom: 30, top: 30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          InkWell(
+            onTap: () {},
+            child: Row(
+              children: [
+                SvgPicture.asset('assets/svg/edit.svg'),
+                const SizedBox(width: 6),
+                Text('Edit',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    )),
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {},
+            child: Row(
+              children: [
+                SvgPicture.asset('assets/svg/done.svg'),
+                const SizedBox(width: 6),
+                Text('Mark as Sold',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    )),
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {},
+            child: Row(
+              children: [
+                SvgPicture.asset('assets/svg/trash.svg'),
+                const SizedBox(width: 6),
+                Text('Remove your ad',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    )),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

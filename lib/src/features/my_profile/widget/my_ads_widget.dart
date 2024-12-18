@@ -7,6 +7,7 @@ import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/features/my_profile/view/ad_details_screen.dart';
+import 'package:testt/src/features/sell/model/sell_truck_model/sell_truck_model.dart';
 
 // Step 1: Define a Post model class
 class Post {
@@ -86,9 +87,13 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-
       onTap: () {
-        Navigator.push(context, SlideTransitionPage(page: MyAdDetailScreen()));
+        Navigator.push(
+            context,
+            SlideTransitionPage(
+                page: MyAdDetailScreen(
+              ad: dummyAds.first,
+            )));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 4),
@@ -139,7 +144,7 @@ class PostCard extends StatelessWidget {
                       children: [
                         StatItem(label: 'Views', value: post.viewsCount),
                         StatItem(label: 'Calls', value: post.callsCount),
-      
+
                         StatItem(label: 'Chats', value: post.chatCount),
                         // "See My Ad" Text Button
                         Row(
@@ -168,6 +173,83 @@ class PostCard extends StatelessWidget {
     );
   }
 }
+
+// Simulated dummy API data
+final List<SellTruckModel> dummyAds = [
+  SellTruckModel(
+    truckImages: [
+      'assets/images/truck.png',
+      'assets/images/remove_me1.png',
+      'assets/images/description.png',
+    ],
+    
+    truckVideo: 'assets/videos/truck_video.mp4',
+    price: 'PKR, 22 Lack',
+    location: 'Karachi, Sindh',
+    category: 'Heavy Duty Truck',
+    registeredIn: 'Sindh',
+    truckYear: '2024',
+    truckMake: 'Hino Pakistan',
+    description:
+        'Lorem ipsum dolor sit amet consectetur. Sagittis facilisis augue posuere eu iaculis est.',
+    truckModel: 'Hino 500',
+    color: 'Green Orange',
+    engineType: 'Petrol',
+    engineCapacity: '1000 (cc)',
+    engineMileage: '103,950 km',
+    transmissionType: 'Automatic',
+    selectedFeatures: [
+      "ABS",
+      "Air Bags",
+      "Alloy Rims",
+      "CD Player",
+      "Immobilizer Key",
+      "Keyless Entry",
+      "Power Locks",
+      "Power Mirrors",
+      "Power Steering",
+      "Power Windows",
+      "Air Conditioning",
+      "AM/FM Radio",
+    ],
+    
+    sellerName: 'John Doe',
+    mobileNumber: '0300-1234567',
+    address: '123 Main Street, Karachi',
+    comments: 'Great truck, well maintained!',
+  ),
+  SellTruckModel(
+    truckImages: [
+      'assets/images/truck.png',
+      'assets/images/description.png',
+    ],
+    price: 'PKR, 18 Lack',
+    description:
+        'Lorem ipsum dolor sit amet consectetur. Sagittis facilisis augue posuere eu iaculis est.',
+    location: 'Lahore, Punjab',
+    category: 'Medium Duty Truck',
+    registeredIn: 'Punjab',
+    truckYear: '2022',
+    truckMake: 'Isuzu',
+    truckModel: 'Isuzu N-Series',
+    color: 'White',
+    engineType: 'Diesel',
+    engineCapacity: '500 (cc)',
+    engineMileage: '56,000 km',
+    transmissionType: 'Manual',
+    selectedFeatures: [
+      "ABS",
+      "Air Bags",
+      "Power Steering",
+      "Power Windows",
+      "Air Conditioning",
+    ],
+    sellerName: 'Ali Khan',
+    mobileNumber: '0301-7654321',
+    address: '456 Lahore Road, Punjab',
+    comments: 'Affordable price and in good condition!',
+  ),
+];
 
 // Reusable Stat Item Widget for Chat, Views, and Calls
 class StatItem extends StatelessWidget {

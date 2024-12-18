@@ -20,13 +20,6 @@ class AuthHttpApiRepository implements AuthRepository {
   }
 
   @override
-  Future<UserModel> loginApi(dynamic data) async {
-    dynamic response =
-        await _apiServices.getPostApiResponse(AppUrl.loginEndPint, data);
-    return UserModel.fromJson(response);
-  }
-
-  @override
   Future<UserModel> continueWithGoogleApi(data) {
     // TODO: implement continueWithGoogleApi
     throw UnimplementedError();

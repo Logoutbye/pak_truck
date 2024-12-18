@@ -2,11 +2,10 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
-import 'package:testt/src/features/sell/view_model/sell_truck_view_model.dart';
+
 
 Widget buildSellImagePicker(BuildContext context, String label, viewModel) {
   Future<void> showImageSourceActionSheet() async {
