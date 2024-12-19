@@ -12,7 +12,7 @@ class NetworkApiService implements BaseApiServices {
   @override
   Future getGetApiResponse(String url) async {
     if (kDebugMode) {
-      print(url);
+      print('request url: $url');
     }
     dynamic responseJson;
     try {
@@ -32,17 +32,15 @@ class NetworkApiService implements BaseApiServices {
       throw FetchDataException('Network Request time out');
     }
 
-    if (kDebugMode) {
-      print(responseJson);
-    }
     return responseJson;
   }
 
   @override
   Future getPostApiResponse(String url, dynamic data) async {
     if (kDebugMode) {
-      print(url);
-      print(data);
+      print('------------start------------');
+      print('request url: $url');
+      print('request body: $data');
     }
 
     dynamic responseJson;
@@ -64,15 +62,14 @@ class NetworkApiService implements BaseApiServices {
       throw FetchDataException('Network Request time out');
     }
 
-    if (kDebugMode) {
-      print(responseJson);
-    }
     return responseJson;
   }
 
   dynamic returnResponse(http.Response response) {
     if (kDebugMode) {
-      print(response.statusCode);
+      print('response.statusCode ${response.statusCode}');
+      print('response.body ${response.body}');
+      print('------------end------------');
     }
 
     switch (response.statusCode) {

@@ -8,7 +8,7 @@ import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/features/auth/view_model/auth_view_model.dart';
+import 'package:testt/src/features/auth/login/view_model/login_view_model.dart';
 import 'package:testt/src/configs/components/custom_appbar.dart';
 import '../../../../configs/extensions.dart';
 import '../../../../configs/theme/theme_text.dart';

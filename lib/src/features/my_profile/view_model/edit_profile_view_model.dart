@@ -73,7 +73,6 @@ class EditProfileViewModel extends ChangeNotifier {
         'phoneNoController': phoneNoController.text.trim(),
         'frontImage': profileImage,
       };
-      print('::: data is ${data}');
       Future.delayed(Duration(seconds: 2), () {
         setLoading(false);
         Utils.snackBar('Application submitted successfully', context);

@@ -1,6 +1,14 @@
 class AppUrl {
   static var baseUrl = 'https://paktruck-production.up.railway.app/api';
 
-  static var loginEndPint = '$baseUrl/api/login';
+  static var sendPhoneOtp = '$baseUrl/auth/app/otp/send';
+  static var reSendPhoneOtp = '$baseUrl/auth/app/otp/send';
+  static var verifyEmailOtp = '$baseUrl/auth/app/otp/send';
+
   static var sendEmailOtp = '$baseUrl/auth/send-otp';
+  static var reSendEmailOtp = '$baseUrl/auth/send-otp';
+  static var verifyPhoneOtp = '$baseUrl/auth/send-otp';
+
+  static var selectAccountMode = '$baseUrl/auth/send-otp';
+  static var completeProfile = '$baseUrl/auth/send-otp';
 }

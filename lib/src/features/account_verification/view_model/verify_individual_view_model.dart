@@ -89,7 +89,6 @@ class VerifyIndividualViewModel extends ChangeNotifier {
   Future<void> submitData(BuildContext context) async {
     setLoading(true);
     try {
-      print('::: email is $email otp is $otp');
       var data = {
         if (email.isNotEmpty) "email": email.toString(),
         if (phoneNo.isNotEmpty) "phoneNo": phoneNo.toString(),
@@ -99,7 +98,6 @@ class VerifyIndividualViewModel extends ChangeNotifier {
         'frontImage': frontImage,
         'backImage': backImage,
       };
-      print('::: data is ${data}');
       Future.delayed(Duration(seconds: 2), () {
         // setLoading(false);
         // Utils.snackBar('Application submitted successfully', context);

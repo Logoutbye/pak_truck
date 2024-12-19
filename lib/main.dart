@@ -11,10 +11,10 @@ import 'package:testt/src/features/sell/view_model/sell_spare_parts_view_model.d
 import 'package:testt/src/features/sell/view_model/sell_truck_view_model.dart';
 import 'package:testt/src/features/splash/view_model/local_provider.dart';
 import 'src/features/my_profile/view_model/profile_tabbar_provider.dart';
-import 'src/repository/auth_api/auth_http_api_repository.dart';
-import 'src/repository/auth_api/auth_repository.dart';
+import 'src/repository/signup_api/signup_http_api_repository.dart';
+import 'src/repository/signup_api/signup_repository.dart';
 import 'src/configs/theme/state.dart';
-import 'src/features/auth/view_model/auth_view_model.dart';
+import 'src/features/auth/login/view_model/login_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'src/configs/routes/routes.dart';
@@ -26,7 +26,7 @@ GetIt getIt = GetIt.instance;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  getIt.registerLazySingleton<AuthRepository>(() => AuthHttpApiRepository());
+  getIt.registerLazySingleton<SignUpRepository>(() => SignUpHttpApiRepository());
   runApp(const MyApp());
 }
 
@@ -41,12 +41,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (_) => LoginViewModel(authRepository: getIt())),
         ChangeNotifierProvider(
-            create: (_) => SignUpViewModel(authRepository: getIt())),
+            create: (_) => SignUpViewModel(signUpRepository: getIt())),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => VerifyShopViewModel()),
         ChangeNotifierProvider(create: (_) => VerifyIndividualViewModel()),
         ChangeNotifierProvider(
-            create: (_) => SignUpViewModel(authRepository: getIt())),
+            create: (_) => SignUpViewModel(signUpRepository: getIt())),
         ChangeNotifierProvider(create: (_) => NavigationProvider()),
         ChangeNotifierProvider(create: (_) => ProfileTabBarProvider()),
         ChangeNotifierProvider(create: (_) => EditProfileViewModel()),

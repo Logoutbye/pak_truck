@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:testt/main.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';

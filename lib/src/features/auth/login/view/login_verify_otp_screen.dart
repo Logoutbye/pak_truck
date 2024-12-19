@@ -13,17 +13,15 @@ import 'package:testt/src/features/auth/login/view_model/login_view_model.dart';
 import 'package:testt/src/configs/components/custom_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ResetPasswordVerifyOtpScreen extends StatefulWidget {
-  final String email;
-  const ResetPasswordVerifyOtpScreen({super.key, required this.email});
+class LoginVerifyOtpScreen extends StatefulWidget {
+  final String phoneNumber;
+  const LoginVerifyOtpScreen({super.key, required this.phoneNumber});
 
   @override
-  State<ResetPasswordVerifyOtpScreen> createState() =>
-      _ResetPasswordVerifyOtpScreenState();
+  State<LoginVerifyOtpScreen> createState() => _LoginVerifyOtpScreenState();
 }
 
-class _ResetPasswordVerifyOtpScreenState
-    extends State<ResetPasswordVerifyOtpScreen> {
+class _LoginVerifyOtpScreenState extends State<LoginVerifyOtpScreen> {
   final TextEditingController _controller = TextEditingController();
 
   int _start = 30; // Initial timer in seconds
@@ -60,12 +58,14 @@ class _ResetPasswordVerifyOtpScreenState
   Widget _buildOTPField() {
     return Pinput(
       controller: _controller,
-      length: 6,
+      length: 6, // Number of OTP digits
       focusNode: FocusNode(),
-      closeKeyboardWhenCompleted: true,
+      closeKeyboardWhenCompleted:
+          true, // Close the keyboard when OTP is complete
       onCompleted: (pin) async {
         await context.read<LoginViewModel>().verifyOtp(context, pin).then((_) {
-          Navigator.pushNamed(context, RoutesName.setNewPasswordScreen);
+          Navigator.pushNamedAndRemoveUntil(
+              context, RoutesName.chooseAccountScreen, (route) => false);
         }).onError((e, s) {
           Utils.flushBarErrorMessage(e.toString(), context);
         });
@@ -82,7 +82,8 @@ class _ResetPasswordVerifyOtpScreenState
           color: Colors.black,
         ),
         decoration: BoxDecoration(
-          border: Border.all(color: AppColors.primaryColor, width: 2),
+          color: AppColors.whiteColor,
+          border: Border.all(color: AppColors.grey, width: 2),
           borderRadius: BorderRadius.circular(8),
         ),
       ),
@@ -116,7 +117,7 @@ class _ResetPasswordVerifyOtpScreenState
                   text: localization.otpIntro,
                   children: [
                     TextSpan(
-                      text: widget.email,
+                      text: widget.phoneNumber,
                       style: Themetext.blackBoldText.copyWith(
                         color: AppColors.primaryColor,
                         fontWeight: FontWeight.bold,
@@ -137,10 +138,22 @@ class _ResetPasswordVerifyOtpScreenState
             },
             child: const Text(
               'Wrong number?',
-              style: TextStyle(color: Colors.teal),
+              style: TextStyle(color: AppColors.primaryColor),
             ),
           ),
           const SizedBox(height: 30),
+          if (_start > 0)
+            Padding(
+              padding: const EdgeInsets.only(right: 28.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(),
+                  _buildSplitTimerBox(),
+                ],
+              ),
+            ),
+          const SizedBox(height: 20),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -158,10 +171,7 @@ class _ResetPasswordVerifyOtpScreenState
             TextButton(
               onPressed: () async {
                 _startTimer();
-                var data = {"phone": widget.email};
-                await context
-                    .read<LoginViewModel>()
-                    .reSendEmailOtp(context, data);
+                await context.read<LoginViewModel>().reSendPhoneOtp(context);
                 setState(() {});
               },
               child: const Text(
@@ -173,4 +183,48 @@ class _ResetPasswordVerifyOtpScreenState
       ),
     );
   }
+Widget _buildSplitTimerBox() {
+  // Extract minutes and seconds
+  final minutes = (_start ~/ 60).toString().padLeft(2, '0');
+  final seconds = (_start % 60).toString().padLeft(2, '0');
+
+  // Box builder
+  Widget _buildBox(String value) {
+    return Container(
+      alignment: Alignment.center,
+      width: context.mediaQueryWidth/12, // Fixed width for uniformity
+      height: context.mediaQueryHeight/30, // Fixed height for a square box
+      decoration: BoxDecoration(
+        color: Colors.white, // White background
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.grey),
+      ),
+      child: Text(
+        value,
+        style: Themetext.headline.copyWith(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      _buildBox(minutes), // Minutes box
+      const SizedBox(width: 5), // Space between boxes
+      Text(
+        ":",
+        style: Themetext.headline.copyWith(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      const SizedBox(width: 5), // Space between colon and seconds
+      _buildBox(seconds), // Seconds box
+    ],
+  );
+}
+
 }

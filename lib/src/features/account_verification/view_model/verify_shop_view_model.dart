@@ -97,7 +97,6 @@ class VerifyShopViewModel extends ChangeNotifier {
         'frontImage': frontImage,
         'backImage': backImage,
       };
-      print('::: data is ${data}');
       Future.delayed(Duration(seconds: 2), () {
         setLoading(false);
         Utils.snackBar('Application submitted successfully', context);

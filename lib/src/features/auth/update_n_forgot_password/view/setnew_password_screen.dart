@@ -8,7 +8,7 @@ import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/utils.dart';
 import 'package:testt/src/features/auth/signup/view/signup_view_with_number.dart';
-import 'package:testt/src/features/auth/view_model/auth_view_model.dart';
+import 'package:testt/src/features/auth/login/view_model/login_view_model.dart';
 import 'package:testt/src/features/auth/update_n_forgot_password/view/reset_password_otp_screen.dart';
 import 'package:testt/src/configs/components/custom_appbar.dart';
 import '../../../../configs/extensions.dart';
