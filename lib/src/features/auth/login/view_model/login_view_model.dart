@@ -57,7 +57,6 @@ class LoginViewModel with ChangeNotifier {
         setLoading(false);
       });
       var response = await authRepository.sendPhoneOtp(fullPhone);
-      print(response.success);
 
       Navigator.push(
           context,
@@ -85,7 +84,6 @@ class LoginViewModel with ChangeNotifier {
         setLoading(false);
       });
       var response = await authRepository.sendPhoneOtp(fullPhone);
-      print(response.success);
 
       Navigator.push(
           context,
@@ -179,6 +177,4 @@ class LoginViewModel with ChangeNotifier {
       setLoading(false);
     }
   }
-
-
 }
