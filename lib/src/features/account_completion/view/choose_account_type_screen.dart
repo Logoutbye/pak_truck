@@ -3,13 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/extensions.dart';
-import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/configs/components/custom_appbar.dart';
 import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/features/account_verification/view/verify_individual_screen.dart';
-import 'package:testt/src/features/account_verification/view_model/verify_individual_view_model.dart';
-import 'package:testt/src/features/account_verification/view_model/verify_shop_view_model.dart';
+import 'package:testt/src/features/account_completion/view_model/complete_account_view_model.dart';
 
 class ChooseAccountTypeScreen extends StatefulWidget {
   const ChooseAccountTypeScreen({super.key});
@@ -236,32 +233,31 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
             ),
             Column(
               children: [
-                RoundButton(
-                  title: _accountType == "Individual"
-                      ? "Next"
-                      : _shopType == null
-                          ? "Select Shop Type"
-                          : "Verify Your Shop",
-                  onPress: () {
-                    if (_accountType == "Individual") {
-                      context
-                          .read<VerifyIndividualViewModel>()
-                          .setUserRole(_accountType.toLowerCase());
-
-                      Navigator.pushNamed(
-                          context, RoutesName.verifyIndividualScreen);
-                    } else if (_accountType == "Shop" && _shopType != null) {
-                      context.read<VerifyShopViewModel>().setUserRoleAndType(
-                          _accountType.toLowerCase(),
-                          _shopType?.toLowerCase() ?? 'Not defined');
-                      Navigator.pushNamed(
-                        context,
-                        RoutesName.verifyShopScreen,
-                      );
-                    } else {
-                      Utils.flushBarErrorMessage(
-                          'Please select a shop type.', context);
-                    }
+                Consumer<CompleteAccountViewModel>(
+                  builder: (BuildContext context,
+                      CompleteAccountViewModel value, Widget? child) {
+                    return RoundButton(
+                      loading: value.loading,
+                      title: _accountType == "Individual"
+                          ? "Next"
+                          : _shopType == null
+                              ? "Select Shop Type"
+                              : "Verify Your Shop",
+                      onPress: () {
+                        if (_accountType == "Individual") {
+                          value.setUserRole(_accountType.toLowerCase());
+                          value.selectAccountMode(context, true);
+                        } else if (_accountType == "Shop" &&
+                            _shopType != null) {
+                          value.setUserRoleAndType(_accountType.toLowerCase(),
+                              _shopType?.toLowerCase() ?? 'Not defined');
+                          value.selectAccountMode(context, false);
+                        } else {
+                          Utils.flushBarErrorMessage(
+                              'Please select a shop type.', context);
+                        }
+                      },
+                    );
                   },
                 ),
                 SizedBox(height: context.mediaQueryHeight / 35),

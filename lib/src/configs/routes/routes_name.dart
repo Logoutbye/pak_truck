@@ -1,5 +1,3 @@
-import 'package:testt/src/features/sell/view/sell_spare_parts_screen.dart';
-
 class RoutesName {
 // splash
   static const String splash = 'splash_view';
@@ -11,6 +9,8 @@ class RoutesName {
   static const setNewPasswordScreen = 'set_new_password_screen';
 
   static const chooseAccountScreen = 'chooseAccountScreen';
+  static const completeAccountScreen = 'completeAccountScreen';
+
 
   static const verifyShopScreen = 'verify_shop_screen';
   static const verifyIndividualScreen = 'verify_individual_screen';

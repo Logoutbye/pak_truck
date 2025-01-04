@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
@@ -85,6 +86,8 @@ class _CountryPickerTextFormFieldState
               controller: widget.controller,
               obscureText: widget.isPassword,
               style: Themetext.subheadline,
+              keyboardType: TextInputType.phone,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               decoration: InputDecoration(
                 focusedBorder: InputBorder.none,
                 enabledBorder: InputBorder.none,

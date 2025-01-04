@@ -33,6 +33,10 @@ class _SignUpViewWithNumberState extends State<SignUpViewWithNumber> {
           firstText: localization.create_an_account,
           secondText: localization.sign_up,
         ),
+       
+       
+       
+       
         body: Padding(
           padding: const EdgeInsets.all(20),
           child: ListView(
@@ -135,6 +139,10 @@ class _SignUpViewWithNumberState extends State<SignUpViewWithNumber> {
             ],
           ),
         ),
+     
+     
+     
+     
         bottomSheet: Padding(
           padding: const EdgeInsets.only(bottom: 38.0),
           child: Row(

@@ -41,10 +41,11 @@ class SellTextFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          titleText,
-          style: const TextStyle(fontWeight: FontWeight.w500),
-        ),
+        if (titleText.isNotEmpty)
+          Text(
+            titleText,
+            style: const TextStyle(fontWeight: FontWeight.w500),
+          ),
         const SizedBox(height: 8),
         TextFormField(
           controller: controller,
@@ -103,7 +104,7 @@ class SellTextFormField extends StatelessWidget {
             }
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: context.mediaQueryHeight / 90),
       ],
     );
   }

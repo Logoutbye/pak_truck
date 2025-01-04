@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:testt/src/configs/color/color.dart';
-import 'package:testt/src/configs/components/custom_text_filed.dart';
 import 'package:testt/src/configs/extensions.dart';
-import 'package:testt/src/features/home/view/spare_part_details_screen.dart';
+import 'package:testt/src/configs/utils.dart';
 import 'package:testt/src/features/my_profile/widget/user_image_avatar_widget.dart';
+import 'package:testt/src/features/sell/widget/sell_textform_field.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,16 +23,26 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(4.0),
           child: UserImageAvatarWidget(imageUrl: ''),
         ),
-        title: CustomTextFormField(
-          maxLines: 1,
-          minLines: 1,
-          color: AppColors.whiteColor,
-            hintText: 'Search used Truck',
-            controller: searchTextEditingController),
+        title: Column(
+          children: [
+            SellTextFormField(
+              leading: Icon(Icons.search),
+              maxLines: 1,
+              minLines: 1,
+              color: AppColors.whiteColor,
+              borderColor: AppColors.dividerColor,
+              hintText: 'Search used Truck',
+              controller: searchTextEditingController,
+              titleText: '',
+            ),
+          ],
+        ),
         actions: [
           InkWell(
               borderRadius: BorderRadius.circular(12),
-              onTap: () {},
+              onTap: () {
+                Utils.dismissKeyboard(context);
+              },
               child: Container(
                   padding: EdgeInsets.all(8),
                   margin: EdgeInsets.all(2),

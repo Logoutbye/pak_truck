@@ -5,6 +5,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:testt/src/configs/color/color.dart';
 
 class Utils {
+  // Function to dismiss the keyboard
+  static dismissKeyboard(BuildContext context) {
+    FocusScope.of(context).unfocus();
+  }
+
   // we will use this function to shift focus from one text field to another text field
   // we are using to avoid duplications of code
   static void fieldFocusChange(

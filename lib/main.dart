@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:testt/languages/I10n/l10n.dart';
+import 'package:testt/src/features/account_completion/view_model/complete_account_view_model.dart';
 import 'package:testt/src/features/account_verification/view_model/verify_individual_view_model.dart';
 import 'package:testt/src/features/account_verification/view_model/verify_shop_view_model.dart';
 import 'package:testt/src/features/auth/signup/view_model/signup_viewmodel.dart';
@@ -26,7 +27,8 @@ GetIt getIt = GetIt.instance;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  getIt.registerLazySingleton<SignUpRepository>(() => SignUpHttpApiRepository());
+  getIt
+      .registerLazySingleton<SignUpRepository>(() => SignUpHttpApiRepository());
   runApp(const MyApp());
 }
 
@@ -43,6 +45,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (_) => SignUpViewModel(signUpRepository: getIt())),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(
+            create: (_) => CompleteAccountViewModel(signUpRepository: getIt())),
+
         ChangeNotifierProvider(create: (_) => VerifyShopViewModel()),
         ChangeNotifierProvider(create: (_) => VerifyIndividualViewModel()),
         ChangeNotifierProvider(
@@ -50,7 +55,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => NavigationProvider()),
         ChangeNotifierProvider(create: (_) => ProfileTabBarProvider()),
         ChangeNotifierProvider(create: (_) => EditProfileViewModel()),
-        ChangeNotifierProvider(create: (_) => SellTuckViewModel()),    
+        ChangeNotifierProvider(create: (_) => SellTuckViewModel()),
         ChangeNotifierProvider(create: (_) => SellSparePartsViewModel()),
       ],
       child: Consumer2<ThemeProvider, LocaleProvider>(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testt/src/configs/routes/slide_transition_page.dart';
+import 'package:testt/src/features/account_completion/view/choose_account_type_screen.dart';
+import 'package:testt/src/features/account_completion/view/complete_account_screen.dart';
 import 'package:testt/src/features/account_verification/view/verify_individual_screen.dart';
 import 'package:testt/src/features/account_verification/view/verify_shop_screen.dart';
 import 'package:testt/src/features/auth/signup/view/signup_view_with_number.dart';
@@ -13,7 +15,6 @@ import 'package:testt/src/features/sell/view/choose_selling_plan_screen.dart';
 import 'package:testt/src/features/sell/view/sell_spare_parts_screen.dart';
 import 'package:testt/src/features/sell/view/sell_truck_screen.dart';
 import 'package:testt/src/features/splash/view/select_langage_screen.dart';
-import '../../features/account_verification/view/choose_ccount_type_screen.dart';
 import 'routes_name.dart';
 import '../../features/auth/login/view/login_view_with_number.dart';
 import '../../features/splash/view/splash_screen.dart';
@@ -43,7 +44,9 @@ class Routes {
       case RoutesName.chooseSellingPlan:
         return SlideTransitionPage(page: const ChooseSellingPlanScreen());
 
-// shop verifucation
+      case RoutesName.completeAccountScreen:
+        return SlideTransitionPage(page: CompleteAccountScreen());
+
       case RoutesName.verifyShopScreen:
         return SlideTransitionPage(page: VerifyShopScreen());
       case RoutesName.verifyIndividualScreen:
@@ -60,7 +63,6 @@ class Routes {
         return SlideTransitionPage(page: NotificationScreen());
       case RoutesName.editProfile:
         return SlideTransitionPage(page: EditProfileScreen());
-
 
       case RoutesName.sellSparePartsScreen:
         return SlideTransitionPage(page: SellSparePartsScreen());
