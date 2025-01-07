@@ -5,6 +5,7 @@ import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/features/dashborad/widgets/what_do_you_want_to_sell_bottom_sheet.dart';
 import 'package:testt/src/features/home/view/home_screen.dart';
+import 'package:testt/src/features/home/view_model/category_tab_index_notifier.dart';
 import 'package:testt/src/features/my_profile/view/profile_screen.dart';
 import 'package:testt/src/features/videos/videos_screen.dart';
 import '../../chat/chat_screen.dart';
@@ -29,6 +30,8 @@ class Dashboard extends StatelessWidget {
             currentIndex: provider.selectedIndex,
             showUnselectedLabels: true,
             onTap: (index) {
+              ///  this line make sures that we always set to first tab category for dynamic height assigning
+              context.read<CategoryTabIndexNotifier>().updateIndex(0);
               if (index == 2) {
                 whatDoYouWantToSellBottomSheet(context);
               } else {

@@ -7,7 +7,8 @@ import 'package:testt/src/features/account_verification/view_model/verify_indivi
 import 'package:testt/src/features/account_verification/view_model/verify_shop_view_model.dart';
 import 'package:testt/src/features/auth/signup/view_model/signup_viewmodel.dart';
 import 'package:testt/src/features/dashborad/view_model/navigation_provider.dart';
-import 'package:testt/src/features/home/view/home_screen.dart';
+import 'package:testt/src/features/home/view_model/category_tab_index_notifier.dart';
+import 'package:testt/src/features/home/view_model/new_tab_bar_notifier.dart';
 import 'package:testt/src/features/my_profile/view_model/edit_profile_view_model.dart';
 import 'package:testt/src/features/sell/view_model/sell_spare_parts_view_model.dart';
 import 'package:testt/src/features/sell/view_model/sell_truck_view_model.dart';
@@ -58,7 +59,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => EditProfileViewModel()),
         ChangeNotifierProvider(create: (_) => SellTuckViewModel()),
         ChangeNotifierProvider(create: (_) => SellSparePartsViewModel()),
-        ChangeNotifierProvider(create: (_) => TabIndexNotifier()),
+        ChangeNotifierProvider(create: (_) => CategoryTabIndexNotifier()),
+        ChangeNotifierProvider(create: (_) => CustomTabBarNotifier()),
       ],
       child: Consumer2<ThemeProvider, LocaleProvider>(
         builder: (BuildContext context, themeProvider, localeProvider,

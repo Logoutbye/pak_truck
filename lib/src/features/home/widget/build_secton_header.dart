@@ -1,262 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
-import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
-import 'package:testt/src/features/home/view/ad_details_screen.dart';
-import 'package:testt/src/features/my_profile/widget/my_ads_widget.dart';
 
-Widget buildSectionHeader(
-  BuildContext context, {
-  required String title,
-  required VoidCallback onViewAllPressed,
-}) {
+Widget buildSectionHeader(BuildContext context,
+    {required String title,
+    required VoidCallback onViewAllPressed,
+    bool hasViewAll = true}) {
   return Padding(
     padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(title, style: Themetext.blackBoldText.copyWith(fontSize: 20)),
-        GestureDetector(
-            onTap: onViewAllPressed,
-            child: Text('View All',
-                style: Themetext.blackBoldText
-                    .copyWith(color: AppColors.primaryColor))),
+        if (hasViewAll)
+          InkWell(
+              onTap: onViewAllPressed,
+              child: Text('View All',
+                  style: Themetext.blackBoldText
+                      .copyWith(color: AppColors.primaryColor))),
       ],
     ),
   );
 }
-
-Widget buildHorizontalList(BuildContext context, bool byPaktruck) {
-  final items = [
-    {
-      'image': 'assets/images/mini_truck.png',
-      'title': 'Dumper Truck',
-      'price': 'PKR. 3,800,000',
-      'location': 'Islamabad'
-    },
-    {
-      'image': 'assets/images/mini_truck.png',
-      'title': 'Automatic Truck',
-      'price': 'PKR. 3,800,000',
-      'location': 'Lahore'
-    },
-    {
-      'image': 'assets/images/mini_truck.png',
-      'title': 'Box Truck',
-      'price': 'PKR. 3,800,000',
-      'location': 'Karachi'
-    },
-    {
-      'image': 'assets/images/mini_truck.png',
-      'title': 'Dumper Truck',
-      'price': 'PKR. 3,800,000',
-      'location': 'Islamabad'
-    },
-    {
-      'image': 'assets/images/mini_truck.png',
-      'title': 'Automatic Truck',
-      'price': 'PKR. 3,800,000',
-      'location': 'Lahore'
-    },
-    {
-      'image': 'assets/images/mini_truck.png',
-      'title': 'Box Truck',
-      'price': 'PKR. 3,800,000',
-      'location': 'Karachi'
-    },
-  ];
-
-  return SizedBox(
-    // height: 220,
-    height: context.mediaQueryHeight / 4.2,
-    child: ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        final item = items[index];
-        return Container(
-          // width: 160,
-          width: context.mediaQueryWidth / 2.4,
-          margin: const EdgeInsets.symmetric(horizontal: 8),
-          decoration: BoxDecoration(
-            color: AppColors.whiteColor,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.grey.shade300),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.grey.shade300),
-                ),
-                child: Image.asset(
-                  item['image']!,
-                  height: 120,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      item['title']!,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: context.mediaQueryHeight / 100),
-                    Text(item['price']!,
-                        style: Themetext.blackBoldText
-                            .copyWith(color: AppColors.primaryColor)),
-                    SizedBox(height: context.mediaQueryHeight / 100),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          item['location']!,
-                          style: const TextStyle(color: Colors.grey),
-                        ),
-                        if (byPaktruck)
-                          Text(
-                            'By PakTruck ',
-                            style: TextStyle(
-                                color: AppColors.orange, fontSize: 12),
-                          ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    ),
-  );
-}
-
-Widget buildVerticalList(BuildContext context) {
-  final items = [
-    {
-      'image': 'assets/images/mini_truck.png',
-      'title': 'Dumper Truck',
-      'description':
-          'Pakistan is making significant strides towards a greener and more...',
-    },
-    {
-      'image': 'assets/images/mini_truck.png',
-      'title': 'Automatic Truck',
-      'description':
-          'Pakistan is making significant strides towards a greener and more...',
-    },
-    {
-      'image': 'assets/images/mini_truck.png',
-      'title': 'Box Truck',
-      'description':
-          'Pakistan is making significant strides towards a greener and more...',
-    },
-    {
-      'image': 'assets/images/mini_truck.png',
-      'title': 'Dumper Truck',
-      'description':
-          'Pakistan is making significant strides towards a greener and more...',
-    },
-    {
-      'image': 'assets/images/mini_truck.png',
-      'title': 'Automatic Truck',
-      'description':
-          'Pakistan is making significant strides towards a greener and more...',
-    },
-    {
-      'image': 'assets/images/mini_truck.png',
-      'title': 'Box Truck',
-      'description':
-          'Pakistan is making significant strides towards a greener and more...',
-    },
-  ];
-
-  return ListView.builder(
-    shrinkWrap: true,
-    // physics: NeverScrollableScrollPhysics(),
-    scrollDirection: Axis.vertical,
-    itemCount: items.length,
-    itemBuilder: (context, index) {
-      final item = items[index];
-      return GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              SlideTransitionPage(
-                  page: AdDetailScreen(
-                ad: dummyAds.first,
-              )));
-        },
-        child: Container(
-          width: context.mediaQueryWidth / 2.4,
-          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-          decoration: BoxDecoration(
-            color: AppColors.whiteColor,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.grey.shade300),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: context.mediaQueryWidth / 2.5,
-                margin: EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.grey.shade300),
-                ),
-                child: Image.asset(
-                  item['image']!,
-                  height: 120,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 2, vertical: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      item['title']!,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: context.mediaQueryHeight / 100),
-                    SizedBox(
-                      width: context.mediaQueryWidth / 2,
-                      child: Text(
-                        item['description']!,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
-}
-
 Widget buildSparePartsList() {
   final spareParts = [
     'Body Part',

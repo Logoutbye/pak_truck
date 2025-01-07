@@ -5,23 +5,15 @@ import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/configs/utils.dart';
+import 'package:testt/src/features/home/view_model/category_tab_index_notifier.dart';
+import 'package:testt/src/features/home/widget/auto_shop_widget.dart';
 import 'package:testt/src/features/home/widget/build_secton_header.dart';
+import 'package:testt/src/features/home/widget/horizontal_list_widget.dart';
 import 'package:testt/src/features/home/widget/shop_tabbar_view.dart';
 import 'package:testt/src/features/sell/widget/sell_textform_field.dart';
 
 import '../../my_profile/widget/user_image_avatar_widget.dart';
 import '../widget/category_tab.dart';
-
-class TabIndexNotifier with ChangeNotifier {
-  int _currentIndex = 0;
-
-  int get currentIndex => _currentIndex;
-
-  void updateIndex(int newIndex) {
-    _currentIndex = newIndex;
-    notifyListeners();
-  }
-}
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -45,25 +37,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _thirdTabController = TabController(length: 3, vsync: this);
 
     _categoryTabController.addListener(() {
-      context
-          .read<TabIndexNotifier>()
-          .updateIndex(_categoryTabController.index);
+      if (mounted) {
+        context
+            .read<CategoryTabIndexNotifier>()
+            .updateIndex(_categoryTabController.index);
+      }
     });
   }
 
   @override
-  void dispose() {
-    searchTextEditingController.dispose();
-    _categoryTabController.dispose();
-    _autoTabController.dispose();
-    _thirdTabController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final currentIndex = context.watch<TabIndexNotifier>().currentIndex;
-
+    final currentIndex = context.watch<CategoryTabIndexNotifier>().currentIndex;
     // Define heights dynamically based on tab index
     final double dynamicHeight = currentIndex == 0
         ? MediaQuery.of(context).size.height / 6
@@ -78,11 +62,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: UserImageAvatarWidget(
-            imageUrl: '', // Ensure imageUrl is not null
-          ),
-        ),
+            padding: const EdgeInsets.all(4.0),
+            child: UserImageAvatarWidget(imageUrl: '')),
         title: Column(
           children: [
             SellTextFormField(
@@ -161,27 +142,91 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ],
             ),
           ),
-          SizedBox(height: context.mediaQueryHeight / 75),
           buildSectionHeader(
             context,
             title: 'Feature Used Truck',
             onViewAllPressed: () {},
           ),
-          buildHorizontalList(context, false),
+          HorizontalList(
+            items: [
+              {
+                'image': 'assets/remove/truck.png',
+                'title': 'Dumper Truck',
+                'price': 'PKR. 3,800,000',
+                'location': 'Islamabad'
+              },
+              {
+                'image': 'assets/remove/truck_1.png',
+                'title': 'Automatic Truck',
+                'price': 'PKR. 3,800,000',
+                'location': 'Lahore'
+              },
+              {
+                'image': 'assets/images/mini_truck.png',
+                'title': 'Box Truck',
+                'price': 'PKR. 3,800,000',
+                'location': 'Karachi'
+              },
+            ],
+          ),
           SizedBox(height: context.mediaQueryHeight / 75),
           buildSectionHeader(
             context,
             title: 'Manage by PakTruck',
             onViewAllPressed: () {},
           ),
-          buildHorizontalList(context, true),
+          HorizontalList(
+            showPakTruckTag: true,
+            items: [
+              {
+                'image': 'assets/remove/truck.png',
+                'title': 'Dumper Truck',
+                'price': 'PKR. 3,800,000',
+                'location': 'Islamabad'
+              },
+              {
+                'image': 'assets/remove/truck_1.png',
+                'title': 'Automatic Truck',
+                'price': 'PKR. 3,800,000',
+                'location': 'Lahore'
+              },
+              {
+                'image': 'assets/images/mini_truck.png',
+                'title': 'Box Truck',
+                'price': 'PKR. 3,800,000',
+                'location': 'Karachi'
+              },
+            ],
+          ),
           SizedBox(height: context.mediaQueryHeight / 75),
           buildSectionHeader(
             context,
             title: 'Used Buses for Sale',
             onViewAllPressed: () {},
           ),
-          buildHorizontalList(context, false),
+          HorizontalList(
+            showPakTruckTag: true,
+            items: [
+              {
+                'image': 'assets/remove/truck.png',
+                'title': 'Dumper Truck',
+                'price': 'PKR. 3,800,000',
+                'location': 'Islamabad'
+              },
+              {
+                'image': 'assets/remove/truck_1.png',
+                'title': 'Automatic Truck',
+                'price': 'PKR. 3,800,000',
+                'location': 'Lahore'
+              },
+              {
+                'image': 'assets/images/mini_truck.png',
+                'title': 'Box Truck',
+                'price': 'PKR. 3,800,000',
+                'location': 'Karachi'
+              },
+            ],
+          ),
           SizedBox(height: context.mediaQueryHeight / 75),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -213,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ],
           ),
           SizedBox(
-            height: context.mediaQueryHeight / 1.8,
+            height: context.mediaQueryHeight / 2.3,
             child: TabBarView(
               controller: _autoTabController,
               children: [
@@ -242,37 +287,53 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             title: 'News',
             onViewAllPressed: () {},
           ),
-          TabBar(
-            dividerColor: Colors.transparent,
-            tabAlignment: TabAlignment.start,
-            controller: _thirdTabController,
-            isScrollable: true,
-            indicatorColor: AppColors.primaryColor,
-            labelColor: AppColors.primaryColor,
-            unselectedLabelColor: Colors.grey.shade700,
-            labelStyle: Themetext.blackBoldText.copyWith(),
-            unselectedLabelStyle: Themetext.blackBoldText.copyWith(),
-            tabs: const [
-              Tab(text: 'News'),
-              Tab(text: 'Truck Reviews'),
-              Tab(text: 'Discussion'),
+          // TabBar(
+          //   dividerColor: Colors.transparent,
+          //   tabAlignment: TabAlignment.start,
+          //   controller: _thirdTabController,
+          //   isScrollable: true,
+          //   indicatorColor: AppColors.primaryColor,
+          //   labelColor: AppColors.primaryColor,
+          //   unselectedLabelColor: Colors.grey.shade700,
+          //   labelStyle: Themetext.blackBoldText.copyWith(),
+          //   unselectedLabelStyle: Themetext.blackBoldText.copyWith(),
+          //   tabs: const [
+          //     Tab(text: 'News'),
+          //     Tab(text: 'Truck Reviews'),
+          //     Tab(text: 'Discussion'),
+          //   ],
+          // ),
+          // SizedBox(
+          //   height: context.mediaQueryHeight / 1.8,
+          //   child: TabBarView(
+          //     controller: _thirdTabController,
+          //     children: [
+          //       buildVerticalList(context),
+          //       buildVerticalList(context),
+          //       buildVerticalList(context),
+          //     ],
+          //   ),
+          // ),
+
+          CustomTabBar(tabs: const ['News', 'Truck Reviews', 'Discussion']),
+          CustomTabView(
+            children: [
+              buildNewsWidget(context, newsItems), // News Tab
+              buildNewsWidget(context, reviewsItems), // Truck Reviews Tab
+              buildNewsWidget(context, discussionItems) // Discussion Tab
             ],
-          ),
-          SizedBox(
-            height: context.mediaQueryHeight / 1.8,
-            child: Expanded(
-              child: TabBarView(
-                controller: _thirdTabController,
-                children: [
-                  buildVerticalList(context),
-                  buildVerticalList(context),
-                  buildVerticalList(context),
-                ],
-              ),
-            ),
-          ),
+          )
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    searchTextEditingController.dispose();
+    _categoryTabController.dispose();
+    _autoTabController.dispose();
+    _thirdTabController.dispose();
+    super.dispose();
   }
 }

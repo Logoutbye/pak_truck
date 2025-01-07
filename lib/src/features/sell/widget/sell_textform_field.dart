@@ -49,6 +49,7 @@ class SellTextFormField extends StatelessWidget {
           ),
         const SizedBox(height: 8),
         TextFormField(
+          
           controller: controller,
           obscureText: isPassword,
           style: Themetext.subheadline.copyWith(fontWeight: FontWeight.w500),

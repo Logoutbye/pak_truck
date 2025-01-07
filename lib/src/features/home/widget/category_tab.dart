@@ -59,11 +59,17 @@ Widget buildCategoryTab({
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      category['image']!,
-                      height: height * 0.4, // Dynamic image height
-                      width: width * 0.6, // Dynamic image width
-                      fit: BoxFit.contain,
+                    Container(
+                      margin: const EdgeInsets.all(2),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(
+                          category['image']!,
+                          height: height * 0.4, // Dynamic image height
+                          width: width * 0.6, // Dynamic image width
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
                   ],
                 ),
