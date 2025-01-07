@@ -4,8 +4,8 @@ class Themetext {
   Themetext._();
 
   // Font sizes
-  static const double smallSize = 12.0;
-  static const double mediumSize = 14.0;
+  static const double smallSize = 13.0;
+  static const double mediumSize = 15.0;
   static const double largeSize = 18.0;
   static const double extraLargeSize = 24.0;
 

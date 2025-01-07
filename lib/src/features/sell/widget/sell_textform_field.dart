@@ -3,6 +3,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
+import 'package:testt/src/configs/utils.dart';
 
 class SellTextFormField extends StatelessWidget {
   final String titleText;
@@ -52,6 +53,7 @@ class SellTextFormField extends StatelessWidget {
           obscureText: isPassword,
           style: Themetext.subheadline.copyWith(fontWeight: FontWeight.w500),
           minLines: minLines ?? 1,
+          onTapOutside: (event) => Utils.dismissKeyboard(context),
           maxLines: maxLines ?? 1,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(

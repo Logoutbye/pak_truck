@@ -7,21 +7,11 @@ class SplashServices {
   void checkAuthentication(BuildContext context) async {
     SessionController().getUserFromPreference().then((value) async {
       if (SessionController().isLogin!) {
-        // Timer(
-        //   const Duration(seconds: 2),
-        //   () =>
-
-        // Navigator.pushNamedAndRemoveUntil(
-        //     context, RoutesName.home, (route) => false);
-        // );
-      } else {
-        // Timer(
-        //   const Duration(seconds: 2),
-        //   () =>
-
         Navigator.pushNamedAndRemoveUntil(
             context, RoutesName.selectLanguageScreen, (route) => false);
-        // );
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, RoutesName.dashboard, (route) => false);
       }
     }).onError((error, stackTrace) {
       Timer(

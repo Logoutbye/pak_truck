@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
-import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
+import 'package:testt/src/configs/utils.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final String hintText;
@@ -49,6 +49,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         style: Themetext.subheadline,
         minLines: widget.minLines, // Support multi-line input
         maxLines: widget.maxLines ?? null, // Null allows dynamic expansion
+        onTapOutside: (event) => Utils.dismissKeyboard(context),
+
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(
               vertical: 10, horizontal: 10), // Adjust padding for centering
