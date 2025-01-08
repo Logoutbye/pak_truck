@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final currentIndex = context.watch<CategoryTabIndexNotifier>().currentIndex;
     // Define heights dynamically based on tab index
     final double dynamicHeight = currentIndex == 0
-        ? MediaQuery.of(context).size.height / 6
+        ? MediaQuery.of(context).size.height / 3.8
         : currentIndex == 1
             ? MediaQuery.of(context).size.height / 7
             : currentIndex == 2
@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 'location': 'Lahore'
               },
               {
-                'image': 'assets/images/mini_truck.png',
+                'image': 'assets/images/remove_me2.png',
                 'title': 'Box Truck',
                 'price': 'PKR. 3,800,000',
                 'location': 'Karachi'
@@ -179,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             showPakTruckTag: true,
             items: [
               {
-                'image': 'assets/remove/truck.png',
+                'image': 'assets/images/remove_me1.png',
                 'title': 'Dumper Truck',
                 'price': 'PKR. 3,800,000',
                 'location': 'Islamabad'
@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 'location': 'Lahore'
               },
               {
-                'image': 'assets/images/mini_truck.png',
+                'image': 'assets/images/remove_me2.png',
                 'title': 'Box Truck',
                 'price': 'PKR. 3,800,000',
                 'location': 'Karachi'
@@ -208,19 +208,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             showPakTruckTag: true,
             items: [
               {
-                'image': 'assets/remove/truck.png',
+                'image': 'assets/images/remove_me2.png',
                 'title': 'Dumper Truck',
                 'price': 'PKR. 3,800,000',
                 'location': 'Islamabad'
               },
               {
-                'image': 'assets/remove/truck_1.png',
+                'image': 'assets/images/remove_me1.png',
                 'title': 'Automatic Truck',
                 'price': 'PKR. 3,800,000',
                 'location': 'Lahore'
               },
               {
-                'image': 'assets/images/mini_truck.png',
+                'image': 'assets/remove/truck_1.png',
                 'title': 'Box Truck',
                 'price': 'PKR. 3,800,000',
                 'location': 'Karachi'

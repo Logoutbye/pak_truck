@@ -6,45 +6,45 @@ import 'package:testt/src/features/home/view_model/new_tab_bar_notifier.dart';
 
 final List<Map<String, String>> newsItems = [
   {
-    'image': 'assets/images/mini_truck.png',
+    'image': 'assets/images/remove_me1.png',
     'title': 'Latest Truck News',
     'description': 'The trucking industry is evolving rapidly...',
   },
   {
-    'image': 'assets/images/mini_truck.png',
+    'image': 'assets/images/remove_me2.png',
     'title': 'Fuel Efficiency Tips',
     'description': 'Discover how to maximize your truck\'s fuel efficiency...',
   },
 ];
 
 final List<Map<String, String>> reviewsItems = [
-  {
-    'image': 'assets/images/mini_truck.png',
-    'title': 'Truck Review: Volvo',
-    'description': 'The Volvo FH16 offers unmatched comfort...',
+   {
+    'image': 'assets/images/remove_me2.png',
+    'title': 'Fuel Efficiency Tips',
+    'description': 'Discover how to maximize your truck\'s fuel efficiency...',
   },
   {
-    'image': 'assets/images/mini_truck.png',
-    'title': 'Scania R-Series Review',
-    'description': 'Scania\'s R-Series brings a mix of power and style...',
+    'image': 'assets/images/remove_me1.png',
+    'title': 'Latest Truck News',
+    'description': 'The trucking industry is evolving rapidly...',
   },
   {
-    'image': 'assets/images/mini_truck.png',
-    'title': 'Truck Review: Volvo',
-    'description': 'The Volvo FH16 offers unmatched comfort...',
+    'image': 'assets/images/remove_me2.png',
+    'title': 'Fuel Efficiency Tips',
+    'description': 'Discover how to maximize your truck\'s fuel efficiency...',
   },
 ];
 
 final List<Map<String, String>> discussionItems = [
-  {
-    'image': 'assets/images/mini_truck.png',
-    'title': 'Maintenance Tips',
-    'description': 'Join the discussion on how to maintain your truck...',
+ {
+    'image': 'assets/images/remove_me1.png',
+    'title': 'Latest Truck News',
+    'description': 'The trucking industry is evolving rapidly...',
   },
   {
-    'image': 'assets/images/mini_truck.png',
-    'title': 'Best Truck Brands',
-    'description': 'Truck enthusiasts debate the top brands...',
+    'image': 'assets/images/remove_me2.png',
+    'title': 'Fuel Efficiency Tips',
+    'description': 'Discover how to maximize your truck\'s fuel efficiency...',
   },
 ];
 
@@ -139,7 +139,7 @@ Widget buildNewsWidget(BuildContext context, List<Map<String, String>> items) {
                     item['image']!,
                     height: 120,
                     width: double.infinity,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),

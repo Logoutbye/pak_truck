@@ -16,7 +16,7 @@ Widget buildTwoRowHorizontalList(BuildContext context) {
       'location': 'Lahore'
     },
     {
-      'image': 'assets/images/mini_truck.png',
+      'image': 'assets/images/remove_me1.png',
       'shop_name': 'Box Truck',
       'location': 'Karachi'
     },
@@ -34,7 +34,7 @@ Widget buildTwoRowHorizontalList(BuildContext context) {
       'location': 'Islamabad'
     },
     {
-      'image': 'assets/images/mini_truck.png',
+      'image': 'assets/images/remove_me2.png',
       'shop_name': 'Box Truck',
       'location': 'Karachi'
     },

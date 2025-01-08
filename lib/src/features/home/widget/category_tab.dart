@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testt/src/configs/color/color.dart';
+import 'package:testt/src/configs/extensions.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 Widget buildCategoryTab({
   required BuildContext context,
@@ -8,85 +10,159 @@ Widget buildCategoryTab({
 }) {
   final categories = [
     {
-      'image': 'assets/images/mini_truck.png',
-      'text': 'Mini Truck',
-      'color': '0xFFE0F7FA', // Light Cyan
+      'image': 'assets/images/Automatic Truck.png',
+      'text': 'Automatic',
+      'color': '0xFFe4e5ed', // Light Pink
     },
     {
-      'image': 'assets/images/used_truck.png',
-      'text': 'Used Truck',
-      'color': '0xFFFCE4EC', // Light Pink
+      'image': 'assets/images/Dumper Truck.png',
+      'text': 'Dumper Truck',
+      'color': '0xFFf8f0e0', // Light Cyan
     },
     {
-      'image': 'assets/images/earth_movable.png',
-      'text': 'Earth moving...',
-      'color': '0xFFFFF3E0', // Light Orange
+      'image': 'assets/images/Flatted.png',
+      'text': 'Flatbed Truck',
+      'color': '0xFFf2f1f3', // Light Orange
     },
     {
-      'image': 'assets/images/agricultural.png',
-      'text': 'Agriculture Truck',
-      'color': '0xFFE8F5E9', // Light Green
+      'image': 'assets/images/Tailer Truck.png',
+      'text': 'Tailer Truck',
+      'color': '0xFFe7e8ee', // Light Green
+    },
+    {
+      'image': 'assets/images/Container.png',
+      'text': 'Container Carrier',
+      'color': '0xFFfaf5e6', // Light Pink
+    },
+    {
+      'image': 'assets/images/Cargo Landing.png',
+      'text': 'Cargo Landing...',
+      'color': '0xFFeeeef0', // Light Cyan
+    },
+    {
+      'image': 'assets/images/Box Truck.png',
+      'text': 'Box Truck',
+      'color': '0xFFe7e8ee', // Light Orange
+    },
+    {
+      'image': 'assets/images/Freezer Truck.png',
+      'text': 'Freezer Truck',
+      'color': '0xFFe8e8e8', // Light Green
+    },
+    {
+      'image': 'assets/images/Tanker Truck.png',
+      'text': 'Tanker Truck',
+      'color': '0xFFfaf5e6', // Light Pink
+    },
+    {
+      'image': 'assets/images/Dump truck.png',
+      'text': 'Dump truck',
+      'color': '0xFFf2f1f3', // Light Cyan
     },
   ];
 
-  return ListView.builder(
-    scrollDirection: Axis.horizontal,
-    itemCount: categories.length,
-    itemBuilder: (context, index) {
-      final category = categories[index];
-      return Container(
-        height: height,
-        width: width,
-        margin: const EdgeInsets.only(top: 8, left: 4, right: 4, bottom: 34),
-        decoration: BoxDecoration(
-          color: AppColors.whiteColor,
-          border: Border.all(color: Colors.grey.shade300, width: 2),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 4, left: 4, right: 4),
-                decoration: BoxDecoration(
-                  color:
-                      Color(int.parse(category['color']!)), // Background color
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.all(2),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.asset(
-                          category['image']!,
-                          height: height * 0.4, // Dynamic image height
-                          width: width * 0.6, // Dynamic image width
-                          fit: BoxFit.contain,
+  final pageController = PageController(); // Controller for PageView
+
+  // Split categories into pages of 8 items each
+  final pages = List.generate(
+    (categories.length / 8).ceil(),
+    (index) => categories.sublist(
+      index * 8,
+      (index + 1) * 8 > categories.length ? categories.length : (index + 1) * 8,
+    ),
+  );
+
+  return SingleChildScrollView(
+    physics: NeverScrollableScrollPhysics(),
+    child: Column(
+      children: [
+        SizedBox(
+          height: height * 1.2,
+          child: PageView.builder(
+            controller: pageController,
+            itemCount: pages.length,
+            itemBuilder: (context, pageIndex) {
+              final pageCategories = pages[pageIndex];
+              return Center(
+                child: Wrap(
+                  /// Horizontal spacing, responsive to width
+                  spacing: width * 0.04,
+
+                  /// Vertical spacing, responsive to height
+                  // runSpacing: height * 0.02,
+                  children: pageCategories.map((category) {
+                    return Container(
+                      margin: const EdgeInsets.only(top: 8),
+                      width:
+                          (context.mediaQueryWidth - 29) / 4, // 4 items per row
+                      decoration: BoxDecoration(
+                        color: AppColors.whiteColor,
+                        border:
+                            Border.all(color: Colors.grey.shade300, width: 2),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Image with background color
+                            Container(
+                              margin: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: Color(int.parse(category['color']!)),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      category['image']!,
+                                      height: height * 0.32,
+                                      width: width * 0.63,
+                                      fit: BoxFit.fitWidth,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: context.mediaQueryHeight / 150),
+                            // Text
+                            Text(
+                              category['text']!,
+                              textAlign: TextAlign.center,
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: height * 0.06,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(height: context.mediaQueryHeight / 150),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                    );
+                  }).toList(),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                category['text']!,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: height * 0.06,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
+              );
+            },
           ),
         ),
-      );
-    },
+        SizedBox(height: context.mediaQueryHeight / 75),
+        SmoothPageIndicator(
+          controller: pageController,
+          count: pages.length,
+          effect: ExpandingDotsEffect(
+            activeDotColor: AppColors.primaryColor,
+            dotColor: Colors.grey.shade300,
+            dotHeight: height * 0.04,
+            dotWidth: height * 0.04,
+          ),
+        ),
+      ],
+    ),
   );
 }
