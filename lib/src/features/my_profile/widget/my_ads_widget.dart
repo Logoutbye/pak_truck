@@ -68,7 +68,7 @@ class MyAdsWidget extends StatelessWidget {
         SizedBox(height: context.mediaQueryHeight / 30),
         Text(
           'Your Posts',
-          style: Themetext.headline.copyWith(color: AppColors.primaryColor),
+          style: Themetext.headline.copyWith(color: AppColors.primary),
         ),
         SizedBox(height: 16),
 
@@ -98,7 +98,7 @@ class PostCard extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 4),
         decoration: BoxDecoration(
-          color: AppColors.whiteColor,
+          color: AppColors.white,
           border: Border.all(color: Colors.black12),
           borderRadius: BorderRadius.circular(
             12,
@@ -135,7 +135,7 @@ class PostCard extends StatelessWidget {
                     Text(
                       post.price,
                       style: Themetext.blackBoldText
-                          .copyWith(color: AppColors.primaryColor),
+                          .copyWith(color: AppColors.primary),
                     ),
                     SizedBox(height: context.mediaQueryHeight / 45),
                     // Stats: Chat Count, Views Count, Calls Count
@@ -152,12 +152,12 @@ class PostCard extends StatelessWidget {
                             Text(
                               'See My Ad',
                               style: Themetext.blackBoldText.copyWith(
-                                  color: AppColors.primaryColor, fontSize: 12),
+                                  color: AppColors.primary, fontSize: 12),
                             ),
                             SizedBox(width: 5),
                             SvgPicture.asset(
                               'assets/svg/arrow-right.svg',
-                              color: AppColors.primaryColor,
+                              color: AppColors.primary,
                             )
                           ],
                         ),

@@ -57,7 +57,7 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
                         Text(
                           localization.signin,
                           style: Themetext.headline.copyWith(
-                              color: AppColors.primaryColor, fontSize: 21),
+                              color: AppColors.primary, fontSize: 21),
                         ),
                         SizedBox(height: context.mediaQueryHeight / 80),
                         Text(
@@ -88,7 +88,7 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
                         RoundButton(
                             width: context.mediaQueryWidth / 2.5,
                             textStyle: TextStyle(
-                              color: AppColors.primaryColor,
+                              color: AppColors.primary,
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
@@ -156,7 +156,7 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
                       child: Text(
                         ' ${localization.sign_up}',
                         style: Themetext.blackBoldText.copyWith(
-                            color: AppColors.primaryColor, fontSize: 16),
+                            color: AppColors.primary, fontSize: 16),
                       ),
                     ),
                   ],

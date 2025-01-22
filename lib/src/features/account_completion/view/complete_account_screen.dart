@@ -22,8 +22,8 @@ class _CompleteAccountScreenState extends State<CompleteAccountScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: AppColors.whiteColor,
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -31,7 +31,7 @@ class _CompleteAccountScreenState extends State<CompleteAccountScreen> {
             icon: Icon(Icons.arrow_back)),
         title: Text(
           'Complete Your Profile',
-          style: TextStyle(color: AppColors.whiteColor),
+          style: TextStyle(color: AppColors.white),
         ),
       ),
       body: ListView(
@@ -39,7 +39,7 @@ class _CompleteAccountScreenState extends State<CompleteAccountScreen> {
         children: [
           Text(
             "Verify your Identity",
-            style: Themetext.headline.copyWith(color: AppColors.primaryColor),
+            style: Themetext.headline.copyWith(color: AppColors.primary),
           ),
           SizedBox(height: context.mediaQueryHeight / 30),
           Column(
@@ -95,7 +95,7 @@ class _CompleteAccountScreenState extends State<CompleteAccountScreen> {
           SizedBox(height: context.mediaQueryHeight / 35),
           Text(
             "Identity Card Front & Back",
-            style: Themetext.headline.copyWith(color: AppColors.primaryColor),
+            style: Themetext.headline.copyWith(color: AppColors.primary),
           ),
           SizedBox(height: context.mediaQueryHeight / 70),
           Row(
@@ -104,7 +104,7 @@ class _CompleteAccountScreenState extends State<CompleteAccountScreen> {
               RoundButton(
                 width: context.mediaQueryWidth / 2.5,
                 textStyle: TextStyle(
-                  color: AppColors.primaryColor,
+                  color: AppColors.primary,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
@@ -118,11 +118,11 @@ class _CompleteAccountScreenState extends State<CompleteAccountScreen> {
                       loading: value.loading,
                       width: context.mediaQueryWidth / 2.5,
                       textStyle: TextStyle(
-                        color: AppColors.whiteColor,
+                        color: AppColors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
-                      color: AppColors.primaryColor,
+                      color: AppColors.primary,
                       title: 'Submit',
                       onPress: () {
                         if (viewModel.validateInputs(context)) {

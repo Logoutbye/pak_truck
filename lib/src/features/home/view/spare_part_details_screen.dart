@@ -15,8 +15,8 @@ class SpartPartDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: AppColors.whiteColor,
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
         title: const Text(
           'My Spare Part',
           style: TextStyle(color: Colors.white),
@@ -58,14 +58,14 @@ class SpartPartDetailScreen extends StatelessWidget {
                           Text(
                             1999299.viewCountFormatted,
                             style: Themetext.headline.copyWith(
-                                color: AppColors.primaryColor,
+                                color: AppColors.primary,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600),
                           ),
                           SizedBox(width: context.mediaQueryWidth / 41),
                           SvgPicture.asset(
                             'assets/svg/eye.svg',
-                            color: AppColors.primaryColor,
+                            color: AppColors.primary,
                             height: context.mediaQueryHeight / 35,
                           )
                         ],
@@ -97,7 +97,7 @@ class SpartPartDetailScreen extends StatelessWidget {
                       Text(
                         sparePart.price.toString(),
                         style: Themetext.superHeadline
-                            .copyWith(color: AppColors.primaryColor),
+                            .copyWith(color: AppColors.primary),
                       ),
                     ],
                   ),
@@ -133,7 +133,7 @@ class SpartPartDetailScreen extends StatelessWidget {
                       Text(
                         'Seller Comments',
                         style: Themetext.subheadline
-                            .copyWith(color: AppColors.primaryColor),
+                            .copyWith(color: AppColors.primary),
                       ),
                     ],
                   ),

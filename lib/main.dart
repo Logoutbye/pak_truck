@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:testt/languages/I10n/l10n.dart';
 import 'package:testt/src/features/account_completion/view_model/complete_account_view_model.dart';
@@ -65,21 +66,24 @@ class MyApp extends StatelessWidget {
       child: Consumer2<ThemeProvider, LocaleProvider>(
         builder: (BuildContext context, themeProvider, localeProvider,
             Widget? child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Pak Truck',
-            theme: themeProvider.themeData,
-            locale: localeProvider.locale,
-            supportedLocales: L10n.all,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            initialRoute: RoutesName.splash,
-            onGenerateRoute: Routes.generateRoute,
-            // home: Dashboard(),
+          return ScreenUtilInit(
+            
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Pak Truck',
+              theme: themeProvider.themeData,
+              locale: localeProvider.locale,
+              supportedLocales: L10n.all,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              initialRoute: RoutesName.splash,
+              onGenerateRoute: Routes.generateRoute,
+              // home: Dashboard(),
+            ),
           );
         },
       ),

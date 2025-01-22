@@ -90,7 +90,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
                     }
                   },
                   color: selectedLanguage != null
-                      ? AppColors.primaryColor
+                      ? AppColors.primary
                       : Colors.grey,
                 ),
                 SizedBox(

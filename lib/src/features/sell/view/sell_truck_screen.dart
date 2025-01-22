@@ -32,13 +32,13 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
     var viewModel = Provider.of<SellTuckViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: AppColors.whiteColor,
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
         title: InkWell(
           onTap: () {},
           child: Text(
             'Sell your Truck',
-            style: TextStyle(color: AppColors.whiteColor),
+            style: TextStyle(color: AppColors.white),
           ),
         ),
       ),

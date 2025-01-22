@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:testt/src/configs/color/color.dart';
-import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 
 Widget buildSectionHeader(BuildContext context,
@@ -12,17 +12,20 @@ Widget buildSectionHeader(BuildContext context,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: Themetext.blackBoldText.copyWith(fontSize: 20)),
+        Text(title,
+            style: Themetext.blackBoldText
+                .copyWith(fontWeight: FontWeight.w600, fontSize: 15.sp)),
         if (hasViewAll)
           InkWell(
               onTap: onViewAllPressed,
               child: Text('View All',
                   style: Themetext.blackBoldText
-                      .copyWith(color: AppColors.primaryColor))),
+                      .copyWith(fontSize: 10.sp, color: AppColors.primary))),
       ],
     ),
   );
 }
+
 Widget buildSparePartsList() {
   final spareParts = [
     'Body Part',
@@ -257,72 +260,6 @@ Widget buildCityList() {
                       Text(
                         part,
                         style: const TextStyle(fontSize: 14),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }).toList(),
-          );
-        }).toList(),
-      ),
-    ),
-  );
-}
-
-Widget buildPaktruckBrandsList(BuildContext context) {
-  final brands = [
-    {'name': 'Hino', 'icon': 'assets/images/hino.png'},
-    {'name': 'Isuzu', 'icon': 'assets/images/isuzu.png'},
-    {'name': 'Tata', 'icon': 'assets/images/tata.png'},
-    {'name': 'Sinotruk', 'icon': 'assets/images/sinotruk.png'},
-    {'name': 'Kamaz', 'icon': 'assets/images/kamaz.png'},
-    {'name': 'JAC', 'icon': 'assets/images/jac.png'},
-    {'name': 'Scania', 'icon': 'assets/images/scania.png'},
-    {'name': 'Kamaz', 'icon': 'assets/images/kamaz.png'},
-    {'name': 'FAW Pakistan', 'icon': 'assets/images/faw.png'},
-  ];
-
-  // Group brands into rows of three
-  List<List<Map<String, String>>> groupedBrands = [];
-  for (int i = 0; i < brands.length; i += 3) {
-    groupedBrands.add(brands.sublist(
-      i,
-      (i + 3) > brands.length ? brands.length : i + 3,
-    ));
-  }
-
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    child: SingleChildScrollView(
-      physics: NeverScrollableScrollPhysics(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: groupedBrands.map((row) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: row.map((brand) {
-              return Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        brand['icon']!,
-                        height: 30, // Adjust the size of the icon
-                        width: 30,
-                        fit: BoxFit.contain,
-                      ),
-                      const SizedBox(width: 8),
-                      SizedBox(
-                        width: context.mediaQueryWidth / 6,
-                        child: Text(
-                          brand['name']!,
-                          overflow: TextOverflow.clip,
-                          style: const TextStyle(fontSize: 14),
-                        ),
                       ),
                     ],
                   ),

@@ -60,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             child: SvgPicture.asset(
               'assets/svg/logout.svg',
               height: context.mediaQueryHeight / 31,
-              color: AppColors.blackColor,
+              color: AppColors.black,
             ),
           ),
           SizedBox(width: context.mediaQueryWidth / 20)
@@ -155,7 +155,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       ),
                       SvgPicture.asset(
                         'assets/svg/arrow-right.svg',
-                        color: AppColors.blackColor,
+                        color: AppColors.black,
                         height: context.mediaQueryHeight / 51,
                       )
                     ],
@@ -170,8 +170,8 @@ class _ProfileScreenState extends State<ProfileScreen>
             dividerColor: Colors.transparent,
             controller: _tabController,
             isScrollable: true,
-            indicatorColor: AppColors.primaryColor,
-            labelColor: AppColors.primaryColor,
+            indicatorColor: AppColors.primary,
+            labelColor: AppColors.primary,
             unselectedLabelColor: Colors.grey,
             onTap: (index) {
               // Update the selected tab index in the provider
@@ -186,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     SvgPicture.asset('assets/svg/myads.svg',
                         height: context.mediaQueryHeight / 41,
                         color: tabProvider.selectedTabIndex == 0
-                            ? AppColors.primaryColor
+                            ? AppColors.primary
                             : Colors.grey),
                     SizedBox(width: context.mediaQueryHeight / 90),
                     Text('My Ads'),
@@ -205,7 +205,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               : 'assets/svg/heart.svg',
                           height: context.mediaQueryHeight / 41,
                           color: tabProvider.selectedTabIndex == 1
-                              ? AppColors.primaryColor
+                              ? AppColors.red
                               : Colors.grey),
                       SizedBox(width: context.mediaQueryHeight / 90),
                       Text('Saved Ads'),
@@ -222,7 +222,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       SvgPicture.asset('assets/svg/personalcard.svg',
                           height: context.mediaQueryHeight / 41,
                           color: tabProvider.selectedTabIndex == 2
-                              ? AppColors.primaryColor
+                              ? AppColors.primary
                               : Colors.grey),
                       SizedBox(width: context.mediaQueryHeight / 90),
                       Text('Personalize'),
@@ -239,7 +239,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       SvgPicture.asset('assets/svg/contact_us.svg',
                           height: context.mediaQueryHeight / 41,
                           color: tabProvider.selectedTabIndex == 3
-                              ? AppColors.primaryColor
+                              ? AppColors.primary
                               : Colors.grey),
                       SizedBox(width: context.mediaQueryHeight / 90),
                       Text('Contact Us'),

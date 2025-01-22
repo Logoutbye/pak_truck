@@ -64,7 +64,7 @@ class _CountryPickerTextFormFieldState
                         ? '${selectedCountry!.flagEmoji} +${selectedCountry!.phoneCode}'
                         : '🌍 +XX',
                     style: TextStyle(
-                      color: AppColors.primaryColor,
+                      color: AppColors.primary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -73,7 +73,7 @@ class _CountryPickerTextFormFieldState
                     height: context.mediaQueryHeight / 35,
                     width: 2,
                     decoration: BoxDecoration(
-                      color: AppColors.primaryColor,
+                      color: AppColors.primary,
                       borderRadius: BorderRadius.circular(40),
                     ),
                   ),

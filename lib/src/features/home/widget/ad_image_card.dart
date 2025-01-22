@@ -59,7 +59,7 @@ class AdImageCard extends StatelessWidget {
                                     child: SvgPicture.asset(
                                       'assets/svg/arrow_back.svg',
                                       color: provider.currentIndex > 0
-                                          ? AppColors.primaryColor
+                                          ? AppColors.primary
                                           : Colors.grey,
                                       width: MediaQuery.of(context).size.width /
                                           20,
@@ -75,7 +75,7 @@ class AdImageCard extends StatelessWidget {
                                       'assets/svg/arrow_right.svg',
                                       color: provider.currentIndex <
                                               provider.totalImages - 1
-                                          ? AppColors.primaryColor
+                                          ? AppColors.primary
                                           : Colors.grey,
                                       width: MediaQuery.of(context).size.width /
                                           20,

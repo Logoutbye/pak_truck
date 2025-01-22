@@ -79,7 +79,7 @@ class NotificationScreen extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.primaryColor),
+                      color: AppColors.primary),
                 ),
               ),
               // Notifications for this date
@@ -103,7 +103,7 @@ class NotificationCard extends StatelessWidget {
         margin: EdgeInsets.all(8),
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: AppColors.whiteColor,
+          color: AppColors.white,
           border: Border.all(color: Colors.black12),
           borderRadius: BorderRadius.circular(12),
         ),
@@ -125,11 +125,11 @@ class NotificationCard extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
+                    color: AppColors.primary,
                     borderRadius: BorderRadius.circular(23)),
                 child: Text(
                   ' New ',
-                  style: TextStyle(color: AppColors.whiteColor),
+                  style: TextStyle(color: AppColors.white),
                 ),
               )
             ]

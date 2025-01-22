@@ -50,7 +50,7 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                       child: Radio<String>(
                         value: "Individual",
                         groupValue: _accountType,
-                        activeColor: AppColors.primaryColor,
+                        activeColor: AppColors.primary,
                         onChanged: (value) {
                           setState(() {
                             _accountType = value!;
@@ -72,7 +72,7 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                         style: TextStyle(
                           fontSize: 18,
                           color: _accountType == "Individual"
-                              ? AppColors.primaryColor
+                              ? AppColors.primary
                               : Colors.black,
                           fontWeight: FontWeight.w500,
                         ),
@@ -88,7 +88,7 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                       child: Radio<String>(
                         value: "Shop",
                         groupValue: _accountType,
-                        activeColor: AppColors.primaryColor,
+                        activeColor: AppColors.primary,
                         onChanged: (value) {
                           setState(() {
                             _accountType = value!;
@@ -109,7 +109,7 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                         style: TextStyle(
                           fontSize: 18,
                           color: _accountType == "Shop"
-                              ? AppColors.primaryColor
+                              ? AppColors.primary
                               : Colors.black,
                           fontWeight: FontWeight.w500,
                         ),
@@ -133,7 +133,7 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                         child: Radio<String>(
                           value: "Factory",
                           groupValue: _shopType,
-                          activeColor: AppColors.primaryColor,
+                          activeColor: AppColors.primary,
                           onChanged: (value) {
                             setState(() {
                               _shopType = value!;
@@ -152,7 +152,7 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                           style: TextStyle(
                             fontSize: 18,
                             color: _shopType == "Factory"
-                                ? AppColors.primaryColor
+                                ? AppColors.primary
                                 : Colors.black,
                             fontWeight: FontWeight.w500,
                           ),
@@ -167,7 +167,7 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                         child: Radio<String>(
                           value: "Showroom",
                           groupValue: _shopType,
-                          activeColor: AppColors.primaryColor,
+                          activeColor: AppColors.primary,
                           onChanged: (value) {
                             setState(() {
                               _shopType = value!;
@@ -186,7 +186,7 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                           style: TextStyle(
                             fontSize: 18,
                             color: _shopType == "Showroom"
-                                ? AppColors.primaryColor
+                                ? AppColors.primary
                                 : Colors.black,
                             fontWeight: FontWeight.w500,
                           ),
@@ -201,7 +201,7 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                         child: Radio<String>(
                           value: "Shop",
                           groupValue: _shopType,
-                          activeColor: AppColors.primaryColor,
+                          activeColor: AppColors.primary,
                           onChanged: (value) {
                             setState(() {
                               _shopType = value!;
@@ -220,7 +220,7 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                           style: TextStyle(
                             fontSize: 18,
                             color: _shopType == "Shop"
-                                ? AppColors.primaryColor
+                                ? AppColors.primary
                                 : Colors.black,
                             fontWeight: FontWeight.w500,
                           ),

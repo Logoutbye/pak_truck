@@ -44,7 +44,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 text: secondText,
                 style: secondTextStyle ??
                     const TextStyle(
-                      color: AppColors.primaryColor,
+                      color: AppColors.primary,
                       fontSize: 16,
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w500,
@@ -65,7 +65,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 text: secondText,
                 style: secondTextStyle ??
                     const TextStyle(
-                      color: AppColors.primaryColor,
+                      color: AppColors.primary,
                       fontSize: 16,
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.w500,

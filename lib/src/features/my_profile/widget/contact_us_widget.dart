@@ -21,7 +21,7 @@ class ContactUsWidget extends StatelessWidget {
         SizedBox(height: context.mediaQueryHeight / 30),
         Text(
           'Contact Us',
-          style: Themetext.headline.copyWith(color: AppColors.primaryColor),
+          style: Themetext.headline.copyWith(color: AppColors.primary),
         ),
         SizedBox(height: context.mediaQueryHeight / 30),
         CustomTextFormField(

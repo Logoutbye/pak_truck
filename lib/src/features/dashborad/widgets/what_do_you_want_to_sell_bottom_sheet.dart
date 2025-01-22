@@ -36,7 +36,7 @@ void whatDoYouWantToSellBottomSheet(BuildContext context) {
                 "It's free and takes less than a minute.",
                 textAlign: TextAlign.center,
                 style: Themetext.headline.copyWith(
-                    color: AppColors.blackColor,
+                    color: AppColors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.normal),
               ),

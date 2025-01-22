@@ -12,8 +12,8 @@ class ChooseSellingPlanScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-       foregroundColor: AppColors.whiteColor,
+        backgroundColor: AppColors.primary,
+       foregroundColor: AppColors.white,
         title: const Text(
           'Choose a plan',
           style: TextStyle(color: Colors.white, fontSize: 18),
@@ -26,7 +26,7 @@ class ChooseSellingPlanScreen extends StatelessWidget {
           children: [
             Text(
               'How do you want to Sell your Truck?',
-              style: Themetext.headline.copyWith(color: AppColors.primaryColor),
+              style: Themetext.headline.copyWith(color: AppColors.primary),
             ),
             const SizedBox(height: 24),
             // First Card: Sell it myself
@@ -72,9 +72,9 @@ class ChooseSellingPlanScreen extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            color: AppColors.whiteColor,
+            color: AppColors.white,
             borderRadius: BorderRadius.circular(19),
-            border: Border.all(color: AppColors.dividerColor)),
+            border: Border.all(color: AppColors.divider)),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
@@ -104,7 +104,7 @@ class ChooseSellingPlanScreen extends StatelessWidget {
                     Text(
                       actionText,
                       style: const TextStyle(
-                        color: AppColors.primaryColor,
+                        color: AppColors.primary,
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
                       ),

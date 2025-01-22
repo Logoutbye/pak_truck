@@ -75,7 +75,7 @@ class _SignUpVerifyOtpScreenState extends State<SignUpVerifyOtpScreen> {
           color: Colors.black,
         ),
         decoration: BoxDecoration(
-          color: AppColors.whiteColor,
+          color: AppColors.white,
           border: Border.all(color: AppColors.grey, width: 2),
           borderRadius: BorderRadius.circular(8),
         ),
@@ -112,7 +112,7 @@ class _SignUpVerifyOtpScreenState extends State<SignUpVerifyOtpScreen> {
                     TextSpan(
                       text: widget.phoneNumber,
                       style: Themetext.blackBoldText.copyWith(
-                        color: AppColors.primaryColor,
+                        color: AppColors.primary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -131,7 +131,7 @@ class _SignUpVerifyOtpScreenState extends State<SignUpVerifyOtpScreen> {
             },
             child: const Text(
               'Wrong number?',
-              style: TextStyle(color: AppColors.primaryColor),
+              style: TextStyle(color: AppColors.primary),
             ),
           ),
           const SizedBox(height: 30),
@@ -170,7 +170,7 @@ class _SignUpVerifyOtpScreenState extends State<SignUpVerifyOtpScreen> {
               },
               child: const Text(
                 'Resend Code',
-                style: TextStyle(color: AppColors.primaryColor),
+                style: TextStyle(color: AppColors.primary),
               ),
             ),
         ],

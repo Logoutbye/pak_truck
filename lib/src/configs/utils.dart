@@ -56,7 +56,7 @@ class Utils {
   // we will utilise this for showing errors or success messages
   static snackBar(String message, BuildContext context) {
     return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: AppColors.primary,
         content: Text(
           message,
           style: TextStyle(color: AppColors.whiteSccafold),

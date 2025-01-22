@@ -15,6 +15,7 @@ class SellTextFormField extends StatelessWidget {
   final ValueChanged<String>? onPhoneNumberChanged;
   final bool isPassword;
   final int? minLines; // Minimum number of lines
+  final double? borderRadius; // Minimum number of lines
   final int? maxLines; // Maximum number of lines
   final Widget? leading; // Custom widget for leading
   final Widget? trailing; // Custom widget for trailing
@@ -31,6 +32,7 @@ class SellTextFormField extends StatelessWidget {
     this.onPhoneNumberChanged,
     this.isPassword = false,
     this.minLines = 1, // Allow customization of minimum lines
+    this.borderRadius = 12,
     this.maxLines, // Allow customization of maximum lines
     this.leading, // Custom leading widget (e.g., an icon or button)
     this.trailing, // Custom trailing widget (e.g., clear button or icon)
@@ -49,7 +51,6 @@ class SellTextFormField extends StatelessWidget {
           ),
         const SizedBox(height: 8),
         TextFormField(
-          
           controller: controller,
           obscureText: isPassword,
           style: Themetext.subheadline.copyWith(fontWeight: FontWeight.w500),
@@ -71,20 +72,20 @@ class SellTextFormField extends StatelessWidget {
             ),
             errorText: errorText,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(borderRadius ?? 12),
               borderSide: BorderSide(color: borderColor),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(borderRadius ?? 12),
               borderSide: BorderSide(color: borderColor),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(borderRadius ?? 12),
               borderSide:
-                  const BorderSide(color: AppColors.checkboxColor, width: 1.5),
+                  const BorderSide(color: AppColors.checkbox, width: 1.5),
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(borderRadius ?? 12),
               borderSide: const BorderSide(color: Colors.red, width: 1.5),
             ),
             prefixIcon: leading != null

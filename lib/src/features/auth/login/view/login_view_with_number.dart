@@ -94,7 +94,7 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
                   },
                   color: loginViewModel.phoneNumber.isEmpty
                       ? AppColors.greyColor
-                      : AppColors.primaryColor,
+                      : AppColors.primary,
                 ),
                 SizedBox(height: context.mediaQueryHeight / 20),
                 const Padding(
@@ -124,7 +124,7 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
                   textStyle: Themetext.subheadline
                       .copyWith(fontWeight: FontWeight.w600),
                   onPress: () {},
-                  color: AppColors.whiteColor,
+                  color: AppColors.white,
                   borderColor: Colors.grey.shade300,
                 ),
                 SizedBox(height: context.mediaQueryHeight / 40),
@@ -137,7 +137,7 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
                     Navigator.push(context,
                         SlideTransitionPage(page: LoginViewWithEmail()));
                   },
-                  color: AppColors.whiteColor,
+                  color: AppColors.white,
                   borderColor: Colors.grey.shade300,
                 ),
                 // SizedBox(height: context.mediaQueryHeight / 10),
@@ -167,7 +167,7 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
                   child: Text(
                     ' ${localization.signup_text}',
                     style: Themetext.blackBoldText
-                        .copyWith(color: AppColors.primaryColor, fontSize: 16),
+                        .copyWith(color: AppColors.primary, fontSize: 16),
                   ),
                 ),
               ],

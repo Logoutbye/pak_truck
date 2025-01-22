@@ -25,13 +25,13 @@ class _SellSparePartsScreenState extends State<SellSparePartsScreen> {
     var viewModel = Provider.of<SellSparePartsViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: AppColors.whiteColor,
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
         title: InkWell(
           onTap: () {},
           child: Text(
             'Sell Spare Parts',
-            style: TextStyle(color: AppColors.whiteColor),
+            style: TextStyle(color: AppColors.white),
           ),
         ),
       ),

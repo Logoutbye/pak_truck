@@ -23,8 +23,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: AppColors.whiteColor,
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
         leading: IconButton(
             onPressed: () {
               viewModel.clearAll();
@@ -33,7 +33,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             icon: Icon(Icons.arrow_back)),
         title: Text(
           'Edit Profile',
-          style: TextStyle(color: AppColors.whiteColor),
+          style: TextStyle(color: AppColors.white),
         ),
       ),
       body: ListView(
@@ -41,7 +41,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         children: [
           buildProfileImagePicker(context, ''),
           SizedBox(height: context.mediaQueryHeight / 70),
-          Divider(color: AppColors.dividerColor),
+          Divider(color: AppColors.divider),
           SizedBox(height: context.mediaQueryHeight / 70),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,7 +134,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               RoundButton(
                 width: context.mediaQueryWidth / 2.5,
                 textStyle: TextStyle(
-                  color: AppColors.primaryColor,
+                  color: AppColors.primary,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
@@ -148,11 +148,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       loading: value.loading,
                       width: context.mediaQueryWidth / 2.5,
                       textStyle: TextStyle(
-                        color: AppColors.whiteColor,
+                        color: AppColors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
-                      color: AppColors.primaryColor,
+                      color: AppColors.primary,
                       title: 'Save Changes',
                       onPress: () {
                         if (viewModel.validateInputs(context)) {

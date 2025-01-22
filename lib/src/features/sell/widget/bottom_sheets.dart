@@ -152,13 +152,13 @@ Future<void> showDynamicCategoryModal({
                         children: [
                           // Parent as Radio Button
                           RadioListTile<String>(
-                            activeColor: AppColors.primaryColor,
+                            activeColor: AppColors.primary,
                             title: Text(
                               parent,
                               style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.primaryColor),
+                                  color: AppColors.primary),
                             ),
                             value: parent,
                             groupValue: selectedParent,
@@ -177,12 +177,12 @@ Future<void> showDynamicCategoryModal({
                               child: Column(
                                 children: data[parent]!
                                     .map((child) => RadioListTile<String>(
-                                      activeColor: AppColors.checkboxColor,
+                                      activeColor: AppColors.checkbox,
                                           title: Text(
                                             child,
                                             style: const TextStyle(
                                                 fontSize: 14,
-                                                color: AppColors.checkboxColor),
+                                                color: AppColors.checkbox),
                                           ),
                                           value: child,
                                           groupValue: selectedChild,

@@ -22,8 +22,8 @@ class CustomAlertDialog extends StatelessWidget {
     required this.buttonText,
     required this.onButtonPressed,
     this.icon,
-    this.buttonColor = AppColors.primaryColor,
-    this.iconColor = AppColors.primaryColor,
+    this.buttonColor = AppColors.primary,
+    this.iconColor = AppColors.primary,
     this.cancelButtonText = 'Cancel',
     required this.onCancelPressed,
   });

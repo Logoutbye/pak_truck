@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 
-class HorizontalList extends StatelessWidget {
+class VechileCard extends StatelessWidget {
   final List<Map<String, String>> items;
   final double height;
   final bool showPakTruckTag;
   final double imageHeightRatio;
   final double cardWidthRatio;
 
-  const HorizontalList({
+  const VechileCard({
     super.key,
     required this.items,
-    this.height = 200, // Default height for the list
-    this.showPakTruckTag = false, // Whether to show "By PakTruck"
-    this.imageHeightRatio = 0.5, // Ratio for image height
-    this.cardWidthRatio = 0.45, // Ratio for card width
+    this.height = 200, 
+    this.showPakTruckTag = false, 
+    this.imageHeightRatio = 0.5,
+    this.cardWidthRatio = 0.6, 
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height != 200 ? height : context.mediaQueryHeight / 4.5,
+      height: height != 200 ? height : context.mediaQueryHeight / 5,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: items.length,
@@ -42,7 +44,7 @@ class HorizontalList extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.grey.shade300),
       ),
       child: Column(
@@ -51,9 +53,9 @@ class HorizontalList extends StatelessWidget {
           // Image Container with Rounded Borders
           if (item['image'] != null && item['image']!.isNotEmpty)
             Container(
-              margin: const EdgeInsets.all(2),
+              margin: const EdgeInsets.all(4),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(18),
                 child: Image.asset(
                   item['image']!,
                   height: imageHeight,
@@ -62,9 +64,10 @@ class HorizontalList extends StatelessWidget {
                 ),
               ),
             ),
+          SizedBox(height: 8.h),
           // Item Details
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            padding: EdgeInsets.symmetric(horizontal: 8.sp),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -77,47 +80,38 @@ class HorizontalList extends StatelessWidget {
                   ),
                 if (item['title'] != null && item['title']!.isNotEmpty)
                   SizedBox(height: context.mediaQueryHeight / 75),
-                if (item['price'] != null && item['price']!.isNotEmpty)
-                  Text(
-                    item['price']!,
-                    style: const TextStyle(
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                if (item['price'] != null && item['price']!.isNotEmpty)
-                  SizedBox(height: context.mediaQueryHeight / 75),
-                if (item['location'] != null && item['location']!.isNotEmpty ||
-                    showPakTruckTag)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      if (item['location'] != null &&
-                          item['location']!.isNotEmpty)
-                        Text(
-                          item['location']!,
-                          style: const TextStyle(color: Colors.grey),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    if (item['price'] != null && item['price']!.isNotEmpty)
+                      Text(
+                        item['price']!,
+                        style: const TextStyle(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w500,
                         ),
-                      if (showPakTruckTag)
-                       Row(
-                      children: [
-                        const Icon(
-                          Icons.circle,
-                          size: 8,
-                          color: AppColors.orange,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          'By PakTruck',
-                          style: TextStyle(
-                              color: AppColors.orange,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    ],
-                  ),
+                      ),
+                    if (item['location'] != null &&
+                            item['location']!.isNotEmpty ||
+                        showPakTruckTag)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          if (item['location'] != null &&
+                              item['location']!.isNotEmpty)
+                            Row(
+                              children: [
+                                SvgPicture.asset('assets/svg/location.svg'),
+                                SizedBox(width: 2.sp),
+                                Text(
+                                  item['location']!,
+                                ),
+                              ],
+                            ),
+                        ],
+                      ),
+                  ],
+                )
               ],
             ),
           ),
@@ -125,6 +119,4 @@ class HorizontalList extends StatelessWidget {
       ),
     );
   }
-
-
 }

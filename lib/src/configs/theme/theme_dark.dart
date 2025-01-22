@@ -17,14 +17,14 @@ class Themedark {
     elevatedButtonTheme: elevatedButtonTheme,
   );
   static AppBarTheme appbarTheme = const AppBarTheme(
-      backgroundColor: AppColors.whiteColor,
-      titleTextStyle: TextStyle(color: AppColors.primaryColor));
+      backgroundColor: AppColors.white,
+      titleTextStyle: TextStyle(color: AppColors.primary));
 
 
 
   static ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.white,
       padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),

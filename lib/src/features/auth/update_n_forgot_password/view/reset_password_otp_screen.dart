@@ -82,7 +82,7 @@ class _ResetPasswordVerifyOtpScreenState
           color: Colors.black,
         ),
         decoration: BoxDecoration(
-          border: Border.all(color: AppColors.primaryColor, width: 2),
+          border: Border.all(color: AppColors.primary, width: 2),
           borderRadius: BorderRadius.circular(8),
         ),
       ),
@@ -118,7 +118,7 @@ class _ResetPasswordVerifyOtpScreenState
                     TextSpan(
                       text: widget.email,
                       style: Themetext.blackBoldText.copyWith(
-                        color: AppColors.primaryColor,
+                        color: AppColors.primary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -166,7 +166,7 @@ class _ResetPasswordVerifyOtpScreenState
               },
               child: const Text(
                 'Resend Code',
-                style: TextStyle(color: AppColors.primaryColor),
+                style: TextStyle(color: AppColors.primary),
               ),
             ),
         ],

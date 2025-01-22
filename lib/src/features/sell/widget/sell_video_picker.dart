@@ -77,7 +77,7 @@ Widget buildSellVideoPicker(BuildContext context, String label) {
             final videoController = vm.videoController;
             return DottedBorder(
               dashPattern: const <double>[10, 5],
-              color: AppColors.primaryColor,
+              color: AppColors.primary,
               borderType: BorderType.RRect,
               radius: Radius.circular(12),
               padding: EdgeInsets.all(6),
@@ -120,7 +120,7 @@ Widget buildSellVideoPicker(BuildContext context, String label) {
                           Text(
                             'Add Video',
                             style: TextStyle(
-                                color: AppColors.primaryColor, fontSize: 16),
+                                color: AppColors.primary, fontSize: 16),
                           ),
                           SizedBox(height: 8),
                           Text(
@@ -146,7 +146,7 @@ Widget buildSellVideoPicker(BuildContext context, String label) {
                     ? IconButton(
                         icon: Icon(
                           Icons.stop,
-                          color: AppColors.primaryColor,
+                          color: AppColors.primary,
                         ),
                         onPressed: () {
                           vm.stopVideo();
@@ -155,7 +155,7 @@ Widget buildSellVideoPicker(BuildContext context, String label) {
                     : IconButton(
                         icon: Icon(
                           vm.isPlaying ? Icons.pause : Icons.play_arrow,
-                          color: AppColors.primaryColor,
+                          color: AppColors.primary,
                         ),
                         onPressed: () {
                           vm.isPlaying ? vm.pauseVideo() : vm.playVideo();

@@ -69,7 +69,7 @@ Widget buildSellImagePicker(BuildContext context, String label, viewModel) {
           onTap: showImageSourceActionSheet,
           child: DottedBorder(
             dashPattern: const <double>[10, 5],
-            color: AppColors.primaryColor,
+            color: AppColors.primary,
             borderType: BorderType.RRect,
             radius: Radius.circular(12),
             padding: EdgeInsets.all(6),
@@ -80,12 +80,12 @@ Widget buildSellImagePicker(BuildContext context, String label, viewModel) {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.camera_alt,
-                      color: AppColors.primaryColor, size: 40),
+                      color: AppColors.primary, size: 40),
                   SizedBox(height: 8),
                   Text(
                     'Add Photo',
                     style:
-                        TextStyle(color: AppColors.primaryColor, fontSize: 16),
+                        TextStyle(color: AppColors.primary, fontSize: 16),
                   ),
                   SizedBox(height: 8),
                   Text(
@@ -149,9 +149,9 @@ Widget buildSellImagePicker(BuildContext context, String label, viewModel) {
                 Text('If you want you can add more'),
                 TextButton.icon(
                   onPressed: showImageSourceActionSheet,
-                  icon: Icon(Icons.add_a_photo, color: AppColors.primaryColor),
+                  icon: Icon(Icons.add_a_photo, color: AppColors.primary),
                   label: Text('Add more',
-                      style: TextStyle(color: AppColors.primaryColor)),
+                      style: TextStyle(color: AppColors.primary)),
                 ),
               ],
             ),

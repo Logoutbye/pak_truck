@@ -16,8 +16,8 @@ class AdDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: AppColors.whiteColor,
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
         title: const Text(
           'My Ads',
           style: TextStyle(color: Colors.white),
@@ -60,14 +60,14 @@ class AdDetailScreen extends StatelessWidget {
                           Text(
                             1999299.viewCountFormatted,
                             style: Themetext.headline.copyWith(
-                                color: AppColors.primaryColor,
+                                color: AppColors.primary,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600),
                           ),
                           SizedBox(width: context.mediaQueryWidth / 41),
                           SvgPicture.asset(
                             'assets/svg/eye.svg',
-                            color: AppColors.primaryColor,
+                            color: AppColors.primary,
                             height: context.mediaQueryHeight / 35,
                           )
                         ],
@@ -82,7 +82,7 @@ class AdDetailScreen extends StatelessWidget {
                         // 'PKR, 22 Lack',
                         ad.price.toString(),
                         style: Themetext.superHeadline
-                            .copyWith(color: AppColors.primaryColor),
+                            .copyWith(color: AppColors.primary),
                       ),
                     ],
                   ),

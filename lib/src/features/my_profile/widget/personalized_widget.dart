@@ -16,7 +16,7 @@ class PersonalizedWidget extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(12),
           height: context.mediaQueryHeight / 8,
-          decoration: BoxDecoration(color: AppColors.whiteColor),
+          decoration: BoxDecoration(color: AppColors.white),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -38,7 +38,7 @@ class PersonalizedWidget extends StatelessWidget {
                   SvgPicture.asset(
                     'assets/svg/arrow-right.svg',
                     width: context.mediaQueryWidth / 21,
-                    color: AppColors.blackColor,
+                    color: AppColors.black,
                   )
                 ],
               ),
@@ -72,7 +72,7 @@ class PersonalizedWidget extends StatelessWidget {
                     SvgPicture.asset(
                       'assets/svg/arrow-right.svg',
                       width: context.mediaQueryWidth / 21,
-                      color: AppColors.blackColor,
+                      color: AppColors.black,
                     )
                   ],
                 ),

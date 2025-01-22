@@ -37,7 +37,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
               ListTile(
                 title: Text('Upload Photos'),
                 titleTextStyle: TextStyle(
-                  color: AppColors.blackColor,
+                  color: AppColors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -68,7 +68,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
       leading: Icon(icon),
       title: Text(text),
       titleTextStyle: TextStyle(
-        color: AppColors.blackColor,
+        color: AppColors.black,
         fontSize: 16,
         fontWeight: FontWeight.bold,
       ),
@@ -108,7 +108,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
           onTap: _showImageSourceActionSheet,
           child: DottedBorder(
             dashPattern: const <double>[10, 5],
-            color: AppColors.primaryColor,
+            color: AppColors.primary,
             borderType: BorderType.RRect,
             radius: Radius.circular(12),
             padding: EdgeInsets.all(6),
@@ -131,12 +131,12 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.camera_alt,
-                                color: AppColors.primaryColor, size: 40),
+                                color: AppColors.primary, size: 40),
                             SizedBox(height: 8),
                             Text(
                               'Add Photo',
                               style: TextStyle(
-                                  color: AppColors.primaryColor, fontSize: 16),
+                                  color: AppColors.primary, fontSize: 16),
                             ),
                             SizedBox(height: 8),
                             Text(

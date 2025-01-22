@@ -18,7 +18,7 @@ class Themelight {
   static AppBarTheme appbarTheme = const AppBarTheme(
     backgroundColor: AppColors.whiteSccafold,
     titleTextStyle: TextStyle(
-      color: AppColors.blackColor,
+      color: AppColors.black,
       fontSize: 16,
       fontFamily: 'Roboto',
       fontWeight: FontWeight.w500,
@@ -27,7 +27,7 @@ class Themelight {
 
   static ElevatedButtonThemeData elevatedbuttontheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: AppColors.primary,
       padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
@@ -59,10 +59,10 @@ class Themelight {
     checkColor: WidgetStateProperty.all(Colors.white), // Checkmark color
     fillColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return AppColors.checkboxColor; // Fill color when checked
+        return AppColors.checkbox; // Fill color when checked
       }
       return Colors.transparent; // Transparent when unchecked
     }),
-    overlayColor: WidgetStateProperty.all(AppColors.checkboxColor.withOpacity(0.1)),
+    overlayColor: WidgetStateProperty.all(AppColors.checkbox.withOpacity(0.1)),
   );
 }

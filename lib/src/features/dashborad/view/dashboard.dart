@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/features/dashborad/widgets/what_do_you_want_to_sell_bottom_sheet.dart';
-import 'package:testt/src/features/home/view/home_screen.dart';
+import 'package:testt/src/features/home/view/home_screen_new.dart';
 import 'package:testt/src/features/home/view_model/category_tab_index_notifier.dart';
 import 'package:testt/src/features/my_profile/view/profile_screen.dart';
 import 'package:testt/src/features/videos/videos_screen.dart';
@@ -25,7 +25,7 @@ class Dashboard extends StatelessWidget {
       bottomNavigationBar: Consumer<NavigationProvider>(
         builder: (context, provider, child) {
           return BottomNavigationBar(
-            backgroundColor: AppColors.whiteColor,
+            backgroundColor: AppColors.white,
             type: BottomNavigationBarType.fixed,
             currentIndex: provider.selectedIndex,
             showUnselectedLabels: true,
@@ -40,7 +40,7 @@ class Dashboard extends StatelessWidget {
             },
             selectedItemColor: provider.selectedIndex == 2
                 ? Colors.red
-                : AppColors.primaryColor,
+                : AppColors.primary,
             unselectedItemColor: Colors.black,
             selectedLabelStyle:
                 TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
@@ -90,7 +90,7 @@ class Dashboard extends StatelessWidget {
   Widget _getPage(int index) {
     switch (index) {
       case 0:
-        return Center(child: HomeScreen());
+        return Center(child: HomeScreenNew());
       case 1:
         return Center(child: VideosScreen());
       case 2:
@@ -100,7 +100,7 @@ class Dashboard extends StatelessWidget {
       case 4:
         return Center(child: ProfileScreen());
       default:
-        return Center(child: HomeScreen());
+        return Center(child: HomeScreenNew());
     }
   }
 }

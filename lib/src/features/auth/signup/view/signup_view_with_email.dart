@@ -42,7 +42,7 @@ class SignUpViewWithEmail extends StatelessWidget {
                       Text(
                         localization.sign_up,
                         style: Themetext.headline.copyWith(
-                            color: AppColors.primaryColor, fontSize: 21),
+                            color: AppColors.primary, fontSize: 21),
                       ),
                       SizedBox(height: context.mediaQueryHeight / 80),
                       Text(
@@ -126,7 +126,7 @@ class SignUpViewWithEmail extends StatelessWidget {
                     child: Text(
                       ' ${localization.signin}',
                       style: Themetext.blackBoldText.copyWith(
-                          color: AppColors.primaryColor, fontSize: 16),
+                          color: AppColors.primary, fontSize: 16),
                     ),
                   ),
                 ],

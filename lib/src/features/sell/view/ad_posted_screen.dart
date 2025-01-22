@@ -12,7 +12,7 @@ class PostedSuccessScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: AppColors.primary,
         leading: IconButton(
           icon: const Icon(Icons.cancel, color: Colors.white),
           onPressed: () => Navigator.pushNamedAndRemoveUntil(
@@ -38,7 +38,7 @@ class PostedSuccessScreen extends StatelessWidget {
             const Text(
               'Ad Has Been Posted\nSuccessfully!',
               style: TextStyle(
-                color: AppColors.primaryColor,
+                color: AppColors.primary,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
@@ -64,12 +64,12 @@ class PostedSuccessScreen extends StatelessWidget {
                 RoundButton(
                     icon: Icon(
                       Icons.remove_red_eye,
-                      color: AppColors.whiteColor,
+                      color: AppColors.white,
                     ),
                     width: context.mediaQueryWidth / 2.5,
                     title: 'View Your Ad',
                     textStyle: TextStyle(
-                        color: AppColors.whiteColor,
+                        color: AppColors.white,
                         fontWeight: FontWeight.bold),
                     onPress: () {}),
                 RoundButton(
@@ -77,11 +77,11 @@ class PostedSuccessScreen extends StatelessWidget {
                     width: context.mediaQueryWidth / 2.5,
                     title: 'Post Another Ad',
                     textStyle: TextStyle(
-                        color: AppColors.whiteColor,
+                        color: AppColors.white,
                         fontWeight: FontWeight.bold),
                     icon: Icon(
                       Icons.add_circle,
-                      color: AppColors.whiteColor,
+                      color: AppColors.white,
                     ),
                     onPress: () {
                       whatDoYouWantToSellBottomSheet(context);
