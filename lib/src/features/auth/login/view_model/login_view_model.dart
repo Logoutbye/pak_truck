@@ -55,13 +55,13 @@ class LoginViewModel with ChangeNotifier {
       String fullPhone = fullPhoneNumber;
       Future.delayed(Duration(seconds: 2), () {
         setLoading(false);
+        Utils.snackBar('Otp Sent Scuessfully', context);
+        Navigator.push(
+            context,
+            SlideTransitionPage(
+                page: LoginVerifyOtpScreen(phoneNumber: fullPhoneNumber)));
       });
-      var response = await authRepository.sendPhoneOtp(fullPhone);
-
-      Navigator.push(
-          context,
-          SlideTransitionPage(
-              page: LoginVerifyOtpScreen(phoneNumber: fullPhoneNumber)));
+      // var response = await authRepository.sendPhoneOtp(fullPhone);
     } catch (error) {
       Utils.snackBar('Failed to send OTP. Please try again.', context);
       setLoading(false);

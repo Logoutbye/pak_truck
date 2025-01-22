@@ -1,7 +1,7 @@
 class AppUrl {
-  // static var baseUrl = 'https://paktruck-production.up.railway.app/api';
+  static var baseUrl = 'https://paktruck-production.up.railway.app/api';
 
-  static const baseUrl = "http://192.168.18.102:3000/api";
+  // static const baseUrl = "http://192.168.18.102:3000/api";
 
   static var sendPhoneOtp = '$baseUrl/auth/app/otp/send';
   static var reSendPhoneOtp = '$baseUrl/auth/app/otp/send';
