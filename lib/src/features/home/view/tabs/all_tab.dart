@@ -7,9 +7,7 @@ import 'package:testt/src/features/home/widget/news_widget.dart';
 
 // ignore: must_be_immutable
 class AllTab extends StatelessWidget {
-  AllTab({super.key});
-
-  TextEditingController searchTextEditingController = TextEditingController();
+  const AllTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +87,4 @@ class AllTab extends StatelessWidget {
       ),
     );
   }
-
-
 }

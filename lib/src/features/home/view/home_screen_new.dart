@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/configs/utils.dart';
+import 'package:testt/src/features/home/view/tabs/agricultural_tab.dart';
 import 'package:testt/src/features/home/view/tabs/all_tab.dart';
 import 'package:testt/src/features/home/view/tabs/buses_tab.dart';
-import 'package:testt/src/features/home/widget/build_secton_header.dart';
+import 'package:testt/src/features/home/view/tabs/earth_moving_tab.dart';
+import 'package:testt/src/features/home/view/tabs/spare_parts_tab.dart';
 import 'package:testt/src/features/home/view/tabs/truck_tab.dart';
 import 'package:testt/src/features/my_profile/widget/user_image_avatar_widget.dart';
 import 'package:testt/src/features/sell/widget/sell_textform_field.dart';
@@ -249,14 +250,16 @@ class _HomeScreenNewState extends State<HomeScreenNew>
           ];
         },
         body: TabBarView(
+            physics: BouncingScrollPhysics(), // Allow smooth scrolling
+
           controller: _categoryTabController,
           children: [
-            AllTab(),
-            TruckTab(),
-            BusesTab(),
-            buildCityList(),
-            buildModelList(),
-            buildModelList(),
+            AllTab(), //all
+            TruckTab(), // truck
+            EarthMovingTab(), // earth moving
+            BusesTab(), // buses
+            AgriculturalTab(), // agricultural
+            SparePartsTab(), // spare parts
           ],
         ),
       ),

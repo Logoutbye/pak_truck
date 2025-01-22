@@ -5,11 +5,12 @@ import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/features/home/widget/auto_shop_widget.dart';
 import 'package:testt/src/features/home/widget/build_secton_header.dart';
+
 import 'package:testt/src/features/home/widget/vechile_card.dart';
 import 'package:testt/src/features/home/widget/vechile_card_2.dart';
 
-class TruckTab extends StatelessWidget {
-  const TruckTab({
+class SparePartsTab extends StatelessWidget {
+  const SparePartsTab({
     super.key,
   });
 
@@ -169,7 +170,7 @@ class TruckTab extends StatelessWidget {
           ),
           SizedBox(height: 12.h),
           buildSectionHeader(context,
-              title: 'Used Truck For Sale', onViewAllPressed: () {}),
+              title: 'Agriculture Machine for Sale ', onViewAllPressed: () {}),
           VechileCard(
             cardWidthRatio: 0.6,
             items: [
@@ -194,8 +195,7 @@ class TruckTab extends StatelessWidget {
             ],
           ),
           SizedBox(height: 12.h),
-          vechileCard2(context, newsItems),
-
+          vechileCard2(context, newsItems, ),
         ],
       ),
     );
