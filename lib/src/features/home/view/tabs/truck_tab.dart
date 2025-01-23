@@ -171,7 +171,6 @@ class TruckTab extends StatelessWidget {
           buildSectionHeader(context,
               title: 'Used Truck For Sale', onViewAllPressed: () {}),
           VechileCard(
-            cardWidthRatio: 0.6,
             items: [
               {
                 'image': 'assets/remove/truck.png',
@@ -195,7 +194,7 @@ class TruckTab extends StatelessWidget {
           ),
           SizedBox(height: 12.h),
           vechileCard2(context, newsItems),
-
+          Padding(padding: EdgeInsets.only(bottom: 50.sp))
         ],
       ),
     );

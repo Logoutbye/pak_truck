@@ -29,8 +29,10 @@ class Post {
 }
 
 // Step 2: Create a list of Post objects
+// ignore: must_be_immutable
 class MyAdsWidget extends StatelessWidget {
-  MyAdsWidget({super.key});
+  Widget headingWidget;
+  MyAdsWidget({super.key, required this.headingWidget});
 
   final List<Post> posts = [
     Post(
@@ -63,13 +65,9 @@ class MyAdsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       // physics: NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.symmetric(horizontal: 4),
+      padding: EdgeInsets.symmetric(horizontal: 14),
       children: [
-        SizedBox(height: context.mediaQueryHeight / 30),
-        Text(
-          'Your Posts',
-          style: Themetext.headline.copyWith(color: AppColors.primary),
-        ),
+        headingWidget,
         SizedBox(height: 16),
 
         // Step 3: Use Post model data to display the list of posts
@@ -182,7 +180,6 @@ final List<SellTruckModel> dummyAds = [
       'assets/images/remove_me1.png',
       'assets/images/description.png',
     ],
-    
     truckVideo: 'assets/videos/truck_video.mp4',
     price: 'PKR, 22 Lack',
     location: 'Karachi, Sindh',
@@ -212,7 +209,6 @@ final List<SellTruckModel> dummyAds = [
       "Air Conditioning",
       "AM/FM Radio",
     ],
-    
     sellerName: 'John Doe',
     mobileNumber: '0300-1234567',
     address: '123 Main Street, Karachi',

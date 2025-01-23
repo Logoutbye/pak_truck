@@ -5,7 +5,7 @@ import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/configs/utils.dart';
 
-class SellTextFormField extends StatelessWidget {
+class SellTextformField extends StatelessWidget {
   final String titleText;
   final String hintText;
   final TextEditingController controller;
@@ -21,7 +21,7 @@ class SellTextFormField extends StatelessWidget {
   final Widget? trailing; // Custom widget for trailing
   final String? errorText; // Add error text
 
-  const SellTextFormField({
+  const SellTextformField({
     super.key,
     required this.titleText,
     required this.hintText,
@@ -44,12 +44,21 @@ class SellTextFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (titleText.isNotEmpty)
-          Text(
-            titleText,
-            style: const TextStyle(fontWeight: FontWeight.w500),
-          ),
         const SizedBox(height: 8),
+        Row(
+          children: [
+            if (leading != null)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: leading,
+              ),
+            if (titleText.isNotEmpty)
+              Text(
+                titleText,
+                style: const TextStyle(fontWeight: FontWeight.w500),
+              ),
+          ],
+        ),
         TextFormField(
           controller: controller,
           obscureText: isPassword,
@@ -88,12 +97,6 @@ class SellTextFormField extends StatelessWidget {
               borderRadius: BorderRadius.circular(borderRadius ?? 12),
               borderSide: const BorderSide(color: Colors.red, width: 1.5),
             ),
-            prefixIcon: leading != null
-                ? Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: leading,
-                  )
-                : null,
             suffixIcon: trailing != null
                 ? Container(
                     height: context.mediaQueryHeight / 20,

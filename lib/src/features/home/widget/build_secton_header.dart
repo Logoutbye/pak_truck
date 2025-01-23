@@ -49,7 +49,7 @@ Widget buildSparePartsList() {
   }
 
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    padding:  EdgeInsets.symmetric(horizontal: 8.sp, vertical: 8),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: groupedParts.map((row) {

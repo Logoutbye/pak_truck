@@ -26,7 +26,7 @@ class SignUpViewWithEmail extends StatelessWidget {
       return Scaffold(
         appBar: CustomAppBar(
           firstText: '',
-          secondText: localization.create_an_account,
+          secondText: localization.skinadar,
         ),
         body: Padding(
           padding: const EdgeInsets.all(20),

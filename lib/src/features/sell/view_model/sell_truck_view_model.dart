@@ -17,73 +17,93 @@ class SellTuckViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ------------------------pick media------------------------
+
+  final List<Map<String, dynamic>> _media = [];
+  List<Map<String, dynamic>> get media => _media;
+
+  void addMedia(File file, String type) {
+    _media.add({'file': file, 'type': type});
+    notifyListeners();
+  }
+
+  void removeMedia(int index) {
+    _media.removeAt(index);
+    notifyListeners();
+  }
+
+  void clearMedia() {
+    _media.clear();
+    notifyListeners();
+  }
+
   // ------------------------pick images------------------------
 
-  final List<File> _images = [];
-  List<File> get images => _images;
+  // final List<File> _images = [];
+  // List<File> get images => _images;
 
-  void addImage(File image) {
-    _images.add(image);
-    notifyListeners();
-  }
+  // void addImage(File image) {
+  //   _images.add(image);
+  //   notifyListeners();
+  // }
 
-  void removeImage(int index) {
-    _images.removeAt(index);
-    notifyListeners();
-  }
+  // void removeImage(int index) {
+  //   _images.removeAt(index);
+  //   notifyListeners();
+  // }
 
-  void clearImages() {
-    _images.clear();
-    notifyListeners();
-  }
+  // void clearImages() {
+  //   _images.clear();
+  //   notifyListeners();
+  // }
 //------------------------ vdeo picking/playing/removing mechanism starts from here------------------------
 
-  File? _video;
-  VideoPlayerController? _videoController;
+  // File? _video;
+  // VideoPlayerController? _videoController;
 
-  bool _isPlaying = false;
-  bool get isPlaying => _isPlaying;
+  // bool _isPlaying = false;
+  // bool get isPlaying => _isPlaying;
 
-  File? get truckVideo => _video;
-  VideoPlayerController? get videoController => _videoController;
+  // File? get truckVideo => _video;
+  // VideoPlayerController? get videoController => _videoController;
 
-  void setVideo(File videoFile) {
-    _video = videoFile;
-    _videoController?.dispose();
-    _videoController = VideoPlayerController.file(videoFile)
-      ..initialize().then((_) {
-        notifyListeners();
-      });
-    _isPlaying = false;
-    notifyListeners();
-  }
+  // void setVideo(File videoFile) {
+  //   _video = videoFile;
+  //   _videoController?.dispose();
+  //   _videoController = VideoPlayerController.file(videoFile)
+  //     ..initialize().then((_) {
+  //       notifyListeners();
+  //     });
+  //   _isPlaying = false;
+  //   notifyListeners();
+  // }
 
-  void playVideo() {
-    _videoController?.play();
-    _isPlaying = true;
-    notifyListeners();
-  }
+  // void playVideo() {
+  //   _videoController?.play();
+  //   _isPlaying = true;
+  //   notifyListeners();
+  // }
 
-  void pauseVideo() {
-    _videoController?.pause();
-    _isPlaying = false;
-    notifyListeners();
-  }
+  // void pauseVideo() {
+  //   _videoController?.pause();
+  //   _isPlaying = false;
+  //   notifyListeners();
+  // }
 
-  void stopVideo() {
-    _videoController?.pause();
-    _videoController?.seekTo(Duration.zero);
-    _isPlaying = false;
-    notifyListeners();
-  }
+  // void stopVideo() {
+  //   _videoController?.pause();
+  //   _videoController?.seekTo(Duration.zero);
+  //   _isPlaying = false;
+  //   notifyListeners();
+  // }
 
-  void removeVideo() {
-    _video = null;
-    _videoController?.dispose();
-    _videoController = null;
-    _isPlaying = false;
-    notifyListeners();
-  }
+  // void removeVideo() {
+  //   _video = null;
+  //   _videoController?.dispose();
+  //   _videoController = null;
+  //   _isPlaying = false;
+  //   notifyListeners();
+  // }
 
   // ---------------------Controllers for truck info
   TextEditingController priceController = TextEditingController();
@@ -92,13 +112,17 @@ class SellTuckViewModel extends ChangeNotifier {
   TextEditingController registeredInController = TextEditingController();
   TextEditingController yearController = TextEditingController();
   TextEditingController truckMakeController = TextEditingController();
-  TextEditingController truckModelController = TextEditingController();
-  TextEditingController colorController = TextEditingController();
-  TextEditingController engineTypeController = TextEditingController();
-  TextEditingController engineCapacityController = TextEditingController();
-  TextEditingController engineMillageController = TextEditingController();
-  TextEditingController truckAssemblyController = TextEditingController();
+
   TextEditingController descriptionController = TextEditingController();
+
+  String? _selectedEngineType;
+
+  String? get selectedEngineType => _selectedEngineType;
+
+  void selectEngineType(String engineType) {
+    _selectedEngineType = engineType;
+    notifyListeners();
+  }
 
   // ------------------- manual or automatic
   String? _selectedTransmission;
@@ -153,21 +177,13 @@ class SellTuckViewModel extends ChangeNotifier {
   Map<String, String?> get fieldErrors => _fieldErrors;
 
   void _addErrorClearListeners() {
-    truckAssemblyController
-        .addListener(() => _clearFieldError('Truck Assembly'));
     priceController.addListener(() => _clearFieldError('Price'));
     locationController.addListener(() => _clearFieldError('Location'));
     cateogryController.addListener(() => _clearFieldError('Category'));
     registeredInController.addListener(() => _clearFieldError('Registered In'));
     yearController.addListener(() => _clearFieldError('Truck Year'));
     truckMakeController.addListener(() => _clearFieldError('Truck Make'));
-    truckModelController.addListener(() => _clearFieldError('Truck Model'));
-    colorController.addListener(() => _clearFieldError('Color'));
-    engineTypeController.addListener(() => _clearFieldError('Engine Type'));
-    engineCapacityController
-        .addListener(() => _clearFieldError('Engine Capacity'));
-    engineMillageController
-        .addListener(() => _clearFieldError('Engine Mileage'));
+
     descriptionController.addListener(() => _clearFieldError('Description'));
     sellerNameController.addListener(() => _clearFieldError('Name'));
     sellerMobileController.addListener(() => _clearFieldError('Mobile Number'));
@@ -184,21 +200,19 @@ class SellTuckViewModel extends ChangeNotifier {
   // Validation Logic
   bool validateSellTruckFields(BuildContext context) {
     _fieldErrors.clear();
-    if (images.isEmpty) {
-      Utils.flushBarErrorMessage('Please select image of your truck', context);
-    }
-    if (truckVideo == null) {
-      Utils.flushBarErrorMessage('Please select video of your truck', context);
-    }
+    // if (images.isEmpty) {
+    //   Utils.flushBarErrorMessage('Please select image of your truck', context);
+    // }
+    // if (truckVideo == null) {
+    //   Utils.flushBarErrorMessage('Please select video of your truck', context);
+    // }
     if (selectedTransmission == null) {
       Utils.flushBarErrorMessage('Please select Transmission type', context);
     }
     if (priceController.text.isEmpty) {
       _fieldErrors['Price'] = 'Price is required';
     }
-    if (truckAssemblyController.text.isEmpty) {
-      _fieldErrors['Truck Assembly'] = 'Truck Assembly is required';
-    }
+
     if (locationController.text.isEmpty) {
       _fieldErrors['Location'] = 'Location is required';
     }
@@ -214,21 +228,7 @@ class SellTuckViewModel extends ChangeNotifier {
     if (truckMakeController.text.isEmpty) {
       _fieldErrors['Truck Make'] = 'Truck make is required';
     }
-    if (truckModelController.text.isEmpty) {
-      _fieldErrors['Truck Model'] = 'Truck model is required';
-    }
-    if (colorController.text.isEmpty) {
-      _fieldErrors['Color'] = 'Color is required';
-    }
-    if (engineTypeController.text.isEmpty) {
-      _fieldErrors['Engine Type'] = 'Engine Type is required';
-    }
-    if (engineCapacityController.text.isEmpty) {
-      _fieldErrors['Engine Capacity'] = 'Engine Capacity is required';
-    }
-    if (engineMillageController.text.isEmpty) {
-      _fieldErrors['Engine Mileage'] = 'Engine Mileage is required';
-    }
+
     if (descriptionController.text.isEmpty) {
       _fieldErrors['Description'] = 'Description is required';
     }
@@ -265,20 +265,16 @@ class SellTuckViewModel extends ChangeNotifier {
     try {
       // Prepare the SellTruckModel object
       final truckData = SellTruckModel(
-        truckImages:
-            _images.map((image) => image.path).toList(), // List of image paths
-        truckVideo: truckVideo?.path ?? '', // Video file path
+        // truckImages:
+        //     _images.map((image) => image.path).toList(), // List of image paths
+        // truckVideo: truckVideo?.path ?? '', // Video file path
         price: priceController.text.trim(),
         location: locationController.text.trim(),
         category: cateogryController.text.trim(),
         registeredIn: registeredInController.text.trim(),
         truckYear: yearController.text.trim(),
         truckMake: truckMakeController.text.trim(),
-        truckModel: truckModelController.text.trim(),
-        color: colorController.text.trim(),
-        engineType: engineTypeController.text.trim(),
-        engineCapacity: engineCapacityController.text.trim(),
-        engineMileage: engineMillageController.text.trim(),
+
         description: descriptionController.text.trim(),
         transmissionType: selectedTransmission ?? '',
         selectedFeatures: selectedFeatures,
@@ -308,19 +304,14 @@ class SellTuckViewModel extends ChangeNotifier {
   }
 
   void clearForm() {
-    images.clear;
-    removeVideo();
+    // images.clear;
+    // removeVideo();
     priceController.clear();
     locationController.clear();
     cateogryController.clear();
     registeredInController.clear();
     yearController.clear();
     truckMakeController.clear();
-    truckModelController.clear();
-    colorController.clear();
-    engineTypeController.clear();
-    engineCapacityController.clear();
-    engineMillageController.clear();
     descriptionController.clear();
     sellerNameController.clear();
     sellerMobileController.clear();
@@ -340,13 +331,8 @@ class SellTuckViewModel extends ChangeNotifier {
     registeredInController.dispose();
     yearController.dispose();
     truckMakeController.dispose();
-    truckModelController.dispose();
-    colorController.dispose();
-    engineTypeController.dispose();
-    engineCapacityController.dispose();
-    engineMillageController.dispose();
     descriptionController.dispose();
-    _videoController?.dispose();
+    // _videoController?.dispose();
     super.dispose();
   }
 }

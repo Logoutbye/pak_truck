@@ -20,53 +20,68 @@ class EarthMovingTab extends StatelessWidget {
     var width = MediaQuery.of(context).size.width / 3;
     final categories = [
       {
-        'image': 'assets/images/Automatic Truck.png',
-        'text': 'Automatic',
+        'image': 'assets/images/earth_moving/earth_1.png',
+        'text': 'Excavator Operator',
         'color': '0xFFe4e5ed', // Light Pink
       },
       {
-        'image': 'assets/images/Dumper Truck.png',
-        'text': 'Dumper Truck',
+        'image': 'assets/images/earth_moving/earth_2.png',
+        'text': 'Loader Operator',
         'color': '0xFFf8f0e0', // Light Cyan
       },
       {
-        'image': 'assets/images/Flatted.png',
-        'text': 'Flatbed Truck',
+        'image': 'assets/images/earth_moving/earth_3.png',
+        'text': 'Roller Machine',
         'color': '0xFFf2f1f3', // Light Orange
       },
       {
-        'image': 'assets/images/Tailer Truck.png',
-        'text': 'Tailer Truck',
+        'image': 'assets/images/earth_moving/earth_4.png',
+        'text': 'Grader machine',
         'color': '0xFFe7e8ee', // Light Green
       },
       {
-        'image': 'assets/images/Container.png',
-        'text': 'Container Carrier',
+        'image': 'assets/images/earth_moving/earth_5.png',
+        'text': 'Wheel Tractor',
         'color': '0xFFfaf5e6', // Light Pink
       },
       {
-        'image': 'assets/images/Cargo Landing.png',
-        'text': 'Cargo Landing...',
+        'image': 'assets/images/earth_moving/earth_6.png',
+        'text': 'Road Cutter',
         'color': '0xFFeeeef0', // Light Cyan
       },
       {
-        'image': 'assets/images/Box Truck.png',
-        'text': 'Box Truck',
+        'image': 'assets/images/earth_moving/earth_7.png',
+        'text': 'Drilling Machine',
         'color': '0xFFe7e8ee', // Light Orange
       },
       {
-        'image': 'assets/images/Freezer Truck.png',
-        'text': 'Freezer Truck',
+        'image': 'assets/images/earth_moving/earth_8.png',
+        'text': 'Compactor Machine',
         'color': '0xFFe8e8e8', // Light Green
       },
       {
-        'image': 'assets/images/Tanker Truck.png',
-        'text': 'Tanker Truck',
+        'image': 'assets/images/earth_moving/earth_1.png',
+        'text': 'Forklift',
         'color': '0xFFfaf5e6', // Light Pink
       },
       {
-        'image': 'assets/images/Dump truck.png',
-        'text': 'Dump truck',
+        'image': 'assets/images/earth_moving/earth_2.png',
+        'text': 'Crusher',
+        'color': '0xFFf2f1f3', // Light Cyan
+      },
+      {
+        'image': 'assets/images/earth_moving/earth_3.png',
+        'text': 'Screening Machine',
+        'color': '0xFFfaf5e6', // Light Pink
+      },
+      {
+        'image': 'assets/images/earth_moving/earth_4.png',
+        'text': 'Conveyor',
+        'color': '0xFFf2f1f3', // Light Cyan
+      },
+      {
+        'image': 'assets/images/earth_moving/earth_7.png',
+        'text': 'Buildozer',
         'color': '0xFFf2f1f3', // Light Cyan
       },
     ];
@@ -172,7 +187,6 @@ class EarthMovingTab extends StatelessWidget {
           buildSectionHeader(context,
               title: 'Similar Machinery Ads', onViewAllPressed: () {}),
           VechileCard(
-            cardWidthRatio: 0.6,
             items: [
               {
                 'image': 'assets/remove/truck.png',
@@ -196,6 +210,7 @@ class EarthMovingTab extends StatelessWidget {
           ),
           SizedBox(height: 12.h),
           vechileCard2(context, newsItems),
+          Padding(padding: EdgeInsets.only(bottom: 50.sp))
         ],
       ),
     );

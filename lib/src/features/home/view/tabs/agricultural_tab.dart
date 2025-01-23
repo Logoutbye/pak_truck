@@ -20,54 +20,24 @@ class AgriculturalTab extends StatelessWidget {
     var width = MediaQuery.of(context).size.width / 3;
     final categories = [
       {
-        'image': 'assets/images/Automatic Truck.png',
-        'text': 'Automatic',
+        'image': 'assets/images/agricultural/agricultural_1.png',
+        'text': 'Tractors',
         'color': '0xFFe4e5ed', // Light Pink
       },
       {
-        'image': 'assets/images/Dumper Truck.png',
-        'text': 'Dumper Truck',
+        'image': 'assets/images/agricultural/agricultural_2.png',
+        'text': 'Threshers',
         'color': '0xFFf8f0e0', // Light Cyan
       },
       {
-        'image': 'assets/images/Flatted.png',
-        'text': 'Flatbed Truck',
+        'image': 'assets/images/agricultural/agricultural_3.png',
+        'text': 'Harvesters',
         'color': '0xFFf2f1f3', // Light Orange
       },
       {
-        'image': 'assets/images/Tailer Truck.png',
-        'text': 'Tailer Truck',
+        'image': 'assets/images/agricultural/agricultural_4.png',
+        'text': 'Seeders',
         'color': '0xFFe7e8ee', // Light Green
-      },
-      {
-        'image': 'assets/images/Container.png',
-        'text': 'Container Carrier',
-        'color': '0xFFfaf5e6', // Light Pink
-      },
-      {
-        'image': 'assets/images/Cargo Landing.png',
-        'text': 'Cargo Landing...',
-        'color': '0xFFeeeef0', // Light Cyan
-      },
-      {
-        'image': 'assets/images/Box Truck.png',
-        'text': 'Box Truck',
-        'color': '0xFFe7e8ee', // Light Orange
-      },
-      {
-        'image': 'assets/images/Freezer Truck.png',
-        'text': 'Freezer Truck',
-        'color': '0xFFe8e8e8', // Light Green
-      },
-      {
-        'image': 'assets/images/Tanker Truck.png',
-        'text': 'Tanker Truck',
-        'color': '0xFFfaf5e6', // Light Pink
-      },
-      {
-        'image': 'assets/images/Dump truck.png',
-        'text': 'Dump truck',
-        'color': '0xFFf2f1f3', // Light Cyan
       },
     ];
 
@@ -89,7 +59,7 @@ class AgriculturalTab extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: height * 1.2,
+            height: height * 0.6,
             child: PageView.builder(
               controller: pageController,
               itemCount: pages.length,
@@ -157,22 +127,10 @@ class AgriculturalTab extends StatelessWidget {
               },
             ),
           ),
-          SizedBox(height: context.mediaQueryHeight / 75),
-          SmoothPageIndicator(
-            controller: pageController,
-            count: pages.length,
-            effect: ExpandingDotsEffect(
-              activeDotColor: AppColors.primary,
-              dotColor: Colors.grey.shade300,
-              dotHeight: height * 0.04,
-              dotWidth: height * 0.04,
-            ),
-          ),
           SizedBox(height: 12.h),
           buildSectionHeader(context,
               title: 'Agriculture Machine for Sale ', onViewAllPressed: () {}),
           VechileCard(
-            cardWidthRatio: 0.6,
             items: [
               {
                 'image': 'assets/remove/truck.png',
@@ -196,6 +154,7 @@ class AgriculturalTab extends StatelessWidget {
           ),
           SizedBox(height: 12.h),
           vechileCard2(context, newsItems),
+          Padding(padding: EdgeInsets.only(bottom: 50.sp))
         ],
       ),
     );

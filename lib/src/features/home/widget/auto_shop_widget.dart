@@ -14,6 +14,16 @@ final List<Map<String, String>> newsItems = [
     'title': 'Fuel Efficiency Tips',
     'description': 'Discover how to maximize your truck\'s fuel efficiency...',
   },
+  {
+    'image': 'assets/images/remove_me1.png',
+    'title': 'Latest Truck News',
+    'description': 'The trucking industry is evolving rapidly...',
+  },
+  {
+    'image': 'assets/images/remove_me2.png',
+    'title': 'Fuel Efficiency Tips',
+    'description': 'Discover how to maximize your truck\'s fuel efficiency...',
+  },
 ];
 
 // final List<Map<String, String>> reviewsItems = [

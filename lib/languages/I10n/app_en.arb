@@ -23,6 +23,6 @@
   "verifyNumber": "Verify your number",
   "enterOtp": "Enter the OTP Code",
   "otpIntro": "Please enter the six (6) digit code sent to ",
-  "otpOutro": " and continue that was sent to your Phone Number."
-
+  "otpOutro": " and continue that was sent to your Phone Number.",
+  "skinadar": "Already Have an account?"
 }

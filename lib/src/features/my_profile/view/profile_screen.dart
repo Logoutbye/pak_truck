@@ -9,7 +9,7 @@ import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/features/my_profile/view_model/profile_tabbar_provider.dart';
 import 'package:testt/src/features/my_profile/widget/contact_us_widget.dart';
-import 'package:testt/src/features/my_profile/widget/my_ads_widget.dart';
+import 'package:testt/src/features/my_ads/widgets/my_ads_widget.dart';
 import 'package:testt/src/features/my_profile/widget/personalized_widget.dart';
 import 'package:testt/src/features/my_profile/widget/saved_ads_widget.dart';
 import 'package:testt/src/features/my_profile/widget/show_logout_dialog.dart';
@@ -255,7 +255,20 @@ class _ProfileScreenState extends State<ProfileScreen>
             child: TabBarView(
               controller: _tabController,
               children: [
-                Center(child: MyAdsWidget()),
+                Center(
+                    child: MyAdsWidget(
+                  headingWidget: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: context.mediaQueryHeight / 30),
+                      Text(
+                        'Your All Ads',
+                        style: Themetext.headline
+                            .copyWith(color: AppColors.primary),
+                      ),
+                    ],
+                  ),
+                )),
                 Center(child: SavedAdsWidget()),
                 Column(
                   children: [

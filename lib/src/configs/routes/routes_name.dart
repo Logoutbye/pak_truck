@@ -25,4 +25,5 @@ class RoutesName {
   static const chooseSellingPlan = 'choose_plan';
   static const sellSparePartsScreen = 'sellSparePartsScreen';
   static const sellTruckScreen = 'sellTruckScreen';
+  static const storeTabbarView = 'storeTabbarView';
 }

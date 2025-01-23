@@ -57,5 +57,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/agricultural/
+    - assets/images/earth_moving/
     - assets/svg/
     - assets/remove/

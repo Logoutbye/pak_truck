@@ -6,25 +6,21 @@ import 'package:testt/src/configs/extensions.dart';
 
 class VechileCard extends StatelessWidget {
   final List<Map<String, String>> items;
-  final double height;
+
   final bool showPakTruckTag;
-  final double imageHeightRatio;
-  final double cardWidthRatio;
 
   const VechileCard({
     super.key,
     required this.items,
-    this.height = 200, 
-    this.showPakTruckTag = false, 
-    this.imageHeightRatio = 0.5,
-    this.cardWidthRatio = 0.6, 
+    this.showPakTruckTag = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height != 200 ? height : context.mediaQueryHeight / 5,
+      height: context.mediaQueryHeight / 4.5,
       child: ListView.builder(
+        padding: EdgeInsets.only(left: 8),
         scrollDirection: Axis.horizontal,
         itemCount: items.length,
         itemBuilder: (context, index) {
@@ -36,12 +32,9 @@ class VechileCard extends StatelessWidget {
   }
 
   Widget _buildListItem(BuildContext context, Map<String, String> item) {
-    final cardWidth = MediaQuery.of(context).size.width * cardWidthRatio;
-    final imageHeight = height * imageHeightRatio;
-
     return Container(
-      width: cardWidth,
-      margin: const EdgeInsets.symmetric(horizontal: 4),
+      width: 230.w,
+      margin: EdgeInsets.symmetric(horizontal: 4.sp),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -58,7 +51,7 @@ class VechileCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18),
                 child: Image.asset(
                   item['image']!,
-                  height: imageHeight,
+                  height: 90.h,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),

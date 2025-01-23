@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/features/home/widget/auto_shop_widget.dart';
 import 'package:testt/src/features/home/widget/build_secton_header.dart';
@@ -18,7 +19,6 @@ class AllTab extends StatelessWidget {
           buildSectionHeader(context,
               title: 'Used Truck For Sale', onViewAllPressed: () {}),
           VechileCard(
-            cardWidthRatio: 0.6,
             items: [
               {
                 'image': 'assets/remove/truck.png',

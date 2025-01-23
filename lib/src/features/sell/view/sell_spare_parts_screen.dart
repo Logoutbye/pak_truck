@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/app_constants.dart';
 import 'package:testt/src/configs/color/color.dart';
+import 'package:testt/src/configs/components/custom_back_button.dart';
 import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/configs/utils.dart';
 import 'package:testt/src/features/sell/view_model/sell_spare_parts_view_model.dart';
-import 'package:testt/src/features/sell/widget/allow_contact_on_whatsapp_widget.dart';
 import 'package:testt/src/features/sell/widget/bottom_sheets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:testt/src/features/sell/widget/sell_spareparts_media_picker.dart';
 import 'package:testt/src/features/sell/widget/sell_textform_field.dart';
-import 'package:testt/src/features/sell/widget/sell_image_picker.dart';
 
 class SellSparePartsScreen extends StatefulWidget {
   const SellSparePartsScreen({super.key});
@@ -25,43 +27,34 @@ class _SellSparePartsScreenState extends State<SellSparePartsScreen> {
     var viewModel = Provider.of<SellSparePartsViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        foregroundColor: AppColors.white,
+        leading: CustomBackButton(),
         title: InkWell(
           onTap: () {},
           child: Text(
             'Sell Spare Parts',
-            style: TextStyle(color: AppColors.white),
+            style: TextStyle(color: AppColors.black),
           ),
         ),
       ),
       body: ListView(
         padding: EdgeInsets.all(12),
         children: [
-          buildSellImagePicker(context, 'Upload Photo',
+          buildSparePartsMediaPicker(context, 'Upload File',
               Provider.of<SellSparePartsViewModel>(context)),
-
-          SizedBox(height: context.mediaQueryHeight / 20),
+          SizedBox(height: context.mediaQueryHeight / 70),
           Text('Spare parts information', style: Themetext.superHeadline),
-
-          SizedBox(height: context.mediaQueryHeight / 30),
-
           //  location
-          SellTextFormField(
-            errorText: viewModel.fieldErrors['Price'],
-            titleText: 'Price',
-            hintText: 'Enter Price in PKR',
-            controller: viewModel.priceController,
-            leading: Image.asset('assets/images/price.png'),
-          ),
-
-          //  location
-          SellTextFormField(
+          SellTextformField(
             errorText: viewModel.fieldErrors['Location'],
             titleText: 'Location',
             hintText: 'Enter Location',
             controller: viewModel.locationController,
-            leading: Image.asset('assets/images/location.png'),
+            // leading: Image.asset('assets/images/location.png'),
+
+            leading: SvgPicture.asset(
+              'assets/svg/location.svg',
+              height: 18.h,
+            ),
             trailing: InkWell(
                 onTap: () {
                   showSelectionModal(
@@ -76,56 +69,55 @@ class _SellSparePartsScreenState extends State<SellSparePartsScreen> {
                 },
                 child: Image.asset('assets/images/more.png')),
           ),
-          // title
-          SellTextFormField(
-            errorText: viewModel.fieldErrors['Title'],
-            titleText: ' Title',
-            hintText: 'Enter Title',
-            controller: viewModel.titleController,
+          //  price
+          SellTextformField(
+            errorText: viewModel.fieldErrors['Price'],
+            titleText: 'Price',
+            hintText: 'Enter Price in PKR',
+            controller: viewModel.priceController,
+            leading: SvgPicture.asset(
+              'assets/svg/price.svg',
+              height: 18.h,
+            ),
           ),
-
+          //  conditon
+          SellTextformField(
+            errorText: viewModel.fieldErrors['Condition'],
+            titleText: 'Condition',
+            hintText: 'Enter Condition',
+            controller: viewModel.conditionController,
+            leading: SvgPicture.asset(
+              'assets/svg/condition.svg',
+              height: 18.h,
+            ),
+            trailing: InkWell(
+                onTap: () {
+                  showSelectionModal(
+                    context: context,
+                    title: "Select Condition",
+                    hintText: 'Search by Condition',
+                    items: ['New', 'Used'],
+                    onItemSelected: (selectedItem) {
+                      viewModel.conditionController.text = selectedItem;
+                    },
+                  );
+                },
+                child: Image.asset('assets/images/more.png')),
+          ),
           // description
-          SellTextFormField(
+          SellTextformField(
+            leading: SizedBox(
+              height: 18.h,
+            ),
             errorText: viewModel.fieldErrors['Description'],
-            maxLines: 2,
-            minLines: 2,
+            maxLines: 5,
+            minLines: 4,
             titleText: ' Description',
             hintText: 'Enter Description',
             controller: viewModel.descriptionController,
           ),
-
-          SizedBox(height: context.mediaQueryHeight / 30),
-
-          // contact form
-          Text('Contact Information', style: Themetext.superHeadline),
-          SizedBox(height: context.mediaQueryHeight / 35),
-          SellTextFormField(
-            errorText: viewModel.fieldErrors['Name'],
-            titleText: 'Your Name',
-            hintText: 'Enter your Name',
-            controller: viewModel.sellerNameController,
-          ),
-          SellTextFormField(
-            errorText: viewModel.fieldErrors['Mobile Number'],
-            titleText: 'Your Mobile Number',
-            hintText: 'Enter your Mobile Number',
-            controller: viewModel.sellerMobileController,
-          ),
-          SellTextFormField(
-            errorText: viewModel.fieldErrors['Address'],
-            titleText: 'Your Address',
-            hintText: 'Enter your Address',
-            controller: viewModel.selllerAddressController,
-          ),
-          SellTextFormField(
-            maxLines: 2,
-            minLines: 2,
-            titleText: 'Your Comments',
-            hintText: 'Enter any other details',
-            controller: viewModel.sellerCommentController,
-          ),
-          AllowWhatsappContactWidget(),
           SizedBox(height: context.mediaQueryHeight / 20),
+          // submit button
           RoundButton(
               title: 'Submit & Continue',
               onPress: () {

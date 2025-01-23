@@ -7,30 +7,50 @@ class SellSparePartsViewModel extends ChangeNotifier {
   SellSparePartsViewModel() {
     _addErrorClearListeners();
   }
+  // ------------------------pick media------------------------
 
-  // ------------------------pick images------------------------
+  final List<Map<String, dynamic>> _media = [];
+  List<Map<String, dynamic>> get media => _media;
 
-  final List<File> _images = [];
-  List<File> get images => _images;
-
-  void addImage(File image) {
-    _images.add(image);
+  void addMedia(File file, String type) {
+    _media.add({'file': file, 'type': type});
     notifyListeners();
   }
 
-  void removeImage(int index) {
-    _images.removeAt(index);
+  void removeMedia(int index) {
+    _media.removeAt(index);
     notifyListeners();
   }
 
-  void clearImages() {
-    _images.clear();
+  void clearMedia() {
+    _media.clear();
     notifyListeners();
   }
+
+  // // ------------------------pick images------------------------
+
+  // final List<File> _images = [];
+  // List<File> get images => _images;
+
+  // void addImage(File image) {
+  //   _images.add(image);
+  //   notifyListeners();
+  // }
+
+  // void removeImage(int index) {
+  //   _images.removeAt(index);
+  //   notifyListeners();
+  // }
+
+  // void clearImages() {
+  //   _images.clear();
+  //   notifyListeners();
+  // }
 
   // ---------------------Controllers for truck info
   TextEditingController priceController = TextEditingController();
   TextEditingController locationController = TextEditingController();
+  TextEditingController conditionController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
@@ -80,9 +100,6 @@ class SellSparePartsViewModel extends ChangeNotifier {
   // Validation Logic
   bool validateSellTruckFields(BuildContext context) {
     _fieldErrors.clear();
-    if (images.isEmpty) {
-      Utils.flushBarErrorMessage('Please select image of your truck', context);
-    }
 
     if (priceController.text.isEmpty) {
       _fieldErrors['Price'] = 'Price is required';
@@ -130,7 +147,6 @@ class SellSparePartsViewModel extends ChangeNotifier {
     try {
       if (validateSellTruckFields(context)) {
         SparePartsModel spareParts = SparePartsModel(
-          images: _images.map((image) => image.path).toList(),
           location: locationController.text.trim(),
           title: titleController.text.trim(),
           description: descriptionController.text.trim(),

@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
+import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/configs/utils.dart';
 import 'package:testt/src/features/home/view/tabs/agricultural_tab.dart';
 import 'package:testt/src/features/home/view/tabs/all_tab.dart';
 import 'package:testt/src/features/home/view/tabs/buses_tab.dart';
 import 'package:testt/src/features/home/view/tabs/earth_moving_tab.dart';
-import 'package:testt/src/features/home/view/tabs/spare_parts_tab.dart';
 import 'package:testt/src/features/home/view/tabs/truck_tab.dart';
 import 'package:testt/src/features/my_profile/widget/user_image_avatar_widget.dart';
-import 'package:testt/src/features/sell/widget/sell_textform_field.dart';
+import 'package:testt/src/configs/components/custom_textform_field.dart';
+import 'package:testt/src/features/stores/view_model/store_tabbar_provider.dart';
 
 class HomeScreenNew extends StatefulWidget {
   const HomeScreenNew({super.key});
@@ -30,7 +32,7 @@ class _HomeScreenNewState extends State<HomeScreenNew>
   void initState() {
     super.initState();
     searchTextEditingController = TextEditingController();
-    _categoryTabController = TabController(length: 6, vsync: this);
+    _categoryTabController = TabController(length: 5, vsync: this);
   }
 
   @override
@@ -43,7 +45,7 @@ class _HomeScreenNewState extends State<HomeScreenNew>
             SliverAppBar(
               pinned: true,
               floating: true,
-              expandedHeight: 175.h,
+              expandedHeight: 190.h,
               flexibleSpace: FlexibleSpaceBar(
                 background: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +59,7 @@ class _HomeScreenNewState extends State<HomeScreenNew>
                       children: [
                         SizedBox(
                           width: context.mediaQueryWidth / 1.2,
-                          child: SellTextFormField(
+                          child: CustomTextFormField(
                             borderRadius: 30,
                             leading: Icon(Icons.search),
                             maxLines: 1,
@@ -72,7 +74,7 @@ class _HomeScreenNewState extends State<HomeScreenNew>
                         Row(
                           children: [
                             InkWell(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(50),
                               onTap: () {
                                 Utils.dismissKeyboard(context);
                               },
@@ -99,43 +101,73 @@ class _HomeScreenNewState extends State<HomeScreenNew>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Container(
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                color: AppColors.primaryLight2),
-                            child: Text(
-                              'Auto Store',
-                              style: TextStyle(
-                                  color: AppColors.primaryLight3,
-                                  fontWeight: FontWeight.bold),
+                          GestureDetector(
+                            onTap: () {
+                              context
+                                  .read<StoreTabbarProvider>()
+                                  .setTabIndex(0);
+
+                              Navigator.pushNamed(
+                                  context, RoutesName.storeTabbarView);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12)),
+                                  color: AppColors.primaryLight2),
+                              child: Text(
+                                'Auto Store',
+                                style: TextStyle(
+                                    color: AppColors.primaryLight3,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                color: AppColors.primaryLight2),
-                            child: Text(
-                              'Factories',
-                              style: TextStyle(
-                                  color: AppColors.primaryLight3,
-                                  fontWeight: FontWeight.bold),
+                          GestureDetector(
+                            onTap: () {
+                              context
+                                  .read<StoreTabbarProvider>()
+                                  .setTabIndex(1);
+
+                              Navigator.pushNamed(
+                                  context, RoutesName.storeTabbarView);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12)),
+                                  color: AppColors.primaryLight2),
+                              child: Text(
+                                'Factories',
+                                style: TextStyle(
+                                    color: AppColors.primaryLight3,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                color: AppColors.primaryLight2),
-                            child: Text(
-                              'Showroom',
-                              style: TextStyle(
-                                  color: AppColors.primaryLight3,
-                                  fontWeight: FontWeight.bold),
+                          GestureDetector(
+                            onTap: () {
+                              context
+                                  .read<StoreTabbarProvider>()
+                                  .setTabIndex(2);
+
+                              Navigator.pushNamed(
+                                  context, RoutesName.storeTabbarView);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12)),
+                                  color: AppColors.primaryLight2),
+                              child: Text(
+                                'Showroom',
+                                style: TextStyle(
+                                    color: AppColors.primaryLight3,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           )
                         ],
@@ -235,12 +267,6 @@ class _HomeScreenNewState extends State<HomeScreenNew>
                             child: Center(child: Text('Agricultural')),
                           ),
                         ),
-                        Tab(
-                          child: SizedBox(
-                            width: 100.w,
-                            child: Center(child: Text('Spare Parts')),
-                          ),
-                        ),
                       ],
                     ),
                   ],
@@ -250,8 +276,7 @@ class _HomeScreenNewState extends State<HomeScreenNew>
           ];
         },
         body: TabBarView(
-            physics: BouncingScrollPhysics(), // Allow smooth scrolling
-
+          physics: BouncingScrollPhysics(),
           controller: _categoryTabController,
           children: [
             AllTab(), //all
@@ -259,7 +284,6 @@ class _HomeScreenNewState extends State<HomeScreenNew>
             EarthMovingTab(), // earth moving
             BusesTab(), // buses
             AgriculturalTab(), // agricultural
-            SparePartsTab(), // spare parts
           ],
         ),
       ),

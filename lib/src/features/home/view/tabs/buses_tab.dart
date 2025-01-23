@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/features/home/widget/auto_shop_widget.dart';
 import 'package:testt/src/features/home/widget/build_secton_header.dart';
@@ -52,6 +53,7 @@ class BusesTab extends StatelessWidget {
             onViewAllPressed: () {},
           ),
           buildNewsWidget(context, newsItems),
+          Padding(padding: EdgeInsets.only(bottom: 50.sp))
         ],
       ),
     );
