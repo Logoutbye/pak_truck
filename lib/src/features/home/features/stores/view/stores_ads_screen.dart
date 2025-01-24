@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:testt/src/configs/components/custom_back_button.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
-import 'package:testt/src/features/home/widget/auto_shop_widget.dart';
-import 'package:testt/src/features/home/widget/vechile_card.dart';
-import 'package:testt/src/features/home/widget/vechile_card_2.dart';
+import 'package:testt/src/features/home/features/main/widget/auto_shop_widget.dart';
+import 'package:testt/src/features/home/features/main/widget/vechile_horizantal_card.dart';
+import 'package:testt/src/features/home/features/main/widget/vechile_card_2.dart';
 
 class StoresAdsScreen extends StatelessWidget {
   StoresAdsScreen({super.key, required this.title});
@@ -33,7 +33,7 @@ class StoresAdsScreen extends StatelessWidget {
                 style: Themetext.blackBoldText
                     .copyWith(fontWeight: FontWeight.w600, fontSize: 15.sp)),
           ),
-          VechileCard(
+          VechileHorizantalCard(
             items: [
               {
                 'image': 'assets/remove/truck.png',

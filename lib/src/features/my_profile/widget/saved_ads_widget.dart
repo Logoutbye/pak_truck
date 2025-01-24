@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
-import 'package:testt/src/features/home/view/spare_part_details_screen.dart';
+import 'package:testt/src/features/home/features/main/view/spare_part_details_screen.dart';
 import 'package:testt/src/features/sell/model/spare_parts/spare_parts_model.dart';
 
 // Step 1: Define a Post model class

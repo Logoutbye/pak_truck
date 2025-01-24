@@ -6,7 +6,7 @@ import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
-import 'package:testt/src/features/home/view/ad_details_screen.dart';
+import 'package:testt/src/features/home/features/main/view/ad_details_screen.dart';
 import 'package:testt/src/features/sell/model/sell_truck_model/sell_truck_model.dart';
 
 // Step 1: Define a Post model class

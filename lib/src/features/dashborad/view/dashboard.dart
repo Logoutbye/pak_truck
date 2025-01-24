@@ -4,8 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/features/dashborad/widgets/what_do_you_want_to_sell_bottom_sheet.dart';
-import 'package:testt/src/features/home/view/home_screen_new.dart';
-import 'package:testt/src/features/home/view_model/category_tab_index_notifier.dart';
+import 'package:testt/src/features/home/features/main/view/home_screen.dart';
+import 'package:testt/src/features/home/features/main/view_model/category_tab_index_notifier.dart';
 import 'package:testt/src/features/my_ads/view/my_ads_screen.dart';
 import 'package:testt/src/features/my_profile/view/profile_screen.dart';
 import 'package:testt/src/features/videos/videos_screen.dart';
@@ -109,7 +109,7 @@ class Dashboard extends StatelessWidget {
   Widget _getPage(int index) {
     switch (index) {
       case 0:
-        return Center(child: HomeScreenNew());
+        return Center(child: HomeScreen());
       case 1:
         return Center(child: MyAdsScreen());
       case 2:
@@ -119,7 +119,7 @@ class Dashboard extends StatelessWidget {
       case 4:
         return Center(child: ProfileScreen());
       default:
-        return Center(child: HomeScreenNew());
+        return Center(child: HomeScreen());
     }
   }
 }

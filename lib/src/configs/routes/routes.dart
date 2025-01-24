@@ -15,7 +15,7 @@ import 'package:testt/src/features/sell/view/choose_selling_plan_screen.dart';
 import 'package:testt/src/features/sell/view/sell_spare_parts_screen.dart';
 import 'package:testt/src/features/sell/view/sell_truck_screen.dart';
 import 'package:testt/src/features/splash/view/select_langage_screen.dart';
-import 'package:testt/src/features/stores/view/store_tabbar_view.dart';
+import 'package:testt/src/features/home/features/stores/view/stores_tabbar_view.dart';
 import 'routes_name.dart';
 import '../../features/auth/login/view/login_view_with_number.dart';
 import '../../features/splash/view/splash_screen.dart';
@@ -70,7 +70,7 @@ class Routes {
       case RoutesName.sellTruckScreen:
         return SlideTransitionPage(page: SellTruckScreen());
       case RoutesName.storeTabbarView:
-        return SlideTransitionPage(page: StoreTabbarView());
+        return SlideTransitionPage(page: StoresTabbarView());
 
       default:
         return MaterialPageRoute(builder: (_) {

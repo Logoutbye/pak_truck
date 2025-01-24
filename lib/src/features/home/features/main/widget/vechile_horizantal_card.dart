@@ -4,12 +4,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 
-class VechileCard extends StatelessWidget {
+class VechileHorizantalCard extends StatelessWidget {
   final List<Map<String, String>> items;
 
   final bool showPakTruckTag;
 
-  const VechileCard({
+  const VechileHorizantalCard({
     super.key,
     required this.items,
     this.showPakTruckTag = false,

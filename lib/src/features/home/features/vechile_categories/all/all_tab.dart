@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:testt/src/configs/extensions.dart';
-import 'package:testt/src/features/home/widget/auto_shop_widget.dart';
-import 'package:testt/src/features/home/widget/build_secton_header.dart';
-import 'package:testt/src/features/home/widget/vechile_card.dart';
-import 'package:testt/src/features/home/widget/news_widget.dart';
+import 'package:testt/src/features/home/features/main/widget/auto_shop_widget.dart';
+import 'package:testt/src/features/home/features/main/widget/build_secton_header.dart';
+import 'package:testt/src/features/home/features/main/widget/vechile_horizantal_card.dart';
+import 'package:testt/src/features/home/features/main/widget/news_widget.dart';
 
 // ignore: must_be_immutable
 class AllTab extends StatelessWidget {
@@ -18,7 +17,7 @@ class AllTab extends StatelessWidget {
         children: [
           buildSectionHeader(context,
               title: 'Used Truck For Sale', onViewAllPressed: () {}),
-          VechileCard(
+          VechileHorizantalCard(
             items: [
               {
                 'image': 'assets/remove/truck.png',
@@ -46,7 +45,7 @@ class AllTab extends StatelessWidget {
             title: 'Used Buses for Sale',
             onViewAllPressed: () {},
           ),
-          VechileCard(
+          VechileHorizantalCard(
             showPakTruckTag: true,
             items: [
               {

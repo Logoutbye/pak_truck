@@ -7,23 +7,23 @@ import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/features/home/view/tabs/agricultural_tab.dart';
-import 'package:testt/src/features/home/view/tabs/all_tab.dart';
-import 'package:testt/src/features/home/view/tabs/buses_tab.dart';
-import 'package:testt/src/features/home/view/tabs/earth_moving_tab.dart';
-import 'package:testt/src/features/home/view/tabs/truck_tab.dart';
+import 'package:testt/src/features/home/features/vechile_categories/agricultural/agricultural_tab.dart';
+import 'package:testt/src/features/home/features/vechile_categories/all/all_tab.dart';
+import 'package:testt/src/features/home/features/vechile_categories/busses/buses_tab.dart';
+import 'package:testt/src/features/home/features/vechile_categories/earth_moving/earth_moving_tab.dart';
+import 'package:testt/src/features/home/features/vechile_categories/trucks/truck_tab.dart';
 import 'package:testt/src/features/my_profile/widget/user_image_avatar_widget.dart';
 import 'package:testt/src/configs/components/custom_textform_field.dart';
-import 'package:testt/src/features/stores/view_model/store_tabbar_provider.dart';
+import 'package:testt/src/features/home/features/stores/view_model/store_tabbar_provider.dart';
 
-class HomeScreenNew extends StatefulWidget {
-  const HomeScreenNew({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  _HomeScreenNewState createState() => _HomeScreenNewState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenNewState extends State<HomeScreenNew>
+class _HomeScreenState extends State<HomeScreen>
     with TickerProviderStateMixin {
   late TabController _categoryTabController;
   late TextEditingController searchTextEditingController;

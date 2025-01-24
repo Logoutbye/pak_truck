@@ -8,13 +8,14 @@ import 'package:testt/src/features/account_verification/view_model/verify_indivi
 import 'package:testt/src/features/account_verification/view_model/verify_shop_view_model.dart';
 import 'package:testt/src/features/auth/signup/view_model/signup_viewmodel.dart';
 import 'package:testt/src/features/dashborad/view_model/navigation_provider.dart';
-import 'package:testt/src/features/home/view_model/category_tab_index_notifier.dart';
-import 'package:testt/src/features/home/view_model/new_tab_bar_notifier.dart';
+import 'package:testt/src/features/home/features/main/view_model/category_tab_index_notifier.dart';
+import 'package:testt/src/features/home/features/main/view_model/new_tab_bar_notifier.dart';
+import 'package:testt/src/features/home/features/vechile_categories/reuseable_tabbar_view.dart/reuseable_tabbar_provider.dart';
 import 'package:testt/src/features/my_profile/view_model/edit_profile_view_model.dart';
 import 'package:testt/src/features/sell/view_model/sell_spare_parts_view_model.dart';
 import 'package:testt/src/features/sell/view_model/sell_truck_view_model.dart';
 import 'package:testt/src/features/splash/view_model/local_provider.dart';
-import 'package:testt/src/features/stores/view_model/store_tabbar_provider.dart';
+import 'package:testt/src/features/home/features/stores/view_model/store_tabbar_provider.dart';
 import 'src/features/my_profile/view_model/profile_tabbar_provider.dart';
 import 'src/repository/signup_api/signup_http_api_repository.dart';
 import 'src/repository/signup_api/signup_repository.dart';
@@ -63,13 +64,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SellSparePartsViewModel()),
         ChangeNotifierProvider(create: (_) => CategoryTabIndexNotifier()),
         ChangeNotifierProvider(create: (_) => CustomTabBarNotifier()),
+
+        /// for stores tabbar like autostore, factories, showrom, etc where it will go to selected type of that store
         ChangeNotifierProvider(create: (_) => StoreTabbarProvider()),
+
+        /// for subcateogries tabbar like truck, earthing moving, bueese etc where it will go to selected type of that vechile
+        ChangeNotifierProvider(create: (_) => ReusableTabBarProvider()),
       ],
       child: Consumer2<ThemeProvider, LocaleProvider>(
         builder: (BuildContext context, themeProvider, localeProvider,
             Widget? child) {
           return ScreenUtilInit(
-            
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Pak Truck',

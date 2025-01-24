@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
-import 'package:testt/src/features/home/view_model/ad_image_provider.dart';
+import 'package:testt/src/features/home/features/main/view_model/ad_image_provider.dart';
 
 class AdImageCard extends StatelessWidget {
   final List<String> images;

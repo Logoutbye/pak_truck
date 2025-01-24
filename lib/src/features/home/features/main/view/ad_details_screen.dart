@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
-import 'package:testt/src/features/home/widget/ad_image_card.dart';
-import 'package:testt/src/features/home/widget/truck_features_widget.dart';
+import 'package:testt/src/features/home/features/main/widget/ad_image_card.dart';
+import 'package:testt/src/features/home/features/main/widget/truck_features_widget.dart';
 import 'package:testt/src/features/sell/model/sell_truck_model/sell_truck_model.dart';
 
 class AdDetailScreen extends StatelessWidget {
