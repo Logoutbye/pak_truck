@@ -11,8 +11,7 @@ class TruckTabbarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReusableTabBarView(
-      title: 'PakTruck',
-
+      title: 'Trucks',
       searchController: searchTextEditingController,
       onFilterPressed: () {
         Utils.dismissKeyboard(context);
@@ -88,17 +87,17 @@ class TruckTabbarView extends StatelessWidget {
         ),
       ],
       tabViews: [
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
+        VechileVerticalCard(title: 'All', items: dummy),
+        VechileVerticalCard(title: 'Automatic', items: dummy),
+        VechileVerticalCard(title: 'Dumper Truck', items: dummy),
+        VechileVerticalCard(title: 'Flatbed Truck', items: dummy),
+        VechileVerticalCard(title: 'Tailer Truck', items: dummy),
+        VechileVerticalCard(title: 'Container Carrier', items: dummy),
+        VechileVerticalCard(title: 'Cargo Landing', items: dummy),
+        VechileVerticalCard(title: 'Box Truck', items: dummy),
+        VechileVerticalCard(title: 'Freezer Truck', items: dummy),
+        VechileVerticalCard(title: 'Tanker Truck', items: dummy),
+        VechileVerticalCard(title: 'Dump Truck', items: dummy),
       ],
     );
   }
@@ -124,6 +123,3 @@ var dummy = [
     'location': 'Karachi'
   },
 ];
-
-
-

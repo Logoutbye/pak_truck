@@ -3,28 +3,61 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
+import 'package:testt/src/configs/theme/theme_text.dart';
 
 class VechileVerticalCard extends StatelessWidget {
   final List<Map<String, String>> items;
 
   final bool showPakTruckTag;
-
+  final String title;
+  final Function()? onSortingPressed;
   const VechileVerticalCard({
     super.key,
     required this.items,
     this.showPakTruckTag = false,
+    required this.title,
+    this.onSortingPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          final item = items[index];
-          return _buildListItem(context, item);
-        },
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 12.sp),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(title,
+                      style: Themetext.superHeadline.copyWith(
+                          fontSize: 18.sp, fontWeight: FontWeight.w600)),
+                  GestureDetector(
+                    onTap: onSortingPressed,
+                    child: Row(
+                      children: [
+                        SvgPicture.asset('assets/svg/filter.svg'),
+                        SizedBox(width: 4.sp),
+                        Text('Filter'),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                final item = items[index];
+                return _buildListItem(context, item);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -114,7 +147,6 @@ class VechileVerticalCard extends StatelessWidget {
           Positioned(
               right: 0,
               child: GestureDetector(
-               
                 child: Container(
                   margin: EdgeInsets.all(8.sp),
                   padding: EdgeInsets.all(6.sp),

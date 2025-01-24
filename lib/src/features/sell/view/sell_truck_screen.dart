@@ -13,10 +13,8 @@ import 'package:testt/src/features/sell/view/ad_posted_screen.dart';
 import 'package:testt/src/features/sell/view_model/sell_truck_view_model.dart';
 import 'package:testt/src/features/sell/widget/bottom_sheets.dart';
 import 'package:testt/src/features/sell/widget/select_transmission_widget.dart';
-import 'package:testt/src/features/sell/widget/sell_image_picker.dart';
 import 'package:testt/src/features/sell/widget/sell_truck_media_picker.dart';
 import 'package:testt/src/features/sell/widget/sell_textform_field.dart';
-import 'package:testt/src/features/sell/widget/sell_video_picker.dart';
 import '../widget/select_engine_type_widget.dart';
 
 class SellTruckScreen extends StatefulWidget {

@@ -23,8 +23,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with TickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late TabController _categoryTabController;
   late TextEditingController searchTextEditingController;
 
@@ -45,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen>
             SliverAppBar(
               pinned: true,
               floating: true,
-              expandedHeight: 190.h,
+              expandedHeight: 170.h,
               flexibleSpace: FlexibleSpaceBar(
                 background: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,6 +176,9 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ),
               title: Row(
+                mainAxisAlignment: innerBoxIsScrolled
+                    ? MainAxisAlignment.start
+                    : MainAxisAlignment.spaceBetween,
                 children: [
                   UserImageAvatarWidget(
                       height: 30.h,
@@ -187,6 +189,8 @@ class _HomeScreenState extends State<HomeScreen>
                   Text('PakTruck',
                       style:
                           Themetext.subheadline.copyWith(color: Colors.black)),
+                  SizedBox(),
+                  SizedBox()
                 ],
               ),
               actions: [

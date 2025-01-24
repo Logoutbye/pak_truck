@@ -11,7 +11,7 @@ class EarthMovingTabbarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReusableTabBarView(
-      title: 'PakTruck',
+      title: 'Earth Moving',
       searchController: searchTextEditingController,
       onFilterPressed: () {
         Utils.dismissKeyboard(context);
@@ -27,19 +27,19 @@ class EarthMovingTabbarView extends StatelessWidget {
         Tab(
           child: Container(
             padding: EdgeInsets.all(8),
-            width: 90.w,
+            width: 160.w,
             child: Center(child: Text('Excavator Operator')),
           ),
         ),
         Tab(
           child: SizedBox(
-            width: 120.w,
+            width: 130.w,
             child: Center(child: Text('Loader Operator')),
           ),
         ),
         Tab(
           child: SizedBox(
-            width: 120.w,
+            width: 125.w,
             child: Center(child: Text('Roller Machine')),
           ),
         ),
@@ -63,31 +63,31 @@ class EarthMovingTabbarView extends StatelessWidget {
         ),
         Tab(
           child: SizedBox(
-            width: 100.w,
+            width: 130.w,
             child: Center(child: Text('Drilling Machine')),
           ),
         ),
         Tab(
           child: SizedBox(
-            width: 120.w,
+            width: 150.w,
             child: Center(child: Text('Compactor Machine')),
           ),
         ),
         Tab(
           child: SizedBox(
-            width: 120.w,
+            width: 100.w,
             child: Center(child: Text('Forklift')),
           ),
         ),
         Tab(
           child: SizedBox(
-            width: 120.w,
+            width: 100.w,
             child: Center(child: Text('Crusher')),
           ),
         ),
         Tab(
           child: SizedBox(
-            width: 120.w,
+            width: 150.w,
             child: Center(child: Text('Screening Machine')),
           ),
         ),
@@ -105,26 +105,80 @@ class EarthMovingTabbarView extends StatelessWidget {
         ),
       ],
       tabViews: [
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
+        VechileVerticalCard(title: 'All', items: dummy),
+        VechileVerticalCard(title: 'Excavator Operator', items: dummy),
+        VechileVerticalCard(title: 'Loader Operator', items: dummy),
+        VechileVerticalCard(title: 'Roller Machine', items: dummy),
+        VechileVerticalCard(title: 'Grader Machine', items: dummy),
+        VechileVerticalCard(title: 'Wheel Tractor', items: dummy),
+        VechileVerticalCard(title: 'Road Cutter', items: dummy),
+        VechileVerticalCard(title: 'Drilling Machine', items: dummy),
+        VechileVerticalCard(title: 'Compactor Machine', items: dummy),
+        VechileVerticalCard(title: 'Forklift', items: dummy),
+        VechileVerticalCard(title: 'Crusher', items: dummy),
+        VechileVerticalCard(title: 'Screening Machine', items: dummy),
+        VechileVerticalCard(title: 'Conveyor', items: dummy),
+        VechileVerticalCard(title: 'Buildozer', items: dummy),
       ],
     );
   }
 }
 
 var dummy = [
+  {
+    'image': 'assets/remove/truck.png',
+    'title': 'Dumper Truck',
+    'price': 'PKR. 3,800,000',
+    'location': 'Islamabad'
+  },
+  {
+    'image': 'assets/remove/truck_1.png',
+    'title': 'Automatic Truck',
+    'price': 'PKR. 3,800,000',
+    'location': 'Lahore'
+  },
+  {
+    'image': 'assets/images/remove_me2.png',
+    'title': 'Box Truck',
+    'price': 'PKR. 3,800,000',
+    'location': 'Karachi'
+  },
+  {
+    'image': 'assets/remove/truck.png',
+    'title': 'Dumper Truck',
+    'price': 'PKR. 3,800,000',
+    'location': 'Islamabad'
+  },
+  {
+    'image': 'assets/remove/truck_1.png',
+    'title': 'Automatic Truck',
+    'price': 'PKR. 3,800,000',
+    'location': 'Lahore'
+  },
+  {
+    'image': 'assets/images/remove_me2.png',
+    'title': 'Box Truck',
+    'price': 'PKR. 3,800,000',
+    'location': 'Karachi'
+  },
+  {
+    'image': 'assets/remove/truck.png',
+    'title': 'Dumper Truck',
+    'price': 'PKR. 3,800,000',
+    'location': 'Islamabad'
+  },
+  {
+    'image': 'assets/remove/truck_1.png',
+    'title': 'Automatic Truck',
+    'price': 'PKR. 3,800,000',
+    'location': 'Lahore'
+  },
+  {
+    'image': 'assets/images/remove_me2.png',
+    'title': 'Box Truck',
+    'price': 'PKR. 3,800,000',
+    'location': 'Karachi'
+  },
   {
     'image': 'assets/remove/truck.png',
     'title': 'Dumper Truck',

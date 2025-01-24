@@ -11,7 +11,7 @@ class AgriculturalTabbarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReusableTabBarView(
-      title: 'PakTruck',
+      title: 'Agricultural',
       searchController: searchTextEditingController,
       onFilterPressed: () {
         Utils.dismissKeyboard(context);
@@ -51,13 +51,11 @@ class AgriculturalTabbarView extends StatelessWidget {
         ),
       ],
       tabViews: [
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-        VechileVerticalCard(items: dummy),
-
-       
+        VechileVerticalCard(title: 'All', items: dummy),
+        VechileVerticalCard(title: 'Tractors', items: dummy),
+        VechileVerticalCard(title: 'Threshers', items: dummy),
+        VechileVerticalCard(title: 'Harvesters', items: dummy),
+        VechileVerticalCard(title: 'Seeders', items: dummy),
       ],
     );
   }
