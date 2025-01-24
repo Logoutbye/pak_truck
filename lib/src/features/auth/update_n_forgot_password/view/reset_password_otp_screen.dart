@@ -9,9 +9,9 @@ import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/features/auth/login/view_model/login_view_model.dart';
 import 'package:testt/src/configs/components/custom_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:testt/src/features/auth/signup/view_model/signup_viewmodel.dart';
 
 class ResetPasswordVerifyOtpScreen extends StatefulWidget {
   final String email;
@@ -64,7 +64,10 @@ class _ResetPasswordVerifyOtpScreenState
       focusNode: FocusNode(),
       closeKeyboardWhenCompleted: true,
       onCompleted: (pin) async {
-        await context.read<LoginViewModel>().verifyOtp(context, pin).then((_) {
+        await context
+            .read<AuthViewModel>()
+            .verifyPhoneOtp(context, pin)
+            .then((_) {
           Navigator.pushNamed(context, RoutesName.setNewPasswordScreen);
         }).onError((e, s) {
           Utils.flushBarErrorMessage(e.toString(), context);
@@ -160,7 +163,7 @@ class _ResetPasswordVerifyOtpScreenState
                 _startTimer();
                 var data = {"phone": widget.email};
                 await context
-                    .read<LoginViewModel>()
+                    .read<AuthViewModel>()
                     .reSendEmailOtp(context, data);
                 setState(() {});
               },

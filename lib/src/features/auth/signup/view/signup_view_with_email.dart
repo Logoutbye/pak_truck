@@ -22,7 +22,7 @@ class SignUpViewWithEmail extends StatelessWidget {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
 
-    return Consumer<SignUpViewModel>(builder: (context, signUpViewModel, _) {
+    return Consumer<AuthViewModel>(builder: (context, signUpViewModel, _) {
       return Scaffold(
         appBar: CustomAppBar(
           firstText: '',

@@ -8,8 +8,8 @@ import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/features/auth/login/view_model/login_view_model.dart';
 import 'package:testt/src/configs/components/custom_appbar.dart';
+import 'package:testt/src/features/auth/signup/view_model/signup_viewmodel.dart';
 import '../../../../configs/extensions.dart';
 import '../../../../configs/theme/theme_text.dart';
 import '../../../../configs/components/custom_text_filed.dart';
@@ -36,8 +36,8 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
     final localization = AppLocalizations.of(context)!;
 
     return ChangeNotifierProvider(
-      create: (_) => LoginViewModel(authRepository: getIt()),
-      child: Consumer<LoginViewModel>(builder: (context, loginViewModel, _) {
+      create: (_) => AuthViewModel(authRepository: getIt()),
+      child: Consumer<AuthViewModel>(builder: (context, loginViewModel, _) {
         return Scaffold(
           appBar: CustomAppBar(
             firstText: '',
@@ -56,8 +56,8 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
                       children: [
                         Text(
                           localization.signin,
-                          style: Themetext.headline.copyWith(
-                              color: AppColors.primary, fontSize: 21),
+                          style: Themetext.headline
+                              .copyWith(color: AppColors.primary, fontSize: 21),
                         ),
                         SizedBox(height: context.mediaQueryHeight / 80),
                         Text(
@@ -104,8 +104,8 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
                 ),
                 Spacer(),
                 // need gap here that
-                Consumer<LoginViewModel>(
-                  builder: (BuildContext context, LoginViewModel provider,
+                Consumer<AuthViewModel>(
+                  builder: (BuildContext context, AuthViewModel provider,
                       Widget? child) {
                     return RoundButton(
                       loading: provider.loading ? true : false,
@@ -155,8 +155,8 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
                       },
                       child: Text(
                         ' ${localization.sign_up}',
-                        style: Themetext.blackBoldText.copyWith(
-                            color: AppColors.primary, fontSize: 16),
+                        style: Themetext.blackBoldText
+                            .copyWith(color: AppColors.primary, fontSize: 16),
                       ),
                     ),
                   ],

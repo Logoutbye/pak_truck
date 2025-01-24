@@ -8,9 +8,8 @@ import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/utils.dart';
 import 'package:testt/src/features/auth/signup/view/signup_view_with_number.dart';
-import 'package:testt/src/features/auth/login/view_model/login_view_model.dart';
-import 'package:testt/src/features/auth/update_n_forgot_password/view/reset_password_otp_screen.dart';
 import 'package:testt/src/configs/components/custom_appbar.dart';
+import 'package:testt/src/features/auth/signup/view_model/signup_viewmodel.dart';
 import '../../../../configs/extensions.dart';
 import '../../../../configs/theme/theme_text.dart';
 import '../../../../configs/components/custom_text_filed.dart';
@@ -38,8 +37,8 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
     final localization = AppLocalizations.of(context)!;
 
     return ChangeNotifierProvider(
-      create: (_) => LoginViewModel(authRepository: getIt()),
-      child: Consumer<LoginViewModel>(builder: (context, loginViewModel, _) {
+      create: (_) => AuthViewModel(authRepository: getIt()),
+      child: Consumer<AuthViewModel>(builder: (context, loginViewModel, _) {
         return Scaffold(
           appBar: CustomAppBar(
             firstText: '',
@@ -80,8 +79,8 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                 ),
                 Spacer(),
                 // need gap here that
-                Consumer<LoginViewModel>(
-                  builder: (BuildContext context, LoginViewModel provider,
+                Consumer<AuthViewModel>(
+                  builder: (BuildContext context, AuthViewModel provider,
                       Widget? child) {
                     return RoundButton(
                       loading: provider.loading ? true : false,

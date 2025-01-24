@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/repository/signup_api/signup_repository.dart';
+import 'package:testt/src/repository/auth_api/auth_repository.dart';
 
 class CompleteAccountViewModel extends ChangeNotifier {
-  final SignUpRepository signUpRepository;
+  final AuthRepository signUpRepository;
   CompleteAccountViewModel({required this.signUpRepository});
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailAddressController = TextEditingController();
   final TextEditingController phoneNoController = TextEditingController();
-  String? role;
-  String? type;
+  String? accountType;
+  String? shopType;
 
   void setUserRole(String role) {
     role = role;
     notifyListeners();
   }
 
-  void setUserRoleAndType(String role, String type) {
-    type = type;
-    role = role;
+  void setUserRoleAndType(String rolee, String typee) {
+    accountType = rolee;
+    shopType = typee;
+
     notifyListeners();
   }
 
@@ -52,20 +53,17 @@ class CompleteAccountViewModel extends ChangeNotifier {
   }
 
   Future<void> selectAccountMode(
-      BuildContext context, bool isIndividual) async {
+      BuildContext context, bool isIndividual, String userId) async {
     setLoading(true);
     try {
       var data = isIndividual
-          ? {
-              'userId': '',
-              'accountMode': '',
-            }
-          : {'userId': '', 'accountMode': '', 'shope': ''};
-      Future.delayed(Duration(seconds: 2), () {
-        setLoading(false);
-        Navigator.pushNamed(context, RoutesName.completeAccountScreen);
-      });
-      // var response = await signUpRepository.selectAccountMode(data);
+          ? {'userId': userId, 'accountMode': 'individual'}
+          : {'userId': userId, 'accountMode': 'shop', 'shopCategory': shopType};
+      print(data);
+      await signUpRepository.selectAccountMode(data);
+      setLoading(false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, RoutesName.dashboard, (route) => false);
     } catch (error) {
       Utils.snackBar('Failed to submitted. Please try again.', context);
       setLoading(false);

@@ -27,16 +27,18 @@ class _SignUpViewWithNumberState extends State<SignUpViewWithNumber> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
 
-    return Consumer<SignUpViewModel>(builder: (context, signupViewModel, _) {
+    return Consumer<AuthViewModel>(builder: (context, signupViewModel, _) {
       return Scaffold(
         appBar: CustomAppBar(
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(
+                    context, RoutesName.loginViewWithNumber);
+              },
+              icon: Icon(Icons.arrow_back)),
           firstText: localization.create_an_account,
           secondText: localization.sign_up,
         ),
-       
-       
-       
-       
         body: Padding(
           padding: const EdgeInsets.all(20),
           child: ListView(
@@ -83,8 +85,7 @@ class _SignUpViewWithNumberState extends State<SignUpViewWithNumber> {
                     Utils.flushBarErrorMessage(
                         'Please enter your phone number', context);
                   } else {
-                    signupViewModel
-                        .sendPhoneOtp(context);
+                    signupViewModel.sendPhoneOtp(context);
                   }
                 },
                 color: signupViewModel.phoneNumber.isEmpty
@@ -139,10 +140,6 @@ class _SignUpViewWithNumberState extends State<SignUpViewWithNumber> {
             ],
           ),
         ),
-     
-     
-     
-     
         bottomSheet: Padding(
           padding: const EdgeInsets.only(bottom: 38.0),
           child: Row(

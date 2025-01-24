@@ -103,30 +103,3 @@ class CustomAlertDialog extends StatelessWidget {
     );
   }
 }
-
-// Usage Example:
-// CustomAlertDialog(
-//   title: 'Logout',
-//   contentSpans: [
-//     TextSpan(
-//       text: 'Are you sure you want to ',
-//       style: TextStyle(color: Colors.black),
-//     ),
-//     TextSpan(
-//       text: 'log out',
-//       style: TextStyle(color: Colors.red),
-//     ),
-//     TextSpan(
-//       text: ' your account?',
-//       style: TextStyle(color: Colors.black),
-//     ),
-//   ],
-//   buttonText: 'Logout',
-//   onButtonPressed: () {
-//     // Handle logout logic
-//   },
-//   icon: 'assets/icons/logout.svg', // Or null if no icon
-//   onCancelPressed: () {
-//     Navigator.pop(context);
-//   },
-// );

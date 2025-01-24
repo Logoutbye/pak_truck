@@ -4,12 +4,14 @@ import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/utils.dart';
 import 'package:testt/src/features/auth/signup/view/signup_verify_otp_screen.dart';
-import 'package:testt/src/repository/signup_api/signup_repository.dart';
+import 'package:testt/src/features/splash/services/session_manager/session_controller.dart';
+import 'package:testt/src/model/user/user_model.dart';
+import 'package:testt/src/repository/auth_api/auth_repository.dart';
 
-class SignUpViewModel extends ChangeNotifier {
-  final SignUpRepository signUpRepository;
+class AuthViewModel extends ChangeNotifier {
+  final AuthRepository authRepository;
 
-  SignUpViewModel({required this.signUpRepository});
+  AuthViewModel({required this.authRepository});
 
   bool _loading = false;
   bool get loading => _loading;
@@ -33,20 +35,6 @@ class SignUpViewModel extends ChangeNotifier {
     try {
       // final response = await signUpRepository.sendEmailOtp(data);
       Utils.flushBarErrorMessage('OTP sent successfully', context);
-      toggleOtpField(true);
-    } catch (error) {
-      Utils.flushBarErrorMessage(error.toString(), context);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  Future<void> reSendEmailOtp(
-      BuildContext context, Map<String, String> data) async {
-    setLoading(true);
-    try {
-      // final response = await signUpRepository.reSendEmailOtp(data);
-      Utils.flushBarErrorMessage('OTP re-sent successfully', context);
       toggleOtpField(true);
     } catch (error) {
       Utils.flushBarErrorMessage(error.toString(), context);
@@ -106,13 +94,10 @@ class SignUpViewModel extends ChangeNotifier {
 
     setLoading(true);
     try {
-      String fullPhone = fullPhoneNumber;
-      Future.delayed(Duration(seconds: 2), () {
-        setLoading(false);
-      });
-      // var response = await signUpRepository.sendPhoneOtp(fullPhone);
-      // print(response.success);
+      var data = {'phone': fullPhoneNumber};
+      await authRepository.sendPhoneOtp(data);
 
+      setLoading(false);
       Navigator.push(
           context,
           SlideTransitionPage(
@@ -140,8 +125,6 @@ class SignUpViewModel extends ChangeNotifier {
       });
       // var response = await signUpRepository.sendPhoneOtp(fullPhone);
       // print(response.success);
-
-  
     } catch (error) {
       Utils.snackBar('Failed to send OTP. Please try again.', context);
       setLoading(false);
@@ -154,13 +137,92 @@ class SignUpViewModel extends ChangeNotifier {
       Future.delayed(Duration(seconds: 2), () {
         setLoading(false);
       });
-      // var response = await signUpRepository.verifyPhoneOtp(pin);
+
+      var data = {'identifier': fullPhoneNumber, 'otp': pin};
+      var response = await authRepository.verifyPhoneOtp(data);
+
+      // Parse the response into a UserModel object
+      UserModel userModel = UserModel.fromJson(response);
+      SessionController().saveUserInPreference(userModel);
 
       Navigator.pushNamedAndRemoveUntil(
-          context, RoutesName.chooseAccountScreen, (route) => false);
+          context,
+          userModel.user?.accountMode != null
+              ? RoutesName.chooseAccountScreen
+              : RoutesName.dashboard,
+          (route) => false);
+
       Utils.snackBar('Otp verified successfully', context);
     } catch (error) {
       Utils.snackBar('Failed to verify OTP. Please try again.', context);
+      setLoading(false);
+    }
+  }
+
+  Future<void> signinWithEmail(BuildContext context, dynamic data) async {
+    setLoading(true);
+    try {
+      Future.delayed(Duration(seconds: 2), () {
+        setLoading(false);
+        Utils.snackBar('Login Successfully', context);
+      });
+      // var response = await authRepository.signInWithEmailApi(data);
+    } catch (error) {
+      Utils.snackBar('Failed to Login. Please try again.', context);
+      setLoading(false);
+    }
+  }
+
+  Future<void> signupWithEmail(BuildContext context, dynamic data) async {
+    setLoading(true);
+    try {
+      Future.delayed(Duration(seconds: 2), () {
+        setLoading(false);
+        Utils.snackBar('User Registrered Scuessfully', context);
+      });
+      // var response = await authRepository.signUpWithEmailApi(data);
+    } catch (error) {
+      Utils.snackBar('Failed to send OTP. Please try again.', context);
+      setLoading(false);
+    }
+  }
+
+  Future<void> forgotPassword(BuildContext context, dynamic data) async {
+    setLoading(true);
+    try {
+      Future.delayed(Duration(seconds: 2), () {
+        setLoading(false);
+        Utils.snackBar('Code Sent successfully on your email', context);
+      });
+    } catch (error) {
+      Utils.snackBar('Failed to send code. Please try again.', context);
+      setLoading(false);
+    }
+  }
+
+  Future<void> resetPassword(BuildContext context, dynamic data) async {
+    setLoading(true);
+    try {
+      Future.delayed(Duration(seconds: 2), () {
+        setLoading(false);
+        Utils.snackBar('Code Sent successfully on your email', context);
+      });
+    } catch (error) {
+      Utils.snackBar('Failed to send code. Please try again.', context);
+      setLoading(false);
+    }
+  }
+
+  Future<void> reSendEmailOtp(BuildContext context, dynamic data) async {
+    setLoading(true);
+    try {
+      String fullPhone = 'fullPhoneNumber';
+      Future.delayed(Duration(seconds: 2), () {
+        setLoading(false);
+      });
+      var response = await authRepository.sendEmailOtp(fullPhone);
+    } catch (error) {
+      Utils.snackBar('Failed to send OTP. Please try again.', context);
       setLoading(false);
     }
   }

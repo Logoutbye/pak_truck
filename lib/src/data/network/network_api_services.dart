@@ -19,7 +19,7 @@ class NetworkApiService implements BaseApiServices {
     dynamic responseJson;
     try {
       // Retrieve the token from SessionController
-      String? token = SessionController().user?.token ?? '';
+      String? token = SessionController().token;
 
       // Prepare headers
       Map<String, String> headers = {
@@ -27,7 +27,7 @@ class NetworkApiService implements BaseApiServices {
       };
 
       // Add Authorization header if token is available
-      if (token.isNotEmpty) {
+      if (token != null) {
         headers['Authorization'] = 'Bearer $token';
       }
 
@@ -55,14 +55,14 @@ class NetworkApiService implements BaseApiServices {
     dynamic responseJson;
     try {
       // Retrieve the token from SessionController
-      String? token = SessionController().user?.token ?? '';
+      String? token = SessionController().token;
 
       // Prepare headers, conditionally adding the Authorization header
       Map<String, String> headers = {
         'Content-Type': 'application/json',
       };
 
-      if (token.isNotEmpty) {
+      if (token != null) {
         headers['Authorization'] = 'Bearer $token';
       }
 
@@ -107,7 +107,7 @@ class NetworkApiService implements BaseApiServices {
 
     try {
       // Retrieve the token from SessionController
-      String? token = SessionController().user?.token ?? '';
+      String? token = SessionController().token;
 
       // Create Multipart Request
       var request = MultipartRequest('POST', Uri.parse(url));
@@ -118,7 +118,7 @@ class NetworkApiService implements BaseApiServices {
       };
 
       // Add Authorization header if token is available
-      if (token.isNotEmpty) {
+      if (token != null) {
         headers['Authorization'] = 'Bearer $token';
       }
 
@@ -198,14 +198,14 @@ class NetworkApiService implements BaseApiServices {
     dynamic responseJson;
     try {
       // Retrieve the token from SessionController
-      String? token = SessionController().user?.token ?? '';
+      String? token = SessionController().token;
 
       // Prepare headers, conditionally adding the Authorization header
       Map<String, String> headers = {
         'Content-Type': 'application/json',
       };
 
-      if (token.isNotEmpty) {
+      if (token != null) {
         headers['Authorization'] = 'Bearer $token';
       }
 
@@ -236,14 +236,14 @@ class NetworkApiService implements BaseApiServices {
     dynamic responseJson;
     try {
       // Retrieve the token from SessionController
-      String? token = SessionController().user?.token ?? '';
+      String? token = SessionController().token;
 
       // Prepare headers, conditionally adding the Authorization header
       Map<String, String> headers = {
         'Content-Type': 'application/json',
       };
 
-      if (token.isNotEmpty) {
+      if (token != null) {
         headers['Authorization'] = 'Bearer $token';
       }
 

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
+import 'package:testt/src/features/auth/signup/view_model/signup_viewmodel.dart';
 
 class CountryPickerTextFormField extends StatefulWidget {
   final String hintText;
@@ -29,9 +31,33 @@ class CountryPickerTextFormField extends StatefulWidget {
 class _CountryPickerTextFormFieldState
     extends State<CountryPickerTextFormField> {
   Country? selectedCountry;
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the selectedCountry with Pakistan by default
+    selectedCountry = Country(
+      phoneCode: '92', // Pakistan's phone code
+      countryCode: 'PK', // Pakistan's 2-letter country code
+      e164Sc: 0, // e164Sc value (use 0 for default)
+      geographic: true, // Pakistan is a geographic country
+      level: 1, // Set level (1 is typical for countries)
+      name: 'Pakistan', // Country name
+      nameLocalized: 'Pakistan', // Localized name (optional)
+      example: '+92 300 1234567', // Example phone number
+      displayName: 'Pakistan +92', // Display name with phone code
+      displayNameNoCountryCode: 'Pakistan', // Display name without phone code
+      e164Key: 'PK', // e164 key (often the 2-letter country code)
+      fullExampleWithPlusSign: '+923001234567', // Full example with '+' sign
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    Future.microtask(() {
+      Provider.of<AuthViewModel>(context, listen: false)
+          .setSelectedCountry(selectedCountry!);
+
+    });
     return Container(
       height: context.mediaQueryHeight / 17,
       decoration: BoxDecoration(

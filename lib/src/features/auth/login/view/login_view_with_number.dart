@@ -7,7 +7,8 @@ import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/features/auth/login/view_model/login_view_model.dart';
+
+import 'package:testt/src/features/auth/signup/view_model/signup_viewmodel.dart';
 import 'package:testt/src/features/auth/widgets/country_picker_textfiled.dart';
 import 'package:testt/src/configs/components/custom_appbar.dart';
 import '../../../../configs/extensions.dart';
@@ -35,10 +36,11 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
     final localization = AppLocalizations.of(context)!;
 
     return ChangeNotifierProvider(
-      create: (_) => LoginViewModel(authRepository: getIt()),
-      child: Consumer<LoginViewModel>(builder: (context, loginViewModel, _) {
+      create: (_) => AuthViewModel(authRepository: getIt()),
+      child: Consumer<AuthViewModel>(builder: (context, loginViewModel, _) {
         return Scaffold(
           appBar: CustomAppBar(
+            leading: SizedBox.shrink(),
             firstText: localization.signin_second,
             secondText: localization.signin_first,
             isSecondTextBeforeFirst: true,
@@ -140,12 +142,6 @@ class _LoginViewWithNumberState extends State<LoginViewWithNumber> {
                   color: AppColors.white,
                   borderColor: Colors.grey.shade300,
                 ),
-                // SizedBox(height: context.mediaQueryHeight / 10),
-                // RoundButton(
-                //   title: localization.next_button,
-                //   onPress: () {},
-                // ),
-                // SizedBox(height: context.mediaQueryHeight / 30),
               ],
             ),
           ),

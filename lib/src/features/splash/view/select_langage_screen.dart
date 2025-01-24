@@ -5,6 +5,7 @@ import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/utils.dart';
+import 'package:testt/src/features/splash/services/session_manager/session_controller.dart';
 import 'package:testt/src/features/splash/view_model/local_provider.dart';
 import '../../../configs/components/inline_drop_down_widget.dart';
 import '../services/splash/splash_services.dart';
@@ -58,10 +59,11 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
                     'Urdu',
                   ],
                   selectedItem: selectedLanguage,
-                  onChanged: (value) {
+                  onChanged: (value) async {
                     setState(() {
                       selectedLanguage = value;
                     });
+                    await SessionController().saveLanguageInPreference();
                   },
                   itemLabelBuilder: (item) => item,
                 ),

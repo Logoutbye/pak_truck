@@ -61,7 +61,7 @@ class _SignUpVerifyOtpScreenState extends State<SignUpVerifyOtpScreen> {
       closeKeyboardWhenCompleted:
           true, // Close the keyboard when OTP is complete
       onCompleted: (pin) async {
-        await context.read<SignUpViewModel>().verifyPhoneOtp(context, pin);
+        await context.read<AuthViewModel>().verifyPhoneOtp(context, pin);
       },
       onChanged: (pin) {
         // Handle OTP change here if needed
@@ -164,7 +164,7 @@ class _SignUpVerifyOtpScreenState extends State<SignUpVerifyOtpScreen> {
             TextButton(
               onPressed: () async {
                 _startTimer();
-                await context.read<SignUpViewModel>().reSendPhoneOtp(context);
+                await context.read<AuthViewModel>().reSendPhoneOtp(context);
 
                 setState(() {});
               },

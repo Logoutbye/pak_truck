@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/extensions.dart';
@@ -199,7 +200,7 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                       Transform.scale(
                         scale: 1.5,
                         child: Radio<String>(
-                          value: "Shop",
+                          value: "Store",
                           groupValue: _shopType,
                           activeColor: AppColors.primary,
                           onChanged: (value) {
@@ -212,14 +213,14 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            _shopType = "Shop";
+                            _shopType = "Store";
                           });
                         },
                         child: Text(
-                          "Shop",
+                          "Auto Store",
                           style: TextStyle(
                             fontSize: 18,
-                            color: _shopType == "Shop"
+                            color: _shopType == "Store"
                                 ? AppColors.primary
                                 : Colors.black,
                             fontWeight: FontWeight.w500,
@@ -243,15 +244,25 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                           : _shopType == null
                               ? "Select Shop Type"
                               : "Verify Your Shop",
-                      onPress: () {
+                      onPress: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        String? userId = prefs.getString('user_id');
+
+
                         if (_accountType == "Individual") {
                           value.setUserRole(_accountType.toLowerCase());
-                          value.selectAccountMode(context, true);
-                        } else if (_accountType == "Shop" &&
-                            _shopType != null) {
+                          value.selectAccountMode(
+                            context,
+                            true,
+                            userId.toString(),
+                          );
+                        } else if (_accountType == "Shop" &&  _shopType != null) {
                           value.setUserRoleAndType(_accountType.toLowerCase(),
                               _shopType?.toLowerCase() ?? 'Not defined');
-                          value.selectAccountMode(context, false);
+
+                          value.selectAccountMode(
+                              context, false, userId.toString());
                         } else {
                           Utils.flushBarErrorMessage(
                               'Please select a shop type.', context);

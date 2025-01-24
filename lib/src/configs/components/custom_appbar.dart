@@ -29,7 +29,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: leading ??
           IconButton(
             onPressed: () {
-              Navigator.pop(context);
+             Navigator.pop(context);
             },
             icon: CircleAvatar(
               backgroundColor: Colors.white,
