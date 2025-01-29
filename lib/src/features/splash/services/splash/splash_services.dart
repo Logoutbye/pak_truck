@@ -18,7 +18,7 @@ class SplashServices {
         Navigator.pushNamedAndRemoveUntil(
             context,
             isLanguageSelected == true
-                ? RoutesName.loginViewWithNumber
+                ? RoutesName.signupViewWithNumber
                 : RoutesName.selectLanguageScreen,
             (route) => false);
       }

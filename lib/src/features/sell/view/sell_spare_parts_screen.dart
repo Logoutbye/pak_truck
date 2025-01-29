@@ -43,6 +43,32 @@ class _SellSparePartsScreenState extends State<SellSparePartsScreen> {
               Provider.of<SellSparePartsViewModel>(context)),
           SizedBox(height: context.mediaQueryHeight / 70),
           Text('Spare parts information', style: Themetext.superHeadline),
+          //  category
+          SellTextformField(
+            errorText: viewModel.fieldErrors['Category'],
+            titleText: 'Category',
+            hintText: 'Select Category',
+            controller: viewModel.cateogryController,
+            leading: SvgPicture.asset(
+              'assets/svg/truck_im.svg',
+              height: 18.h,
+            ),
+            trailing: InkWell(
+              onTap: () {
+                 showSelectionModal(
+                    context: context,
+                    title: "Select Category",
+                    hintText: 'Search by Category',
+                    items: sparePartsCategories,
+                    onItemSelected: (selectedItem) {
+                      viewModel.cateogryController.text = selectedItem;
+                    },
+                  );
+              },
+              child: Image.asset('assets/images/more.png'),
+            ),
+          ),
+
           //  location
           SellTextformField(
             errorText: viewModel.fieldErrors['Location'],

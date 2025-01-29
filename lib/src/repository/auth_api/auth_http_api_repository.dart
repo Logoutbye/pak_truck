@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:testt/src/features/auth/signup/model/send_email_otp.dart';
+
 import '../../data/network/base_api_services.dart';
 import '../../data/network/network_api_services.dart';
 import '../../data/network/app_url.dart';
@@ -33,32 +33,17 @@ class AuthHttpApiRepository implements AuthRepository {
 
   // signup with email
   @override
-  Future<SendEmailOtpResponse> sendEmailOtp(dynamic data) async {
+  Future<Map<String, dynamic>> signupEmail(dynamic data) async {
     dynamic response = await _apiServices.postApiResponse(
-        AppUrl.sendEmailOtp, jsonEncode(data));
-    return SendEmailOtpResponse.fromJson(response);
+        AppUrl.signupEmail, jsonEncode(data));
+    return response;
   }
 
   @override
-  Future<Map<String, dynamic>> verifyEmailOtp(dynamic data) async {
-    try {
-      final response = await _apiServices.postApiResponse(
-          AppUrl.verifyEmailOtp, jsonEncode(data));
-      return response;
-    } catch (error) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<Map<String, dynamic>> reSendEmailOtp(dynamic data) async {
-    try {
-      final response = await _apiServices.postApiResponse(
-          AppUrl.reSendEmailOtp, jsonEncode(data));
-      return response;
-    } catch (error) {
-      rethrow;
-    }
+  Future<Map<String, dynamic>> signInEmail(dynamic data) async {
+    dynamic response = await _apiServices.postApiResponse(
+        AppUrl.signInEmail, jsonEncode(data));
+    return response;
   }
 
   // Profile setup
@@ -78,6 +63,28 @@ class AuthHttpApiRepository implements AuthRepository {
     try {
       final response = await _apiServices.postApiResponse(
           AppUrl.completeProfile, jsonEncode(data));
+      return response;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> forgotPasswordApi(dynamic data) async {
+    try {
+      final response = await _apiServices.postApiResponse(
+          AppUrl.forgetPassword, jsonEncode(data));
+      return response;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> resetPasswordApi(dynamic data) async {
+    try {
+      final response = await _apiServices.postApiResponse(
+          AppUrl.resetPassword, jsonEncode(data));
       return response;
     } catch (error) {
       rethrow;

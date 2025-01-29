@@ -7,6 +7,7 @@ part 'spare_parts_model.g.dart';
 class SparePartsModel with _$SparePartsModel {
   const factory SparePartsModel({
    @Default([]) List<String>? images, // List of image file paths
+   @Default('') String category, // Location
    @Default('') String location, // Location
    @Default('') String price, // Location
    @Default('') String title, // Title

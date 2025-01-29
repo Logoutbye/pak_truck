@@ -66,7 +66,7 @@ class _ResetPasswordVerifyOtpScreenState
       onCompleted: (pin) async {
         await context
             .read<AuthViewModel>()
-            .verifyPhoneOtp(context, pin)
+            .verifyOtp(context, pin, '')
             .then((_) {
           Navigator.pushNamed(context, RoutesName.setNewPasswordScreen);
         }).onError((e, s) {
@@ -162,9 +162,9 @@ class _ResetPasswordVerifyOtpScreenState
               onPressed: () async {
                 _startTimer();
                 var data = {"phone": widget.email};
-                await context
-                    .read<AuthViewModel>()
-                    .reSendEmailOtp(context, data);
+                // await context
+                //     .read<AuthViewModel>()
+                //     .reSendEmailOtp(context, data);
                 setState(() {});
               },
               child: const Text(

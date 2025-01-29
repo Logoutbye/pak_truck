@@ -5,11 +5,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/main.dart';
 import 'package:testt/src/configs/components/round_button.dart';
-import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/utils.dart';
 import 'package:testt/src/features/auth/signup/view_model/signup_viewmodel.dart';
-
-import 'package:testt/src/features/auth/update_n_forgot_password/view/reset_password_otp_screen.dart';
 import 'package:testt/src/configs/components/custom_appbar.dart';
 import '../../../../configs/extensions.dart';
 import '../../../../configs/theme/theme_text.dart';
@@ -84,20 +81,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           Utils.flushBarErrorMessage(
                               'Please enter your email', context);
                         } else {
-                          Map data = {
-                            'email': _emailController.text.trim(),
-                          };
-                          provider.forgotPassword(context, data).then((value) {
-                            Navigator.push(
-                                context,
-                                SlideTransitionPage(
-                                    page: ResetPasswordVerifyOtpScreen(
-                                  email: _emailController.text.trim(),
-                                )));
-                          }).onError((error, stackTrace) {
-                            Utils.flushBarErrorMessage(
-                                error.toString(), context);
-                          });
+                          provider.forgotPassword(
+                              context, _emailController.text.trim());
                         }
                       },
                     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/components/round_button.dart';
@@ -39,7 +40,10 @@ class CustomAlertDialog extends StatelessWidget {
         children: [
           if (icon != null && icon!.isNotEmpty)
             icon!.endsWith('.svg')
-                ? SvgPicture.asset(icon!, color: iconColor,)
+                ? SvgPicture.asset(
+                    icon!,
+                    color: iconColor,
+                  )
                 : Image.asset(icon!, height: 24, width: 24, color: iconColor),
           if (icon != null && icon!.isNotEmpty) SizedBox(width: 8),
           Flexible(
@@ -84,6 +88,9 @@ class CustomAlertDialog extends StatelessWidget {
               color: AppColors.greyColor,
               title: cancelButtonText,
               onPress: onCancelPressed,
+            ),
+            SizedBox(
+              width: 15.sp,
             ),
             RoundButton(
               borderRadius: 15,

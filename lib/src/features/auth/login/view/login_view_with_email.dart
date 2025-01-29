@@ -66,17 +66,13 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
                       ],
                     ),
                     SizedBox(height: context.mediaQueryHeight / 20),
-                    // AuthTextFormField(
-                    //   hintText: 'Enter your name',
-                    //   controller: _nameController,
-                    // ),
-                    // SizedBox(height: context.mediaQueryHeight / 30),
                     CustomTextFormField(
                       hintText: 'Enter your email',
                       controller: _emailController,
                     ),
                     SizedBox(height: context.mediaQueryHeight / 30),
                     CustomTextFormField(
+                      isPassword: true,
                       hintText: 'Enter your password',
                       controller: _passwordController,
                     ),
@@ -111,10 +107,6 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
                       loading: provider.loading ? true : false,
                       title: 'Login',
                       onPress: () {
-                        // if (_nameController.text.isEmpty) {
-                        //   Utils.flushBarErrorMessage(
-                        //       'Please enter your name', context);
-                        // } else
                         if (_emailController.text.isEmpty) {
                           Utils.flushBarErrorMessage(
                               'Please enter your email', context);
@@ -122,18 +114,11 @@ class _LoginViewWithEmailState extends State<LoginViewWithEmail> {
                           Utils.flushBarErrorMessage(
                               'Please enter your password', context);
                         } else {
-                          Map data = {
-                            // 'name': _nameController.text.trim(),
+                          var data = {
                             'email': _emailController.text.trim(),
                             'password': _passwordController.text.trim(),
                           };
-                          provider.signinWithEmail(context, data).then((value) {
-                            Navigator.pushNamed(
-                                context, RoutesName.chooseAccountScreen);
-                          }).onError((error, stackTrace) {
-                            Utils.flushBarErrorMessage(
-                                error.toString(), context);
-                          });
+                          provider.signinWithEmail(context, data);
                         }
                       },
                     );

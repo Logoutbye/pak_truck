@@ -48,6 +48,7 @@ class SellSparePartsViewModel extends ChangeNotifier {
   // }
 
   // ---------------------Controllers for truck info
+  TextEditingController cateogryController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   TextEditingController conditionController = TextEditingController();
@@ -100,7 +101,9 @@ class SellSparePartsViewModel extends ChangeNotifier {
   // Validation Logic
   bool validateSellTruckFields(BuildContext context) {
     _fieldErrors.clear();
-
+    if (cateogryController.text.isEmpty) {
+      _fieldErrors['Category'] = 'Category is required';
+    }
     if (priceController.text.isEmpty) {
       _fieldErrors['Price'] = 'Price is required';
     }
@@ -147,6 +150,7 @@ class SellSparePartsViewModel extends ChangeNotifier {
     try {
       if (validateSellTruckFields(context)) {
         SparePartsModel spareParts = SparePartsModel(
+          category: cateogryController.text.trim(),
           location: locationController.text.trim(),
           title: titleController.text.trim(),
           description: descriptionController.text.trim(),
@@ -174,6 +178,7 @@ class SellSparePartsViewModel extends ChangeNotifier {
 
   @override
   void dispose() {
+    cateogryController.clear();
     priceController.dispose();
     locationController.dispose();
     titleController.dispose();

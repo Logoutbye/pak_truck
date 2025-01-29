@@ -13,6 +13,7 @@ _$SparePartsModelImpl _$$SparePartsModelImplFromJson(
               ?.map((e) => e as String)
               .toList() ??
           const [],
+      category: json['category'] as String? ?? '',
       location: json['location'] as String? ?? '',
       price: json['price'] as String? ?? '',
       title: json['title'] as String? ?? '',
@@ -28,6 +29,7 @@ Map<String, dynamic> _$$SparePartsModelImplToJson(
         _$SparePartsModelImpl instance) =>
     <String, dynamic>{
       'images': instance.images,
+      'category': instance.category,
       'location': instance.location,
       'price': instance.price,
       'title': instance.title,

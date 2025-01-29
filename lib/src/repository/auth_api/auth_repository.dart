@@ -1,4 +1,3 @@
-import 'package:testt/src/features/auth/signup/model/send_email_otp.dart';
 
 abstract class AuthRepository {
   // Sign up with phone
@@ -6,11 +5,13 @@ abstract class AuthRepository {
   Future<Map<String, dynamic>> verifyPhoneOtp(dynamic data);
 
   // Sign up with email
-  Future<SendEmailOtpResponse> sendEmailOtp(dynamic data);
-  Future<Map<String, dynamic>> reSendEmailOtp(dynamic data);
-  Future<Map<String, dynamic>> verifyEmailOtp(dynamic data);
+  Future<Map<String, dynamic>> signupEmail(dynamic data);
+  Future<Map<String, dynamic>> signInEmail(dynamic data);
+
 
   // Profile setup
   Future<Map<String, dynamic>> selectAccountMode(dynamic data);
   Future<Map<String, dynamic>> completeProfile(dynamic data);
+  Future<Map<String, dynamic>> forgotPasswordApi(dynamic data);
+  Future<Map<String, dynamic>> resetPasswordApi(dynamic data);
 }

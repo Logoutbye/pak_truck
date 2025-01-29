@@ -11,8 +11,8 @@ class CustomTextFormField extends StatefulWidget {
   final ValueChanged<Country?>? onCountrySelected;
   final ValueChanged<String>? onPhoneNumberChanged;
   final bool isPassword;
-  final int? minLines; // Minimum number of lines
-  final int? maxLines; // Maximum number of lines
+  final int? minLines;
+  final int? maxLines;
 
   const CustomTextFormField({
     super.key,
@@ -33,44 +33,67 @@ class CustomTextFormField extends StatefulWidget {
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   Country? selectedCountry;
+  bool _isObscure = true; // State to toggle password visibility
+
+  @override
+  void initState() {
+    super.initState();
+    _isObscure = widget.isPassword; // Initialize based on `isPassword`
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // Remove fixed height to allow dynamic resizing
       decoration: BoxDecoration(
         color: widget.color,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: widget.borderColor),
       ),
-      child: TextFormField(
-        controller: widget.controller,
-        obscureText: widget.isPassword,
-        style: Themetext.subheadline,
-        minLines: widget.minLines, // Support multi-line input
-        maxLines: widget.maxLines ?? null, // Null allows dynamic expansion
-        onTapOutside: (event) => Utils.dismissKeyboard(context),
-
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(
-              vertical: 10, horizontal: 10), // Adjust padding for centering
-          focusedBorder: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          border: InputBorder.none,
-          hintText: widget.hintText,
-          hintStyle: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w200,
-            fontSize: 15,
+      child: Row(
+        children: [
+          Expanded(
+            child: TextFormField(
+              controller: widget.controller,
+              obscureText: widget.isPassword ? _isObscure : false,
+              style: Themetext.subheadline,
+              minLines: widget.minLines,
+              maxLines: widget.isPassword ? 1 : widget.maxLines ?? null,
+              onTapOutside: (event) => Utils.dismissKeyboard(context),
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10, horizontal: 10),
+                focusedBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                border: InputBorder.none,
+                hintText: widget.hintText,
+                hintStyle: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w200,
+                  fontSize: 15,
+                ),
+                filled: true,
+                fillColor: Colors.transparent,
+              ),
+              onChanged: (value) {
+                if (widget.onPhoneNumberChanged != null) {
+                  widget.onPhoneNumberChanged!(value);
+                }
+              },
+            ),
           ),
-          filled: true,
-          fillColor: Colors.transparent,
-        ),
-        onChanged: (value) {
-          if (widget.onPhoneNumberChanged != null) {
-            widget.onPhoneNumberChanged!(value);
-          }
-        },
+          if (widget.isPassword)
+            IconButton(
+              icon: Icon(
+                _isObscure ? Icons.visibility_off : Icons.visibility,
+                color: Colors.black38,
+              ),
+              onPressed: () {
+                setState(() {
+                  _isObscure = !_isObscure; // Toggle visibility state
+                });
+              },
+            ),
+        ],
       ),
     );
   }

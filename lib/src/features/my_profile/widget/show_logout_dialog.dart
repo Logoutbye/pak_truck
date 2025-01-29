@@ -35,6 +35,7 @@ void showLogoutDialog(BuildContext context) {
               });
             },
             icon: 'assets/svg/logout_right.svg', // Or null if no icon
+            
             onCancelPressed: () {
               Navigator.pop(context);
             },

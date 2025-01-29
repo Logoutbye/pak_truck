@@ -200,7 +200,7 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                       Transform.scale(
                         scale: 1.5,
                         child: Radio<String>(
-                          value: "Store",
+                          value: "autoStore",
                           groupValue: _shopType,
                           activeColor: AppColors.primary,
                           onChanged: (value) {
@@ -213,14 +213,14 @@ class _ChooseAccountTypeScreenState extends State<ChooseAccountTypeScreen> {
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            _shopType = "Store";
+                            _shopType = "autoStore";
                           });
                         },
                         child: Text(
                           "Auto Store",
                           style: TextStyle(
                             fontSize: 18,
-                            color: _shopType == "Store"
+                            color: _shopType == "autoStore"
                                 ? AppColors.primary
                                 : Colors.black,
                             fontWeight: FontWeight.w500,

@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
-import 'package:testt/src/configs/utils.dart';
+
 import 'package:testt/src/configs/components/custom_appbar.dart';
-import 'package:testt/src/features/account_verification/view_model/verify_individual_view_model.dart';
+import 'package:testt/src/configs/utils.dart';
 import '../../../../configs/extensions.dart';
 import '../../../../configs/theme/theme_text.dart';
 import '../../../../configs/components/custom_text_filed.dart';
@@ -14,7 +14,10 @@ import '../view_model/signup_viewmodel.dart';
 
 class SignUpViewWithEmail extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _otpController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   SignUpViewWithEmail({super.key});
 
@@ -41,8 +44,8 @@ class SignUpViewWithEmail extends StatelessWidget {
                     children: [
                       Text(
                         localization.sign_up,
-                        style: Themetext.headline.copyWith(
-                            color: AppColors.primary, fontSize: 21),
+                        style: Themetext.headline
+                            .copyWith(color: AppColors.primary, fontSize: 21),
                       ),
                       SizedBox(height: context.mediaQueryHeight / 80),
                       Text(
@@ -51,6 +54,17 @@ class SignUpViewWithEmail extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: context.mediaQueryHeight / 20),
+                  Text('Name',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
+                  SizedBox(height: context.mediaQueryHeight / 75),
+                  CustomTextFormField(
+                    maxLines: 1,
+                    minLines: 1,
+                    hintText: 'Enter your name',
+                    controller: _nameController,
+                  ),
+                  SizedBox(height: context.mediaQueryHeight / 40),
                   Text('Email',
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
@@ -61,51 +75,59 @@ class SignUpViewWithEmail extends StatelessWidget {
                     hintText: 'Enter your email',
                     controller: _emailController,
                   ),
-                  if (signUpViewModel.showOtpField) ...[
-                    SizedBox(height: context.mediaQueryHeight / 30),
-                    Text('OTP',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w700)),
-                    SizedBox(height: context.mediaQueryHeight / 75),
-                    CustomTextFormField(
-                      hintText: 'Enter OTP',
-                      controller: _otpController,
-                      // keyboardType: TextInputType.number,
-                    ),
-                  ],
+                  SizedBox(height: context.mediaQueryHeight / 40),
+                  Text('Password',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
+                  SizedBox(height: context.mediaQueryHeight / 75),
+                  CustomTextFormField(
+                    isPassword: true,
+                    maxLines: 1,
+                    minLines: 1,
+                    hintText: 'Enter your password',
+                    controller: _passwordController,
+                  ),
+                  SizedBox(height: context.mediaQueryHeight / 40),
+                  Text('Confirm Password',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
+                  SizedBox(height: context.mediaQueryHeight / 75),
+                  CustomTextFormField(
+                    isPassword: true,
+                    maxLines: 1,
+                    minLines: 1,
+                    hintText: 'Enter your password again',
+                    controller: _confirmPasswordController,
+                  ),
                   SizedBox(height: context.mediaQueryHeight / 30),
                 ],
               ),
               Spacer(),
               RoundButton(
                 loading: signUpViewModel.loading,
-                title: signUpViewModel.showOtpField
-                    ? 'Verfiy Otp'
-                    : localization.sign_up,
+                title: localization.sign_up,
                 onPress: () {
-                  if (signUpViewModel.showOtpField) {
-                    // Verify OTP
-                    if (_otpController.text.isEmpty) {
-                      Utils.flushBarErrorMessage('Please enter OTP', context);
-                    } else {
-                      context
-                          .read<VerifyIndividualViewModel>()
-                          .setEmail(_emailController.text);
-                      context
-                          .read<VerifyIndividualViewModel>()
-                          .setOtp(_otpController.text);
-                      Navigator.pushNamed(
-                          context, RoutesName.chooseAccountScreen);
-                    }
+                  if (_emailController.text.isEmpty) {
+                    Utils.flushBarErrorMessage(
+                        'Email cannot be empty', context);
+                  } else if (_nameController.text.isEmpty) {
+                    Utils.flushBarErrorMessage('Name cannot be empty', context);
+                  } else if (_passwordController.text.isEmpty) {
+                    Utils.flushBarErrorMessage(
+                        'Password cannot be empty', context);
+                  } else if (_confirmPasswordController.text.isEmpty) {
+                    Utils.flushBarErrorMessage(
+                        'Please enter correct password again', context);
+                  } else if (_confirmPasswordController.text !=
+                      _passwordController.text) {
+                    Utils.flushBarErrorMessage('Please donot match', context);
                   } else {
-                    // Send OTP
-                    if (_emailController.text.isEmpty) {
-                      Utils.flushBarErrorMessage(
-                          'Please enter your email', context);
-                    } else {
-                      final emailData = {'email': _emailController.text};
-                      signUpViewModel.sendEmailOtp(context, emailData);
-                    }
+                    var data = {
+                      "fullname": _nameController.text,
+                      "email": _emailController.text,
+                      "password": _passwordController.text,
+                    };
+                    signUpViewModel.signUpWithEmail(context, data);
                   }
                 },
               ),
@@ -125,8 +147,8 @@ class SignUpViewWithEmail extends StatelessWidget {
                     },
                     child: Text(
                       ' ${localization.signin}',
-                      style: Themetext.blackBoldText.copyWith(
-                          color: AppColors.primary, fontSize: 16),
+                      style: Themetext.blackBoldText
+                          .copyWith(color: AppColors.primary, fontSize: 16),
                     ),
                   ),
                 ],

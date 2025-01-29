@@ -61,7 +61,9 @@ class _SignUpVerifyOtpScreenState extends State<SignUpVerifyOtpScreen> {
       closeKeyboardWhenCompleted:
           true, // Close the keyboard when OTP is complete
       onCompleted: (pin) async {
-        await context.read<AuthViewModel>().verifyPhoneOtp(context, pin);
+        await context
+            .read<AuthViewModel>()
+            .verifyOtp(context, pin, widget.phoneNumber);
       },
       onChanged: (pin) {
         // Handle OTP change here if needed

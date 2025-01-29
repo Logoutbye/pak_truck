@@ -339,3 +339,16 @@ final List<String> truckFeatures = [
   'Immobilizer Key',
   'CD Player',
 ];
+
+// Features List
+final List<String> sparePartsCategories = [
+  'Crush plant',
+  'Hydraulic pump',
+  'Cabin',
+  'Hydraulic Jack',
+  'Excavator',
+  'Engine',
+  'Loader',
+  'Boozer',
+  'Hydraulic Jack',
+];
