@@ -26,4 +26,5 @@ class RoutesName {
   static const sellSparePartsScreen = 'sellSparePartsScreen';
   static const sellTruckScreen = 'sellTruckScreen';
   static const storeTabbarView = 'storeTabbarView';
+  static const wantToVerifyScreen = 'WantToVerifyScreen';
 }

@@ -57,8 +57,8 @@ class CompleteAccountViewModel extends ChangeNotifier {
     setLoading(true);
     try {
       var data = isIndividual
-          ? {'userId': userId, 'accountMode': 'individual'}
-          : {'userId': userId, 'accountMode': 'shop', 'shopCategory': shopType};
+          ? {'accountMode': 'individual'}
+          : {'accountMode': 'shop', 'shopCategory': shopType};
       print(data);
       await signUpRepository.selectAccountMode(data);
       setLoading(false);

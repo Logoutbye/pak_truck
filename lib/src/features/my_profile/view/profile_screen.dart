@@ -7,6 +7,7 @@ import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
+import 'package:testt/src/features/my_profile/view_model/my_profile_view_model.dart';
 import 'package:testt/src/features/my_profile/view_model/profile_tabbar_provider.dart';
 import 'package:testt/src/features/my_profile/widget/contact_us_widget.dart';
 import 'package:testt/src/features/my_ads/widgets/my_ads_widget.dart';
@@ -32,6 +33,9 @@ class _ProfileScreenState extends State<ProfileScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
+    Future.microtask(() {
+      context.read<ProfileViewModel>().fetchMyProfileApi();
+    });
   }
 
   @override

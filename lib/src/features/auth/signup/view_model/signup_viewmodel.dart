@@ -79,10 +79,6 @@ class AuthViewModel extends ChangeNotifier {
       BuildContext context, String pin, String phoneNumberr) async {
     setLoading(true);
     try {
-      Future.delayed(Duration(seconds: 2), () {
-        setLoading(false);
-      });
-
       var data = {'identifier': phoneNumberr, 'otp': pin};
       var response = await authRepository.verifyPhoneOtp(data);
       var isNewUser = response['isUserNew'];
@@ -90,7 +86,7 @@ class AuthViewModel extends ChangeNotifier {
       // Parse the response into a UserModel object
       UserModel userModel = UserModel.fromJson(response);
       SessionController().saveUserInPreference(userModel);
-
+      setLoading(false);
       Navigator.pushNamedAndRemoveUntil(
           context,
           isNewUser == true

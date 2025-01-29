@@ -12,10 +12,13 @@ import 'package:testt/src/features/home/features/main/view_model/category_tab_in
 import 'package:testt/src/features/home/features/main/view_model/new_tab_bar_notifier.dart';
 import 'package:testt/src/features/home/features/vechile_categories/reuseable_tabbar_view.dart/reuseable_tabbar_provider.dart';
 import 'package:testt/src/features/my_profile/view_model/edit_profile_view_model.dart';
+import 'package:testt/src/features/my_profile/view_model/my_profile_view_model.dart';
 import 'package:testt/src/features/sell/view_model/sell_spare_parts_view_model.dart';
 import 'package:testt/src/features/sell/view_model/sell_truck_view_model.dart';
 import 'package:testt/src/features/splash/view_model/local_provider.dart';
 import 'package:testt/src/features/home/features/stores/view_model/store_tabbar_provider.dart';
+import 'package:testt/src/repository/profile_api/profile_http_api_repository.dart';
+import 'package:testt/src/repository/profile_api/profile_repository.dart';
 import 'src/features/my_profile/view_model/profile_tabbar_provider.dart';
 import 'src/repository/auth_api/auth_http_api_repository.dart';
 import 'src/repository/auth_api/auth_repository.dart';
@@ -33,6 +36,8 @@ GetIt getIt = GetIt.instance;
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   getIt.registerLazySingleton<AuthRepository>(() => AuthHttpApiRepository());
+  getIt.registerLazySingleton<ProfileRepository>(
+      () => ProfileHttpApiRepository());
   runApp(const MyApp());
 }
 
@@ -57,6 +62,8 @@ class MyApp extends StatelessWidget {
             create: (_) => AuthViewModel(authRepository: getIt())),
         ChangeNotifierProvider(create: (_) => NavigationProvider()),
         ChangeNotifierProvider(create: (_) => ProfileTabBarProvider()),
+        ChangeNotifierProvider(
+            create: (_) => ProfileViewModel(profileRepository: getIt())),
         ChangeNotifierProvider(create: (_) => EditProfileViewModel()),
         ChangeNotifierProvider(create: (_) => SellTuckViewModel()),
         ChangeNotifierProvider(create: (_) => SellSparePartsViewModel()),
@@ -87,7 +94,6 @@ class MyApp extends StatelessWidget {
               ],
               initialRoute: RoutesName.splash,
               onGenerateRoute: Routes.generateRoute,
-              // home: Dashboard(),
             ),
           );
         },

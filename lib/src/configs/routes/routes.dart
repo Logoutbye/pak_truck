@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/features/account_completion/view/choose_account_type_screen.dart';
 import 'package:testt/src/features/account_completion/view/complete_account_screen.dart';
+import 'package:testt/src/features/account_completion/view/want_to_verify_screen.dart';
 import 'package:testt/src/features/account_verification/view/verify_individual_screen.dart';
 import 'package:testt/src/features/account_verification/view/verify_shop_screen.dart';
 import 'package:testt/src/features/auth/signup/view/signup_view_with_number.dart';
@@ -71,6 +72,8 @@ class Routes {
         return SlideTransitionPage(page: SellTruckScreen());
       case RoutesName.storeTabbarView:
         return SlideTransitionPage(page: StoresTabbarView());
+      case RoutesName.wantToVerifyScreen:
+        return SlideTransitionPage(page: WantToVerifyScreen());
 
       default:
         return MaterialPageRoute(builder: (_) {
