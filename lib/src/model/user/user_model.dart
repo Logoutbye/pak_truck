@@ -26,24 +26,39 @@ class User with _$User {
     @Default('') String shopCategory,
     @Default('') String otp,
     @Default(null) DateTime? otpExpiry,
-    @Default(false) bool verified,
-    @Default('') String shopeName,
-    @Default('') String cnic,
-    @Default('') String shopeAddress,
+    @Default(false) bool otpVerification,
+    @Default('') String shopName,
+    @Default('') String shopAddress,
     @Default('') String role,
-    @Default(false) bool isBlocked,
-    @Default(null) String? blockReason,
-    @Default([]) List<String> blockedCnic,
-    @Default('') String username,
     @Default('') String country,
     @Default('') String city,
     @Default('') String phone,
     @Default(null) DateTime? verificationDate,
     @Default(false) bool verificationDocuments,
+    @Default(false) bool isAccountModeVerified,
+    @Default(false) bool isActive,
     @Default(null) String? googleId,
+    @Default(null) String? profileImage,
+    @Default(null) String? idCardFrontImage,
+    @Default(null) String? idCardBackImage,
+    @Default(null) String? shopImage,
+    @Default(null) String? passwordResetToken,
+    @Default(null) DateTime? passwordResetExpires,
     @Default('') String createdAt,
     @Default('') String updatedAt,
+    @Default([]) List<FavoriteItem> favorites,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+}
+
+@freezed
+class FavoriteItem with _$FavoriteItem {
+  factory FavoriteItem({
+    @Default('') String itemId,
+    @Default('') String itemType,
+  }) = _FavoriteItem;
+
+  factory FavoriteItem.fromJson(Map<String, dynamic> json) =>
+      _$FavoriteItemFromJson(json);
 }

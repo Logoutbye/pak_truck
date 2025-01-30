@@ -1,3 +1,5 @@
+import 'package:testt/src/features/sell/view/check_verification_screen.dart';
+
 class RoutesName {
 // splash
   static const String splash = 'splash_view';
@@ -27,4 +29,5 @@ class RoutesName {
   static const sellTruckScreen = 'sellTruckScreen';
   static const storeTabbarView = 'storeTabbarView';
   static const wantToVerifyScreen = 'WantToVerifyScreen';
+  static const checkVerificationScreen = 'CheckVerificationScreen';
 }

@@ -11,6 +11,7 @@ import 'package:testt/src/configs/utils.dart';
 import 'package:testt/src/features/account_verification/view_model/verify_shop_view_model.dart';
 import 'package:testt/src/features/account_verification/widgets/profile_image_picker_widget.dart';
 
+
 class VerifyShopScreen extends StatefulWidget {
   const VerifyShopScreen({super.key});
 
@@ -19,6 +20,18 @@ class VerifyShopScreen extends StatefulWidget {
 }
 
 class _VerifyShopScreenState extends State<VerifyShopScreen> {
+  @override
+  void initState() {
+    super.initState();
+    final verifyShopViewModel =
+        Provider.of<VerifyShopViewModel>(context, listen: false);
+
+    Future.microtask(() {
+      // Retrieve profile data from SessionController (local storage)
+      verifyShopViewModel.setProfileDataFromSession();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<VerifyShopViewModel>(context);
@@ -75,6 +88,23 @@ class _VerifyShopScreenState extends State<VerifyShopScreen> {
               CustomTextFormField(
                 hintText: 'Enter your shop address',
                 controller: viewModel.shopAddressController,
+                color: AppColors.greyColor,
+                borderColor: Colors.black12,
+              )
+            ],
+          ),
+          SizedBox(height: context.mediaQueryHeight / 35),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Your Name',
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              SizedBox(height: context.mediaQueryHeight / 70),
+              CustomTextFormField(
+                hintText: 'Enter your Name',
+                controller: viewModel.nameController,
                 color: AppColors.greyColor,
                 borderColor: Colors.black12,
               )

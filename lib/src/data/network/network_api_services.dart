@@ -87,109 +87,113 @@ class NetworkApiService implements BaseApiServices {
   }
 
   /// Post request with support for single or multiple media files (images, videos, etc.)
-  @override
-  Future<dynamic> postMediaApiResponse(
-    String url,
-    data, {
-    File? singleFile, // For a single file (image, video, etc.)
-    List<File>? mediaFiles, // For multiple files
-    String? mediaFieldName = 'media', // Field name for the media
+@override
+Future<dynamic> postMediaApiResponse(
+  String url,
+  dynamic data, {
+  File? singleFile, // ✅ Single file
+  List<File>? mediaFiles, // ✅ Multiple files
+  String? mediaFieldName, // ✅ Field name for single file
+  List<String>? mediaFieldNames, // ✅ Field names for multiple files
+  List<String>? allowedFileTypes, // ✅ Allowed file types
+}) async {
+  MyLogger.debug('request url: $url');
+  MyLogger.debug('request body: $data');
+  MyLogger.debug('request mediaField: $mediaFieldName');
+  MyLogger.debug('request singleFile: $singleFile');
+  MyLogger.debug('request mediaFiles: $mediaFiles');
+  MyLogger.debug('request mediaFieldNames: $mediaFieldNames');
 
-    List<String>? allowedFileTypes, // List of allowed file extensions
-  }) async {
-    MyLogger.debug('request url: $url');
-    MyLogger.debug('request body: $data');
-    MyLogger.debug('request mediaField: $mediaFieldName');
-    MyLogger.debug('request singleFile: $singleFile');
-    MyLogger.debug('request mediaFiles: $mediaFiles');
+  dynamic responseJson;
 
-    dynamic responseJson;
+  try {
+    // ✅ Retrieve the token from SessionController
+    String? token = SessionController().token;
 
-    try {
-      // Retrieve the token from SessionController
-      String? token = SessionController().token;
+    // ✅ Create Multipart Request
+    var request = MultipartRequest('POST', Uri.parse(url));
 
-      // Create Multipart Request
-      var request = MultipartRequest('POST', Uri.parse(url));
+    // ✅ Prepare headers
+    Map<String, String> headers = {
+      'Content-Type': 'multipart/form-data',
+    };
 
-      // Prepare headers
-      Map<String, String> headers = {
-        'Content-Type': 'multipart/form-data',
-      };
+    if (token != null) {
+      headers['Authorization'] = 'Bearer $token';
+    }
 
-      // Add Authorization header if token is available
-      if (token != null) {
-        headers['Authorization'] = 'Bearer $token';
+    request.headers.addAll(headers);
+
+    // ✅ Log headers for debugging
+    MyLogger.debug('Request Headers: $headers');
+
+    // ✅ Add form fields
+    data.forEach((key, value) {
+      request.fields[key] = value.toString();
+    });
+
+    // ✅ Handle single file upload
+    if (singleFile != null) {
+      final fileExtension = singleFile.path.split('.').last.toLowerCase();
+      if (allowedFileTypes != null &&
+          !allowedFileTypes.contains(fileExtension)) {
+        throw Exception(
+            'Unsupported file type: $fileExtension. Allowed types: ${allowedFileTypes.join(', ')}');
       }
 
-      // Add headers to the request
-      request.headers.addAll(headers);
+      var stream = ByteStream(singleFile.openRead());
+      var length = await singleFile.length();
+      var multipartFile = MultipartFile(
+        mediaFieldName ?? 'file', // ✅ Use mediaFieldName or default to 'file'
+        stream,
+        length,
+        filename: singleFile.path.split('/').last,
+      );
+      request.files.add(multipartFile);
+    }
 
-      // Log headers for debugging
-      MyLogger.debug('Request Headers: $headers');
+    // ✅ Handle multiple file uploads dynamically
+    if (mediaFiles != null && mediaFiles.isNotEmpty && mediaFieldNames != null) {
+      if (mediaFiles.length != mediaFieldNames.length) {
+        throw Exception('Number of files and field names must match');
+      }
 
-      // Add form fields
-      data.forEach((key, value) {
-        request.fields[key] = value.toString();
-      });
+      for (int i = 0; i < mediaFiles.length; i++) {
+        final file = mediaFiles[i];
+        final fieldName = mediaFieldNames[i]; // ✅ Use dynamic field name
 
-      // Handle single file upload
-      if (singleFile != null) {
-        final fileExtension = singleFile.path.split('.').last.toLowerCase();
+        final fileExtension = file.path.split('.').last.toLowerCase();
         if (allowedFileTypes != null &&
             !allowedFileTypes.contains(fileExtension)) {
           throw Exception(
               'Unsupported file type: $fileExtension. Allowed types: ${allowedFileTypes.join(', ')}');
         }
 
-        var stream = ByteStream(singleFile.openRead());
-        var length = await singleFile.length();
+        var stream = ByteStream(file.openRead());
+        var length = await file.length();
         var multipartFile = MultipartFile(
-          mediaFieldName!, // Use mediaField for the single file
+          fieldName, // ✅ Use dynamic field name
           stream,
           length,
-          filename: singleFile.path.split('/').last,
+          filename: file.path.split('/').last,
         );
         request.files.add(multipartFile);
       }
-
-      // Handle multiple file uploads
-      if (mediaFiles != null && mediaFiles.isNotEmpty) {
-        for (int i = 0; i < mediaFiles.length; i++) {
-          final file = mediaFiles[i];
-          final fileExtension = file.path.split('.').last.toLowerCase();
-
-          if (allowedFileTypes != null &&
-              !allowedFileTypes.contains(fileExtension)) {
-            throw Exception(
-                'Unsupported file type: $fileExtension. Allowed types: ${allowedFileTypes.join(', ')}');
-          }
-
-          var stream = ByteStream(file.openRead());
-          var length = await file.length();
-          var multipartFile = MultipartFile(
-            '$mediaFieldName[$i]', // Array-style naming for multiple files
-            stream,
-            length,
-            filename: file.path.split('/').last,
-          );
-          request.files.add(multipartFile);
-        }
-      }
-
-      // Send Request
-      var streamedResponse = await request.send();
-      var response = await Response.fromStream(streamedResponse);
-      responseJson = returnResponse(response);
-    } on SocketException {
-      throw Exception('No Internet Connection');
-    } on TimeoutException {
-      throw Exception('Request timed out');
-    } catch (e) {
-      throw Exception('An error occurred: $e');
     }
-    return responseJson;
+
+    // ✅ Send Request
+    var streamedResponse = await request.send();
+    var response = await Response.fromStream(streamedResponse);
+    responseJson = returnResponse(response);
+  } on SocketException {
+    throw Exception('No Internet Connection');
+  } on TimeoutException {
+    throw Exception('Request timed out');
+  } catch (e) {
+    throw Exception('An error occurred: $e');
   }
+  return responseJson;
+}
 
   @override
   Future<dynamic> deleteApiResponse(String url, {dynamic data}) async {

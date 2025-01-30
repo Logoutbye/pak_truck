@@ -12,6 +12,7 @@ import 'package:testt/src/features/dashborad/view/dashboard.dart';
 import 'package:testt/src/features/my_profile/view/delete_account_screen.dart';
 import 'package:testt/src/features/my_profile/view/edit_profile_screen.dart';
 import 'package:testt/src/features/notifications/notifications_screen.dart';
+import 'package:testt/src/features/sell/view/check_verification_screen.dart';
 import 'package:testt/src/features/sell/view/choose_selling_plan_screen.dart';
 import 'package:testt/src/features/sell/view/sell_spare_parts_screen.dart';
 import 'package:testt/src/features/sell/view/sell_truck_screen.dart';
@@ -74,6 +75,8 @@ class Routes {
         return SlideTransitionPage(page: StoresTabbarView());
       case RoutesName.wantToVerifyScreen:
         return SlideTransitionPage(page: WantToVerifyScreen());
+      case RoutesName.checkVerificationScreen:
+        return SlideTransitionPage(page: CheckVerificationScreen());
 
       default:
         return MaterialPageRoute(builder: (_) {

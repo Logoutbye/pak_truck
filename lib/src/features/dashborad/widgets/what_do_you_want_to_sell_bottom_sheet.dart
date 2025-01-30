@@ -49,8 +49,7 @@ void whatDoYouWantToSellBottomSheet(BuildContext context) {
                   InkWell(
                     onTap: () {
                       Navigator.pop(context);
-                      Navigator.pushNamed(
-                          context, RoutesName.chooseSellingPlan);
+                      Navigator.pushNamed(context, RoutesName.sellTruckScreen);
                     },
                     child: Container(
                       padding: EdgeInsets.only(top: 12),

@@ -22,8 +22,6 @@ class AppUrl {
   static var markFavorite = '$baseUrl/profile/favorites/mark';
   static var unmarkFavorite = '$baseUrl/profile/favorites/unmark';
   static var myFavorite = '$baseUrl/profile/favorites/';
-
-
 }
 
 

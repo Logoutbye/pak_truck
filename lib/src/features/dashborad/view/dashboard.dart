@@ -3,11 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
+import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/features/dashborad/widgets/what_do_you_want_to_sell_bottom_sheet.dart';
 import 'package:testt/src/features/home/features/main/view/home_screen.dart';
 import 'package:testt/src/features/home/features/main/view_model/category_tab_index_notifier.dart';
 import 'package:testt/src/features/my_ads/view/my_ads_screen.dart';
 import 'package:testt/src/features/my_profile/view/profile_screen.dart';
+import 'package:testt/src/features/splash/services/session_manager/session_controller.dart';
 import 'package:testt/src/features/videos/videos_screen.dart';
 import '../../chat/chat_screen.dart';
 import '../view_model/navigation_provider.dart';
@@ -20,7 +22,14 @@ class Dashboard extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          whatDoYouWantToSellBottomSheet(context);
+          bool isAccountModeVerified =
+              SessionController().user?.user?.isAccountModeVerified ?? false;
+
+          if (isAccountModeVerified) {
+            whatDoYouWantToSellBottomSheet(context);
+          } else {
+            Navigator.pushNamed(context, RoutesName.checkVerificationScreen);
+          }
         },
         shape: CircleBorder(),
         backgroundColor: AppColors.green,

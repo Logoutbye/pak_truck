@@ -1,14 +1,31 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:testt/src/configs/utils.dart';
+import 'package:testt/src/features/splash/services/session_manager/session_controller.dart';
+import 'package:testt/src/model/user/user_model.dart';
+import 'package:testt/src/repository/profile_api/profile_repository.dart';
 
 class EditProfileViewModel extends ChangeNotifier {
+  final ProfileRepository profileRepository;
+
+  EditProfileViewModel({required this.profileRepository});
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController countryController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
   final TextEditingController emailAddressController = TextEditingController();
   final TextEditingController phoneNoController = TextEditingController();
   File? profileImage;
+
+  // Method to pre-fill controllers with fetched user data
+  void setProfileData(User user) {
+    nameController.text = user.fullname;
+    emailAddressController.text = user.email;
+    phoneNoController.text = user.phone;
+    countryController.text = user.country;
+    cityController.text = user.city;
+    notifyListeners();
+  }
 
   void setProfileImage(File? image) {
     profileImage = image;
@@ -67,22 +84,36 @@ class EditProfileViewModel extends ChangeNotifier {
     setLoading(true);
     try {
       var data = {
-        'shopNameController': nameController.text.trim(),
-        'shopAddressController': countryController.text.trim(),
-        'emailAddressController': emailAddressController.text.trim(),
-        'phoneNoController': phoneNoController.text.trim(),
-        'frontImage': profileImage,
+        'email': emailAddressController.text.trim(),
+        'phone': phoneNoController.text.trim(),
+        'fullname': nameController.text.trim(),
+        'country': countryController.text.trim(),
+        'city': cityController.text.trim(),
       };
-      Future.delayed(Duration(seconds: 2), () {
-        setLoading(false);
-        Utils.snackBar('Application submitted successfully', context);
-      });
-      // var response = await authRepository.continueWithPhoneNumberApi(fullPhone);
-    } catch (error) {
-      Utils.snackBar('Failed to submitted. Please try again.', context);
+
+      var response =
+          await profileRepository.editProfile(data, profileImage: profileImage);
+      var updatedUserData = response['data']['user'];
+
+      // Update the fields individually using SessionController
+      await SessionController()
+          .updateUserField('phone', updatedUserData['phone']);
+      await SessionController()
+          .updateUserField('email', updatedUserData['email']);
+      await SessionController()
+          .updateUserField('fullname', updatedUserData['fullname']);
+      await SessionController()
+          .updateUserField('country', updatedUserData['country']);
+      await SessionController()
+          .updateUserField('city', updatedUserData['city']);
+
       setLoading(false);
-    } finally {
-      clearAll();
+      Navigator.pop(context);
+      Utils.snackBar('Profile Updated Scuessfully.', context);
+    } catch (error) {
+      Utils.flushBarErrorMessage(
+          'Failed to Update Profile. Please try again.', context);
+      setLoading(false);
     }
   }
 }

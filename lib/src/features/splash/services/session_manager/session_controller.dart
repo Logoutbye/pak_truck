@@ -99,7 +99,6 @@ class SessionController {
       // Retrieve the stored JSON string
       String? userJson = await sharedPreferenceClass.readValue('user');
       String? isLoginString = await sharedPreferenceClass.readValue('isLogin');
-
       if (userJson != null) {
         // Parse the JSON to the UserModel
         user = UserModel.fromJson(jsonDecode(userJson));
@@ -125,13 +124,14 @@ class SessionController {
     }
   }
 
-  // Get a specific field from the user's data
   dynamic getUserField(String fieldName) {
-    if (user != null) {
-      var userMap = user!.toJson();
-      return userMap[fieldName];
+    if (user != null && user!.user != null) {
+      // Access the nested 'user' field and convert it to a Map
+      var userMap = user!.user!.toJson();
+      print('::: ${userMap[fieldName]}');
+      return userMap[fieldName]; // Access the desired field inside 'user'
     }
-    return null;
+    return null; // Return null if the field is not found
   }
 
   // Logout method to clear user data
@@ -148,17 +148,61 @@ class SessionController {
       debugPrint('Logout Error: $e');
     }
   }
+
+  Future<void> updateUserField(String fieldName, dynamic value) async {
+    try {
+      if (SessionController().user != null &&
+          SessionController().user!.user != null) {
+        // Get the current user data from SessionController
+        var currentUser = SessionController().user!.user!;
+
+           // Dynamically create the arguments for copyWith for all fields
+      final updatedUser = currentUser.copyWith(
+        fullname: (fieldName == 'fullname') ? value : currentUser.fullname,
+        email: (fieldName == 'email') ? value : currentUser.email,
+        password: (fieldName == 'password') ? value : currentUser.password,
+        accountMode: (fieldName == 'accountMode') ? value : currentUser.accountMode,
+        shopCategory: (fieldName == 'shopCategory') ? value : currentUser.shopCategory,
+        otp: (fieldName == 'otp') ? value : currentUser.otp,
+        otpExpiry: (fieldName == 'otpExpiry') ? value : currentUser.otpExpiry,
+        otpVerification: (fieldName == 'otpVerification') ? value : currentUser.otpVerification,
+        shopName: (fieldName == 'shopName') ? value : currentUser.shopName,
+        shopAddress: (fieldName == 'shopAddress') ? value : currentUser.shopAddress,
+        role: (fieldName == 'role') ? value : currentUser.role,
+        country: (fieldName == 'country') ? value : currentUser.country,
+        city: (fieldName == 'city') ? value : currentUser.city,
+        phone: (fieldName == 'phone') ? value : currentUser.phone,
+        verificationDate: (fieldName == 'verificationDate') ? value : currentUser.verificationDate,
+        verificationDocuments: (fieldName == 'verificationDocuments') ? value : currentUser.verificationDocuments,
+        isAccountModeVerified: (fieldName == 'isAccountModeVerified') ? value : currentUser.isAccountModeVerified,
+        isActive: (fieldName == 'isActive') ? value : currentUser.isActive,
+        googleId: (fieldName == 'googleId') ? value : currentUser.googleId,
+        profileImage: (fieldName == 'profileImage') ? value : currentUser.profileImage,
+        idCardFrontImage: (fieldName == 'idCardFrontImage') ? value : currentUser.idCardFrontImage,
+        idCardBackImage: (fieldName == 'idCardBackImage') ? value : currentUser.idCardBackImage,
+        shopImage: (fieldName == 'shopImage') ? value : currentUser.shopImage,
+        passwordResetToken: (fieldName == 'passwordResetToken') ? value : currentUser.passwordResetToken,
+        passwordResetExpires: (fieldName == 'passwordResetExpires') ? value : currentUser.passwordResetExpires,
+        createdAt: (fieldName == 'createdAt') ? value : currentUser.createdAt,
+        updatedAt: (fieldName == 'updatedAt') ? value : currentUser.updatedAt,
+        favorites: (fieldName == 'favorites') ? value : currentUser.favorites,
+      );
+
+
+        // Create an updated UserModel with the new user data
+        UserModel updatedUserModel = SessionController().user!.copyWith(
+              user: updatedUser,
+            );
+
+        // Save the updated user data to SharedPreferences
+        await SessionController().saveUserInPreference(updatedUserModel);
+
+        debugPrint("Updated '$fieldName' to '$value' in user data.");
+      } else {
+        debugPrint("User data is not available.");
+      }
+    } catch (e) {
+      debugPrint("Error updating user field '$fieldName': $e");
+    }
+  }
 }
-
-
-
-
-// // Save user data
-// SessionController().saveUserInPreference(user);
-
-// // Retrieve user data and update session
-// await SessionController().getUserFromPreference();
-
-// // Access user details
-// String? token = SessionController().getUserField('token');
-// int? userId = SessionController().getUserField('id');

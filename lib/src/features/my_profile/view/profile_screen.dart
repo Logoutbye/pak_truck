@@ -7,14 +7,13 @@ import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/routes/routes_name.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
-import 'package:testt/src/features/my_profile/view_model/my_profile_view_model.dart';
 import 'package:testt/src/features/my_profile/view_model/profile_tabbar_provider.dart';
 import 'package:testt/src/features/my_profile/widget/contact_us_widget.dart';
 import 'package:testt/src/features/my_ads/widgets/my_ads_widget.dart';
 import 'package:testt/src/features/my_profile/widget/personalized_widget.dart';
 import 'package:testt/src/features/my_profile/widget/saved_ads_widget.dart';
+import 'package:testt/src/features/my_profile/widget/profile_consumer_widget.dart';
 import 'package:testt/src/features/my_profile/widget/show_logout_dialog.dart';
-import 'package:testt/src/features/my_profile/widget/user_image_avatar_widget.dart';
 
 import '../widget/show_delete_dialog.dart';
 
@@ -33,9 +32,6 @@ class _ProfileScreenState extends State<ProfileScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
-    Future.microtask(() {
-      context.read<ProfileViewModel>().fetchMyProfileApi();
-    });
   }
 
   @override
@@ -73,33 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       body: Column(
         // padding: EdgeInsets.all(8),
         children: [
-          ListTile(
-            leading: UserImageAvatarWidget(imageUrl: ''),
-            title: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'Inayat',
-                  style: Themetext.headline,
-                ),
-                SizedBox(width: 20),
-                SvgPicture.asset('assets/svg/unverified.svg',
-                    height: context.mediaQueryHeight / 41),
-                SizedBox(width: context.mediaQueryWidth / 70),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, RoutesName.verifyShopScreen);
-                  },
-                  child: Text(
-                    'Unverified',
-                    style: Themetext.headline.copyWith(color: AppColors.orange),
-                  ),
-                ),
-              ],
-            ),
-            subtitle: Text('Member Since Nov 12, 2024'),
-          ),
+          ProfileConsumerWidget(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             child: Row(

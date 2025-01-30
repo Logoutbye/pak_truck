@@ -56,7 +56,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (_) => CompleteAccountViewModel(signUpRepository: getIt())),
 
-        ChangeNotifierProvider(create: (_) => VerifyShopViewModel()),
+        ChangeNotifierProvider(
+            create: (_) => VerifyShopViewModel(profileRepository: getIt())),
         ChangeNotifierProvider(create: (_) => VerifyIndividualViewModel()),
         ChangeNotifierProvider(
             create: (_) => AuthViewModel(authRepository: getIt())),
@@ -64,7 +65,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ProfileTabBarProvider()),
         ChangeNotifierProvider(
             create: (_) => ProfileViewModel(profileRepository: getIt())),
-        ChangeNotifierProvider(create: (_) => EditProfileViewModel()),
+        ChangeNotifierProvider(
+            create: (_) => EditProfileViewModel(profileRepository: getIt())),
         ChangeNotifierProvider(create: (_) => SellTuckViewModel()),
         ChangeNotifierProvider(create: (_) => SellSparePartsViewModel()),
         ChangeNotifierProvider(create: (_) => CategoryTabIndexNotifier()),

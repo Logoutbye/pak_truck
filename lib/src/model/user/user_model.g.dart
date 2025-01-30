@@ -33,18 +33,10 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       otpExpiry: json['otpExpiry'] == null
           ? null
           : DateTime.parse(json['otpExpiry'] as String),
-      verified: json['verified'] as bool? ?? false,
-      shopeName: json['shopeName'] as String? ?? '',
-      cnic: json['cnic'] as String? ?? '',
-      shopeAddress: json['shopeAddress'] as String? ?? '',
+      otpVerification: json['otpVerification'] as bool? ?? false,
+      shopName: json['shopName'] as String? ?? '',
+      shopAddress: json['shopAddress'] as String? ?? '',
       role: json['role'] as String? ?? '',
-      isBlocked: json['isBlocked'] as bool? ?? false,
-      blockReason: json['blockReason'] as String? ?? null,
-      blockedCnic: (json['blockedCnic'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          const [],
-      username: json['username'] as String? ?? '',
       country: json['country'] as String? ?? '',
       city: json['city'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
@@ -52,9 +44,23 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
           ? null
           : DateTime.parse(json['verificationDate'] as String),
       verificationDocuments: json['verificationDocuments'] as bool? ?? false,
+      isAccountModeVerified: json['isAccountModeVerified'] as bool? ?? false,
+      isActive: json['isActive'] as bool? ?? false,
       googleId: json['googleId'] as String? ?? null,
+      profileImage: json['profileImage'] as String? ?? null,
+      idCardFrontImage: json['idCardFrontImage'] as String? ?? null,
+      idCardBackImage: json['idCardBackImage'] as String? ?? null,
+      shopImage: json['shopImage'] as String? ?? null,
+      passwordResetToken: json['passwordResetToken'] as String? ?? null,
+      passwordResetExpires: json['passwordResetExpires'] == null
+          ? null
+          : DateTime.parse(json['passwordResetExpires'] as String),
       createdAt: json['createdAt'] as String? ?? '',
       updatedAt: json['updatedAt'] as String? ?? '',
+      favorites: (json['favorites'] as List<dynamic>?)
+              ?.map((e) => FavoriteItem.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -67,21 +73,37 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'shopCategory': instance.shopCategory,
       'otp': instance.otp,
       'otpExpiry': instance.otpExpiry?.toIso8601String(),
-      'verified': instance.verified,
-      'shopeName': instance.shopeName,
-      'cnic': instance.cnic,
-      'shopeAddress': instance.shopeAddress,
+      'otpVerification': instance.otpVerification,
+      'shopName': instance.shopName,
+      'shopAddress': instance.shopAddress,
       'role': instance.role,
-      'isBlocked': instance.isBlocked,
-      'blockReason': instance.blockReason,
-      'blockedCnic': instance.blockedCnic,
-      'username': instance.username,
       'country': instance.country,
       'city': instance.city,
       'phone': instance.phone,
       'verificationDate': instance.verificationDate?.toIso8601String(),
       'verificationDocuments': instance.verificationDocuments,
+      'isAccountModeVerified': instance.isAccountModeVerified,
+      'isActive': instance.isActive,
       'googleId': instance.googleId,
+      'profileImage': instance.profileImage,
+      'idCardFrontImage': instance.idCardFrontImage,
+      'idCardBackImage': instance.idCardBackImage,
+      'shopImage': instance.shopImage,
+      'passwordResetToken': instance.passwordResetToken,
+      'passwordResetExpires': instance.passwordResetExpires?.toIso8601String(),
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
+      'favorites': instance.favorites,
+    };
+
+_$FavoriteItemImpl _$$FavoriteItemImplFromJson(Map<String, dynamic> json) =>
+    _$FavoriteItemImpl(
+      itemId: json['itemId'] as String? ?? '',
+      itemType: json['itemType'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$$FavoriteItemImplToJson(_$FavoriteItemImpl instance) =>
+    <String, dynamic>{
+      'itemId': instance.itemId,
+      'itemType': instance.itemType,
     };

@@ -75,23 +75,12 @@ Widget buildProfileImagePicker(BuildContext context, String networkImage) {
                     backgroundImage: FileImage(image),
                     radius: 25,
                   )
-                : UserImageAvatarWidget(imageUrl: ''),
+                : UserImageAvatarWidget(imageUrl: networkImage),
             SizedBox(width: context.mediaQueryWidth / 21),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Inayat',
-                      style: Themetext.headline,
-                    ),
-                  ],
-                ),
-                SizedBox(height: context.mediaQueryHeight / 70),
                 GestureDetector(
                   onTap: showImageSourceActionSheet,
                   child: Container(

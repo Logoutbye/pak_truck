@@ -1,8 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:testt/src/configs/utils.dart';
+import 'package:testt/src/features/splash/services/session_manager/session_controller.dart';
+import 'package:testt/src/repository/profile_api/profile_repository.dart';
 
 class VerifyShopViewModel extends ChangeNotifier {
+  final ProfileRepository profileRepository;
+  VerifyShopViewModel({required this.profileRepository});
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController shopNameController = TextEditingController();
   final TextEditingController shopAddressController = TextEditingController();
   final TextEditingController emailAddressController = TextEditingController();
@@ -16,6 +21,25 @@ class VerifyShopViewModel extends ChangeNotifier {
   void setUserRoleAndType(String role, String type) {
     type = type;
     role = role;
+    notifyListeners();
+  }
+
+  void setProfileDataFromSession() {
+    // Retrieve user info from SessionController
+    dynamic name = SessionController().user?.user?.fullname.toString();
+    dynamic email = SessionController().user?.user?.email.toString();
+    dynamic phone = SessionController().user?.user?.phone.toString();
+
+    if (name != null) {
+      nameController.text = name;
+    }
+    if (email != null) {
+      emailAddressController.text = email;
+    }
+    if (phone != null) {
+      phoneNoController.text = phone;
+    }
+
     notifyListeners();
   }
 
@@ -90,18 +114,31 @@ class VerifyShopViewModel extends ChangeNotifier {
     setLoading(true);
     try {
       var data = {
-        'shopNameController': shopNameController.text.trim(),
-        'shopAddressController': shopAddressController.text.trim(),
-        'emailAddressController': emailAddressController.text.trim(),
-        'phoneNoController': phoneNoController.text.trim(),
-        'frontImage': frontImage,
-        'backImage': backImage,
+        'fullname': nameController.text.trim(),
+        'email': emailAddressController.text.trim(),
+        'phone': phoneNoController.text.trim(),
+        'shopName': shopNameController.text.trim(),
+        'shopAddress': shopAddressController.text.trim(),
       };
-      Future.delayed(Duration(seconds: 2), () {
-        setLoading(false);
-        Utils.snackBar('Application submitted successfully', context);
-      });
-      // var response = await authRepository.continueWithPhoneNumberApi(fullPhone);
+      await profileRepository.shopVerification(data,
+          idCardFrontImage: frontImage,
+          idCardBackImage: backImage,
+          shopImage: shopImage);
+
+      setLoading(false);
+      await SessionController()
+          .updateUserField('fullname', nameController.text.trim());
+      await SessionController()
+          .updateUserField('email', emailAddressController.text.trim());
+      await SessionController()
+          .updateUserField('phone', phoneNoController.text.trim());
+      await SessionController()
+          .updateUserField('shopName', shopNameController.text.trim());
+      await SessionController()
+          .updateUserField('shopAddress', shopAddressController.text.trim());
+      await SessionController().updateUserField('isAccountModeVerified', true);
+      setLoading(false);
+      Utils.snackBar('Application submitted successfully', context);
     } catch (error) {
       Utils.snackBar('Failed to submitted. Please try again.', context);
       setLoading(false);

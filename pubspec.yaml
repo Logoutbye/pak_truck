@@ -33,6 +33,7 @@ dependencies:
   country_picker: ^2.0.21
   smooth_page_indicator: ^1.0.0
   flutter_screenutil: ^5.9.3
+  shimmer: ^3.0.0
 
 
   # Localization

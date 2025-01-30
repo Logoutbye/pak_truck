@@ -26,3 +26,23 @@ extension NumberFormatter on num {
     }
   }
 }
+
+
+
+extension DateTimeFormatter on String {
+  String toFormattedDate() {
+    if (isEmpty) return "N/A";
+    DateTime? date = DateTime.tryParse(this);
+    if (date == null) return "Invalid Date";
+
+    return "${date.day} ${_getMonthName(date.month)} ${date.year}";
+  }
+
+  static String _getMonthName(int month) {
+    const monthNames = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    return monthNames[month - 1];
+  }
+}

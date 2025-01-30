@@ -233,23 +233,27 @@ mixin _$User {
   String get shopCategory => throw _privateConstructorUsedError;
   String get otp => throw _privateConstructorUsedError;
   DateTime? get otpExpiry => throw _privateConstructorUsedError;
-  bool get verified => throw _privateConstructorUsedError;
-  String get shopeName => throw _privateConstructorUsedError;
-  String get cnic => throw _privateConstructorUsedError;
-  String get shopeAddress => throw _privateConstructorUsedError;
+  bool get otpVerification => throw _privateConstructorUsedError;
+  String get shopName => throw _privateConstructorUsedError;
+  String get shopAddress => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
-  bool get isBlocked => throw _privateConstructorUsedError;
-  String? get blockReason => throw _privateConstructorUsedError;
-  List<String> get blockedCnic => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
   String get city => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
   DateTime? get verificationDate => throw _privateConstructorUsedError;
   bool get verificationDocuments => throw _privateConstructorUsedError;
+  bool get isAccountModeVerified => throw _privateConstructorUsedError;
+  bool get isActive => throw _privateConstructorUsedError;
   String? get googleId => throw _privateConstructorUsedError;
+  String? get profileImage => throw _privateConstructorUsedError;
+  String? get idCardFrontImage => throw _privateConstructorUsedError;
+  String? get idCardBackImage => throw _privateConstructorUsedError;
+  String? get shopImage => throw _privateConstructorUsedError;
+  String? get passwordResetToken => throw _privateConstructorUsedError;
+  DateTime? get passwordResetExpires => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get updatedAt => throw _privateConstructorUsedError;
+  List<FavoriteItem> get favorites => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -274,23 +278,27 @@ abstract class $UserCopyWith<$Res> {
       String shopCategory,
       String otp,
       DateTime? otpExpiry,
-      bool verified,
-      String shopeName,
-      String cnic,
-      String shopeAddress,
+      bool otpVerification,
+      String shopName,
+      String shopAddress,
       String role,
-      bool isBlocked,
-      String? blockReason,
-      List<String> blockedCnic,
-      String username,
       String country,
       String city,
       String phone,
       DateTime? verificationDate,
       bool verificationDocuments,
+      bool isAccountModeVerified,
+      bool isActive,
       String? googleId,
+      String? profileImage,
+      String? idCardFrontImage,
+      String? idCardBackImage,
+      String? shopImage,
+      String? passwordResetToken,
+      DateTime? passwordResetExpires,
       String createdAt,
-      String updatedAt});
+      String updatedAt,
+      List<FavoriteItem> favorites});
 }
 
 /// @nodoc
@@ -316,23 +324,27 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? shopCategory = null,
     Object? otp = null,
     Object? otpExpiry = freezed,
-    Object? verified = null,
-    Object? shopeName = null,
-    Object? cnic = null,
-    Object? shopeAddress = null,
+    Object? otpVerification = null,
+    Object? shopName = null,
+    Object? shopAddress = null,
     Object? role = null,
-    Object? isBlocked = null,
-    Object? blockReason = freezed,
-    Object? blockedCnic = null,
-    Object? username = null,
     Object? country = null,
     Object? city = null,
     Object? phone = null,
     Object? verificationDate = freezed,
     Object? verificationDocuments = null,
+    Object? isAccountModeVerified = null,
+    Object? isActive = null,
     Object? googleId = freezed,
+    Object? profileImage = freezed,
+    Object? idCardFrontImage = freezed,
+    Object? idCardBackImage = freezed,
+    Object? shopImage = freezed,
+    Object? passwordResetToken = freezed,
+    Object? passwordResetExpires = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? favorites = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -367,41 +379,21 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.otpExpiry
           : otpExpiry // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      verified: null == verified
-          ? _value.verified
-          : verified // ignore: cast_nullable_to_non_nullable
+      otpVerification: null == otpVerification
+          ? _value.otpVerification
+          : otpVerification // ignore: cast_nullable_to_non_nullable
               as bool,
-      shopeName: null == shopeName
-          ? _value.shopeName
-          : shopeName // ignore: cast_nullable_to_non_nullable
+      shopName: null == shopName
+          ? _value.shopName
+          : shopName // ignore: cast_nullable_to_non_nullable
               as String,
-      cnic: null == cnic
-          ? _value.cnic
-          : cnic // ignore: cast_nullable_to_non_nullable
-              as String,
-      shopeAddress: null == shopeAddress
-          ? _value.shopeAddress
-          : shopeAddress // ignore: cast_nullable_to_non_nullable
+      shopAddress: null == shopAddress
+          ? _value.shopAddress
+          : shopAddress // ignore: cast_nullable_to_non_nullable
               as String,
       role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String,
-      isBlocked: null == isBlocked
-          ? _value.isBlocked
-          : isBlocked // ignore: cast_nullable_to_non_nullable
-              as bool,
-      blockReason: freezed == blockReason
-          ? _value.blockReason
-          : blockReason // ignore: cast_nullable_to_non_nullable
-              as String?,
-      blockedCnic: null == blockedCnic
-          ? _value.blockedCnic
-          : blockedCnic // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
               as String,
       country: null == country
           ? _value.country
@@ -423,10 +415,42 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.verificationDocuments
           : verificationDocuments // ignore: cast_nullable_to_non_nullable
               as bool,
+      isAccountModeVerified: null == isAccountModeVerified
+          ? _value.isAccountModeVerified
+          : isAccountModeVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
       googleId: freezed == googleId
           ? _value.googleId
           : googleId // ignore: cast_nullable_to_non_nullable
               as String?,
+      profileImage: freezed == profileImage
+          ? _value.profileImage
+          : profileImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      idCardFrontImage: freezed == idCardFrontImage
+          ? _value.idCardFrontImage
+          : idCardFrontImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      idCardBackImage: freezed == idCardBackImage
+          ? _value.idCardBackImage
+          : idCardBackImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      shopImage: freezed == shopImage
+          ? _value.shopImage
+          : shopImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordResetToken: freezed == passwordResetToken
+          ? _value.passwordResetToken
+          : passwordResetToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordResetExpires: freezed == passwordResetExpires
+          ? _value.passwordResetExpires
+          : passwordResetExpires // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -435,6 +459,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
+      favorites: null == favorites
+          ? _value.favorites
+          : favorites // ignore: cast_nullable_to_non_nullable
+              as List<FavoriteItem>,
     ) as $Val);
   }
 }
@@ -455,23 +483,27 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String shopCategory,
       String otp,
       DateTime? otpExpiry,
-      bool verified,
-      String shopeName,
-      String cnic,
-      String shopeAddress,
+      bool otpVerification,
+      String shopName,
+      String shopAddress,
       String role,
-      bool isBlocked,
-      String? blockReason,
-      List<String> blockedCnic,
-      String username,
       String country,
       String city,
       String phone,
       DateTime? verificationDate,
       bool verificationDocuments,
+      bool isAccountModeVerified,
+      bool isActive,
       String? googleId,
+      String? profileImage,
+      String? idCardFrontImage,
+      String? idCardBackImage,
+      String? shopImage,
+      String? passwordResetToken,
+      DateTime? passwordResetExpires,
       String createdAt,
-      String updatedAt});
+      String updatedAt,
+      List<FavoriteItem> favorites});
 }
 
 /// @nodoc
@@ -494,23 +526,27 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? shopCategory = null,
     Object? otp = null,
     Object? otpExpiry = freezed,
-    Object? verified = null,
-    Object? shopeName = null,
-    Object? cnic = null,
-    Object? shopeAddress = null,
+    Object? otpVerification = null,
+    Object? shopName = null,
+    Object? shopAddress = null,
     Object? role = null,
-    Object? isBlocked = null,
-    Object? blockReason = freezed,
-    Object? blockedCnic = null,
-    Object? username = null,
     Object? country = null,
     Object? city = null,
     Object? phone = null,
     Object? verificationDate = freezed,
     Object? verificationDocuments = null,
+    Object? isAccountModeVerified = null,
+    Object? isActive = null,
     Object? googleId = freezed,
+    Object? profileImage = freezed,
+    Object? idCardFrontImage = freezed,
+    Object? idCardBackImage = freezed,
+    Object? shopImage = freezed,
+    Object? passwordResetToken = freezed,
+    Object? passwordResetExpires = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? favorites = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -545,41 +581,21 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.otpExpiry
           : otpExpiry // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      verified: null == verified
-          ? _value.verified
-          : verified // ignore: cast_nullable_to_non_nullable
+      otpVerification: null == otpVerification
+          ? _value.otpVerification
+          : otpVerification // ignore: cast_nullable_to_non_nullable
               as bool,
-      shopeName: null == shopeName
-          ? _value.shopeName
-          : shopeName // ignore: cast_nullable_to_non_nullable
+      shopName: null == shopName
+          ? _value.shopName
+          : shopName // ignore: cast_nullable_to_non_nullable
               as String,
-      cnic: null == cnic
-          ? _value.cnic
-          : cnic // ignore: cast_nullable_to_non_nullable
-              as String,
-      shopeAddress: null == shopeAddress
-          ? _value.shopeAddress
-          : shopeAddress // ignore: cast_nullable_to_non_nullable
+      shopAddress: null == shopAddress
+          ? _value.shopAddress
+          : shopAddress // ignore: cast_nullable_to_non_nullable
               as String,
       role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String,
-      isBlocked: null == isBlocked
-          ? _value.isBlocked
-          : isBlocked // ignore: cast_nullable_to_non_nullable
-              as bool,
-      blockReason: freezed == blockReason
-          ? _value.blockReason
-          : blockReason // ignore: cast_nullable_to_non_nullable
-              as String?,
-      blockedCnic: null == blockedCnic
-          ? _value._blockedCnic
-          : blockedCnic // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
               as String,
       country: null == country
           ? _value.country
@@ -601,10 +617,42 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.verificationDocuments
           : verificationDocuments // ignore: cast_nullable_to_non_nullable
               as bool,
+      isAccountModeVerified: null == isAccountModeVerified
+          ? _value.isAccountModeVerified
+          : isAccountModeVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
       googleId: freezed == googleId
           ? _value.googleId
           : googleId // ignore: cast_nullable_to_non_nullable
               as String?,
+      profileImage: freezed == profileImage
+          ? _value.profileImage
+          : profileImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      idCardFrontImage: freezed == idCardFrontImage
+          ? _value.idCardFrontImage
+          : idCardFrontImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      idCardBackImage: freezed == idCardBackImage
+          ? _value.idCardBackImage
+          : idCardBackImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      shopImage: freezed == shopImage
+          ? _value.shopImage
+          : shopImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordResetToken: freezed == passwordResetToken
+          ? _value.passwordResetToken
+          : passwordResetToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordResetExpires: freezed == passwordResetExpires
+          ? _value.passwordResetExpires
+          : passwordResetExpires // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -613,6 +661,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
+      favorites: null == favorites
+          ? _value._favorites
+          : favorites // ignore: cast_nullable_to_non_nullable
+              as List<FavoriteItem>,
     ));
   }
 }
@@ -629,24 +681,28 @@ class _$UserImpl implements _User {
       this.shopCategory = '',
       this.otp = '',
       this.otpExpiry = null,
-      this.verified = false,
-      this.shopeName = '',
-      this.cnic = '',
-      this.shopeAddress = '',
+      this.otpVerification = false,
+      this.shopName = '',
+      this.shopAddress = '',
       this.role = '',
-      this.isBlocked = false,
-      this.blockReason = null,
-      final List<String> blockedCnic = const [],
-      this.username = '',
       this.country = '',
       this.city = '',
       this.phone = '',
       this.verificationDate = null,
       this.verificationDocuments = false,
+      this.isAccountModeVerified = false,
+      this.isActive = false,
       this.googleId = null,
+      this.profileImage = null,
+      this.idCardFrontImage = null,
+      this.idCardBackImage = null,
+      this.shopImage = null,
+      this.passwordResetToken = null,
+      this.passwordResetExpires = null,
       this.createdAt = '',
-      this.updatedAt = ''})
-      : _blockedCnic = blockedCnic;
+      this.updatedAt = '',
+      final List<FavoriteItem> favorites = const []})
+      : _favorites = favorites;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -677,37 +733,16 @@ class _$UserImpl implements _User {
   final DateTime? otpExpiry;
   @override
   @JsonKey()
-  final bool verified;
+  final bool otpVerification;
   @override
   @JsonKey()
-  final String shopeName;
+  final String shopName;
   @override
   @JsonKey()
-  final String cnic;
-  @override
-  @JsonKey()
-  final String shopeAddress;
+  final String shopAddress;
   @override
   @JsonKey()
   final String role;
-  @override
-  @JsonKey()
-  final bool isBlocked;
-  @override
-  @JsonKey()
-  final String? blockReason;
-  final List<String> _blockedCnic;
-  @override
-  @JsonKey()
-  List<String> get blockedCnic {
-    if (_blockedCnic is EqualUnmodifiableListView) return _blockedCnic;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_blockedCnic);
-  }
-
-  @override
-  @JsonKey()
-  final String username;
   @override
   @JsonKey()
   final String country;
@@ -725,17 +760,49 @@ class _$UserImpl implements _User {
   final bool verificationDocuments;
   @override
   @JsonKey()
+  final bool isAccountModeVerified;
+  @override
+  @JsonKey()
+  final bool isActive;
+  @override
+  @JsonKey()
   final String? googleId;
+  @override
+  @JsonKey()
+  final String? profileImage;
+  @override
+  @JsonKey()
+  final String? idCardFrontImage;
+  @override
+  @JsonKey()
+  final String? idCardBackImage;
+  @override
+  @JsonKey()
+  final String? shopImage;
+  @override
+  @JsonKey()
+  final String? passwordResetToken;
+  @override
+  @JsonKey()
+  final DateTime? passwordResetExpires;
   @override
   @JsonKey()
   final String createdAt;
   @override
   @JsonKey()
   final String updatedAt;
+  final List<FavoriteItem> _favorites;
+  @override
+  @JsonKey()
+  List<FavoriteItem> get favorites {
+    if (_favorites is EqualUnmodifiableListView) return _favorites;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_favorites);
+  }
 
   @override
   String toString() {
-    return 'User(id: $id, fullname: $fullname, email: $email, password: $password, accountMode: $accountMode, shopCategory: $shopCategory, otp: $otp, otpExpiry: $otpExpiry, verified: $verified, shopeName: $shopeName, cnic: $cnic, shopeAddress: $shopeAddress, role: $role, isBlocked: $isBlocked, blockReason: $blockReason, blockedCnic: $blockedCnic, username: $username, country: $country, city: $city, phone: $phone, verificationDate: $verificationDate, verificationDocuments: $verificationDocuments, googleId: $googleId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, fullname: $fullname, email: $email, password: $password, accountMode: $accountMode, shopCategory: $shopCategory, otp: $otp, otpExpiry: $otpExpiry, otpVerification: $otpVerification, shopName: $shopName, shopAddress: $shopAddress, role: $role, country: $country, city: $city, phone: $phone, verificationDate: $verificationDate, verificationDocuments: $verificationDocuments, isAccountModeVerified: $isAccountModeVerified, isActive: $isActive, googleId: $googleId, profileImage: $profileImage, idCardFrontImage: $idCardFrontImage, idCardBackImage: $idCardBackImage, shopImage: $shopImage, passwordResetToken: $passwordResetToken, passwordResetExpires: $passwordResetExpires, createdAt: $createdAt, updatedAt: $updatedAt, favorites: $favorites)';
   }
 
   @override
@@ -756,22 +823,13 @@ class _$UserImpl implements _User {
             (identical(other.otp, otp) || other.otp == otp) &&
             (identical(other.otpExpiry, otpExpiry) ||
                 other.otpExpiry == otpExpiry) &&
-            (identical(other.verified, verified) ||
-                other.verified == verified) &&
-            (identical(other.shopeName, shopeName) ||
-                other.shopeName == shopeName) &&
-            (identical(other.cnic, cnic) || other.cnic == cnic) &&
-            (identical(other.shopeAddress, shopeAddress) ||
-                other.shopeAddress == shopeAddress) &&
+            (identical(other.otpVerification, otpVerification) ||
+                other.otpVerification == otpVerification) &&
+            (identical(other.shopName, shopName) ||
+                other.shopName == shopName) &&
+            (identical(other.shopAddress, shopAddress) ||
+                other.shopAddress == shopAddress) &&
             (identical(other.role, role) || other.role == role) &&
-            (identical(other.isBlocked, isBlocked) ||
-                other.isBlocked == isBlocked) &&
-            (identical(other.blockReason, blockReason) ||
-                other.blockReason == blockReason) &&
-            const DeepCollectionEquality()
-                .equals(other._blockedCnic, _blockedCnic) &&
-            (identical(other.username, username) ||
-                other.username == username) &&
             (identical(other.country, country) || other.country == country) &&
             (identical(other.city, city) || other.city == city) &&
             (identical(other.phone, phone) || other.phone == phone) &&
@@ -779,12 +837,30 @@ class _$UserImpl implements _User {
                 other.verificationDate == verificationDate) &&
             (identical(other.verificationDocuments, verificationDocuments) ||
                 other.verificationDocuments == verificationDocuments) &&
+            (identical(other.isAccountModeVerified, isAccountModeVerified) ||
+                other.isAccountModeVerified == isAccountModeVerified) &&
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive) &&
             (identical(other.googleId, googleId) ||
                 other.googleId == googleId) &&
+            (identical(other.profileImage, profileImage) ||
+                other.profileImage == profileImage) &&
+            (identical(other.idCardFrontImage, idCardFrontImage) ||
+                other.idCardFrontImage == idCardFrontImage) &&
+            (identical(other.idCardBackImage, idCardBackImage) ||
+                other.idCardBackImage == idCardBackImage) &&
+            (identical(other.shopImage, shopImage) ||
+                other.shopImage == shopImage) &&
+            (identical(other.passwordResetToken, passwordResetToken) ||
+                other.passwordResetToken == passwordResetToken) &&
+            (identical(other.passwordResetExpires, passwordResetExpires) ||
+                other.passwordResetExpires == passwordResetExpires) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            const DeepCollectionEquality()
+                .equals(other._favorites, _favorites));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -799,23 +875,27 @@ class _$UserImpl implements _User {
         shopCategory,
         otp,
         otpExpiry,
-        verified,
-        shopeName,
-        cnic,
-        shopeAddress,
+        otpVerification,
+        shopName,
+        shopAddress,
         role,
-        isBlocked,
-        blockReason,
-        const DeepCollectionEquality().hash(_blockedCnic),
-        username,
         country,
         city,
         phone,
         verificationDate,
         verificationDocuments,
+        isAccountModeVerified,
+        isActive,
         googleId,
+        profileImage,
+        idCardFrontImage,
+        idCardBackImage,
+        shopImage,
+        passwordResetToken,
+        passwordResetExpires,
         createdAt,
-        updatedAt
+        updatedAt,
+        const DeepCollectionEquality().hash(_favorites)
       ]);
 
   /// Create a copy of User
@@ -844,23 +924,27 @@ abstract class _User implements User {
       final String shopCategory,
       final String otp,
       final DateTime? otpExpiry,
-      final bool verified,
-      final String shopeName,
-      final String cnic,
-      final String shopeAddress,
+      final bool otpVerification,
+      final String shopName,
+      final String shopAddress,
       final String role,
-      final bool isBlocked,
-      final String? blockReason,
-      final List<String> blockedCnic,
-      final String username,
       final String country,
       final String city,
       final String phone,
       final DateTime? verificationDate,
       final bool verificationDocuments,
+      final bool isAccountModeVerified,
+      final bool isActive,
       final String? googleId,
+      final String? profileImage,
+      final String? idCardFrontImage,
+      final String? idCardBackImage,
+      final String? shopImage,
+      final String? passwordResetToken,
+      final DateTime? passwordResetExpires,
       final String createdAt,
-      final String updatedAt}) = _$UserImpl;
+      final String updatedAt,
+      final List<FavoriteItem> favorites}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -882,23 +966,13 @@ abstract class _User implements User {
   @override
   DateTime? get otpExpiry;
   @override
-  bool get verified;
+  bool get otpVerification;
   @override
-  String get shopeName;
+  String get shopName;
   @override
-  String get cnic;
-  @override
-  String get shopeAddress;
+  String get shopAddress;
   @override
   String get role;
-  @override
-  bool get isBlocked;
-  @override
-  String? get blockReason;
-  @override
-  List<String> get blockedCnic;
-  @override
-  String get username;
   @override
   String get country;
   @override
@@ -910,16 +984,203 @@ abstract class _User implements User {
   @override
   bool get verificationDocuments;
   @override
+  bool get isAccountModeVerified;
+  @override
+  bool get isActive;
+  @override
   String? get googleId;
+  @override
+  String? get profileImage;
+  @override
+  String? get idCardFrontImage;
+  @override
+  String? get idCardBackImage;
+  @override
+  String? get shopImage;
+  @override
+  String? get passwordResetToken;
+  @override
+  DateTime? get passwordResetExpires;
   @override
   String get createdAt;
   @override
   String get updatedAt;
+  @override
+  List<FavoriteItem> get favorites;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+FavoriteItem _$FavoriteItemFromJson(Map<String, dynamic> json) {
+  return _FavoriteItem.fromJson(json);
+}
+
+/// @nodoc
+mixin _$FavoriteItem {
+  String get itemId => throw _privateConstructorUsedError;
+  String get itemType => throw _privateConstructorUsedError;
+
+  /// Serializes this FavoriteItem to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of FavoriteItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $FavoriteItemCopyWith<FavoriteItem> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FavoriteItemCopyWith<$Res> {
+  factory $FavoriteItemCopyWith(
+          FavoriteItem value, $Res Function(FavoriteItem) then) =
+      _$FavoriteItemCopyWithImpl<$Res, FavoriteItem>;
+  @useResult
+  $Res call({String itemId, String itemType});
+}
+
+/// @nodoc
+class _$FavoriteItemCopyWithImpl<$Res, $Val extends FavoriteItem>
+    implements $FavoriteItemCopyWith<$Res> {
+  _$FavoriteItemCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of FavoriteItem
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? itemId = null,
+    Object? itemType = null,
+  }) {
+    return _then(_value.copyWith(
+      itemId: null == itemId
+          ? _value.itemId
+          : itemId // ignore: cast_nullable_to_non_nullable
+              as String,
+      itemType: null == itemType
+          ? _value.itemType
+          : itemType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$FavoriteItemImplCopyWith<$Res>
+    implements $FavoriteItemCopyWith<$Res> {
+  factory _$$FavoriteItemImplCopyWith(
+          _$FavoriteItemImpl value, $Res Function(_$FavoriteItemImpl) then) =
+      __$$FavoriteItemImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String itemId, String itemType});
+}
+
+/// @nodoc
+class __$$FavoriteItemImplCopyWithImpl<$Res>
+    extends _$FavoriteItemCopyWithImpl<$Res, _$FavoriteItemImpl>
+    implements _$$FavoriteItemImplCopyWith<$Res> {
+  __$$FavoriteItemImplCopyWithImpl(
+      _$FavoriteItemImpl _value, $Res Function(_$FavoriteItemImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FavoriteItem
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? itemId = null,
+    Object? itemType = null,
+  }) {
+    return _then(_$FavoriteItemImpl(
+      itemId: null == itemId
+          ? _value.itemId
+          : itemId // ignore: cast_nullable_to_non_nullable
+              as String,
+      itemType: null == itemType
+          ? _value.itemType
+          : itemType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$FavoriteItemImpl implements _FavoriteItem {
+  _$FavoriteItemImpl({this.itemId = '', this.itemType = ''});
+
+  factory _$FavoriteItemImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FavoriteItemImplFromJson(json);
+
+  @override
+  @JsonKey()
+  final String itemId;
+  @override
+  @JsonKey()
+  final String itemType;
+
+  @override
+  String toString() {
+    return 'FavoriteItem(itemId: $itemId, itemType: $itemType)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FavoriteItemImpl &&
+            (identical(other.itemId, itemId) || other.itemId == itemId) &&
+            (identical(other.itemType, itemType) ||
+                other.itemType == itemType));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, itemId, itemType);
+
+  /// Create a copy of FavoriteItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FavoriteItemImplCopyWith<_$FavoriteItemImpl> get copyWith =>
+      __$$FavoriteItemImplCopyWithImpl<_$FavoriteItemImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$FavoriteItemImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _FavoriteItem implements FavoriteItem {
+  factory _FavoriteItem({final String itemId, final String itemType}) =
+      _$FavoriteItemImpl;
+
+  factory _FavoriteItem.fromJson(Map<String, dynamic> json) =
+      _$FavoriteItemImpl.fromJson;
+
+  @override
+  String get itemId;
+  @override
+  String get itemType;
+
+  /// Create a copy of FavoriteItem
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FavoriteItemImplCopyWith<_$FavoriteItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

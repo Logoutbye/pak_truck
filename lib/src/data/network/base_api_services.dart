@@ -9,10 +9,11 @@ abstract class BaseApiServices {
   Future<dynamic> postMediaApiResponse(
     String url,
     dynamic data, {
-    File? singleFile, // For a single file (optional)
-    List<File>? mediaFiles, // For multiple files (optional)
-    String? mediaFieldName, // Optional field name for media
-    List<String>? allowedFileTypes, // Optional file type restrictions
+    File? singleFile, // ✅ For a single file (optional)
+    List<File>? mediaFiles, // ✅ For multiple files (optional)
+    String? mediaFieldName, // ✅ Optional field name for a single file
+    List<String>? mediaFieldNames, // ✅ New: Field names for multiple files
+    List<String>? allowedFileTypes, // ✅ Optional file type restrictions
   });
 
   /// Update data via a PUT API
