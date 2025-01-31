@@ -7,7 +7,6 @@ import 'package:testt/src/configs/components/custom_back_button.dart';
 import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
-import 'package:testt/src/configs/utils.dart';
 import 'package:testt/src/features/sell/view_model/sell_spare_parts_view_model.dart';
 import 'package:testt/src/features/sell/widget/bottom_sheets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -4,10 +4,10 @@ import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/utils.dart';
 import 'package:testt/src/data/response/base_response.dart';
 import 'package:testt/src/features/sell/view/ad_posted_screen.dart';
-import 'package:testt/src/repository/sell_api/sell_repository.dart';
+import 'package:testt/src/repository/ads_api/ad_repository.dart';
 
 class SellSparePartsViewModel extends ChangeNotifier {
-  final SellRepository sellRepository;
+  final AdRepository sellRepository;
 
   SellSparePartsViewModel({required this.sellRepository}) {
     _addErrorClearListeners();

@@ -25,6 +25,9 @@ class AppUrl {
   static var myFavorite = '$baseUrl/profile/favorites/';
 
   static var createVehicleAd = '$baseUrl/vehicle-ad/create';
+  static var myVehicleAds = '$baseUrl/vehicle-ad/my-ads';
+  static var allVehicleAds = '$baseUrl/vehicle-ad/all';
+
   static var createSparePartAd = '$baseUrl/sparepart-ad/create';
 }
 

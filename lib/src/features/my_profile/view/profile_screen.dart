@@ -90,30 +90,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                         style: Themetext.blackBoldText.copyWith(
                             fontWeight: FontWeight.w600, fontSize: 13),
                       ),
-                      // SizedBox(
-                      //   height: context.mediaQueryHeight / 21,
-                      //   child: VerticalDivider(
-                      //     color: Colors.grey,
-                      //     width: 20,
-                      //     thickness: 2,
-                      //     indent: 10,
-                      //     endIndent: 10,
-                      //   ),
-                      // ),
-                      // Text(
-                      //   'Get Verified ',
-                      //   style: Themetext.blackBoldText.copyWith(
-                      //       fontWeight: FontWeight.w600,
-                      //       fontSize: 13,
-                      //       color: AppColors.primaryColor),
-                      // ),
-                      // SvgPicture.asset('assets/svg/arrow-right.svg')
                     ],
                   ),
                 ),
                 InkWell(
                   onTap: () {
-                    // Navigator.pushNamed(context, RoutesName.deleteaccount);
                     showDeleteDialog(context);
                   },
                   child: Row(
@@ -229,8 +210,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             child: TabBarView(
               controller: _tabController,
               children: [
-                Center(
-                    child: MyAdsWidget(
+                MyAdsWidget(
                   headingWidget: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -242,7 +222,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       ),
                     ],
                   ),
-                )),
+                ),
                 Center(child: SavedAdsWidget()),
                 Column(
                   children: [
