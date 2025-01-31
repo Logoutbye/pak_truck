@@ -106,7 +106,7 @@ class AdDetailScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _iconWithText('assets/svg/calender.svg', ad.truckYear),
+                      // _iconWithText('assets/svg/calender.svg', ad.truckYear),
                       _iconWithText(
                           'assets/svg/milleage.svg', ad.engineMileage),
                       _iconWithText(
@@ -117,7 +117,7 @@ class AdDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   _truckDetailItem('Registered in', ad.registeredIn),
-                  _truckDetailItem('Brand', ad.truckMake),
+                  // _truckDetailItem('Brand', ad.truckMake),
                   _truckDetailItem('Model', ad.truckModel),
                   _truckDetailItem('Color Pilers', ad.color),
                   _truckDetailItem('Body Type', 'N/A'),

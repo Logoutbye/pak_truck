@@ -22,21 +22,23 @@ SellTruckModel _$SellTruckModelFromJson(Map<String, dynamic> json) {
 mixin _$SellTruckModel {
   List<String> get truckImages =>
       throw _privateConstructorUsedError; // Uploaded images
-  String get truckVideo =>
-      throw _privateConstructorUsedError; // Uploaded video file path
-  String get price => throw _privateConstructorUsedError; // Location
+  List<String> get truckVideos =>
+      throw _privateConstructorUsedError; // Uploaded videos
+  String get price => throw _privateConstructorUsedError; // Price
   String get location => throw _privateConstructorUsedError; // Location
-  String get category => throw _privateConstructorUsedError; // Truck category
+  String get category =>
+      throw _privateConstructorUsedError; // Main category (Truck, Bus, etc.)
+  String get subCategory => throw _privateConstructorUsedError; // Subcategory
   String get registeredIn =>
       throw _privateConstructorUsedError; // Registration area
-  String get truckYear =>
+  String get modelYear =>
       throw _privateConstructorUsedError; // Year of the truck
-  String get truckMake =>
-      throw _privateConstructorUsedError; // Make of the truck
+  String get make => throw _privateConstructorUsedError; // Make of the truck
   String get truckModel =>
       throw _privateConstructorUsedError; // Model of the truck
   String get color => throw _privateConstructorUsedError; // Selected color
-  String get engineType => throw _privateConstructorUsedError; // Engine type
+  String get engineType =>
+      throw _privateConstructorUsedError; // Engine type (diesel, petrol, etc.)
   String get engineCapacity =>
       throw _privateConstructorUsedError; // Engine capacity
   String get engineMileage =>
@@ -53,7 +55,15 @@ mixin _$SellTruckModel {
   String get address => throw _privateConstructorUsedError; // Seller address
   String get comments =>
       throw _privateConstructorUsedError; // Additional comments
-  bool get allowWhatsappContact => throw _privateConstructorUsedError;
+  bool get allowWhatsappContact =>
+      throw _privateConstructorUsedError; // Allow WhatsApp contact
+  String get localOrImported =>
+      throw _privateConstructorUsedError; // Local or imported
+  String get adType =>
+      throw _privateConstructorUsedError; // Default to "Vehicle"
+  String get postedBy =>
+      throw _privateConstructorUsedError; // User ID who posted the ad
+  String get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this SellTruckModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -73,13 +83,14 @@ abstract class $SellTruckModelCopyWith<$Res> {
   @useResult
   $Res call(
       {List<String> truckImages,
-      String truckVideo,
+      List<String> truckVideos,
       String price,
       String location,
       String category,
+      String subCategory,
       String registeredIn,
-      String truckYear,
-      String truckMake,
+      String modelYear,
+      String make,
       String truckModel,
       String color,
       String engineType,
@@ -92,7 +103,11 @@ abstract class $SellTruckModelCopyWith<$Res> {
       String mobileNumber,
       String address,
       String comments,
-      bool allowWhatsappContact});
+      bool allowWhatsappContact,
+      String localOrImported,
+      String adType,
+      String postedBy,
+      String createdAt});
 }
 
 /// @nodoc
@@ -111,13 +126,14 @@ class _$SellTruckModelCopyWithImpl<$Res, $Val extends SellTruckModel>
   @override
   $Res call({
     Object? truckImages = null,
-    Object? truckVideo = null,
+    Object? truckVideos = null,
     Object? price = null,
     Object? location = null,
     Object? category = null,
+    Object? subCategory = null,
     Object? registeredIn = null,
-    Object? truckYear = null,
-    Object? truckMake = null,
+    Object? modelYear = null,
+    Object? make = null,
     Object? truckModel = null,
     Object? color = null,
     Object? engineType = null,
@@ -131,16 +147,20 @@ class _$SellTruckModelCopyWithImpl<$Res, $Val extends SellTruckModel>
     Object? address = null,
     Object? comments = null,
     Object? allowWhatsappContact = null,
+    Object? localOrImported = null,
+    Object? adType = null,
+    Object? postedBy = null,
+    Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
       truckImages: null == truckImages
           ? _value.truckImages
           : truckImages // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      truckVideo: null == truckVideo
-          ? _value.truckVideo
-          : truckVideo // ignore: cast_nullable_to_non_nullable
-              as String,
+      truckVideos: null == truckVideos
+          ? _value.truckVideos
+          : truckVideos // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -153,17 +173,21 @@ class _$SellTruckModelCopyWithImpl<$Res, $Val extends SellTruckModel>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
+      subCategory: null == subCategory
+          ? _value.subCategory
+          : subCategory // ignore: cast_nullable_to_non_nullable
+              as String,
       registeredIn: null == registeredIn
           ? _value.registeredIn
           : registeredIn // ignore: cast_nullable_to_non_nullable
               as String,
-      truckYear: null == truckYear
-          ? _value.truckYear
-          : truckYear // ignore: cast_nullable_to_non_nullable
+      modelYear: null == modelYear
+          ? _value.modelYear
+          : modelYear // ignore: cast_nullable_to_non_nullable
               as String,
-      truckMake: null == truckMake
-          ? _value.truckMake
-          : truckMake // ignore: cast_nullable_to_non_nullable
+      make: null == make
+          ? _value.make
+          : make // ignore: cast_nullable_to_non_nullable
               as String,
       truckModel: null == truckModel
           ? _value.truckModel
@@ -217,6 +241,22 @@ class _$SellTruckModelCopyWithImpl<$Res, $Val extends SellTruckModel>
           ? _value.allowWhatsappContact
           : allowWhatsappContact // ignore: cast_nullable_to_non_nullable
               as bool,
+      localOrImported: null == localOrImported
+          ? _value.localOrImported
+          : localOrImported // ignore: cast_nullable_to_non_nullable
+              as String,
+      adType: null == adType
+          ? _value.adType
+          : adType // ignore: cast_nullable_to_non_nullable
+              as String,
+      postedBy: null == postedBy
+          ? _value.postedBy
+          : postedBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -231,13 +271,14 @@ abstract class _$$SellTruckModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {List<String> truckImages,
-      String truckVideo,
+      List<String> truckVideos,
       String price,
       String location,
       String category,
+      String subCategory,
       String registeredIn,
-      String truckYear,
-      String truckMake,
+      String modelYear,
+      String make,
       String truckModel,
       String color,
       String engineType,
@@ -250,7 +291,11 @@ abstract class _$$SellTruckModelImplCopyWith<$Res>
       String mobileNumber,
       String address,
       String comments,
-      bool allowWhatsappContact});
+      bool allowWhatsappContact,
+      String localOrImported,
+      String adType,
+      String postedBy,
+      String createdAt});
 }
 
 /// @nodoc
@@ -267,13 +312,14 @@ class __$$SellTruckModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? truckImages = null,
-    Object? truckVideo = null,
+    Object? truckVideos = null,
     Object? price = null,
     Object? location = null,
     Object? category = null,
+    Object? subCategory = null,
     Object? registeredIn = null,
-    Object? truckYear = null,
-    Object? truckMake = null,
+    Object? modelYear = null,
+    Object? make = null,
     Object? truckModel = null,
     Object? color = null,
     Object? engineType = null,
@@ -287,16 +333,20 @@ class __$$SellTruckModelImplCopyWithImpl<$Res>
     Object? address = null,
     Object? comments = null,
     Object? allowWhatsappContact = null,
+    Object? localOrImported = null,
+    Object? adType = null,
+    Object? postedBy = null,
+    Object? createdAt = null,
   }) {
     return _then(_$SellTruckModelImpl(
       truckImages: null == truckImages
           ? _value._truckImages
           : truckImages // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      truckVideo: null == truckVideo
-          ? _value.truckVideo
-          : truckVideo // ignore: cast_nullable_to_non_nullable
-              as String,
+      truckVideos: null == truckVideos
+          ? _value._truckVideos
+          : truckVideos // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -309,17 +359,21 @@ class __$$SellTruckModelImplCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
+      subCategory: null == subCategory
+          ? _value.subCategory
+          : subCategory // ignore: cast_nullable_to_non_nullable
+              as String,
       registeredIn: null == registeredIn
           ? _value.registeredIn
           : registeredIn // ignore: cast_nullable_to_non_nullable
               as String,
-      truckYear: null == truckYear
-          ? _value.truckYear
-          : truckYear // ignore: cast_nullable_to_non_nullable
+      modelYear: null == modelYear
+          ? _value.modelYear
+          : modelYear // ignore: cast_nullable_to_non_nullable
               as String,
-      truckMake: null == truckMake
-          ? _value.truckMake
-          : truckMake // ignore: cast_nullable_to_non_nullable
+      make: null == make
+          ? _value.make
+          : make // ignore: cast_nullable_to_non_nullable
               as String,
       truckModel: null == truckModel
           ? _value.truckModel
@@ -373,6 +427,22 @@ class __$$SellTruckModelImplCopyWithImpl<$Res>
           ? _value.allowWhatsappContact
           : allowWhatsappContact // ignore: cast_nullable_to_non_nullable
               as bool,
+      localOrImported: null == localOrImported
+          ? _value.localOrImported
+          : localOrImported // ignore: cast_nullable_to_non_nullable
+              as String,
+      adType: null == adType
+          ? _value.adType
+          : adType // ignore: cast_nullable_to_non_nullable
+              as String,
+      postedBy: null == postedBy
+          ? _value.postedBy
+          : postedBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -382,13 +452,14 @@ class __$$SellTruckModelImplCopyWithImpl<$Res>
 class _$SellTruckModelImpl implements _SellTruckModel {
   const _$SellTruckModelImpl(
       {final List<String> truckImages = const [],
-      this.truckVideo = '',
+      final List<String> truckVideos = const [],
       this.price = '',
       this.location = '',
       this.category = '',
+      this.subCategory = '',
       this.registeredIn = '',
-      this.truckYear = '',
-      this.truckMake = '',
+      this.modelYear = '',
+      this.make = '',
       this.truckModel = '',
       this.color = '',
       this.engineType = '',
@@ -401,8 +472,13 @@ class _$SellTruckModelImpl implements _SellTruckModel {
       this.mobileNumber = '',
       this.address = '',
       this.comments = '',
-      this.allowWhatsappContact = false})
+      this.allowWhatsappContact = false,
+      this.localOrImported = '',
+      this.adType = 'Vehicle',
+      this.postedBy = '',
+      this.createdAt = ''})
       : _truckImages = truckImages,
+        _truckVideos = truckVideos,
         _selectedFeatures = selectedFeatures;
 
   factory _$SellTruckModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -418,14 +494,21 @@ class _$SellTruckModelImpl implements _SellTruckModel {
   }
 
 // Uploaded images
+  final List<String> _truckVideos;
+// Uploaded images
   @override
   @JsonKey()
-  final String truckVideo;
-// Uploaded video file path
+  List<String> get truckVideos {
+    if (_truckVideos is EqualUnmodifiableListView) return _truckVideos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_truckVideos);
+  }
+
+// Uploaded videos
   @override
   @JsonKey()
   final String price;
-// Location
+// Price
   @override
   @JsonKey()
   final String location;
@@ -433,18 +516,22 @@ class _$SellTruckModelImpl implements _SellTruckModel {
   @override
   @JsonKey()
   final String category;
-// Truck category
+// Main category (Truck, Bus, etc.)
+  @override
+  @JsonKey()
+  final String subCategory;
+// Subcategory
   @override
   @JsonKey()
   final String registeredIn;
 // Registration area
   @override
   @JsonKey()
-  final String truckYear;
+  final String modelYear;
 // Year of the truck
   @override
   @JsonKey()
-  final String truckMake;
+  final String make;
 // Make of the truck
   @override
   @JsonKey()
@@ -457,7 +544,7 @@ class _$SellTruckModelImpl implements _SellTruckModel {
   @override
   @JsonKey()
   final String engineType;
-// Engine type
+// Engine type (diesel, petrol, etc.)
   @override
   @JsonKey()
   final String engineCapacity;
@@ -505,10 +592,26 @@ class _$SellTruckModelImpl implements _SellTruckModel {
   @override
   @JsonKey()
   final bool allowWhatsappContact;
+// Allow WhatsApp contact
+  @override
+  @JsonKey()
+  final String localOrImported;
+// Local or imported
+  @override
+  @JsonKey()
+  final String adType;
+// Default to "Vehicle"
+  @override
+  @JsonKey()
+  final String postedBy;
+// User ID who posted the ad
+  @override
+  @JsonKey()
+  final String createdAt;
 
   @override
   String toString() {
-    return 'SellTruckModel(truckImages: $truckImages, truckVideo: $truckVideo, price: $price, location: $location, category: $category, registeredIn: $registeredIn, truckYear: $truckYear, truckMake: $truckMake, truckModel: $truckModel, color: $color, engineType: $engineType, engineCapacity: $engineCapacity, engineMileage: $engineMileage, description: $description, transmissionType: $transmissionType, selectedFeatures: $selectedFeatures, sellerName: $sellerName, mobileNumber: $mobileNumber, address: $address, comments: $comments, allowWhatsappContact: $allowWhatsappContact)';
+    return 'SellTruckModel(truckImages: $truckImages, truckVideos: $truckVideos, price: $price, location: $location, category: $category, subCategory: $subCategory, registeredIn: $registeredIn, modelYear: $modelYear, make: $make, truckModel: $truckModel, color: $color, engineType: $engineType, engineCapacity: $engineCapacity, engineMileage: $engineMileage, description: $description, transmissionType: $transmissionType, selectedFeatures: $selectedFeatures, sellerName: $sellerName, mobileNumber: $mobileNumber, address: $address, comments: $comments, allowWhatsappContact: $allowWhatsappContact, localOrImported: $localOrImported, adType: $adType, postedBy: $postedBy, createdAt: $createdAt)';
   }
 
   @override
@@ -518,19 +621,20 @@ class _$SellTruckModelImpl implements _SellTruckModel {
             other is _$SellTruckModelImpl &&
             const DeepCollectionEquality()
                 .equals(other._truckImages, _truckImages) &&
-            (identical(other.truckVideo, truckVideo) ||
-                other.truckVideo == truckVideo) &&
+            const DeepCollectionEquality()
+                .equals(other._truckVideos, _truckVideos) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.location, location) ||
                 other.location == location) &&
             (identical(other.category, category) ||
                 other.category == category) &&
+            (identical(other.subCategory, subCategory) ||
+                other.subCategory == subCategory) &&
             (identical(other.registeredIn, registeredIn) ||
                 other.registeredIn == registeredIn) &&
-            (identical(other.truckYear, truckYear) ||
-                other.truckYear == truckYear) &&
-            (identical(other.truckMake, truckMake) ||
-                other.truckMake == truckMake) &&
+            (identical(other.modelYear, modelYear) ||
+                other.modelYear == modelYear) &&
+            (identical(other.make, make) || other.make == make) &&
             (identical(other.truckModel, truckModel) ||
                 other.truckModel == truckModel) &&
             (identical(other.color, color) || other.color == color) &&
@@ -554,7 +658,14 @@ class _$SellTruckModelImpl implements _SellTruckModel {
             (identical(other.comments, comments) ||
                 other.comments == comments) &&
             (identical(other.allowWhatsappContact, allowWhatsappContact) ||
-                other.allowWhatsappContact == allowWhatsappContact));
+                other.allowWhatsappContact == allowWhatsappContact) &&
+            (identical(other.localOrImported, localOrImported) ||
+                other.localOrImported == localOrImported) &&
+            (identical(other.adType, adType) || other.adType == adType) &&
+            (identical(other.postedBy, postedBy) ||
+                other.postedBy == postedBy) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -562,13 +673,14 @@ class _$SellTruckModelImpl implements _SellTruckModel {
   int get hashCode => Object.hashAll([
         runtimeType,
         const DeepCollectionEquality().hash(_truckImages),
-        truckVideo,
+        const DeepCollectionEquality().hash(_truckVideos),
         price,
         location,
         category,
+        subCategory,
         registeredIn,
-        truckYear,
-        truckMake,
+        modelYear,
+        make,
         truckModel,
         color,
         engineType,
@@ -581,7 +693,11 @@ class _$SellTruckModelImpl implements _SellTruckModel {
         mobileNumber,
         address,
         comments,
-        allowWhatsappContact
+        allowWhatsappContact,
+        localOrImported,
+        adType,
+        postedBy,
+        createdAt
       ]);
 
   /// Create a copy of SellTruckModel
@@ -604,13 +720,14 @@ class _$SellTruckModelImpl implements _SellTruckModel {
 abstract class _SellTruckModel implements SellTruckModel {
   const factory _SellTruckModel(
       {final List<String> truckImages,
-      final String truckVideo,
+      final List<String> truckVideos,
       final String price,
       final String location,
       final String category,
+      final String subCategory,
       final String registeredIn,
-      final String truckYear,
-      final String truckMake,
+      final String modelYear,
+      final String make,
       final String truckModel,
       final String color,
       final String engineType,
@@ -623,7 +740,11 @@ abstract class _SellTruckModel implements SellTruckModel {
       final String mobileNumber,
       final String address,
       final String comments,
-      final bool allowWhatsappContact}) = _$SellTruckModelImpl;
+      final bool allowWhatsappContact,
+      final String localOrImported,
+      final String adType,
+      final String postedBy,
+      final String createdAt}) = _$SellTruckModelImpl;
 
   factory _SellTruckModel.fromJson(Map<String, dynamic> json) =
       _$SellTruckModelImpl.fromJson;
@@ -631,25 +752,27 @@ abstract class _SellTruckModel implements SellTruckModel {
   @override
   List<String> get truckImages; // Uploaded images
   @override
-  String get truckVideo; // Uploaded video file path
+  List<String> get truckVideos; // Uploaded videos
   @override
-  String get price; // Location
+  String get price; // Price
   @override
   String get location; // Location
   @override
-  String get category; // Truck category
+  String get category; // Main category (Truck, Bus, etc.)
+  @override
+  String get subCategory; // Subcategory
   @override
   String get registeredIn; // Registration area
   @override
-  String get truckYear; // Year of the truck
+  String get modelYear; // Year of the truck
   @override
-  String get truckMake; // Make of the truck
+  String get make; // Make of the truck
   @override
   String get truckModel; // Model of the truck
   @override
   String get color; // Selected color
   @override
-  String get engineType; // Engine type
+  String get engineType; // Engine type (diesel, petrol, etc.)
   @override
   String get engineCapacity; // Engine capacity
   @override
@@ -669,7 +792,15 @@ abstract class _SellTruckModel implements SellTruckModel {
   @override
   String get comments; // Additional comments
   @override
-  bool get allowWhatsappContact;
+  bool get allowWhatsappContact; // Allow WhatsApp contact
+  @override
+  String get localOrImported; // Local or imported
+  @override
+  String get adType; // Default to "Vehicle"
+  @override
+  String get postedBy; // User ID who posted the ad
+  @override
+  String get createdAt;
 
   /// Create a copy of SellTruckModel
   /// with the given fields replaced by the non-null parameter values.

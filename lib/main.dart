@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart';
 import 'package:testt/languages/I10n/l10n.dart';
 import 'package:testt/src/features/account_completion/view_model/complete_account_view_model.dart';
 import 'package:testt/src/features/account_verification/view_model/verify_individual_view_model.dart';
@@ -20,6 +19,7 @@ import 'package:testt/src/features/splash/view_model/local_provider.dart';
 import 'package:testt/src/features/home/features/stores/view_model/store_tabbar_provider.dart';
 import 'package:testt/src/repository/profile_api/profile_http_api_repository.dart';
 import 'package:testt/src/repository/profile_api/profile_repository.dart';
+import 'package:testt/src/repository/sell_api/sell_repository.dart';
 import 'src/features/my_profile/view_model/profile_tabbar_provider.dart';
 import 'src/repository/auth_api/auth_http_api_repository.dart';
 import 'src/repository/auth_api/auth_repository.dart';
@@ -28,6 +28,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'src/configs/routes/routes.dart';
 import 'src/configs/routes/routes_name.dart';
+import 'src/repository/sell_api/sell_http_api_repository.dart';
 
 // creating an instance of GetIt
 // GetIt is a package used for service locator or to manage dependency injection
@@ -38,6 +39,7 @@ void main() {
   getIt.registerLazySingleton<AuthRepository>(() => AuthHttpApiRepository());
   getIt.registerLazySingleton<ProfileRepository>(
       () => ProfileHttpApiRepository());
+  getIt.registerLazySingleton<SellRepository>(() => SellHttpApiRepository());
   runApp(const MyApp());
 }
 
@@ -69,8 +71,10 @@ class MyApp extends StatelessWidget {
             create: (_) => ProfileViewModel(profileRepository: getIt())),
         ChangeNotifierProvider(
             create: (_) => EditProfileViewModel(profileRepository: getIt())),
-        ChangeNotifierProvider(create: (_) => SellTuckViewModel()),
-        ChangeNotifierProvider(create: (_) => SellSparePartsViewModel()),
+        ChangeNotifierProvider(
+            create: (_) => SellTuckViewModel(sellRepository: getIt())),
+        ChangeNotifierProvider(
+            create: (_) => SellSparePartsViewModel(sellRepository: getIt())),
         ChangeNotifierProvider(create: (_) => CategoryTabIndexNotifier()),
         ChangeNotifierProvider(create: (_) => CustomTabBarNotifier()),
 

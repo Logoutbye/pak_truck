@@ -55,15 +55,15 @@ class _SellSparePartsScreenState extends State<SellSparePartsScreen> {
             ),
             trailing: InkWell(
               onTap: () {
-                 showSelectionModal(
-                    context: context,
-                    title: "Select Category",
-                    hintText: 'Search by Category',
-                    items: sparePartsCategories,
-                    onItemSelected: (selectedItem) {
-                      viewModel.cateogryController.text = selectedItem;
-                    },
-                  );
+                showSelectionModal(
+                  context: context,
+                  title: "Select Category",
+                  hintText: 'Search by Category',
+                  items: sparePartsCategories,
+                  onItemSelected: (selectedItem) {
+                    viewModel.cateogryController.text = selectedItem;
+                  },
+                );
               },
               child: Image.asset('assets/images/more.png'),
             ),
@@ -145,10 +145,11 @@ class _SellSparePartsScreenState extends State<SellSparePartsScreen> {
           SizedBox(height: context.mediaQueryHeight / 20),
           // submit button
           RoundButton(
+            loading: viewModel.loading,
               title: 'Submit & Continue',
               onPress: () {
                 if (viewModel.validateSellTruckFields(context)) {
-                  Utils.snackBar('Form submitted successfully!', context);
+                  viewModel.submitData(context);
                 }
               }),
           SizedBox(height: context.mediaQueryHeight / 20),

@@ -17,11 +17,15 @@ class AppUrl {
   static var myprofile = '$baseUrl/profile/';
   static var editprofile = '$baseUrl/profile/edit-profile';
   static var checkVerification = '$baseUrl/profile/check-verification';
-  static var verifyIndividualAccount = '$baseUrl/profile/verify-individual-account';
+  static var verifyIndividualAccount =
+      '$baseUrl/profile/verify-individual-account';
   static var verifyShopAccount = '$baseUrl/profile/verify-shop-account';
   static var markFavorite = '$baseUrl/profile/favorites/mark';
   static var unmarkFavorite = '$baseUrl/profile/favorites/unmark';
   static var myFavorite = '$baseUrl/profile/favorites/';
+
+  static var createVehicleAd = '$baseUrl/vehicle-ad/create';
+  static var createSparePartAd = '$baseUrl/sparepart-ad/create';
 }
 
 

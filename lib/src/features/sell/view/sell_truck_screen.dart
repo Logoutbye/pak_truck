@@ -6,10 +6,7 @@ import 'package:testt/src/configs/app_constants.dart';
 import 'package:testt/src/configs/components/custom_back_button.dart';
 import 'package:testt/src/configs/components/round_button.dart';
 import 'package:testt/src/configs/extensions.dart';
-import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
-import 'package:testt/src/configs/utils.dart';
-import 'package:testt/src/features/sell/view/ad_posted_screen.dart';
 import 'package:testt/src/features/sell/view_model/sell_truck_view_model.dart';
 import 'package:testt/src/features/sell/widget/bottom_sheets.dart';
 import 'package:testt/src/features/sell/widget/select_transmission_widget.dart';
@@ -108,7 +105,7 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
             errorText: viewModel.fieldErrors['Truck Year'],
             titleText: 'Model Year',
             hintText: 'Enter Model Year',
-            controller: viewModel.yearController,
+            controller: viewModel.modelYearController,
             leading: SvgPicture.asset('assets/svg/calender.svg'),
             // leading: Image.asset('assets/images/calender.png'),
             trailing: InkWell(
@@ -119,7 +116,7 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
                     hintText: 'Select By Year',
                     items: vehicleRegistrationYears,
                     onItemSelected: (selectedItem) {
-                      viewModel.yearController.text = selectedItem;
+                      viewModel.modelYearController.text = selectedItem;
                     },
                   );
                 },
@@ -193,19 +190,9 @@ class _SellTruckScreenState extends State<SellTruckScreen> {
                   loading: value.loading,
                   title: 'Submit & Continue',
                   onPress: () {
-                    // if (viewModel.validateSellTruckFields(context)) {
-                    viewModel.submitData(context).then((_) {
-                      Utils.snackBar('Form submitted successfully!', context);
-                      Navigator.push(
-                          context,
-                          SlideTransitionPage(
-                              slideDirection: SlideDirection.top,
-                              page: PostedSuccessScreen()));
-                    }).onError((e, s) {
-                      Utils.flushBarErrorMessage(
-                          'Some thing went wrong please try again', context);
-                    });
-                    // }
+                    if (viewModel.validateSellTruckFields(context)) {
+                    viewModel.submitData(context);
+                    }
                   });
             },
           ),
