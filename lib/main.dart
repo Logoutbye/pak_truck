@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart';
 import 'package:testt/languages/I10n/l10n.dart';
 import 'package:testt/src/features/account_completion/view_model/complete_account_view_model.dart';
 import 'package:testt/src/features/account_verification/view_model/verify_individual_view_model.dart';
@@ -23,7 +24,6 @@ import 'src/features/my_profile/view_model/profile_tabbar_provider.dart';
 import 'src/repository/auth_api/auth_http_api_repository.dart';
 import 'src/repository/auth_api/auth_repository.dart';
 import 'src/configs/theme/state.dart';
-
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'src/configs/routes/routes.dart';
@@ -58,7 +58,9 @@ class MyApp extends StatelessWidget {
 
         ChangeNotifierProvider(
             create: (_) => VerifyShopViewModel(profileRepository: getIt())),
-        ChangeNotifierProvider(create: (_) => VerifyIndividualViewModel()),
+        ChangeNotifierProvider(
+            create: (_) =>
+                VerifyIndividualViewModel(profileRepository: getIt())),
         ChangeNotifierProvider(
             create: (_) => AuthViewModel(authRepository: getIt())),
         ChangeNotifierProvider(create: (_) => NavigationProvider()),

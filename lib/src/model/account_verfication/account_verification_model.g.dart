@@ -9,9 +9,11 @@ part of 'account_verification_model.dart';
 _$AccountVerificationModelImpl _$$AccountVerificationModelImplFromJson(
         Map<String, dynamic> json) =>
     _$AccountVerificationModelImpl(
-      status: json['status'] as String,
-      message: json['message'] as String,
-      data: VerificationData.fromJson(json['data'] as Map<String, dynamic>),
+      status: json['status'] as String? ?? '',
+      message: json['message'] as String? ?? '',
+      data: json['data'] == null
+          ? null
+          : VerificationData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$AccountVerificationModelImplToJson(
@@ -25,9 +27,9 @@ Map<String, dynamic> _$$AccountVerificationModelImplToJson(
 _$VerificationDataImpl _$$VerificationDataImplFromJson(
         Map<String, dynamic> json) =>
     _$VerificationDataImpl(
-      isAccountModeVerified: json['isAccountModeVerified'] as bool,
-      accountMode: json['accountMode'] as String,
-      shopCategory: json['shopCategory'] as String,
+      isAccountModeVerified: json['isAccountModeVerified'] as bool? ?? false,
+      accountMode: json['accountMode'] as String? ?? '',
+      shopCategory: json['shopCategory'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$VerificationDataImplToJson(

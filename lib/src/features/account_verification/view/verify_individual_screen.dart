@@ -21,6 +21,18 @@ class VerifyIndividualScreen extends StatefulWidget {
 
 class _VerifyIndividualScreenState extends State<VerifyIndividualScreen> {
   @override
+  void initState() {
+    super.initState();
+    final verifyShopViewModel =
+        Provider.of<VerifyIndividualViewModel>(context, listen: false);
+
+    Future.microtask(() {
+      // Retrieve profile data from SessionController (local storage)
+      verifyShopViewModel.setProfileDataFromSession();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<VerifyIndividualViewModel>(context);
 
@@ -155,7 +167,8 @@ class _VerifyIndividualScreenState extends State<VerifyIndividualScreen> {
                       onPress: () {
                         if (viewModel.validateInputs(context)) {
                           value.submitData(context).then((_) {
-                            Utils.snackBar('Application submitted successfully', context);
+                            Utils.snackBar(
+                                'Application submitted successfully', context);
 
                             Navigator.pushNamedAndRemoveUntil(context,
                                 RoutesName.dashboard, (routes) => false);

@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:testt/src/configs/utils.dart';
 import 'package:testt/src/features/sell/model/sell_truck_model/sell_truck_model.dart';
-import 'package:video_player/video_player.dart';
 
 class SellTuckViewModel extends ChangeNotifier {
   SellTuckViewModel() {

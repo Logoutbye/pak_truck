@@ -23,7 +23,7 @@ AccountVerificationModel _$AccountVerificationModelFromJson(
 mixin _$AccountVerificationModel {
   String get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
-  VerificationData get data => throw _privateConstructorUsedError;
+  VerificationData? get data => throw _privateConstructorUsedError;
 
   /// Serializes this AccountVerificationModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,9 +41,9 @@ abstract class $AccountVerificationModelCopyWith<$Res> {
           $Res Function(AccountVerificationModel) then) =
       _$AccountVerificationModelCopyWithImpl<$Res, AccountVerificationModel>;
   @useResult
-  $Res call({String status, String message, VerificationData data});
+  $Res call({String status, String message, VerificationData? data});
 
-  $VerificationDataCopyWith<$Res> get data;
+  $VerificationDataCopyWith<$Res>? get data;
 }
 
 /// @nodoc
@@ -64,7 +64,7 @@ class _$AccountVerificationModelCopyWithImpl<$Res,
   $Res call({
     Object? status = null,
     Object? message = null,
-    Object? data = null,
+    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -75,10 +75,10 @@ class _$AccountVerificationModelCopyWithImpl<$Res,
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      data: null == data
+      data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as VerificationData,
+              as VerificationData?,
     ) as $Val);
   }
 
@@ -86,8 +86,12 @@ class _$AccountVerificationModelCopyWithImpl<$Res,
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $VerificationDataCopyWith<$Res> get data {
-    return $VerificationDataCopyWith<$Res>(_value.data, (value) {
+  $VerificationDataCopyWith<$Res>? get data {
+    if (_value.data == null) {
+      return null;
+    }
+
+    return $VerificationDataCopyWith<$Res>(_value.data!, (value) {
       return _then(_value.copyWith(data: value) as $Val);
     });
   }
@@ -102,10 +106,10 @@ abstract class _$$AccountVerificationModelImplCopyWith<$Res>
       __$$AccountVerificationModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String status, String message, VerificationData data});
+  $Res call({String status, String message, VerificationData? data});
 
   @override
-  $VerificationDataCopyWith<$Res> get data;
+  $VerificationDataCopyWith<$Res>? get data;
 }
 
 /// @nodoc
@@ -125,7 +129,7 @@ class __$$AccountVerificationModelImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = null,
-    Object? data = null,
+    Object? data = freezed,
   }) {
     return _then(_$AccountVerificationModelImpl(
       status: null == status
@@ -136,10 +140,10 @@ class __$$AccountVerificationModelImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      data: null == data
+      data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as VerificationData,
+              as VerificationData?,
     ));
   }
 }
@@ -147,18 +151,20 @@ class __$$AccountVerificationModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AccountVerificationModelImpl implements _AccountVerificationModel {
-  const _$AccountVerificationModelImpl(
-      {required this.status, required this.message, required this.data});
+  _$AccountVerificationModelImpl(
+      {this.status = '', this.message = '', this.data});
 
   factory _$AccountVerificationModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AccountVerificationModelImplFromJson(json);
 
   @override
+  @JsonKey()
   final String status;
   @override
+  @JsonKey()
   final String message;
   @override
-  final VerificationData data;
+  final VerificationData? data;
 
   @override
   String toString() {
@@ -197,10 +203,10 @@ class _$AccountVerificationModelImpl implements _AccountVerificationModel {
 }
 
 abstract class _AccountVerificationModel implements AccountVerificationModel {
-  const factory _AccountVerificationModel(
-      {required final String status,
-      required final String message,
-      required final VerificationData data}) = _$AccountVerificationModelImpl;
+  factory _AccountVerificationModel(
+      {final String status,
+      final String message,
+      final VerificationData? data}) = _$AccountVerificationModelImpl;
 
   factory _AccountVerificationModel.fromJson(Map<String, dynamic> json) =
       _$AccountVerificationModelImpl.fromJson;
@@ -210,7 +216,7 @@ abstract class _AccountVerificationModel implements AccountVerificationModel {
   @override
   String get message;
   @override
-  VerificationData get data;
+  VerificationData? get data;
 
   /// Create a copy of AccountVerificationModel
   /// with the given fields replaced by the non-null parameter values.
@@ -335,19 +341,22 @@ class __$$VerificationDataImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$VerificationDataImpl implements _VerificationData {
-  const _$VerificationDataImpl(
-      {required this.isAccountModeVerified,
-      required this.accountMode,
-      required this.shopCategory});
+  _$VerificationDataImpl(
+      {this.isAccountModeVerified = false,
+      this.accountMode = '',
+      this.shopCategory = ''});
 
   factory _$VerificationDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$VerificationDataImplFromJson(json);
 
   @override
+  @JsonKey()
   final bool isAccountModeVerified;
   @override
+  @JsonKey()
   final String accountMode;
   @override
+  @JsonKey()
   final String shopCategory;
 
   @override
@@ -391,10 +400,10 @@ class _$VerificationDataImpl implements _VerificationData {
 }
 
 abstract class _VerificationData implements VerificationData {
-  const factory _VerificationData(
-      {required final bool isAccountModeVerified,
-      required final String accountMode,
-      required final String shopCategory}) = _$VerificationDataImpl;
+  factory _VerificationData(
+      {final bool isAccountModeVerified,
+      final String accountMode,
+      final String shopCategory}) = _$VerificationDataImpl;
 
   factory _VerificationData.fromJson(Map<String, dynamic> json) =
       _$VerificationDataImpl.fromJson;

@@ -1,8 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:testt/src/configs/utils.dart';
+import 'package:testt/src/features/splash/services/session_manager/session_controller.dart';
+import 'package:testt/src/repository/profile_api/profile_repository.dart';
 
 class VerifyIndividualViewModel extends ChangeNotifier {
+  final ProfileRepository profileRepository;
+  VerifyIndividualViewModel({required this.profileRepository});
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailAddressController = TextEditingController();
   final TextEditingController phoneNoController = TextEditingController();
@@ -86,23 +90,50 @@ class VerifyIndividualViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setProfileDataFromSession() {
+    // Retrieve user info from SessionController
+    dynamic name = SessionController().user?.user?.fullname.toString();
+    dynamic email = SessionController().user?.user?.email.toString();
+    dynamic phone = SessionController().user?.user?.phone.toString();
+
+    if (name != null) {
+      nameController.text = name;
+    }
+    if (email != null) {
+      emailAddressController.text = email;
+    }
+    if (phone != null) {
+      phoneNoController.text = phone;
+    }
+
+    notifyListeners();
+  }
+
   Future<void> submitData(BuildContext context) async {
     setLoading(true);
     try {
       var data = {
-        if (email.isNotEmpty) "email": email.toString(),
-        if (phoneNo.isNotEmpty) "phoneNo": phoneNo.toString(),
-        'nameController': nameController.text.trim(),
-        'emailAddressController': emailAddressController.text.trim(),
-        'phoneNoController': phoneNoController.text.trim(),
-        'frontImage': frontImage,
-        'backImage': backImage,
+        'fullname': nameController.text.trim(),
+        'email': emailAddressController.text.trim(),
+        'phone': phoneNoController.text.trim(),
       };
-      Future.delayed(Duration(seconds: 2), () {
-        // setLoading(false);
-        // Utils.snackBar('Application submitted successfully', context);
-      });
-      // var response = await authRepository.continueWithPhoneNumberApi(fullPhone);
+      await profileRepository.individualVerification(
+        data,
+        idCardFrontImage: frontImage,
+        idCardBackImage: backImage,
+      );
+
+      setLoading(false);
+      await SessionController()
+          .updateUserField('fullname', nameController.text.trim());
+      await SessionController()
+          .updateUserField('email', emailAddressController.text.trim());
+      await SessionController()
+          .updateUserField('phone', phoneNoController.text.trim());
+
+      await SessionController().updateUserField('isAccountModeVerified', true);
+      setLoading(false);
+      Utils.snackBar('Application submitted successfully', context);
     } catch (error) {
       Utils.snackBar('Failed to submitted. Please try again.', context);
       setLoading(false);

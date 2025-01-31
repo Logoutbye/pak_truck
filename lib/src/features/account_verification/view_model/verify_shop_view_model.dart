@@ -144,4 +144,5 @@ class VerifyShopViewModel extends ChangeNotifier {
       setLoading(false);
     }
   }
+
 }

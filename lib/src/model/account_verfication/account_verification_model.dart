@@ -5,10 +5,10 @@ part 'account_verification_model.g.dart';
 
 @freezed
 class AccountVerificationModel with _$AccountVerificationModel {
-  const factory AccountVerificationModel({
-    required String status,
-    required String message,
-    required VerificationData data,
+  factory AccountVerificationModel({
+    @Default('') String status,
+    @Default('') String message,
+    VerificationData? data,
   }) = _AccountVerificationModel;
 
   factory AccountVerificationModel.fromJson(Map<String, dynamic> json) =>
@@ -17,10 +17,10 @@ class AccountVerificationModel with _$AccountVerificationModel {
 
 @freezed
 class VerificationData with _$VerificationData {
-  const factory VerificationData({
-    required bool isAccountModeVerified,
-    required String accountMode,
-    required String shopCategory,
+  factory VerificationData({
+    @Default(false) bool isAccountModeVerified,
+    @Default('') String accountMode,
+    @Default('') String shopCategory,
   }) = _VerificationData;
 
   factory VerificationData.fromJson(Map<String, dynamic> json) =>

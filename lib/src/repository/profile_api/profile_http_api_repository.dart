@@ -70,4 +70,20 @@ class ProfileHttpApiRepository implements ProfileRepository {
       rethrow;
     }
   }
+
+  @override
+  Future individualVerification(data,
+      {File? idCardFrontImage, File? idCardBackImage}) async {
+    try {
+      final response = await _apiServices.postMediaApiResponse(
+        AppUrl.verifyIndividualAccount,
+        data,
+        mediaFiles: [idCardFrontImage!, idCardBackImage!],
+        mediaFieldNames: ['idCardFrontImage', 'idCardBackImage'],
+      );
+      return response;
+    } catch (error) {
+      rethrow;
+    }
+  }
 }

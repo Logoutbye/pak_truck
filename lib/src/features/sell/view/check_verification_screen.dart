@@ -44,7 +44,7 @@ class _CheckVerificationScreenState extends State<CheckVerificationScreen> {
                 verificationStatus.data!.data; // Extract verification data
             // ✅ NAVIGATION LOGIC
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (data.isAccountModeVerified) {
+              if (data?.isAccountModeVerified ?? false) {
                 whatDoYouWantToSellBottomSheet(context);
               }
             });
@@ -54,9 +54,10 @@ class _CheckVerificationScreenState extends State<CheckVerificationScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                      "Verification Status: ${data.isAccountModeVerified ? "Verified" : "Not Verified"}"),
+                      "Verification Status: ${data!.isAccountModeVerified ? "Verified" : "Not Verified"}"),
                   Text("Account Mode: ${data.accountMode}"),
-                  Text("Shop Category: ${data.shopCategory}"),
+                  if (data.shopCategory.isNotEmpty)
+                    Text("Shop Category: ${data.shopCategory}"),
                   SizedBox(height: 30.sp),
                   RoundButton(
                       width: context.mediaQueryWidth / 2.5,

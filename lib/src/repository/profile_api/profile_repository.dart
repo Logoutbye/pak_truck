@@ -8,11 +8,16 @@ abstract class ProfileRepository {
   Future<UserModel> fetchMyProfile();
   Future<dynamic> editProfile(dynamic data, {File? profileImage});
   Future<AccountVerificationModel> checkVerification();
-  // Future<dynamic> individualVerification(dynamic data, {File? profileImage});
   Future<dynamic> shopVerification(
     dynamic data, {
     File? idCardFrontImage,
     File? idCardBackImage,
     File? shopImage,
+  });
+
+    Future<dynamic> individualVerification(
+    dynamic data, {
+    File? idCardFrontImage,
+    File? idCardBackImage,
   });
 }
