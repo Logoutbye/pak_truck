@@ -15,14 +15,6 @@ class AdDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: AppColors.primary,
-      //   foregroundColor: AppColors.white,
-      //   title: const Text(
-      //     'My Ads',
-      //     style: TextStyle(color: Colors.white),
-      //   ),
-      // ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,14 +23,12 @@ class AdDetailScreen extends StatelessWidget {
             // Manage Ads Section
             Column(
               children: [
-                AdImageCard(images: [
-                  'assets/images/list_of_images.png',
-                  'assets/images/list_of_images.png'
-                ]),
+                AdImageCard(
+                  images: ad.truckImages,
+                ),
 
                 SizedBox(height: context.mediaQueryHeight / 35),
 
-                
                 // Title & Price
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -47,11 +37,10 @@ class AdDetailScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        constraints:
-                            BoxConstraints(maxWidth: context.mediaQueryWidth / 2),
+                        constraints: BoxConstraints(
+                            maxWidth: context.mediaQueryWidth / 2),
                         child: Text(
                           ad.category,
-                          // 'Truck Swift DLX Automatic 1.3 2024',
                           style: Themetext.headline.copyWith(fontSize: 16),
                         ),
                       ),

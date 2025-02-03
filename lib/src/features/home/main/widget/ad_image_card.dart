@@ -30,8 +30,8 @@ class AdImageCard extends StatelessWidget {
                             child: SvgPicture.asset(
                               'assets/svg/plaeholder.svg',
                               width: double.infinity,
-                              height: 200,
-                              fit: BoxFit.cover,
+                              height: 350.sp,
+                              fit: BoxFit.fitWidth,
                             ),
                           )
                         : ClipRRect(
@@ -39,8 +39,8 @@ class AdImageCard extends StatelessWidget {
                             child: Image.network(
                               images.first,
                               width: double.infinity,
-                              height: 200,
-                              fit: BoxFit.cover,
+                              height: 200.sp,
+                              fit: BoxFit.fill,
                             ),
                           ),
                   ],
@@ -57,7 +57,6 @@ class AdImageCard extends StatelessWidget {
                             children: [
                               // Image
                               ClipRRect(
-                                // borderRadius: BorderRadius.circular(25.0),
                                 child: Image.asset(
                                   provider.currentImage,
                                   width: double.infinity,
@@ -65,42 +64,6 @@ class AdImageCard extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              // Image Counter
-
-                              // Positioned(
-                              //   top: 0,
-                              //   right: 0,
-                              //   child: Container(
-                              //     padding: const EdgeInsets.symmetric(
-                              //         vertical: 10, horizontal: 12),
-                              //     decoration: const BoxDecoration(
-                              //       color: Colors.white,
-                              //       borderRadius: BorderRadius.only(
-                              //           bottomLeft: Radius.circular(25),
-                              //           topRight: Radius.circular(25)),
-                              //     ),
-                              //     child: Row(
-                              //       children: [
-                              //         Text(
-                              //           // "${provider.currentIndex + 1} /
-
-                              //           " ${provider.totalImages}",
-                              //           style: const TextStyle(
-                              //             fontSize: 14,
-                              //             fontWeight: FontWeight.bold,
-                              //             color: Colors.black,
-                              //           ),
-                              //         ),
-                              //         const SizedBox(width: 4),
-                              //         Image.asset(
-                              //           'assets/images/list_of_images.png',
-                              //           width: 30,
-                              //           height: 30,
-                              //         ),
-                              //       ],
-                              //     ),
-                              //   ),
-                              // ),
                             ],
                           ),
 
@@ -163,16 +126,8 @@ class AdImageCard extends StatelessWidget {
             top: 40.sp,
             child: Container(
                 margin: EdgeInsets.all(8),
-                width: 30.h,
-                height: 30.h,
-                child: CustomBackButton())),
-        Positioned(
-            top: 40.sp,
-            right: 10.sp,
-            child: Container(
-                margin: EdgeInsets.all(8),
-                width: 30.h,
-                height: 30.h,
+                width: 35.h,
+                height: 35.h,
                 child: CustomBackButton())),
         Positioned(
             top: 40.sp,
@@ -181,7 +136,32 @@ class AdImageCard extends StatelessWidget {
                 margin: EdgeInsets.all(8),
                 width: 30.h,
                 height: 30.h,
-                child: CustomBackButton())),
+                child: GestureDetector(
+                  // onTap: () => Navigator.pop(context),
+                  child: Container(
+                    padding: EdgeInsets.all(4.sp),
+                    margin: EdgeInsets.all(2.sp),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: AppColors.white),
+                    child: SvgPicture.asset('assets/svg/heart.svg'),
+                  ),
+                ))),
+        Positioned(
+            top: 40.sp,
+            right: 10.sp,
+            child: Container(
+                margin: EdgeInsets.all(8),
+                width: 30.h,
+                height: 30.h,
+                child: GestureDetector(
+                  // onTap: () => Navigator.pop(context),
+                  child: Container(
+                    margin: EdgeInsets.all(3.sp),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: AppColors.white),
+                    child: Icon(Icons.share),
+                  ),
+                ))),
       ],
     );
   }

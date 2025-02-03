@@ -67,7 +67,9 @@ class UserProfileWidget extends StatelessWidget {
           ),
           SizedBox(width: 20),
           SvgPicture.asset(
-            'assets/svg/unverified.svg',
+            user.isAccountModeVerified
+                ? 'assets/svg/verified.svg'
+                : 'assets/svg/unverified.svg',
             height: context.mediaQueryHeight / 41,
           ),
           SizedBox(width: context.mediaQueryWidth / 70),
