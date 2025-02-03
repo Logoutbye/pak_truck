@@ -6,6 +6,7 @@ import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/features/my_profile/widget/socail_media_row_widget.dart';
 
+// ignore: must_be_immutable
 class ContactUsWidget extends StatelessWidget {
   ContactUsWidget({super.key});
   TextEditingController nameController = TextEditingController();

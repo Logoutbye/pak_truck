@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:testt/src/configs/color/color.dart';
 import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/features/home/main/widget/ad_image_card.dart';
-import 'package:testt/src/features/home/main/widget/truck_features_widget.dart';
 import 'package:testt/src/model/truck_model/truck_model.dart';
 
-class AdDetailScreen extends StatelessWidget {
+class MyAdDetailScreen extends StatelessWidget {
   final TruckModel ad;
 
-  const AdDetailScreen({super.key, required this.ad});
+  const MyAdDetailScreen({super.key, required this.ad});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +23,7 @@ class AdDetailScreen extends StatelessWidget {
             // Manage Ads Section
             Column(
               children: [
-                AdImageCard(
-                  images: ad.truckImages,
-                ),
+                AdImageCard(images: ad.truckImages),
 
                 SizedBox(height: context.mediaQueryHeight / 35),
 
@@ -39,9 +37,19 @@ class AdDetailScreen extends StatelessWidget {
                       Container(
                         constraints: BoxConstraints(
                             maxWidth: context.mediaQueryWidth / 2),
-                        child: Text(
-                          ad.category,
-                          style: Themetext.headline.copyWith(fontSize: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              ad.category,
+                              style: Themetext.headline.copyWith(fontSize: 16),
+                            ),
+                            SizedBox(height: 8.h),
+                            Text(
+                              ad.createdAt.toDateAndMonth(),
+                              style: Themetext.headline.copyWith(fontSize: 16),
+                            ),
+                          ],
                         ),
                       ),
                       Row(
@@ -77,8 +85,7 @@ class AdDetailScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        // 'PKR, 22 Lack',
-                        ad.price.toString(),
+                        'PKR, ${ad.price}',
                         style: Themetext.superHeadline
                             .copyWith(color: AppColors.primary),
                       ),
@@ -86,9 +93,14 @@ class AdDetailScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: context.mediaQueryHeight / 75),
-                Text(ad.description
-                    // 'Lorem ipsum dolor sit amet consectetur. Sagittis facilisis augue posuere eu iaculis est.',
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 12.sp),
+                      child: Text(ad.description),
                     ),
+                  ],
+                ),
               ],
             ),
             SizedBox(height: context.mediaQueryHeight / 35),
@@ -102,48 +114,27 @@ class AdDetailScreen extends StatelessWidget {
                   Text('Truck Detail', style: Themetext.headline),
                   SizedBox(height: context.mediaQueryHeight / 75),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      // _iconWithText('assets/svg/calender.svg', ad.truckYear),
                       _iconWithText(
-                          'assets/svg/milleage.svg', ad.engineMileage),
-                      _iconWithText(
-                          'assets/svg/engine_type.svg', ad.engineType),
-                      _iconWithText('assets/svg/transmission_type.svg',
-                          ad.transmissionType),
+                          'assets/svg/calender.svg', ad.modelYear.toString()),
+                      SizedBox(width: 20.w),
+                      _iconWithText('assets/svg/location.svg', ad.location),
                     ],
                   ),
                   const SizedBox(height: 16),
+                  _truckDetailItem('Engine Capacity', ad.engineType),
+                  _truckDetailItem('Category', ad.category),
+                  _truckDetailItem('Sub Category', ad.subCategory),
                   _truckDetailItem('Registered in', ad.registeredIn),
-                  // _truckDetailItem('Brand', ad.truckMake),
-                  _truckDetailItem('Model', ad.truckModel),
-                  _truckDetailItem('Color Pilers', ad.color),
-                  _truckDetailItem('Body Type', 'N/A'),
-                  _truckDetailItem('Engine Capacity', ad.engineCapacity),
-                  _truckDetailItem('Last update', '11 Nov, 2024'),
-                  _truckDetailItem('Ad Ref', '9236459'),
-                  _truckDetailItem('Assembly', 'Imported'),
+                  _truckDetailItem('Assembly', ad.localOrImported),
+                  _truckDetailItem('Model Year', ad.modelYear.toString()),
+                  _truckDetailItem('Brand', ad.make),
+                  _truckDetailItem(
+                      'Created At', ad.createdAt.toFormattedDate()),
                   Divider(color: Colors.grey[300]),
                 ],
               ),
-            ),
-
-            TruckFeaturesWidget(
-              // featureNames: [
-              //   "ABS",
-              //   "Air Bags",
-              //   "Alloy Rims",
-              //   "CD Player",
-              //   "Immobilizer Key",
-              //   "Keyless Entry",
-              //   "Power Locks",
-              //   "Power Mirrors",
-              //   "Power Steering",
-              //   "Power Windows",
-              //   'Air Conditioning',
-              //   "AM/FM Radio",
-              // ],
-              featureNames: ad.selectedFeatures,
             ),
 
             // Bottom Actions
@@ -157,14 +148,15 @@ class AdDetailScreen extends StatelessWidget {
   }
 
   Widget _iconWithText(String icon, String text) {
-    return Column(
+    return Row(
       children: [
         SvgPicture.asset(
           icon,
+          height: 20.sp,
         ),
-        const SizedBox(height: 4),
+        SizedBox(width: 8.sp),
         Text(text,
-            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 12)),
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13.sp)),
       ],
     );
   }

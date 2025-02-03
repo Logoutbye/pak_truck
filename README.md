@@ -28,3 +28,16 @@ flutter pub run build_runner build --delete-conflicting-outputs
 ad views count
 call count
 chat count 
+
+
+
+category
+subcategory
+location
+price
+model year
+registered in 
+truck make
+engintype
+decsitpion
+imported/local

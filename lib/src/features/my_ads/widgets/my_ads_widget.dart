@@ -9,7 +9,7 @@ import 'package:testt/src/configs/extensions.dart';
 import 'package:testt/src/configs/routes/slide_transition_page.dart';
 import 'package:testt/src/configs/theme/theme_text.dart';
 import 'package:testt/src/data/response/status.dart';
-import 'package:testt/src/features/home/main/view/ad_details_screen.dart';
+import 'package:testt/src/features/my_ads/widgets/my_ad_details_screen.dart';
 import 'package:testt/src/features/home/main/view_model/vechile_ads_view_model.dart';
 
 class MyAdsWidget extends StatelessWidget {
@@ -54,7 +54,7 @@ class MyAdsWidget extends StatelessWidget {
                           Navigator.push(
                               context,
                               SlideTransitionPage(
-                                  page: AdDetailScreen(ad: truck)));
+                                  page: MyAdDetailScreen(ad: truck)));
                         },
                         child: Container(
                           margin:

@@ -75,7 +75,6 @@ class UserProfileWidget extends StatelessWidget {
           SizedBox(width: context.mediaQueryWidth / 70),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/verifyShopScreen');
             },
             child: Text(
               user.isAccountModeVerified ? 'Verified' : 'Unverified',

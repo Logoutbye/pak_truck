@@ -17,11 +17,17 @@ class ProfileViewModel with ChangeNotifier {
   }
 
   Future<void> fetchMyProfileApi() async {
+
     setProfile(ApiResponse.loading());
+
     profileRepository.fetchMyProfile().then((value) {
+
       setProfile(ApiResponse.completed(value));
+
     }).onError((error, stackTrace) {
+
       setProfile(ApiResponse.error(error.toString()));
+      
     });
   }
 

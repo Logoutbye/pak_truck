@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:testt/src/configs/color/color.dart';
@@ -14,7 +15,6 @@ import 'package:testt/src/features/my_profile/widget/personalized_widget.dart';
 import 'package:testt/src/features/my_profile/widget/saved_ads_widget.dart';
 import 'package:testt/src/features/my_profile/widget/profile_consumer_widget.dart';
 import 'package:testt/src/features/my_profile/widget/show_logout_dialog.dart';
-
 import '../widget/show_delete_dialog.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -126,6 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             controller: _tabController,
             isScrollable: true,
             indicatorColor: AppColors.primary,
+            tabAlignment: TabAlignment.center,
             labelColor: AppColors.primary,
             unselectedLabelColor: Colors.grey,
             onTap: (index) {
@@ -215,10 +216,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: context.mediaQueryHeight / 30),
-                      Text(
-                        'Your All Ads',
-                        style: Themetext.headline
-                            .copyWith(color: AppColors.primary),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.sp),
+                        child: Text(
+                          'Your All Ads',
+                          style: Themetext.headline
+                              .copyWith(color: AppColors.primary),
+                        ),
                       ),
                     ],
                   ),

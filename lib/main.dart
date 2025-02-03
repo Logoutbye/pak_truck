@@ -38,8 +38,9 @@ GetIt getIt = GetIt.instance;
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   getIt.registerLazySingleton<AuthRepository>(() => AuthHttpApiRepository());
-  getIt.registerLazySingleton<ProfileRepository>(
-      () => ProfileHttpApiRepository());
+
+  getIt.registerLazySingleton<ProfileRepository>( () => ProfileHttpApiRepository());
+  
   getIt.registerLazySingleton<AdRepository>(() => AdHttpApiRepository());
   runApp(const MyApp());
 }

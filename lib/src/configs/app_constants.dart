@@ -248,6 +248,11 @@ var categoriesList = {
     'Box Truck',
     'Dump Truck'
   ],
+   'Used Bus': [
+    'Nazai Express',
+    'Daewo Express',
+    
+  ],
   'Mini Truck': [
     'Mazda Body Truck',
     'Container Mini Truck',
